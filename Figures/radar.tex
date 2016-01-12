@@ -1,0 +1,26 @@
+\begin{tikzpicture}
+[node distance = 20mm,text height=1.2ex,text depth=.25ex, % align text horizontally 
+draw=black,very thick,
+point/.style={coordinate},>=latex,bend angle=20,
+block/.style={draw, rectangle, text width=20mm, inner sep = 2pt,minimum size = 20mm,very thick},
+eblock/.style={rectangle, text width = 20mm, inner sep = 2pt,minimum size = 20mm,very thick},
+pre/.style={<-, thick},
+post/.style={->, thick},
+prepost/.style={<->, double, thick},
+line/.style ={draw, -latex'}
+]	
+				
+\node[eblock] (e0) at (0,0) {Info source};
+\node[block] (e1) [right=of e0] {Info transducer}
+  edge[pre] (e0);
+\node[block] (e2) [right=of e1] {Transmitter}
+  edge[pre] (e1);
+\node[block] (e3) [below right=of e2] {Channel};
+\path[line,pre] (e3) |- (e2);
+\node[block] (e4) [below left=of e3] {Receiver};
+\path[line,pre] (e4) -| (e3);
+\node[block] (e5) [left=of e4] {Output transducer}
+    edge[pre] (e4);
+\node[eblock] (e6) [left=of e5] {Output signal}
+    edge[pre] (e5);
+\end{tikzpicture}

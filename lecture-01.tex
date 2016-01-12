@@ -1,0 +1,80 @@
+\documentclass[a4paper,english,12pt]{article}
+\input{header}
+
+%opening
+\title{Lecture 1: Introduction to Statistical Inference}
+\author{}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+We are interested in processing of information-bearing signals to extract information. 
+There are two types of problems of fundamental interest.
+\begin{enumerate}
+\item Detection: Finite number of possible situations
+\item Estimation: ``Nearest'' to the possible situation
+\end{enumerate}
+We look at three examples of interest.
+\begin{exmp}[Communication System] 
+We need to estimate unknown analog signal from the received signal that is distorted and corrupted.
+\begin{figure}[hhhh]
+\centering
+\input{Figures/analog}
+\caption{Block diagram for analog communication.}
+\label{Fig:AnalogComm}
+\end{figure}
+\end{exmp}
+\begin{exmp}[Radar communication] 
+Pulse electromagnetic waves are sent and received after possible reflection from a target if it exists. 
+Target could be an aircraft, ship, spacecraft, missile etc.
+If the target is detected, then one is interested in estimating range, angle, and velocity of the target. 
+One may be interested in tracking the mobile target trajectory or even controlling it.
+%\begin{figure}[hhhh]
+%\centering
+%\input{Figures/radar}
+%\caption{Block diagram for Radar communication.}
+%\label{Fig:RadarComm}
+%\end{figure}
+\end{exmp}
+\begin{exmp}[Automatic Control]
+In automatic control problem, given a linear time invariant system $H$, we need to design a controller $C$ for achieving a desired response through output signal $y(t)$. 
+Typically, reference signal $x(t)$ is unknown in such systems, and only a noisy version of the state may be observable.
+\begin{figure}[hhhh]
+\centering
+\input{Figures/AutoControl}
+\caption{Block diagram for automatic control.}
+\label{Fig:AutoControl}
+\end{figure}
+\end{exmp}
+Other applications of estimation and detection theory are in seismology, radio astronomy, sonar, speech, signal, and image processing, biomedical signal processing, optimal communications etc.
+
+\section{Probability Review}
+We denote observation space by $\Gamma$ equipped with a $\sigma$-algebra $\mathcal{G}$, that is a  measurable collection of sets.
+Further, for all elements of $A \in \mathcal{G}$, we have a non-negative set function $P: \Gamma \to [0,1]$ that satisfies the following axioms of probability:
+\begin{enumerate}
+\item $P(\Gamma) = 1$,
+\item for any disjoint countable collection of sets $\{A_n: n \in \N\}$, we have $P(\cup_nA_n) = \sum_n P(A_n)$.
+\end{enumerate}
+\begin{exmp}[Finite Observations] When observation space $\Gamma$ has finitely many elements, we can take $\mathcal{G} = \mathcal{P}(\Gamma)$. 
+Further, specifying $P(\{\gamma\})$ for all $\gamma \in \Gamma$ completely specifies the probability set function.
+\end{exmp}
+\begin{exmp}[Euclidean Space] For the case when observation space $\Gamma = \R^n$, we take $\mathcal{G} = \mathcal{B}^n$, Borel $\sigma$-algebra on $\R^n$. 
+For this case, it suffices to specify the set function $P(A)$ for  sets $A \in \mathcal{G}$ of the form $\{\gamma \in \Gamma: \gamma_i \leq x_i, i \in [n]\}$.
+\end{exmp}
+\begin{defn}[Expectation] For a real valued function $g: \Gamma \to \R$, we denote its expectation by $\E[g(Y)]$ and define it as
+\begin{align*}
+\E[g(Y)] = \int_{y \in \Gamma}g(y)dP(y).
+\end{align*}
+\end{defn}
+
+\section{Hypothesis Testing}
+\begin{defn} A \textbf{hypothesis} is a statement about a population parameter.
+\end{defn}
+\begin{defn} The two complementary hypotheses in a hypothesis testing problem are called the \textbf{null hypothesis} and the \textbf{alternative hypothesis}, and denoted by $\mathcal{H}_0$ and $\mathcal{H}_1$ respectively.
+\end{defn}
+Let $\Gamma_1$ be the
+\begin{exmp}
+\end{exmp}
+
+\end{document}

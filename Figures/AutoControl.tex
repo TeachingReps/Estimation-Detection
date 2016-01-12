@@ -1,0 +1,28 @@
+\begin{tikzpicture}
+[node distance = 15mm,text height=1.2ex,text depth=.25ex, % align text horizontally 
+draw=black,very thick,
+point/.style={coordinate},>=latex,bend angle=20,
+adder/.style={draw,circle},
+block/.style={draw, rectangle, align = center, text width=7mm, inner sep = 2pt,minimum size = 7mm,very thick},
+eblock/.style={rectangle, text width = 7mm, inner sep = 0pt,minimum size = 7mm,very thick},
+pre/.style={<-, thick},
+post/.style={->, thick},
+prepost/.style={<->, double, thick},
+line/.style ={draw, -latex'}
+]	
+				
+\node[eblock] (e0) at (0,0) {$x(t)$};
+\node[adder] (e1)[right=of e0,label=below left:$-$]{$+$}
+    edge[pre] (e0);
+\node[block] (e2) [right=of e1] {$C$}
+  edge[pre] node[auto,midway,label=above:$e(t)$]{} (e1);
+\node[block] (e3) [right=of e2] {$H$}
+  edge[pre] node[auto,midway,label=above:$u(t)$]{} (e2);
+\node[point] (e4) [right=of e3] {}
+    edge[pre] (e3);
+\node[eblock] (e6) [right=of e4]{$y(t)$}
+    edge[pre] (e4);
+\node[block] (e5) [below left=of e4] {$F$};
+\path[line,pre] (e5) -| (e4);
+\path[line,pre] (e1) |- (e5);
+\end{tikzpicture}
