@@ -73,12 +73,94 @@ For this case, it suffices to specify the set function $P(A)$ for  sets $A \in \
 \end{defn}
 \begin{defn} The two complementary hypotheses in a hypothesis testing problem are called the \textbf{null hypothesis} and the \textbf{alternative hypothesis}, and denoted by $\mathcal{H}_0$ and $\mathcal{H}_1$ respectively.
 \end{defn}
+We assume that observation is a random variable $Y \in \Gamma$ distributed with probability set function $P_i$ when true hypothesis is $\mathcal{H}_i$ for $i \in \{0,1\}$.
 \begin{defn} A \textbf{hypothesis test} is a rule $\delta: \Gamma \to \{0,1\}$ that specifies for all values of $y \in \Gamma$, index of the accepted true hypothesis $\mathcal{H}_{\delta(y)}$. 
 \end{defn}
 \begin{defn}
 Region $\Gamma_1 = \{ y \in \Gamma: \delta(y) = 1 \}$ is called the \textbf{rejection region}, and $\Gamma_0 = \Gamma_1^c$ is called the \textbf{acceptance region}.
 \end{defn}
-\begin{exmp}
-\end{exmp}
+\begin{defn} When the true underlying hypothesis is $\mathcal{H}_j$, the \textbf{cost} incurred on accepting hypothesis $\mathcal{H}_{i}$ is denoted by $C_{ij}$. Uniform cost is given by
+\begin{align*}
+C_{ij} = 1_{\{i \neq j\}}, i,j \in \{0,1\}.
+\end{align*}
+\end{defn}
+\begin{defn} For each hypothesis $\mathcal{H}_i$, the \textbf{conditional risk} is denoted by $R_j(\delta)$ and defined as the expected cost incurred by the decision rule $\delta$, when it is the underlying true hypothesis. That is,
+\begin{align*}
+R_j(\delta) &= \E\left[ \sum_{i}C_{ij}1_{\{\delta(y) = i\}} | \mathcal{H}_j \text{ holds}\right] = \E_j\left[\sum_{i}C_{ij}1_{\{\delta(y) = i\}}\right]\\
+&= C_{0j}P_j(\Gamma_0) + C_{1j}P_j(\Gamma_1).
+\end{align*}
+\end{defn}
+Our objective is to design a decision rule $\delta$ that minimizes risk. Usually, costs of correct identification of the true hypothesis is low, and cost of incorrect identification is higher. Hence, minimizing risk for any hypothesis would be to ensure that probability $P_j(\Gamma_i)$ is low for $i \neq j$. One can't simultaneously decrease all decision regions $\{\Gamma_i \}$, since they form a partition of observation space $\Gamma$. 
 
+\subsection{Bayesian Hypothesis Testing}
+In this approach, we assume a prior distribution $\pi$ on hypotheses to be true. Specifically, let $\pi_i$ denotes the prior probability of $\mathcal{H}_i$ being true.
+\begin{defn} We can defined unconditional \textbf{risk} as expected value of risk over all possible hypotheses, denoted by $r(\delta)$. That is,
+\begin{align*}
+r(\delta) = \E R_j(\delta) = \sum_j R_j(\delta) \pi_j.
+\end{align*} 
+\end{defn}
+\begin{defn} For two distributions $P_1(y)$ and $P_0(y)$ we can define likelihood ratio as $L(y) = \frac{dP_1}{dP_0}(y)$. When two distributions admit density, it is ratio of their densities at $y$. For discrete distributions, it is ratio of their probability mass functions at $y$.
+\end{defn}
+\begin{thm} For a Bayesian hypothesis testing problem optimal decision rule that minimizes unconditional risk for a prior distribution $\pi$ and costs $\{C_{ij}\}$ is a threshold based rule called likelihood ratio test . That is,
+\begin{align*}
+\delta_B(y) = 1_{\{ L(y) \geq \tau\}},
+\end{align*}
+where likelihood ratio $L(y) = \frac{dP_1}{dP_0}(y)$ and threshold $\tau = \frac{\pi_0(C_{10}-C_{00})}{\pi_1(C_{01}-C_{11})}$.
+\end{thm}
+\begin{proof}
+We can write unconditional risk as 
+\begin{align*}
+r(\delta) = \sum_{j}\pi_jC_{0j} + \int_{y \in \Gamma_1}\sum_{j}\pi_j(C_{1j} - C_{0j})dP_j(y).
+\end{align*}
+Minimizing unconditional risk is equivalent to selecting rejection region $\Gamma_1$ such that the integrand is negative. That is,
+\begin{align*}
+\Gamma_1 = \{ y \in \Gamma: \sum_{j}\pi_j(C_{1j} - C_{0j}) dP_j(y) \leq 0 \}.
+\end{align*}
+By the definition of likelihood ratio and the threshold as defined in the theorem hypothesis, theorem follows.
+\end{proof}
+\begin{rem} For uniform cost, threshold $\tau = \frac{\pi_0}{\pi_1}$ and conditional risk 
+\begin{align*}
+r(\delta) = \pi_0P_0(\Gamma_1) + \pi_1P_1(\Gamma_0),
+\end{align*}
+is probability of error in detection. 
+\end{rem}
+\begin{defn} We can define \textbf{posterior} probability of hypothesis $\mathcal{H}_j$ being true conditioned on observation being $y$ as
+\begin{align*} 
+\pi_j(y) = \Pr\{ \mathcal{H}_j \text{ is true } | Y = y \} = \frac{\pi_j dP_j(y)}{\pi_0dP_0(y) + \pi_1dP_1(y)}.
+\end{align*}
+\end{defn}
+\begin{rem}
+Observe that rejection region can be written in terms of posterior probabilities as
+\begin{align*}
+\Gamma_1 = \{ y \in \Gamma: (C_{10}-C_{00})\pi_0(y) - (C_{01}-C_{11})\pi_1(y) \leq 0 \}.
+\end{align*}
+This is again a likelihood ratio test in term of ratio of posterior probabilities $L'(y) = \frac{\pi_1(y)}{\pi_0(y)}$ and threshold $\tau' = \frac{C_{10}-C_{00}}{C_{01}-C_{11}}$. That is, Bayes' decision rule is
+\begin{align*}
+\delta_B(y) = 1_{\{ L'(y) \geq \tau'\}}.
+\end{align*}
+\end{rem}
+\begin{defn}
+The expected cost of choosing hypothesis $\mathcal{H}_i$ given observation $y$ is called \textbf{posterior cost} and denoted as $R_i(y)$, where %can be computed in terms of posterior probabilities as 
+\begin{align*}
+R_i(y) = \E[\sum_{k,j}C_{kj}1_{\{\delta(y)=i\}}|Y = y] = \sum_{j}C_{ij}\pi_j(y) = C_{i0}\pi_0(y) + C_{i1}\pi_1(y).
+\end{align*}
+\end{defn}
+\begin{rem}
+Alternatively, one can also write rejection region in terms of posterior costs as 
+\begin{align*}
+\Gamma_1 =  \{ y \in \Gamma: R_0(y) \leq R_1(y)\}.
+\end{align*}
+ Therefore, Bayes' decision rule can be interpreted as the one that minimizes the posterior cost of choosing a hypothesis when the observation is $y$. 
+ That is, 
+\begin{align*}
+\delta_B(y) = 1_{\{ \frac{R_1(y)}{R_0(y)} \geq 1 \}}.
+\end{align*}
+\end{rem}
+\begin{rem}
+For uniform cost, Bayes' decision rule is likelihood ratio test for posterior probabilities when the threshold is unity, That is,
+\begin{align*}
+\delta_B(y) = 1_{\{ L'(y) \geq 1 \}}.
+\end{align*}
+This is equivalent to maximizing a posterior probability of underlying hypothesis based on the observation. This is also called a MAP decision rule for binary hypothesis test.
+\end{rem}
 \end{document}
