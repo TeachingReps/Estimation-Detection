@@ -1,0 +1,83 @@
+\documentclass[a4paper,english,12pt]{article}
+\input{header}
+
+%opening
+\title{Lecture-0: Sample For Lecture Notes}
+\author{}
+
+\begin{document}
+\maketitle
+\section{General guide lines}
+\begin{itemize}
+\item Use the environment definitions for lemma, theorem, definition, proof, example, and other such environments you may need, wherever nexessary. Usage of {\bf Definition} for a definition is not acceptable. Different environments are listed in this document below.
+\item Add the .tex file header in your latex file for the below commands to work (\textbackslash input\{header\}, second line of the source file sampleLecture.tex).
+\item Make sure that there are no spelling mistakes in the scribed notes.
+\item Use environments such as align, equations, eqnarray or gather to deal with multi-line equations, instead of newline characters. 
+\item Use punctuation in all equations.
+\item Always make sure that the lecture notes uploaded is complete.
+\item Any math symbol in a line should be within math environment \$\$. For example, \$Y\$ is used to write a math symbol $Y$.
+\item Revise your lectures before uploading, so that there are no variations in the style in which the document is prepared.
+\item If you are using figures in the tex file, put them in the Figures folder.
+\item Please label and caption the figures.
+\item Use full sentences for captions as well, and even when writing equations.
+\item Motivate each section with a sentence or two, on why are we studying this?
+\end{itemize}
+\section{Examples usage of environments}
+\begin{itemize}
+\item Equation with multiple cases:
+\begin{equation}
+A = 
+\begin{cases}
+1 &if~TRUE\\
+0 &if~FALSE.
+\end{cases}
+\end{equation}
+\item Theorem:
+\begin{thm}
+Theorem goes here
+\end{thm}
+\item Corollary:
+\begin{cor}
+content...
+\end{cor}
+\item Proposition:
+\begin{prop}
+content...
+\end{prop}
+\item Lemma:
+\begin{lem}
+content...
+\end{lem}
+\item Definition:
+\begin{defn}
+Definition
+\end{defn}
+\item Conjecture:
+\begin{conj}
+Content...
+\end{conj}
+\item Example:
+\begin{exmp}
+Content...
+\end{exmp}
+\item Assumptions:
+\begin{assum}
+Content...
+\end{assum}
+\item Axiom:
+\begin{axiom}
+Content...
+\end{axiom}
+\item Remark:
+\begin{rem}
+Content...
+\end{rem}
+\item Note:
+\begin{note}
+This is a note.
+\end{note}
+\end{itemize}
+\begin{note}
+Scribed notes that does not follow the guidelines mentioned above attracts penalty.
+\end{note}
+\end{document}
