@@ -148,12 +148,12 @@ R_i(y) = \E[\sum_{k,j}C_{kj}1_{\{\delta(y)=i\}}|Y = y] = \sum_{j}C_{ij}\pi_j(y) 
 \begin{rem}
 Alternatively, one can also write rejection region in terms of posterior costs as 
 \begin{align*}
-\Gamma_1 =  \{ y \in \Gamma: R_0(y) \leq R_1(y)\}.
+\Gamma_1 =  \{ y \in \Gamma: R_1(y) \leq R_0(y)\}.
 \end{align*}
  Therefore, Bayes' decision rule can be interpreted as the one that minimizes the posterior cost of choosing a hypothesis when the observation is $y$. 
  That is, 
 \begin{align*}
-\delta_B(y) = 1_{\{ \frac{R_1(y)}{R_0(y)} \geq 1 \}}.
+\delta_B(y) = 1_{\{ \frac{R_1(y)}{R_0(y)} \leq 1 \}}.
 \end{align*}
 \end{rem}
 \begin{rem}
