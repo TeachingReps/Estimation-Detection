@@ -1,0 +1,18 @@
+\begin{tikzpicture}
+[node distance = 15mm,text height=1.2ex,text depth=.25ex, % align text horizontally 
+draw=black,very thick,
+point/.style={coordinate},>=latex,bend angle=20,
+adder/.style={draw,circle},
+block/.style={draw, rectangle, align = center, text width=7mm, inner sep = 2pt,minimum size = 7mm,very thick},
+eblock/.style={rectangle, text width = 25mm, inner sep = 0pt,minimum size = 7mm,very thick},
+pre/.style={<-, thick},
+post/.style={->, thick},
+prepost/.style={<->, double, thick},
+line/.style ={draw, -latex'}
+]	
+\node[eblock] (e0) at (0,2) {$x\in \{\mu_0,\mu_1\}$};
+\node[eblock] (e2) at (3.2,0) {$n\sim \mathcal{N}(0,\sigma^2)$};
+\node[eblock] (e3) at (6,2) {$y=x+n$};
+\node[adder] (e1) [right=of e0]{$+$}
+    edge[pre] (e0) edge[pre] (e2) edge[post] (e3);
+\end{tikzpicture}
