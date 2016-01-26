@@ -15,14 +15,14 @@
 At the onset, we will look into two examples of Bayesian Hypothesis Testing.
 \begin{exmp}[The Binary Channel] 
 A binary channel is the most common communication channel model used in coding theory and information theory. In this model, a transmitter sends a bit ($0$ or $1$), and the receiver receives it. The bit may be received correctly, or it may be "flipped" with some probability. The probability with which a flipped bit is received is known as "crossover probability". 
-\par Consider transmission of a bit over such a Binary Channe. Let the observation at the output of the channel be $Y$, which can be either $0$, or $1$. Let the crossover probability be $\lambda_0$ when bit $0$ is transmitted, i.e., a transmitted $0$ is received as $1$ with probability $\lambda_0$ and as $0$ with probability (1 - $\lambda_0$), where $0 \leq \lambda_0 \leq 1$. Similarly, let the crossover probability when a $1$ is transmitted  be $\lambda_1$. A Binary Symmetric Channel (BSC) is a special case, where $\lambda_0=\lambda_1=\lambda$. Observing $Y$ does not tell us exactly whether the transmitted digit was bit $0$ or $1$. The goal is to find an optimum decision rule using the Bayesian Hypothesis Testing.
+\par Consider transmission of a bit over such a Binary Channel. Let the observation at the output of the channel be $Y$, which can be either $0$, or $1$. Let the crossover probability be $\lambda_0$ when bit $0$ is transmitted, i.e., a transmitted $0$ is received as $1$ with probability $\lambda_0$ and as $0$ with probability (1 - $\lambda_0$), where $0 \leq \lambda_0 \leq 1$. Similarly, let the crossover probability when a $1$ is transmitted  be $\lambda_1$. A Binary Symmetric Channel (BSC) is a special case, where $\lambda_0=\lambda_1=\lambda$. Observing $Y$ does not tell us exactly whether the transmitted digit was bit $0$ or $1$. The goal is to find an optimum decision rule using the Bayesian Hypothesis Testing.
 \begin{figure}[h]
 \centering
 \input{Figures/bsc}
 \caption{Block diagram for Binary Channel}
 \label{fig:bsc1}
 \end{figure}
-\par The two hypothesis $H_0$, and $H_1$ depic the transmission of bit $0$ and $1$ respectively. The observation set is $\Gamma=\{0,1\}$. The recieved signal $y \in \Gamma$ is an instance of a Bernoulli random variable $Y$ with probability mass funtion (pmf) dependent on the transmitted bit,
+\par The two hypothesis $H_0$, and $H_1$ depict the transmission of bit $0$ and $1$ respectively. The observation set is $\Gamma=\{0,1\}$. The received signal $y \in \Gamma$ is an instance of a Bernoulli random variable $Y$ with probability mass function (pmf) dependent on the transmitted bit,
 \begin{eqnarray}
 Y_{0}~\sim~\mathcal{B}\left( 1-\lambda_{0}\right) ~\mbox{if}~H_0~\mbox{is transmitted},\\\nonumber
 Y_{1}~\sim~\mathcal{B}\left( 1-\lambda_{1}\right)~\mbox{if}~H_1~\mbox{is transmitted},
@@ -47,7 +47,7 @@ As discussed in last lecture, a Bayesian decision rule has the form,
 \begin{equation}
 \delta_B(y)=\mathbbm{1}_{\{L(y)\geq \tau\}},
 \end{equation}
-where $\tau= \frac{\pi_0(C_{10}-C_{00})}{\pi_1(C_{01}-C_{11})}$ is a threshold, which depends on the prior probability $\pi_0$ and the costs. If $\lambda_0,~\lambda_1,~\tau$  are such that $\lambda_1\geq \tau\left( 1-\lambda_0\right) $, then according to the likelihood ratio, a recieved $0$ is decided as transmitted $1$. Similarly a received $1$ is decided as a transmitted $0$ when $(1-\lambda_1)<\tau \lambda_0$.
+where $\tau= \frac{\pi_0(C_{10}-C_{00})}{\pi_1(C_{01}-C_{11})}$ is a threshold, which depends on the prior probability $\pi_0$ and the costs. If $\lambda_0,~\lambda_1,~\tau$  are such that $\lambda_1\geq \tau\left( 1-\lambda_0\right) $, then according to the likelihood ratio, a received $0$ is decided as transmitted $1$. Similarly a received $1$ is decided as a transmitted $0$ when $(1-\lambda_1)<\tau \lambda_0$.
 \par Consider the simple case of uniform cost, for which, $C_{ij} = 0~ \mbox{if}~ i=j$ and $C_{ij} = 1~ \mbox{if} ~i\neq j$, and equal priors i.e.,  $\pi_0=1/2$. In this case, $\tau=1$, and the Bayesian decision rule is given as,
 \begin{eqnarray}
 \delta_{B}(0)=
@@ -74,7 +74,7 @@ y,\hspace{35pt}\mbox{if}~\lambda\leq  0.5\\
 \left( 1-y\right), ~\mbox{if}~\lambda>0.5.
 \end{cases}
 \end{equation}
-For the optimal bayes rule descibed above, conditional risks have the following expressions,
+For the optimal Bayes rule described above, conditional risks have the following expressions,
 \begin{equation}
 R_0(\delta)=\begin{cases}
 \lambda_0~~~~~~~~~~~\mbox{if}~(1-\lambda_1)\geq\lambda_0, \\
@@ -152,9 +152,9 @@ R_1(\delta)= P_1(\Gamma_0)
 \end{figure}
 \end{exmp}
 \section{Minimax Hypothesis Testing}
-Bayesian hypothesis testing assumes the knowledge of prior probabilities for the hypotheses. However, in a practical scenario, the priors are not necessarily available at the receiver. Under such circumstances, it is not possible to design a single Bayesian decision criterion that minimizes the average risk or Bayes risk for all possible prior distributions. Hence, it is necessary to develop a seperate design criterion. In this section, we look at the "Minimax criterion", which considers the minimization of the maximum of conditional risks $R_0(\delta)$ and $R_1(\delta)$ over all possible decision rules $\delta$. 
+Bayesian hypothesis testing assumes the knowledge of prior probabilities for the hypotheses. However, in a practical scenario, the priors are not necessarily available at the receiver. Under such circumstances, it is not possible to design a single Bayesian decision criterion that minimizes the average risk or Bayes risk for all possible prior distributions. Hence, it is necessary to develop a separate design criterion. In this section, we look at the "Minimax criterion", which considers the minimization of the maximum of conditional risks $R_0(\delta)$ and $R_1(\delta)$ over all possible decision rules $\delta$. 
 \begin{defn}
-The decision rule $(\delta)$ minimising the max risk given by the expression $\max~\{R_0(\delta),R_1(\delta)\}$ is known as \textbf{Minimax Rule.}
+The decision rule $(\delta)$ minimizing the max risk given by the expression $\max~\{R_0(\delta),R_1(\delta)\}$ is known as \textbf{Minimax Rule.}
 \end{defn}
 \subsection{The Minimax Rule}
 \begin{figure}[h]
@@ -167,7 +167,7 @@ To derive the Minimax rule, we first consider the unconditional risk for a given
 \begin{equation}
 r(\pi_0,\delta)=~\pi_0R_0(\delta)~+~(1-\pi_0)R_1(\delta), ~~~~\pi_0 \in [0,1].
 \end{equation}
-The unconditional risk function is shown in Fig. \ref{fig:minimax1}. As can be seen, for a fixed $\delta$, the function $r(\pi_0,\delta)$ is a straight line taking values $R_1(\delta)~\mbox{at}~\pi_0=0$ and $R_0(\delta)~\mbox{at}~\pi_0=1$. Thus, it is an affine function, and hence attains maximum value at the extrimities,
+The unconditional risk function is shown in Fig. \ref{fig:minimax1}. As can be seen, for a fixed $\delta$, the function $r(\pi_0,\delta)$ is a straight line taking values $R_1(\delta)~\mbox{at}~\pi_0=0$ and $R_0(\delta)~\mbox{at}~\pi_0=1$. Thus, it is an affine function, and hence attains maximum value at the extremities,
 \begin{equation}\label{eq:maxToPi}
 	\mathop {\max }\limits_{0 \le {\pi _0} \le 1} r({\pi _0},\delta ) = \max\{ {R_0}(\delta ),{R_1}(\delta )\}.
 \end{equation}
@@ -205,7 +205,7 @@ Hence $V(\pi)$ is concave.
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.7\linewidth]{Figures/minimax2}
-	\caption{\textit{Illustartion of the Minimax Rule when V has an interior maximum}}
+	\caption{\textit{Illustration of the Minimax Rule when V has an interior maximum}}
 	\label{fig:minimax2}
 \end{figure}
 \par Moreover, by examination of Fig. \ref{fig:minimax2}, we see that the Minimax rule for this case is a Bayes rule corresponding to the prior value $\pi_L$ that maximizes $V(\pi_0)$ over $\pi_0 \in [0,1]$. Note that for this prior we have that $r(\pi_0,\delta_{\pi_L})$ is constant over $\pi_0$, so,
@@ -214,9 +214,9 @@ Hence $V(\pi)$ is concave.
 \end{equation}  
 The fact that $\delta_{\pi_L}$ is minimax follows from the Fig. \ref{fig:minimax2}, since if $\pi_0' < \pi_L$, we have $\max\{ {R_0}({\delta _{\pi_0'}}),{R_1}({\delta _{\pi_0'}})\}  = {R_0}({\delta _{{\pi _0'}}})>{R_0}({\delta _{{\pi _L}}})$, and if $\pi_0'' > \pi_L$, we have that
 $\max\{ {R_0}({\delta _{\pi_0''}}),{R_1}({\delta _{\pi_0''}})\}  = {R_1}({\delta _{{\pi _0''}}})>{R_1}({\delta _{{\pi _L}}})$, as depicted.
-Because $\pi_L$ maximizes the minimum Bayes risk, it is also called the \textbf{least-favourable prior}. Hence, a minimax decision rule is the Bayes rule for the least-favourable prior.
+Because $\pi_L$ maximizes the minimum Bayes risk, it is also called the \textbf{least-favorable prior}. Hence, a minimax decision rule is the Bayes rule for the least-favorable prior.
 \begin{prop}
-Suppose $\pi_L$ maximises $V(\pi_0)$ for $\pi_0 \in [0,1]$. Suppose that either $\pi_L=0$, $\pi_L=1$, or $R_1(\delta_{\pi_L})=R_0(\delta_{\pi_L})$. Then $\delta_{\pi_L}$ is a Minimax rule.
+Suppose $\pi_L$ maximizes $V(\pi_0)$ for $\pi_0 \in [0,1]$. Suppose that either $\pi_L=0$, $\pi_L=1$, or $R_1(\delta_{\pi_L})=R_0(\delta_{\pi_L})$. Then $\delta_{\pi_L}$ is a Minimax rule.
 \end{prop} 
 \begin{proof}
 Consider the case when $R_1(\delta_{\pi_L})=R_0(\delta_{\pi_L})$. We know that, 
@@ -253,5 +253,5 @@ V'(\pi_0') &= \frac{d}{{d\pi }}r(\pi ,{\delta _{{\pi _0'}}})\left| {_{\pi  = {\p
 &= {R_0}({\delta_{{\pi_0'}}})- {R_1}({\delta_{{\pi_0'}}}).
 \end{align} 
 If $V$ has an interior maximum, i.e., $\pi_L\in (0,1)$, then $V'(\pi_L)$ equals zero, if $V$ is differentiable at $\pi_L$. 
-\par Thus, under the condition of unknown priors, Minimax rule considers the worst case scenario by taking the least favourable prior $\pi_L$ into account and minimizes the maximum unconditional risk for that prior.
+\par Thus, under the condition of unknown priors, Minimax rule considers the worst case scenario by taking the least favorable prior $\pi_L$ into account and minimizes the maximum unconditional risk for that prior.
 \end{document}
