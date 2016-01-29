@@ -14,7 +14,7 @@ The following is the summary of Bayesian, Minimax and Neyman Pearson hypothesis 
 \subsection{Bayesian Hypothesis Testing}
 There are two possible hypotheses $H_{0}$ and $H_{1}$, corresponding to two possible probability distributions $P_{0}$ and $P_{1}$, respectively on the observation set $(\Gamma)$.This problem is written as
 \begin{eqnarray}
-H_{0}:Y\sim P_{0}\\
+H_{0}:Y\sim P_{0}\\\nonumber
 H_{1}:Y\sim P_{1}
 \end{eqnarray}
 The decision rule $\delta$ as a function on $\Gamma$ is given by
@@ -25,20 +25,19 @@ We define expected cost incurred by decision rule $\delta$ when hypothesis $H_{j
 \begin{eqnarray}
 R_{j}(\delta)= C_{1j}P_{j}(\Gamma_{1})+C_{0j}P_{j}(\Gamma_{0})
 \end{eqnarray}
-where $\Gamma_1$ is the rejection region $\Gamma_1$ is the  acceptance region.
-The Bayes risk as the overall cost incurred by decision rule $\delta$ is given by
+where $\Gamma_0$ is the rejection region $\Gamma_1$ is the  acceptance region.
+The Bayes risk or the overall cost incurred by decision rule $\delta$ is given by
 \begin{align}
 r(\delta)&= \pi_{0}R_{0}(\delta)+\pi_{1}R_{1}(\delta)\nonumber\\
          &= \pi_{0}R_{0}(\delta)+(1-\pi_{0})R_{1}(\delta)
 \end{align} 
 where $\pi_{0}$ and $\pi_{1}$ are known as the priori probabilities of the two hypotheses $H_0~and~H_1$ respectively.
-
-A commonly used cost assignment is the uniform cost given by
+\par A commonly used cost assignment is the uniform cost given by
 \begin{equation}
-C_{1j}= 
+C_{ij}= 
 		\begin{cases}
-		0~~if~~i=j\\
-		1~~if~~i\neq j\\
+		0~~\mbox{if}~~i=j\\
+		1~~\mbox{if}~~i\neq j\\
 		\end{cases}
 \end{equation}
 Conditional risks are given~by
@@ -46,7 +45,6 @@ Conditional risks are given~by
   R_{0}(\delta)=P_{0}(\Gamma_{1})\nonumber\\
   R_{1}(\delta)=P_{1}(\Gamma_{0})\nonumber     
 \end{eqnarray}
-
 \subsection{Minimax Hypothesis Testing}
 The minimax rule is given by
 \begin{equation}
@@ -57,9 +55,9 @@ Or equivalently
 \min_{\delta}\max_{0 \leq \pi_{0} \leq 1}r(\pi_{0},\delta)&= \max_{0 \leq \pi_{0} \leq 1}\min_{\delta}r(\pi_{0},\delta)\nonumber\\
 														  &= \max_{0 \leq \pi_{0} \leq 1}V(\pi_{0})
 \end{align}
-Where $V(\pi_{0})=\min_{\delta}r(\pi_{0},\delta)$ and the Minimax rule is achieved where $\pi_{0}$ is such that
+where $V(\pi_{0})=\min_{\delta}r(\pi_{0},\delta)$ and the Minimax rule is achieved where $\pi_{0}$ is such that
 \begin{equation} 
-R_{0}(\delta_{\pi_{0}})=R_{1}(\delta_{\pi_{1}})
+R_{0}(\delta_{\pi_{0}})=R_{1}(\delta_{\pi_{0}})
 \end{equation}
 
 \subsection{Neyman-Pearson Hypothesis Testing}
