@@ -2,7 +2,7 @@
 \input{header}
 
 %opening
-\title{Lecture 06: Composite Hypothesis Testing and Properties of a Random Sample}
+\title{Lecture 6: Composite Hypothesis Testing and Properties of a Random Sample}
 \date{28 Jan 2016}
 \author{}
 
@@ -18,99 +18,91 @@ Testing on the radius of a point on the plane:\\
 Suppose that $\Gamma = {\mathbb{R}}^2$ , i.e. $Y \in \Gamma$, $Y = (Y_1,Y_2).$
 \begin{align*}
 Y &= X + n,\\
-\text{where, }
+\mbox{where, }
 n &\sim \mathcal{N}(0,\sigma^2I_2),\nonumber\\
 X &\in \{0,(A\cos\psi,A\sin\psi)\}.\nonumber
 \end{align*}
 $A > 0$, a constant, $\psi \sim$ unif($[0,2\pi)$) and $n_1$ and $n_2$ are independent of one another and of $\psi$ .\\
-
+	
 The null hypothesis and the alternate hypothesis are given by:
 \begin{align*}
 \mathcal{H}_0 &: Y \sim \mathcal{N}(0,\sigma^2I_2).\\
 \mathcal{H}_1 &: Y \sim \mathcal{N}((A\cos\psi,A\sin\psi),\sigma^2I_2).
 \end{align*}
-
+	
 The observation is a noisy measurement of the coordinates of a point in the plane that is either at the origin or is uniform-randomly distributed on a circle of radius $A$.
-
+	
 \begin{figure}
 \centering
 \includegraphics[scale=0.4]{Figures/decisionRegions.eps}
 \caption{Decision regions for example 1.1($\Gamma_1 = \Gamma_0^c$).}
 \label{fig: example 1.1}
 \end{figure}
-
+	
 So, we have partitions of parametric family of different distributions.
 For each $\psi$, we get different distributions.\\
-Let the parameter be $\Theta = (\Theta_1,\Theta_2)$, with $\Theta_1 \in \{0,A\}$ and $\Theta_2 \in [0,2\pi)$. Thus the parameter set is $\Lambda = \{0,A\}\times [0,2\pi),$
-with $\Lambda_0 = \{\theta \in \Lambda : \theta_1 = 0\}$ and $\Lambda_1 = \{\theta \in \Lambda : \theta_1 = A\}$. Let $\psi$ be a random variable that takes the value $\theta_2$. The conditional distribution of $Y$ given $\Theta = \theta$ is given by:\\
-
-\begin{equation}
-Y|(\Theta=\theta) \sim \mathcal{N} ((\theta_1\cos\theta_2,\theta_1\sin\theta_2), \sigma^2I_2).
-\end{equation}
-
-\begin{equation}
-P_\theta(y) = \int_{-\infty}^{y_1}\int_{-\infty}^{y_2}\dfrac{1}{2\pi\sigma^2}exp\Big[\dfrac{-q(u,\theta)}{2\sigma^2}\Big]du, \hspace{0.5cm} y \in {\mathbb{R}}^2
-\end{equation}
-where,
-\begin{equation}
-q(y,\theta) \triangleq (y_1-\theta_1\cos\theta_2)^2 + (y_2-\theta_1\sin\theta_2)^2
-\end{equation}
-
+Let the parameter be $\Theta = (\Theta_1,\Theta_2)$, with $\Theta_1 \in \{0,A\}$ and $\Theta_2 \in [0,2\pi)$. Thus the parameter set is $\Lambda = \{0,A\}\times [0,2\pi),$ with $\Lambda_0 = \{\theta \in \Lambda : \theta_1 = 0\}$ and $\Lambda_1 = \{\theta \in \Lambda : \theta_1 = A\}$. Let $\psi$ be a random variable that takes the value $\theta_2$. The conditional distribution of $Y$ given $\Theta = \theta$ is given by:\\
+	
+\begin{eqnarray}
+Y|(\Theta=\theta) &\sim& \mathcal{N} ((\theta_1\cos\theta_2,\theta_1\sin\theta_2), \sigma^2I_2).\\
+P_\theta(y) &=& \int_{-\infty}^{y_1}\int_{-\infty}^{y_2}\dfrac{1}{2\pi\sigma^2}\exp\Big[\dfrac{-q(u,\theta)}{2\sigma^2}\Big]du, ~~ y \in {\mathbb{R}}^2\\
+\mbox{where,}\nonumber\\
+q(y,\theta) &\triangleq& (y_1-\theta_1\cos\theta_2)^2 + (y_2-\theta_1\sin\theta_2)^2
+\end{eqnarray}
+	
 The likelihood ratio calculation is as follows:
 \begin{eqnarray}
 p(y|\Theta \in \Lambda_0) &=& p_\theta(y)|_{\theta_1 = 0},\\
-&=& \dfrac{1}{2\pi\sigma^2}exp\big[-\dfrac{(y_1^2 + y_2^2)}{2\sigma^2}\big],
-\end{eqnarray} 
-and,
-\begin{eqnarray}
+&=& \dfrac{1}{2\pi\sigma^2}\exp\big[-\dfrac{(y_1^2 + y_2^2)}{2\sigma^2}\big],\\
+\mbox{and,}\nonumber\\
 p(y|\Theta \in \Lambda_1)&=& \frac{1}{2\pi}\int_{0}^{2\pi}p_\theta(y)|_{\theta_1 = A}d\theta_2,\\
-&=& \dfrac{1}{4\pi^2\sigma^2}\int_{0}^{2\pi}exp\big[\frac{-q(y,\theta)|_{\theta_1 = A}}{2\sigma^2}\big]d\theta_2.
+&=& \dfrac{1}{4\pi^2\sigma^2}\int_{0}^{2\pi}\exp\big[\frac{-q(y,\theta)|_{\theta_1 = A}}{2\sigma^2}\big]d\theta_2.
 \end{eqnarray} 
-
+	
 The likelihood ratio is thus given by,
 \begin{equation}
 L(y) = \frac{dP_1(y| \theta \in \Lambda_1)}{dP_0(y| \theta \in \Lambda_0)}
 \end{equation}
-
+	
 Assume $c(i,\theta)$ is constant over $\theta \in \Lambda_1, \theta \in \Lambda_0$.
-
+	
 \begin{eqnarray}
 \frac{d}{dy}P_\Theta(y | \Theta \in \Lambda_1) &=& \mathbb{E}\big[P_\Theta(y | \Theta \in \Lambda_1), \Theta_2]. \\
-&=& \dfrac{1}{2\pi}\int_{0}^{2\pi}exp\Big[\dfrac{-q(y,\theta)}{2\sigma^2}\Big]d\theta_2 \hspace{0.5cm} for \hspace{0.2cm} \theta \in \Lambda.
+&=& \dfrac{1}{2\pi}\int_{0}^{2\pi}\exp\Big[\dfrac{-q(y,\theta)}{2\sigma^2}\Big]d\theta_2 ~ \forall ~ \theta \in \Lambda.
 \end{eqnarray}
-
+	
 Rewriting the likelihood ratio $L(y)$ as,
 \begin{equation*}
-L(y) = \frac{1}{2\pi}\int_{0}^{2\pi}\dfrac{exp\Big[\frac{-1}{2{\sigma}^2}\Big({y_1}^2 + A^2{\cos\theta_2}-2y_1A\cos\theta_2\Big)-\frac{1}{2{\sigma}^2}\Big({y_2}^2 + A^2{\sin\theta_2}-2y_2A\sin\theta_2\Big)\Big]}{exp\Big(-\dfrac{({y_1}^2 + {y_2}^2)}{2{\sigma}^2}\Big)}d\theta_2.
+L(y) = \frac{1}{2\pi}\int_{0}^{2\pi}\dfrac{\exp\Big[\frac{-1}{2{\sigma}^2}\Big({y_1}^2 + A^2{\cos\theta_2}-2y_1A\cos\theta_2\Big)-\frac{1}{2{\sigma}^2}\Big({y_2}^2 + A^2{\sin\theta_2}-2y_2A\sin\theta_2\Big)\Big]}{\exp\Big(-\dfrac{({y_1}^2 + {y_2}^2)}{2{\sigma}^2}\Big)}d\theta_2.
 \end{equation*}
-
+	
 \begin{eqnarray}
-L(y) &=& \frac{1}{2\pi}\int_{0}^{2\pi}exp\Big[-\frac{A^2}{2{\sigma}^2}+\frac{A}{{\sigma}^2}(y_1\cos\theta_2 + y_2\sin\theta_2)\Big]d\theta_2. \nonumber \\
-&=&\dfrac{exp\big(-\frac{A^2}{2{\sigma}^2}\big)}{2\pi}\int_{0}^{2\pi}exp\Big[\frac{A}{{\sigma}^2}(y_1\cos\theta_2 + y_2\sin\theta_2)\Big]d\theta_2.
+L(y) &=& \frac{1}{2\pi}\int_{0}^{2\pi}\exp\Big[-\frac{A^2}{2{\sigma}^2}+\frac{A}{{\sigma}^2}(y_1\cos\theta_2 + y_2\sin\theta_2)\Big]d\theta_2. \nonumber \\
+&=&\dfrac{\exp\big(-\frac{A^2}{2{\sigma}^2}\big)}{2\pi}\int_{0}^{2\pi}\exp\Big[\frac{A}{{\sigma}^2}(y_1\cos\theta_2 + y_2\sin\theta_2)\Big]d\theta_2.
 \end{eqnarray}
-
+	
 Using the following transformation of variables to make simplifications in the integral:
 \begin{eqnarray}
 r^2 &=& {y_1}^2 + {y_2}^2,\\
 \tan\phi &=& \frac{y_2}{y_1}.\\
-L(r) &=& \dfrac{exp\big(-\frac{A^2}{2\sigma^2}\big)}{2\pi}\int_{0}^{2\pi}exp\big(\frac{A}{\sigma^2}r\cos(\theta_2 - \phi)\big)d\theta_2.\\
-&=& exp\big(-\frac{A^2}{2\sigma^2}\big)I_0\big(\frac{Ar}{\sigma^2}\big).
+L(r) &=& \dfrac{\exp\big(-\frac{A^2}{2\sigma^2}\big)}{2\pi}\int_{0}^{2\pi}\exp\big(\frac{A}{\sigma^2}r\cos(\theta_2 - \phi)\big)d\theta_2.\\
+&=& \exp\big(-\frac{A^2}{2\sigma^2}\big)I_0\big(\frac{Ar}{\sigma^2}\big).
 \end{eqnarray}
 where $I_0(.)$ is the "zeroth order Bessel function of the first kind".
-
+	
 \begin{note} 
 Notice that $L(y)$ is thus independent of $\phi$.
 \end{note}
 \begin{note}
 $I_0$ is monotone increasing in its argument.
 \end{note}
-
+	
 Let us denote the threshold by $\tau$. Since $I_0$ is a monotonic function, it can be inverted to find $r$.
 \begin{eqnarray}
 L(r) &=& \tau.\\
 r &=& L^{-1}(\tau) = \tau'.\\
-\tau' &=& \frac{\sigma^2}{A}I_0^{-1}\Big(exp\big(\frac{A^2}{2\sigma^2}\big)\Big).\\
-\text{The decision rule is:} \nonumber\\
+\tau' &=& \frac{\sigma^2}{A}I_0^{-1}\Big(\exp\big(\frac{A^2}{2\sigma^2}\big)\Big).\\
+\mbox{The decision rule is:} \nonumber\\
 \tilde{\delta}(y) &=&
 \begin{cases}
 1, &if~ r > \tau'.\\
@@ -125,8 +117,8 @@ We have completely characterized decision rule for Bayesian framework. But we kn
 Recall: For a randomized decision rule $\tilde{\delta}$ we want to maximize probability of detection such that probability of false alarm is bounded by "significance level" $\alpha$.
 
 \begin{eqnarray}
-P_F(\tilde{\delta}; \theta) &=& \mathbb{E}_\theta\big(\tilde{\delta}(Y)\big), \hspace{0.5cm} \theta \in \Lambda_0.\\
-P_D(\tilde{\delta}; \theta) &=& \mathbb{E}_\theta\big(\tilde{\delta}(Y)\big), \hspace{0.5cm} \theta \in \Lambda_1.
+P_F(\tilde{\delta}; \theta) &=& \mathbb{E}_\theta\big(\tilde{\delta}(Y)\big), ~ \theta \in \Lambda_0.\\
+P_D(\tilde{\delta}; \theta) &=& \mathbb{E}_\theta\big(\tilde{\delta}(Y)\big), ~ \theta \in \Lambda_1.
 \end{eqnarray}	
 
 This is well defined if there is a unique $\theta \in \Lambda_0$ and a unique $\theta \in \Lambda_1$.\\
@@ -135,34 +127,35 @@ But the problem is that there are many $\theta$'s in $\Lambda_0$ and $\Lambda_1$
 \begin{defn}
 A Uniformly Most Powerful (UMP) test is a decision rule that maximizes the probability of detection $\forall \theta \in \Lambda_1$, such that the probability of false alarm $\forall \theta \in \Lambda_0$ is below the significance level $\alpha$.
 \begin{eqnarray*}
-\underset{\tilde{\delta}}{max} P_D(\tilde{\delta}; \theta), \hspace{1cm} \forall \theta \in \Lambda_1.\\
-\text{s.t.  } P_F(\tilde{\delta}; \theta) \leq \alpha, \hspace{1cm} \forall \theta \in \Lambda_0.
+\max_{\tilde{\delta}}P_D(\tilde{\delta}; \theta), ~ \forall \theta \in \Lambda_1.\\
+\mbox{s.t.  } P_F(\tilde{\delta}; \theta) \leq \alpha, ~ \forall \theta \in \Lambda_0.
 \end{eqnarray*}	
 \end{defn}
-	 
+
 Although the UMP tests are desirable, they exist only in certain cases. To demonstrate this, let us consider the following example.
 \begin{exmp} 
 Consider a case where the null hypothesis is simple, i.e., $\Lambda_0 = \{\theta_0\}$, and the alternate hypothesis $\Lambda_1$ is composite. For each $\theta \in \Lambda_1$, we can find the rejection region.
 
 \begin{eqnarray}
 \Gamma_\theta &=& \{y \in \Gamma: L(y) > \tau\}.\\
-\text{where  } L(y) &=& \dfrac{dP_{\theta_1}(y)}{dP_{\theta_0}},	
+\mbox{where  } L(y) &=& \dfrac{dP_{\theta_1}(y)}{dP_{\theta_0}},	
 \end{eqnarray}	
-
+	
 is the likelihood ratio and $\tau$ is the threshold chosen(with possibly randomization) to give significance level $\alpha$. By the N-P lemma, we know that this test is unique, i.e., for $\theta_1, \theta_2 \in \Lambda_1$, such that $\theta_1 \neq \theta_2 $, the test with critical region $\Gamma_{\theta_1}$ will have smaller power in testing $\mathcal{H}_0: Y \sim P_{\theta_0}$ versus $\mathcal{H}_1: Y \sim P_{\theta_2}$ and vice versa unless the two critical regions are identical.
-
+	
 \begin{equation*}
 P_{\theta_{2}}(\Gamma_{\theta_1}) \leq P_{\theta_{2}}(\Gamma_{\theta_2}).
 \end{equation*}
 with equality iff $\Gamma_{\theta_1} = \Gamma_{\theta_2}$.
 
 \begin{cor}
-{A UMP test exists for simple $\mathcal{H}_0$ versus composite $\mathcal{H}_1$ iff $\Gamma_\theta$ is identical $\forall$ $\theta \in \Gamma_1$.}	
+{A UMP test exists for simple $\mathcal{H}_0$ versus composite $\mathcal{H}_1$ iff $\Gamma_\theta$ is identical $\forall \theta \in \Gamma_1$.}	
 \end{cor}
-\end{exmp}	
+\end{exmp}
+	
 
 \begin{exmp}{UMP testing of location:}\\
-Consider the parametric family of distributions $\{P_\theta;\theta \in \Lambda\}$, where\\ $\{P_\theta= \mathcal{N}(\theta,\sigma^2),\hspace{0.3cm}\theta \in \Lambda\}, \hspace{0.3cm} \Lambda \subseteq \mathbb{R},$ and suppose that we have the hypotheses:
+Consider the parametric family of distributions $\{P_\theta;\theta \in \Lambda\}$, where\\ $\{P_\theta= \mathcal{N}(\theta,\sigma^2),~\theta \in \Lambda\}, ~ \Lambda \subseteq \mathbb{R},$ and suppose that we have the hypotheses:
 \begin{center}
 $\mathcal{H}_0 : \theta = \mu_0.$\\
 $\mathcal{H}_1 : \theta > \mu_0.$	
@@ -170,7 +163,7 @@ $\mathcal{H}_1 : \theta > \mu_0.$
 	
 That is, $\Lambda_0 = \{\mu_0\}$ and $\Lambda_1 = (\mu_0,\infty)$. The most powerful $\alpha$-level test $\mathcal{H}_0$ versus $\mathcal{H}_1 : Y \sim \mathcal{N}(\theta,\sigma^2)$ has critical region:
 \begin{equation}
-\Gamma_\theta = \{y \in \Gamma: y > \sigma \Phi^{-1}(1 - \alpha) + \mu_0 \}, \hspace{0.3cm} \forall \hspace{0.3cm} \theta \in \Lambda_1.
+\Gamma_\theta = \{y \in \Gamma: y > \sigma \Phi^{-1}(1 - \alpha) + \mu_0 \}, ~ \forall ~ \theta \in \Lambda_1.
 \end{equation}
 The UMP test, denoted by $\tilde{\delta}$ is:
 \begin{equation}
@@ -192,8 +185,8 @@ P_D(\tilde{\delta}; \theta) = 1 - \Phi\Big(\Phi^{-1}(1 - \alpha) - \dfrac{(\thet
 \end{note}	
 \end{exmp}		 
 
-\begin{exmp}{Testing of location, with different hypotheses pair:}\\
-The setup be as in previous example, except a different $\mathcal{H}_1$ as follows:
+\begin{exmp}{Testing of location with different hypotheses pair:}\\
+The setup is as in the previous example, except a different $\mathcal{H}_1$.
 \begin{align*}
 \mathcal{H}_0 &: \theta = \mu_0  \text{   (as before),}\\
 \mathcal{H}_1 &: \theta \neq \mu_0.
@@ -243,16 +236,15 @@ As observed earlier, the UMP criterion is very strong to be satisfied. Hence by 
 \item \textbf{Unbiasedness}
 \begin{defn}{A test is said to satisfy the condition of unbiasedness if,
 \begin{eqnarray*} 
-P_D(\widetilde{ \delta};\theta)&\geq&\alpha,  \hspace{1cm} \forall  \theta \in  \Lambda_1. \\
-\text{in addition to}\\
-P_F(\widetilde{\delta};\theta) &\leq& \alpha,  \hspace{1cm} \forall  \theta \in  \Lambda_0.
+P_D(\tilde{ \delta};\theta)&\geq&\alpha,  ~ \forall  \theta \in  \Lambda_1. \\
+\mbox{in addition to}\\
+P_F(\tilde{\delta};\theta) &\leq& \alpha,  ~ \forall  \theta \in  \Lambda_0.
 \end{eqnarray*}
 }
 \end{defn}	
 This requirement would eliminate both $\tilde{\delta_1}$ and $\tilde{\delta_2}$ in the previous example.  
 
-\begin{exmp} Consider an example where the parameter set is given by, $\Lambda = [\theta_0,\infty).$
-\\Let $\Lambda_0 = \{\theta_0\}, \hspace{0.3cm} \Lambda_1 = (\theta_0, \infty)$.\\
+\begin{exmp} Consider an example where the parameter set is given by $\Lambda = [\theta_0,\infty).$ Let $\Lambda_0 = \{\theta_0\}, ~ \Lambda_1 = (\theta_0, \infty)$.\\
 The null hypothesis and the alternate hypothesis are given by:
 \begin{center}
 $\mathcal{H}_0 : \theta = \theta_0$, \\ $\mathcal{H}_1 : \theta > \theta_0.$
@@ -261,25 +253,25 @@ Such a case arises in signal detection where the amplitude of the signal is repr
 The only case where confusion arises is when the received amplitude is close to $\theta_0$. Consider a decision rule $\tilde{\delta}$. Under certain regularity conditions, by the application of Taylor's series expansion about $\theta_0$, we obtain,
 
 \begin{eqnarray}
-P_D(\widetilde{ \delta};\theta) &=& P_D(\widetilde{ \delta};\theta_0) + (\theta - \theta_0) P_{D}'(\widetilde{ \delta};\theta_0) + O((\theta - \theta_0)^2). \nonumber \\
-&=&P_F(\widetilde{ \delta}) + (\theta - \theta_0) P_{D}'(\widetilde{ \delta};\theta_0) + O((\theta - \theta_0)^2). \nonumber \\
-&\approxeq& \alpha + (\theta - \theta_0) P_{D}'(\widetilde{ \delta};\theta_0).
+P_D(\tilde{ \delta};\theta) &=& P_D(\tilde{ \delta};\theta_0) + (\theta - \theta_0) P_{D}'(\tilde{ \delta};\theta_0) + O((\theta - \theta_0)^2). \nonumber \\
+&=&P_F(\tilde{ \delta}) + (\theta - \theta_0) P_{D}'(\tilde{ \delta};\theta_0) + O((\theta - \theta_0)^2). \nonumber \\
+&\approxeq& \alpha + (\theta - \theta_0) P_{D}'(\tilde{ \delta};\theta_0).
 \end{eqnarray} 
 \end{exmp}
 
 \item \textbf{$\alpha$-level "locally most powerful test" (LMP)}
-\\A test that maximizes $P_{D}'(\widetilde{\delta};\theta_0)$ subject to false alarm constraint $	P_F(\widetilde{\delta}) \leq \alpha$ is called an $\alpha$-level locally most powerful test (LMP).
+\\A test that maximizes $P_{D}'(\tilde{\delta};\theta_0)$ subject to false alarm constraint $P_F(\tilde{\delta}) \leq \alpha$ is called an $\alpha$-level locally most powerful test (LMP).
 
 \begin{center}
-$\underset{\widetilde{\delta}}{max} P_{D}'(\widetilde{\delta};\theta_0),$ \\ subject to $	P_F(\widetilde{\delta}) \leq \alpha$.
+$\max\limits_{\tilde{\delta}} P_{D}'(\tilde{\delta};\theta_0),$ \\ subject to $	P_F(\tilde{\delta}) \leq \alpha$.
 \end{center}
 
 Consider,
 \begin{align}
-P_D(\widetilde{ \delta};\theta) &= \mathbb{E}_\theta \widetilde{ \delta}(Y). \nonumber \\
-&= \underset{y \in \Gamma}{\int}  \widetilde{\delta}(y) dP_\theta(y). \nonumber \\
-P_{D}'(\widetilde{ \delta};\theta_0) &=  \underset{y \in \Gamma}{\int}  \widetilde{\delta}(y) d\Bigg[\frac{\partial}{\partial \theta}P_\theta(y)\Bigg]_{\theta = \theta_0}. \nonumber \\
-\widetilde{\delta}_{LO}(y) &= 
+P_D(\tilde{ \delta};\theta) &= \mathbb{E}_\theta \tilde{ \delta}(Y). \nonumber \\
+&= \int_{y \in \Gamma}  \tilde{\delta}(y) dP_\theta(y). \nonumber \\
+P_{D}'(\tilde{ \delta};\theta_0) &=  \int\limits_{y \in \Gamma}  \tilde{\delta}(y) d\Bigg[\frac{\partial}{\partial \theta}P_\theta(y)\Bigg]_{\theta = \theta_0}. \nonumber \\
+\tilde{\delta}_{LO}(y) &= 
 \begin{cases} 
 1, &if~ [\frac{\partial}{\partial \theta}L(y) ] \mid_{\theta = \theta_0} > \eta. \\
 \gamma, &if~ [\frac{\partial}{\partial \theta}L(y)] \mid_{\theta = \theta_0} = \eta. \\
@@ -289,13 +281,13 @@ P_{D}'(\widetilde{ \delta};\theta_0) &=  \underset{y \in \Gamma}{\int}  \widetil
 
 We are mostly interested in the case when $\Lambda_0 = \{\theta_0\}$ and $\Lambda_1$ is composite, where $\eta$ and $\gamma$ are chosen such that, 
 \begin{equation*}
-P_F(\widetilde{\delta}_{LO}) = \alpha.
+P_F(\tilde{\delta}_{LO}) = \alpha.
 \end{equation*}
 
 \item \textbf{Maximum Likelihood Test}\\
 A test that is applicable for composite hypothesis testing problems is based on comparaing the likelihood ratio $ L(y)$ to a threshold $\tau$. The likelihood ratio is given by,
 \begin{equation}
-L(y)=\dfrac{\underset{\theta \in \Lambda_1}{max} \hspace{0.2cm} dP_\theta(y)}{\underset{\theta \in \Lambda_0}{max} \hspace{0.2cm} dP_\theta(y)}. 
+L(y)=\dfrac{\max\limits_{\theta \in \Lambda_1} ~ dP_\theta(y)}{\max\limits_{\theta \in \Lambda_0} ~ dP_\theta(y)}. 
 \end{equation}
 
 So, we have three ways to deal with the composite hypothesis test.
@@ -317,23 +309,23 @@ Let $X_1, X_2, .... X_n$ be a random sample of size $n$ from the population $p(X
 \end{defn}
 
 \begin{exmp}
-$T(X_1, X_2, .... X_n) = \underset{i \in [n]}{min} X_i$.
+$T(X_1, X_2, .... X_n) = \min_{i \in [n]} X_i$.
 \end{exmp}
 \begin{exmp}
-$T(X_1, X_2, .... X_n) = \underset{i \in [n]}{max} X_i$.
+$T(X_1, X_2, .... X_n) = \max_{i \in [n]} X_i$.
 \end{exmp}
 
 \begin{defn}
 The "sample mean" is the statistic defined by taking the arithmetic average of values in a random sample, denoted by $\bar{X}$.
 \begin{equation}
-\bar{X} = \frac{1}{n} \underset{i \in [n]}{\sum} X_i.
+\bar{X} = \frac{1}{n} \sum_{i \in [n]} X_i.
 \end{equation}
 \end{defn}
 
 \begin{defn}
 The "sample variation" is the statistic defined by, 
 \begin{equation}
-s^2 = \frac{1}{n-1}  \underset{i \in [n]}{\sum} (X_i - \bar{X})^2.
+s^2 = \frac{1}{n-1}  \sum_{i \in [n]} (X_i - \bar{X})^2.
 \end{equation}
 \end{defn}
 
@@ -344,8 +336,8 @@ The "sample standard deviation" is the statistic defined by $s = \sqrt{s^2}$.
 \begin{thm}
 Let $x_1, x_2,...x_n  \in \mathbb{R}$ and $\bar{x} = \frac{1}{n} \displaystyle \sum_{i=1}^{n} x_i$ then,\\
 \begin{eqnarray}
-&a)& \hspace{0.3cm} \underset{a}{min} \hspace{0.1cm} \sum_{i=1}^{n} (x_i - a)^2 = \sum_{i=1}^{n} (x_i - \bar{x})^2. \\
-&b)& \hspace{0.3cm} (n-1)s^2 = \sum_{i=1}^{n} (x_i - \bar{x})^2 = \sum_{i=1}^{n} x_i^2 - n\bar{x}^2.
+&a)& ~ \min_{a} ~ \sum_{i=1}^{n} (x_i - a)^2 = \sum_{i=1}^{n} (x_i - \bar{x})^2. \\
+&b)& ~ (n-1)s^2 = \sum_{i=1}^{n} (x_i - \bar{x})^2 = \sum_{i=1}^{n} x_i^2 - n\bar{x}^2.
 \end{eqnarray}
 \end{thm}
 
@@ -360,14 +352,14 @@ The proof for the first statement of the above theorem is as follows:
 \end{eqnarray}
 The above inequality holds with equality when $a = \bar{x}$. Therefore,
 \begin{equation}
- \underset{a}{min} \hspace{0.1cm} \sum_{i=1}^{n} (x_i - a)^2 = \sum_{i=1}^{n} (x_i - \bar{x})^2.
+ \min_{a} \sum_{i=1}^{n} (x_i - a)^2 = \sum_{i=1}^{n} (x_i - \bar{x})^2.
 \end{equation}
 }
 \item{
 Substituting $a = 0$ in the above statement,
 \begin{eqnarray}
 \sum_{i=1}^{n} x_i^2 &=& \sum_{i=1}^{n} (x_i - \bar{x})^2 + \sum_{i=1}^{n} x_i^2.  \nonumber \\
-\therefore \sum_{i=1}^{n} (x_i - \bar{x})^2 &=& \sum_{i=1}^{n} x_i^2 - n \bar{x}^2.
+\sum_{i=1}^{n} (x_i - \bar{x})^2 &=& \sum_{i=1}^{n} x_i^2 - n \bar{x}^2.
 \end{eqnarray}
 }
 \end{enumerate}
@@ -390,12 +382,12 @@ $\mathbb{E}$ is a linear operator and $X_1, X_2, ... X_n$ are identically distri
 \end{eqnarray}
 }
 
-\item{By the definition of variance,
+\item{By the definition of variance,}
 \begin{eqnarray}
 Var\Big[ \sum_{i=1}^{n} g(X_i) \Big] &=& \mathbb{E} \Bigg[ \sum_{i=1}^{n} g(X_i) - \mathbb{E} \Big[ \sum_{i=1}^{n} g(X_i)\Big] \Bigg]^2. \nonumber \\
 &=& \mathbb{E} \Bigg[ \sum_{i=1}^{n} \Big[ g(X_i) - \mathbb{E}[ g(X_i)]\Big] \Bigg]^2.
 \end{eqnarray}
-}
+
 Out of the $n ^2$ terms in the expansion, $n$ terms are of the form,
 \begin{eqnarray}
 \mathbb{E}\Big[ g(X_i) - \mathbb{E}[ g(X_i)]\Big]^2 &=& Var (g(X_i)).\nonumber \\
