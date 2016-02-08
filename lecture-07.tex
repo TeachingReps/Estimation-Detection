@@ -1,0 +1,295 @@
+\documentclass[a4paper,english,12pt]{article}
+\input{header}
+%\usepackage{amsmath}
+\title{ Lecture 7: Properties of Random Sampling }
+\author{}
+\begin{document}
+\maketitle
+
+\section{Continued From Last Class}
+\begin{thm}
+Let $X_1,X_2,....X_n$ be a random sample from a population with mean $\mu$ and variance $\sigma^2<\infty$, then 
+\renewcommand{\labelenumi}{\alph{enumi})}
+\begin{enumerate}
+\item $\E \overline{X}=\mu$,
+\item $Var \overline{X}= \frac{\sigma^2}{n}$,
+\item $\E S^2=\sigma^2$.
+\end{enumerate}
+
+\end{thm}
+
+\begin{proof}
+Part \textbf{(a)} of the theorem can be simply proved as follows :\\
+
+$\E\overline{X}=\E(\frac{1}{n}\sum_{i=1}^{n}X_i)=\frac{1}{n}\E(\sum_{i=1}^{n}X_i)=\frac{1}{n}n\E X_1=\mu$ \\
+
+A similar proof can be given for part\textbf{(b)} : \\
+
+$ Var\overline{X} =Var(\frac{1}{n}\sum_{i=1}^{n}X_i)=\frac{1}{n^2}Var(\sum_{i=1}^{n}X_i)=\frac{1}{n^2}nVarX_1=\frac{\sigma^2}{n}$. \\
+
+From the definition of \textbf{sample variance} and using the equation 
+\begin{align}
+(n-1)S^2=\sum_{i\in [n]}(X_i-\overline{X})^2=\sum_{i\in [n]}X_i^2-n\overline{X}^2.
+\end{align}
+
+Part \textbf{(c)} can be proved as follows:
+
+
+\begin{align}
+\E S^2&=\E \left(\frac{1}{n-1}\left[\sum_{i=1}^{n}X_i^2-n\overline{X}^2\right]\right) \nonumber \\
+&=\frac{1}{n-1}(n\E X_1^2-n\E\overline{X}^2) \nonumber \\
+&=\frac{1}{n-1}\left(n(\sigma^2+\mu^2)-n\left(\frac{\sigma^2}{n}+\mu^2\right)\right) \nonumber\\
+&=\sigma^2
+\end{align}
+
+\end{proof}
+
+\begin{thm}
+Let $X_1,X_2,....X_n$ be a random sample from a pmf or pdf $f(x|\theta)$, where 
+$$ f(x|\theta)=h(x)c(\theta)exp\left(\sum_{i=1}^{k}w_i(\theta)u_i\right)$$ 
+is a member of an exponential family. Define statistics $T_1,T_2,....T_k$ as 
+$$T_i(X_1,X_2.....X_n)=\sum_{j=1}^{n}t_i(X_j),  i=1,2....k$$ 
+If the set $\{w_1(\theta),w_2(\theta),...w_k(\theta):\theta\in\Theta\}$ contains an open subset of $\R^k$, then the distribution of $(T_1,...T_k)$ is an exponential family of the form 
+$$f_T(u_1,....,u_k|\theta)=H(u_1,....u_k)[c(\theta)]^n exp\left(\sum_{i=1}^kw_i(\theta)u_i\right)$$ 
+\end{thm}
+
+\begin{exmp}[Sum of Bernoulli Random Variables]
+
+Let $X_1,X_2,...X_n$ be random sample of size $n$ from a Bernoulli distribution. Thus 
+\begin{align}
+P(X_1,...X_n|p)&=Bern(p)   \nonumber  \\
+&=P(X_1|p)=p^{X_1}(1-p)^{1-X_1} \nonumber \\
+&=(1-p)exp\left(log\left[\frac{p}{1-p}X_1\right]\right)
+\end{align}
+Comparing with the exponential family equation above, we get $h(X_1)=1$,  $c(p)=1-p$ and $w_1(p)=log(\frac{p}{1-p})$
+
+\end{exmp}
+
+\section{Sampling From the Normal Distribution}
+\begin{thm}
+Let $X_1,....X_n$ be a random sample from a Normal Distribution $\mathcal{N}(\mu,\sigma^2)$ and $\overline{X}$ and $S^2$ are sample mean and variance respectively. Then
+\renewcommand{\labelenumi}{\alph{enumi})}
+\begin{enumerate}
+\item $\overline{X}$ and $S^2$ are independent random variables 
+\item $\overline{X} \sim \mathcal{N}(\mu,\frac{\sigma^2}{n})$
+\item $\frac{(n-1)S^2}{n}$ has a chi squared distribution with $(n-1)$ degrees of freedom 
+\end{enumerate}
+\end{thm}
+
+\begin{proof}
+
+\textit{(a)} Without any loss of generality, we can assume that $\mu=0$ and $\sigma=1$. It can be shown that if $X_1$ and $X_2$ be two independent random variables, then $U_1=g_1(X_1)$ and $U_2=g_2(X_2)$ are also independent random vectors where $g_1$ and $g_2$ are functions of $X_1$ and $X_2$ respectively. Thus we aim to show that $\overline{X}$ and $S^2$ are functions of independent random vectors.   
+We can write $S^2$ as a function of $(n-1)$ deviations as follows: 
+\begin{align}
+S^2&=\frac{1}{n-1}\sum_{i=1}^n(X_i-\overline{X})^2 \nonumber \\
+&= \frac{1}{n-1}\left((X_1-\overline{X})^2+\sum_{i=2}^n
+(X_i-\overline{X})^2\right) \nonumber \\
+&=\frac{1}{n-1}\left(\left[\sum_{i=2}^n(X_i-\overline{X})\right]^2+\sum_{i=2}^n(X_i-\overline{X}^2\right) \\
+& (Since~\sum_{i=1}^n(X_i-\overline{X})=0) \nonumber
+\end{align}
+
+Hence, $S^2$ can be written as a function of only the $(n-1)$ deviations   $(X_2-\overline{X},X_3-\overline{X},\dots,X_n-\overline{X}$).We can show that these random variables are independent of $\overline{X}$ and hence prove statement \textit{(a)}. The joint pdf of the sample $X_1,X_2,\dots,X_n$ is given by 
+
+\begin{align}
+f(x_1,\dots,x_n)=\frac{1}{{(2\pi)}^{\frac{n}{2}}}e^{-(1/2)\sum_{i=1}^n x_i^2}  \qquad - \infty <x_i< \infty
+\end{align}
+We make the following transformation 
+\begin{align}
+y_1&=\overline{x}  \nonumber \\
+y_2&=x_2-\overline{x} \nonumber \\
+\vdots \nonumber \\
+y_n&=x_n-\overline{x}
+\end{align}
+This linear transformation has a Jacobian of $n$ and the distribution 
+\begin{align}
+f(y_1,\dots ,y_n)& \nonumber \\
+&= \frac{n}{{(2\pi)}^{\frac{n}{2}}}e^{(1/2)(y_1-\sum_{i=2}^ny_i)^2}e^{-(1/2)\sum_{i=2}^n(y_i+y_1)^2}, \qquad - \infty < y_i <\infty \nonumber \\
+&= \left[ {\left( \frac{n}{2\pi}\right)}^{1/2}e^{(-ny_1^2)/2}\right] \left[ \frac{n^{1/2}}{(2\pi)^{(n-1)/2}}e^{-(1/2){[\sum_{i=2}^ny_i^2)+{(\sum_{i=2}^ny_i)}^2]}}\right], \qquad - \infty < y_i <\infty
+\end{align}
+Hence, the joint pdf factors and thus the random variables $Y_1,\dots ,Y_n$ are independent. 
+\\
+\textit{(b)} 
+Consider a random sample $X_1,\dots ,X_n$ obtained from $\mathcal{N}(\mu,\sigma^2)$. The moment generating function(mgf) of $X_i$, $i\in[n]$ is 
+\begin{align}
+M_{X_i}(t)=exp{(\mu t +\frac{\sigma^2 t^2}{2})};
+\end{align}
+Hence, for the variable $\frac{X_i}{n}$,the mgf is given by 
+\begin{align}
+M_{\frac{X_i}{n}}(t)=exp{(\mu \frac{t}{n} +\frac{\sigma^2 t^2}{2n^2})};
+\end{align}
+Now, or the sample mean $\overline{X}=\frac{(X_1+X_2+\dots +X_n)}{n}$, the mgf is given by 
+\begin{align}
+M_{X_i}(t)&={\left[exp{(\mu \frac{t}{n} +\frac{\sigma^2 t^2}{2n^2})}\right]}^n \nonumber \\
+&=exp{(n(\mu \frac{t}{n} +\frac{\sigma^2 t^2}{2n^2}))} \nonumber \\
+&=exp{(\mu t +\frac{\sigma^2 t^2}{2n})};
+\end{align}
+Because the mgf of a distribution is unique to that distribution, this mgf is from a Normal Distribution with mean $\mu$ and variance $\frac{\sigma^2}{n}$. Hence, $\overline{X} \sim \mathcal{N}(\mu,\frac{\sigma^2}{n}).$
+\\
+\\
+The chi squared pdf is a special case of the gamma pdf and is given as 
+\begin{align}
+f(x)=\frac{1}{\Gamma(p/2)2^{p/2}}x^{(p/2)-1}e^{-x/2}, \qquad 0<x<\infty 
+\end{align}
+Some properties of the chi squared distribution with $p$ degrees of freedom is summarized in the following lemma 
+\begin{lem}
+Let $\chi _p^2$ denote a chi squared random variable with $p$ degrees of freedom, then 
+\renewcommand{\labelenumi}{\alph{enumi})}
+\begin{enumerate}
+\item If $Z\sim \mathcal{N}(0,1)$, then $Z^2 \sim \chi_1^2$, i.e., the  square of a standard normal random variable is a chi squared random variable. 
+\item If $X_1,X_2\dots , X_n$ are independent and $X_i\sim \chi _{p_i}^2$, then $\sum_{i=1}^nX_i\sim X_{\sum_{i=1}^np_i}$. Thus, independent chi squared variables add to a chi squared variable and their degrees of freedom also add up. 
+\end{enumerate}
+\end{lem}
+\textit{(c)} To prove part \textbf{(c)}, we will at first prove 2 results. They are the recursive relations for sample mean and variance. We know that, sample mean $\overline{X_{n+1}}=\frac{1}{n+1} \sum\limits_{k=1}^{n+1} X_{k}$. We obtain the recursive relations for sample mean as follows,
+\begin{align}
+\overline{X_{n+1}}& =\frac{1}{n+1} \sum\limits_{k=1}^{n+1} X_{k}, \nonumber \\
+& = \frac{1}{n+1} [X_{n+1} + \sum\limits_{k=1}^{n} X_{k}], \nonumber \\
+& = \frac{1}{n+1} [X_{n+1} + n\overline{X_n}], \nonumber 
+\end{align}
+Hence the recursive relation for sample mean can be stated as,
+\begin{equation} \label{equation_showing_recursive_relation_for_sample_mean}
+\overline{X_{n+1}}= \frac{1}{n+1} [X_{n+1} + n\overline{X_n}].
+\end{equation}
+Now we will proceed to derive the recursive relationship for sample variance.\\
+For $n+1$, random samples, the sample variance can be stated as,
+\begin{align}
+n^2S_{n+1}=\sum\limits_{k=1}^{n+1} [X_{k}-\overline{X_n+1}]^2
+\end{align}
+Using \eqref{equation_showing_recursive_relation_for_sample_mean}, we have,
+\begin{align}
+n^2S_{n+1}& =\sum\limits_{k=1}^{n+1} [X_{k}-\frac{1}{n+1} [X_{n+1} + n\overline{X_n}]]^2 , \nonumber \\
+& =\sum\limits_{k=1}^{n+1} [X_{k}-\frac{1}{n+1} [X_{n+1} + (n+1-1)\overline{X_n}]]^2 , \nonumber \\
+& =\sum\limits_{k=1}^{n+1} [X_{k}-\overline{X_n}-\frac{1}{n+1}[X_{n+1} - \overline{X_n}]]^2 , \nonumber \\
+\end{align}
+\end{proof}
+\section{Order Statistics}
+\begin{defn}
+The order statistics of a random sample $X_1,X_2, \dots X_n$ are the sample values placed in ascending order. They are denoted by $X_{(1)},X_{(2)},\dots X_{(n)}$.
+\end{defn}
+The order statistics are random variables satisfying $X_{(1)}\leq\dots\leq X_{(n)}$. In particular,
+%\begin{equation}
+\begin{align}
+& X_{(1)}=\underset{1\leq i\leq n}{\text{min}} X_i ,\nonumber \\ 
+& X_{(2)}=second\quad smallest\quad X_i,\\ \nonumber
+& \vdots \\ \nonumber
+& X_{(n)}=\underset{1\leq i\leq n}{\text{max}} X_i.
+\end{align}
+%\end{equation}
+\begin{thm}
+Let $f_X$ be the probability density function associated with the population, then the joint density of order statistics can be written as,
+\begin{equation}
+f_{X_{(1)},X_{(2)},\dots X_{(n)}}(x_1,x_2, \ldots x_n)= 
+		\begin{cases}
+		n!\prod\limits_{i=1}^n f_X (x_i),~~\mbox{if}~~x_1<x_2 \ldots <x_n,\\
+		0,\quad otherwise.\\
+		\end{cases}
+\end{equation}
+\end{thm}
+\begin{defn}
+The \textit{sample range}, $R=X_{(n)}-X_{(1)}$ is the distance between the smallest and the largest observations.It is a measure of the dispersion of the sample and should reflect the dispersion in the population.
+\end{defn}
+\begin{defn}
+The \textit{sample median}, which we will denote by M, is a number such that approximately one half of the observations are less than M and one half are greater.In terms of order statistics, M can be defined as,
+\begin{equation}
+M= 
+		\begin{cases}
+	 X_{(n+1)/2}~~\mbox{if}~n~is~odd,\\
+	(X_{n/2}+X_{(n/2)+1})/2,~~\mbox{if}~n~is~even.\\
+		\end{cases}
+\end{equation}
+\end{defn}
+\begin{defn}
+For any number $p$ between 0 and 1, the $(100p)th$ percentile is the observation such that approximately $np$ of the observations are less than this observation and $n(1-p)$ are greater than it.As a special case, for $p=.5$, we have the $50th$ sample percentile, which is nothing but the sample median.
+\end{defn}
+\begin{thm} \label{theorem:thm_5.4.3_casella_berger}
+Let $X_1,X_2, \dots X_n$ be a random sample from a discrete distribution with pmf $f_X(x_i)=p_i$ where $x_1<x_2 \ldots $ are the possible values of $X$ in ascending order.We define,
+\begin{align}
+& P_0=0, \nonumber \\
+& P_1=p_1,\nonumber \\
+& P_2=p_1+p_2, \\ \nonumber
+& \vdots  \nonumber \\ \nonumber
+& P_i=p_1+p_2\ldots +p_i, \\ \nonumber
+& \vdots \\ \nonumber
+\end{align}
+Let $X_{(1)},X_{(2)},\dots X_{(n)}$ be the order statistics from the sample. Then,
+\begin{equation} \label{eqn:casella berger pg 228 eq 5.4.2}
+P(X_{(j)} \leq x_i)={\sum\limits_{k=j}^n} \binom{n}{k} P_i ^{k} (1-P_i)^{n-k}.
+\end{equation}
+and
+\begin{equation} \label{eqn2:casella berger pg 228 eq 5.4.3}
+P(X_{(j)} = x_i)={\sum\limits_{k=j}^n} \binom{n}{k} [P_i ^{k} (1-P_i)^{n-k} - P_{i-1} ^{k} (1-P_{i-1})^{n-k}].
+\end{equation}
+\end{thm}
+\begin{proof}
+First we fix $i$. Let $Y$ be a random variable which counts the number of $X_1,X_2 \ldots,X_n$ which are less than of equal to $x_i$. For each of $X_1,X_2 \ldots,X_n$, we denote the event $\{X_j \leq x_i\}$ as success and the event $\{X_j>x_i\}$ as failure. So $Y$ can be regarded as the number of successes in $n$ trials. Since $X_1,X_2 \ldots,X_n$  are identically distributed, the probability of success for each trial is a same value, which is $P_i$. We can write $P_i$ as,
+\begin{equation}
+P_i=P[X_j \leq x_i].
+\end{equation}
+The success or failure of the $jth$ trial is independent of the outcome of any other trial, since $X_j$ is independent of other $X_{i}s$. Thus we can write $Y \sim Bin(n,P_i)$. \\
+The event $\{X_j \leq x_i\}$ is equivalent to the event ${Y \geq j}$; that is, atleast $j$ of the sample values are less than or equal to $x_i$. Since $Y$ follows a Binomial distribution, we can write,
+\begin{equation} \label{eq4:eqn_where_Y_is_more_than_some_value}
+P(Y \geq j)={\sum\limits_{k=j}^n} \binom{n}{k} P_i ^{k} (1-P_i)^{n-k}.
+\end{equation}
+As $P(Y \geq j)=P(X_{(j)} \leq x_i)$, we can write,
+\begin{equation} \label{eqn5:where_xj_is_less_than_some_value}
+P(X_{(j)} \leq x_i)={\sum\limits_{k=j}^n} \binom{n}{k} P_i ^{k} (1-P_i)^{n-k}.
+\end{equation}
+This completes the proof of \eqref{eqn:casella berger pg 228 eq 5.4.2}. For the proof of \eqref{eqn2:casella berger pg 228 eq 5.4.3}, we note that, 
+\begin{align}
+P(X_{(j)} = x_i)= P(X_{(j)} \leq x_i)-P(X_{(j)} \leq x_{i-1}). \nonumber
+\end{align}
+Hence we can write using \eqref{eqn5:where_xj_is_less_than_some_value},
+\begin{equation}
+P(X_{(j)} = x_i)={\sum\limits_{k=j}^n} \binom{n}{k} [P_i ^{k} (1-P_i)^{n-k} - P_{i-1} ^{k} (1-P_{i-1})^{n-k}].
+\end{equation}
+This completes our proof.Here, for the case $i=1$, $P(X_{(j)} = x_i)=P(X_{(j)} \leq x_i)$. The definition of $P_0=0$,takes care of this situation.
+\end{proof}
+\begin{thm}
+Let $X_{1},X_{2}, \dots X_{n}$ denote the order statistics of a random sample,$X_1,X_2, \dots X_n$ with $cdf F_x (x)$ and $pdf f_X (x)$. Then the $pdf$ of of $X_j$ is,
+\begin{equation}
+f_{X_{(j)}} (x)= \frac{n!}{(j-1)!(n-j)!} f_X (x) F_X (x) ^{j-1} [1 - F_X (x)]^{n-j}.
+\end{equation}
+\end{thm}
+\begin{proof}
+We will first find the $cdf$ of $X_{(j)}$ and then will differentiate it to get the pdf. As in theorem \ref{theorem:thm_5.4.3_casella_berger}, let $Y$ be a random variable which counts the number of $X_1,X_2, \dots X_n$ which are less than or equal to $x$. Then, if we consider the event${X_j \leq x}$ as success, then following the approach for the proof of \ref{theorem:thm_5.4.3_casella_berger}, we can write that $Y \sim Bin(n,F_X (x))$. It is to be noted that although $X_1,X_2, \dots X_n$ are continuous random variables, $Y$ is discrete.\\
+Hence, we have,
+\begin{equation} \label{equation1:cts_cdf_y}
+P(Y \geq j)= {\sum\limits_{k=j}^n} \binom{n}{k} F_X (x) ^{k} (1-F_X (x))^{n-k}.
+\end{equation}
+Since $P(Y \geq j)=P(X_j \leq x_i)=F_X{()j} (x)$, we will differentiate \eqref{equation1:cts_cdf_y} to obtain the $pdf$ of $X_{(j)}$.
+Thus,
+\begin{align}
+f_{X_{(j)}} (x)&=\frac{d(F_{X_{(j)}} (x))}{dx}, \nonumber \\
+\end{align}
+After differentiating the above expression, it can be written as,
+\begin{multline}
+{\sum\limits_{k=j}^n} \binom{n}{k} [ k F_X (x) ^{k-1} (1-F_X (x))^{n-k}f_X (x) - F_X (x) ^{k} (n-k) (1-F_X (x))^{n-k-1} f_X (x)], \nonumber \\
+=\binom{n}{j}j F_X (x) ^{j-1} (1-F_X (x))^{n-j}f_X (x)+{\sum\limits_{k=j+1}^n} \binom{n}{k} k F_X (x) ^{k-1} (1-F_X (x))^{n-k}f_X (x)\nonumber \\ 
+-{\sum\limits_{k=j}^{n-1}} \binom{n}{k} F_X (x) ^{k} (n-k) (1-F_X (x))^{n-k-1} f_X (x),\nonumber \\
+\end{multline}
+\begin{multline} 
+=\frac{n!}{(j-1)!(n-j)!} f_X (x) F_X (x) ^{j-1} [1 - F_X (x)]^{n-j}\nonumber + {\sum\limits_{p=j}^{n-1}} \binom{n}{p+1} (p+1) F_X (x) ^{p} (1-F_X (x))^{n-p-1}f_X (x)\nonumber \\
+-{\sum\limits_{k=j}^{n-1}} \binom{n}{k} F_X (x) ^{k} (n-k) (1-F_X (x))^{n-k-1} f_X (x).
+\end{multline}
+The 1st equality was obtained from the fact that the second term under the summation will be zero when $n=k$ and the 2nd equality followed, when we make the transformation $p=k-1$.
+Thus,
+\begin{align}
+\label{eqn:final_simplified_form_before_using_combination}
+f_{X_{(j)}} (x)=\frac{n!}{(j-1)!(n-j)!} f_X (x) F_X (x) ^{j-1} [1 - F_X (x)]^{n-j}\nonumber \\ + {\sum\limits_{p=j}^{n-1}} \binom{n}{p+1} (p+1) F_X (x) ^{p} (1-F_X (x))^{n-p-1}f_X (x)\nonumber \\-{\sum\limits_{k=j}^{n-1}} \binom{n}{k} F_X (x) ^{k} (n-k) (1-F_X (x))^{n-k-1} f_X (x).
+\end{align}
+
+
+Now we utilize the following results,
+\begin{align}
+\binom{n}{p+1}\times (p+1)=\frac{n!}{(n-p-1)!p!}, \nonumber 
+\end{align}
+and
+\begin{align}
+\binom{n}{k}\times (n-k)=\frac{n!}{(n-k-1)!k!}. \nonumber 
+\end{align}
+Using these above 2 results, we can write \eqref{eqn:final_simplified_form_before_using_combination} as ,
+\begin{align}
+f_{X_{(j)}} (x)=\frac{n!}{(j-1)!(n-j)!} f_X (x) F_X (x) ^{j-1} [1 - F_X (x)]^{n-j}.
+\end{align}
+This completes our proof of the theorem.
+\end{proof}
+\end{document}
