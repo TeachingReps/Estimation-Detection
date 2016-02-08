@@ -1,0 +1,177 @@
+\documentclass[a4paper,english,12pt]{article}
+\input{header}
+
+%opening
+\title{Lecture 8: Principles of Data Reduction}
+\date{02 Feb 2016}
+\author{}
+
+\begin{document}
+\maketitle
+The previous lecture dealt with some properties of random samples. In the event when the samples were picked IID from a normal distribution, the sample mean and the sample variance were shown to be independent random variables. Also, a general expression for the cumulative distribution function (CDF) of the $ j^{\text{th}} $ order statistic was derived in terms of the CDF governing the population. We begin this lecture by deriving the CDF of the $ j^{\text{th}} $ order statistic for a uniformly distributed population. Next, we discuss the Student's $ t $ distribution. We then study the principle of sufficiency, and derive sufficient statistics for a parameterized population governed by (a) binomial/Bernoulli distribution, and (b) normal distribution. 
+  
+\begin{exmp}[Order Statistics of Uniform Distribution]
+	Let $ X_1,\ldots,X_n \stackrel{IID}{\sim} \text{unif}\left[0,1\right] $. Then, for all $ i=1,\ldots,n $, $ F_{X_{i}}(x) = x $, $ x \in \left[0,1\right] $, where $ F(.) $ denotes the CDF. We now derive the CDF of the $ j^{th} $ order statistic. From Lecture 7, we know that for any $ x \in [0,1] $, we have $ F_{X_{\left(j\right)}} (x) = \sum_{k=j}^{n} \binom{n}{k} x^{k} (1-x)^{n-k}$. So,
+	\begin{align}
+	  	f_{X_{\left(j\right)}} (x)&=\frac{d}{dx} F_{X_{\left(j\right)}} (x)\nonumber\\
+	  	&= \sum_{k=j}^{n} \binom{n}{k} \{k x^{k-1} (1-x)^{n-k} - x^{k} (1-x)^{n-k-1} (n-k)\}\nonumber\\
+	  	&= \sum_{k=j+1}^{n} \binom{n}{k} k x^{k-1} (1-x)^{n-k}
+	  	- \sum_{k=j}^{n-1} \binom{n}{k} x^{k} (1-x)^{n-k-1} (n-k)\nonumber\\
+        &+ \binom{n}{j} j x^{j-1} (1-x)^{n-j}\nonumber\\
+	  	&= \frac{n!}{ (j-1)! \, (n-j)!  } x^{j-1} (1-x)^{n-j}\nonumber\\
+	  	&= \frac{\Gamma(n+1)}{ \Gamma(j) \Gamma(n-j+1)  } x^{j-1} (1-x)^{(n-j+1)-1}, \label{unif_stat}
+    \end{align}
+    where the first equality follows from the relation between the CDF and probability density function (pdf), the second equality follows from the chain rule of the differentiation, and the fourth equality follows by using the following expression:
+    \begin{equation}
+      \binom{n}{k+1} (k+1) = \frac{n!}{ (k)! \, (n-k-1)! } = \binom{n}{k} (n-k). \nonumber
+    \end{equation}
+    
+    \begin{defn}[Beta Distribution]
+    	For $ x \in [0,1] $, and {shape parameters} $ \alpha, \beta > 0 $, the Beta distribution is a power function of the variable $ x $ and of its reflection $(1-x)$. Its pdf is defined as follows:
+    	
+    	\begin{align*}
+    		f_{\text{Beta}(\alpha, \beta)}(x) & = \frac{x^{\alpha-1}(1-x)^{\beta-1}}{\int_0^1 u^{\alpha-1} (1-u)^{\beta-1}\, du} \\
+    		& = \frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\, x^{\alpha-1}(1-x)^{\beta-1} \\
+    		& = \frac{1}{B(\alpha,\beta)} x^{\alpha-1}(1-x)^{\beta-1},
+    	\end{align*}
+    	\\
+    	where $ \Gamma(.) $ denotes the gamma function, and the beta function $B(\alpha,\beta)$ is a normalization factor to ensure that the pdf integrates to 1.
+    \end{defn}
+    
+    Thus, from (\ref*{unif_stat}), and the definition of the Beta distribution, the $j^{\text{th}}$ order statistic of a $ \text{unif}\left[0,1\right] $ random sample has a $ \text{Beta}(j,n-j+1 ) $ distribution. The mean and variance of the $ j^{\text{th}} $ order statistic are as follows:
+    \begin{equation}
+     \E \left[X_{\left(j\right)}\right] = \frac{j}{n+1} ~ \text{and} ~
+     \text{Var} \left[X_{\left(j\right)}\right] = \frac{j(n-j+1)}{(n+2)(n+1)^{2}}. \nonumber
+    \end{equation}
+\end{exmp}
+
+
+\section{The Student's $ t $ Distribution}
+Consider a random sample $ X_{1},\ldots,X_{n} $, with $ X_{i}\sim\mathcal{N}(\mu,\sigma^{2}) $, where $ \sigma^{2} $ is known but $ \mu $ is unknown. Consider the problem of finding $ \mu $. With the knowledge of sample values, the statistic 
+\begin{equation}
+T_{1}=\frac{\bar{X}-\mu}{\sigma/\sqrt{n}} \label{T_{1}}
+\end{equation}
+has only $ \mu $ as the unknown quantity. Here, $ \bar{X}=\frac{1}{n}\sum\limits_{i=1}^{n}X_{i} $ denotes the sample mean. Since $ T_{1} \sim \mathcal{N}(0,1) $, an estimate of $ \mu $ can be obtained as follows: let $ \alpha \in (0,1) $ be fixed, and let $ c>0 $ be a number such that
+\begin{equation}
+\mathbb{P}\left(-c  \leq T_{1} \leq c \right)=\alpha. \label{eq:c,alpha}
+\end{equation}
+Equivalently, we have
+\begin{equation}
+\mathbb{P}\left(-c \leq \frac{\bar{X}-\mu}{{\sigma}/\sqrt{n}} \leq c \right)=\alpha, \label{eq:c,alpha_1}
+\end{equation}
+which may be rearranged to obtain a probabilistic estimate for $ \mu $ as follows:
+\begin{equation}
+\mathbb{P}\left(\mu \in \left[\bar{X}-\frac{c\sigma}{\sqrt{n}}, \bar{X}+\frac{c\sigma}{\sqrt{n}}\right] \right)=\alpha. \label{eq:c,alpha_2}
+\end{equation}
+For example, if $ \alpha=0.99 $,  (\ref*{eq:c,alpha_2}) provides us with a range of values in which $ \mu $ lies with probability $ 0.99 $.
+\\
+
+If both $ \sigma^{2} $ and $ \mu $ are unknown, the approach outlined in the preceding paragraph cannot be used. Instead, however, the sample variance $ S^{2}=\frac{1}{n-1}\sum\limits_{i=1}^{n} \left(X_{i}-\bar{X}\right)^{2} $ can be evaluated with the knowledge of sample values $ X_{1},\ldots,X_{n} $, and the quantity $ S=\sqrt{S^{2}} $ can be used in place of $ \sigma $ in  (\ref*{eq:c,alpha_1}). But, in order to do so, the distribution of the statistic $ T_{2}=\frac{\bar{X}-\mu}{\sqrt{S^{2}}/\sqrt{n}} $ has to necessarily be known.
+\\
+
+If $ X_{1},\ldots,X_{n}\stackrel{IID}{\sim} \mathcal{N}(\mu,\sigma^{2}) $, then we know that $ \frac{\bar{X}-\mu}{\sqrt{\sigma}/\sqrt{n}}\sim \mathcal{N}(0,1) $ and $ \frac{(n-1)S^{2}}{\sigma^{2}} \sim \chi_{n-1}^{2} $ (see Lecture $ 7 $), where $ \chi_{n-1}^{2} $ denotes the ch-squared distribution with $ n-1 $ degrees of freedom. Thus, the expression for $ T_{2} $ can be modified as follows:
+\begin{align}
+T_{2}&=\frac{\bar{X}-\mu}{\sqrt{S^{2}}/\sqrt{n}}\nonumber\\
+     &=\frac{\left(\bar{X}-\mu\right)/\left(\sigma/\sqrt{n}\right)}{\sqrt{S^{2}/\sigma^2}}.\label{eq:T_{2}}
+\end{align}
+
+As pointed out before, the numerator of  (\ref*{eq:T_{2}}) is an $ \mathcal{N}(0,1) $ random variable and the denominator is a $ \sqrt{\frac{1}{n-1}\chi_{n-1}^{2}} $ random variable, independent of the denominator (since $ \bar{X} $ and $ S $ are independent random variables). Thus, the distribution of $ T_{2} $ can be found by solving the simplified problem of finding the distribution of $ U/\sqrt{V/p} $, where $ U $ is $ \mathcal{N}(0,1) $ and $ V $ is $ \chi_{p}^{2} $, $ p=n-1 $, and $ U $ and $ V $ are independent. This gives us Student's $ t $ distribution.
+\\
+
+\begin{defn}
+	Let $ X_{1},\ldots,X_{n} $ be a random sample from $ \mathcal{N}(\mu,\sigma^{2}) $ distribution. The quantity $ \frac{\bar{X}-\mu}{\sqrt{S^{2}}/\sqrt{n}} $ has Student's $ t $ distribution with $ n-1 $ degrees of freedom. Equivalently, a random variable $ T $ has Student's $ t $ distribution with $ p $ degrees of freedom, and we write $ T\sim t_{p} $, if it has the following pdf:
+	\begin{equation}
+	f_{T}(t)=\frac{\Gamma\left(\frac{p+1}{2}\right)}{\Gamma\left(\frac{p}{2}\right)} \frac{1}{\sqrt{p\pi}} \frac{1}{\left(1+\frac{t^{2}}{p}\right)^{\frac{p+1}{2}}},~-\infty < t < \infty.\label{eq:pdf_ST}
+	\end{equation}
+\end{defn}
+When $ p=1 $, (\ref*{eq:pdf_ST}) becomes the pdf of Cauchy distribution. In order to show that the statistic $ T_{2} $ has this distribution, 
+let $ U $ and $ V $ be random variables as defined in the previous paragraph, and let $ p=n-1 $. Then, the joint pdf of $ U $ and $ V $ is given by:
+\begin{align}
+f_{U,V}(u,v)&=f_{U}(u)f_{V}(v)~(\text{since}~U~\text{and}~V~\text{are independent})\nonumber\\
+            &=\left(\frac{1}{\sqrt{2\pi}} e^{-\frac{u^{2}}{2}}\right)\left(\frac{1}{\Gamma(p)} \frac{1}{2^{\frac{p}{2}}} v^{\frac{p}{2}-1} e^{-\frac{v}{2}}\right),~-\infty < u < \infty,~0<v<\infty.\label{eq:f_{U,V}(u,v)}
+\end{align}
+
+We now apply the transformation $ a=\frac{u}{\sqrt{v/p}} $ and $ b=v $. Then, the Jacobian matrix of the transformation is given by:
+\begin{align}
+J(u,v)&=\left[
+\begin{matrix}
+\frac{\partial a}{\partial u}&\frac{\partial a}{\partial v}\\\\\
+\frac{\partial b}{\partial u}&\frac{\partial b}{\partial v}
+\end{matrix}\right]\nonumber\\
+       &=\left[
+       \begin{matrix}
+       	\sqrt{\frac{p}{v}}&-\frac{u}{2}\sqrt{\frac{p}{v}}\\\vspace{0.2pt}\\
+       	0&1
+       \end{matrix}\right].\label{eq:J(u,v)}
+\end{align}
+Thus, the joint distribution of $ A=\frac{U}{\sqrt{V/p}} $ and $ B=V $ is given by:
+\begin{align}
+	f_{A,B}(a,b)&=\frac{f_{U,V}(u,v)}{|\text{det}(J(u,v))|}\nonumber\\
+	            &=f_{U,V}(u,v)\sqrt{\frac{v}{p}},\label{eq:f_{A,B}(a,b)}
+\end{align}
+where det($ J(u,v) $) denotes the determinant of the Jacobian matrix, which evaluates to $ \sqrt{\frac{p}{v}} $. We note that the random variable $ A $ corresponds to the statistic $ T_{2} $ whose pdf is to be computed. Thus, we have
+\begin{align}
+	f_{T_{2}}(t)=f_{A}(t)&=\int\limits_{0}^{\infty} f_{A,B}(t,b) ~db\nonumber\\
+				         &=\int\limits_{0}^{\infty} f_{U,V}\left(t\sqrt{\frac{v}{p}},v\right) \sqrt{\frac{v}{p}}~dv,\label{eq:f_{T_{2}}(t)}
+\end{align} 
+which upon simplification yields the expression on the RHS of (\ref*{eq:pdf_ST}), with $ p=n-1 $.\\
+
+\textbf{An Application of Student's $ t $ Distribution:} We now return to the problem of finding the mean $ \mu $ of a population governed by $ \mathcal{N}(\mu,\sigma^{2}) $ distribution, given the values of the random sample $ X_{1},\ldots,X_{n} $, when both $ \mu $ and $ \sigma^{2} $ are unknown. Let $ \alpha\in (0,1) $ be fixed, and let $ c>0 $ be a number such that
+\begin{equation}
+\mathbb{P}\left(-c \leq T_{2} \leq c\right)=\alpha.\label{eq:c,alphaa}
+\end{equation} 
+Equivalently, we have
+\begin{equation}
+\mathbb{P}\left(-c \leq \frac{\bar{X}-\mu}{\sqrt{S^{2}}/\sqrt{n}} \leq c \right)=\alpha. \label{eq:c,alphaa_1}
+\end{equation}
+Since $ \frac{\bar{X}-\mu}{\sqrt{S^{2}}/\sqrt{n}} $ follows Student's $ t $ distribution with $ n-1 $ degrees of freedom, (\ref*{eq:c,alphaa_1}) can be solved to obtain the value of $ c $, and the following equation then provides the range of values in which $ \mu $ lies with probability $ \alpha $:
+\begin{equation}
+\mathbb{P}\left(\mu \in \left[\bar{X}-\frac{c\sqrt{S^{2}}}{\sqrt{n}}, \bar{X}+\frac{c\sqrt{S^{2}}}{\sqrt{n}}\right] \right)=\alpha. \label{eq:c,alphaa_2}
+\end{equation}
+
+\section{Data Reduction / Principle of Sufficiency.}
+(Reference: Chapter $ 6 $ of {\textit{Statistical Inference} by George Casella and Roger L. Berger}).\\
+
+A statistician uses the information in a sample $  x_1, \dots, x_n  $ provided by a data collector to draw inferences about an unknown parameter $ \theta $ of the distribution governing the population. If the sample size $ n $ is large, then the observed sample may be cumbersome to deal with. 
+
+So, from the statistician's point of view, it is desirable to summarize the information in a sample by determining its key features. This is usually done by computing statistics, which are functions of the sample. Let $ \underline{X} \triangleq X_1, \dots, X_n $ denote a random sample, and $ \underline{x} \triangleq x_1, \dots, x_n $ denote the sample values (or simply, sample).  We wish to construct functions (or statistics) $ T\left(\underline{X}\right) $ that are ``sufficient" for the purpose of determining the parameter $ \theta $. Such functions are called sufficient statistics.
+
+\begin{defn}[Sufficient Statistics (Informal)]
+	A statistic $ T\left(\underline{X}\right) $ is called a sufficient statistic for a population $ F $ with parameter $ \theta $ if $ T\left(\underline{X}\right) $ captures all the information about $ \theta $.
+\end{defn}
+
+\begin{defn}[Sufficient Statistics (Formal)]
+	A statistic $ T\left(\underline{X}\right) $ is said to be sufficient for a parameterized population $ F_{\theta} $ if the conditional distribution of the random sample $ \underline{X} $ given $ T\left(\underline{X}\right) $ does not depend on $ \theta $. 
+\end{defn}
+
+\begin{exmp}[The Trivial Sufficient Statistic]
+	We now show that $ T(\underline{X})=\underline{X} $ is trivially a sufficient statistic for the parameter $ \theta $. We have
+	\begin{align}
+	 \mathbb{P}\left(\underline{X} = \underline{x} \vert ~ T\left(\underline{X}\right) = \left(y_1, \ldots, y_n\right) \right) &= \mathbbm{1} \left( x_i = y_i \right)~ \forall i.\label{eq:trivial}
+	\end{align}
+	Since (\ref*{eq:trivial}) is independent of $ \theta $, we conclude that $ T\left(\underline{X}\right) = \underline{X}$ is a sufficient statistic for the parameter $ \theta $.
+\end{exmp}
+
+\begin{exmp}[Bernoulli/Binomial sufficient statistic]
+	Consider $ n $ IID random variables $ X_1, \dots, X_n $ distributed according to a Bernoulli distribution with bias parameter $ \theta \in \left[0,1\right]$, i.e., $ X_i \in \{0,1\} \forall i=1,\ldots,n $. We now wish to see if $ T\left(\underline{X}\right) = \sum\limits_{i=1}^{n} X_i$ a sufficient statistic? For any $ k\in \mathbb{Z}^{*} $, where $ \mathbb{Z}^{*} $ denotes the set of all positive integers, we have
+	\begin{align}
+	\mathbb{P}\left(\underline{X} = \underline{x} \vert ~ T\left(\underline{X}\right) = k \right) &= \frac{1}{ \binom{n}{k}} \cdot \mathbbm{1} \left( \sum_{i=1}^{n} x_i = k \right).\label{eq:bernoulli}
+	\end{align}     
+	Since (\ref*{eq:bernoulli}) is independent of $ \theta $, we conclude that $ T\left(\underline{X}\right) = \sum\limits_{i=1}^{n} X_i $ is a sufficient statistic for the parameter $ \theta $. 
+\end{exmp}
+
+\begin{exmp}[Normal Sufficient Statistic (when $ \sigma^{2} $ is known)]
+	Without loss of generality, let $ \sigma^{2}=1 $. Let $ X_{1},\ldots,X_{n} \stackrel{IID}{\sim} \mathcal{N}(\mu,1) $. Here, $ \mu $ is unknown, and the objective is to construct at a sufficient statistic for $ \mu $. Let
+	\begin{equation}
+	T(\underline{X})=\frac{1}{n}\sum\limits_{i=1}^{n}X_{i} = \bar{X}\label{eq:T(X)},
+	\end{equation}
+	where $ \bar{X} $ is the sample mean. We wish to see if $ \bar{X} $ is a sufficient statistic for $ \mu $. We have
+	\begin{align}
+		f_{\underline{X}|T(\underline{X})}(\underline{x}|t)&=\frac{f_{\underline{X}}(\underline{x})}{f_{T(\underline{X})}(t)}\nonumber\\
+		&=\dfrac{\left(\frac{1}{\sqrt{2\pi}}\right)^{n} \text{exp}\left[-\frac{1}{2}\sum\limits_{i=1}^{n}\left(x_{i}-\mu\right)^{2}\right]}{\frac{1}{\sqrt{2\pi}} \frac{1}{\sqrt{n}}~ \text{exp}\left[-\frac{1}{2\left(\frac{1}{n}\right)} \left(t-\mu\right)^{2}\right]}\nonumber\\
+		&=\dfrac{\left(\frac{1}{\sqrt{2\pi}}\right)^{n} \text{exp}\left[-\frac{1}{2}\left(\sum\limits_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}+n\left(\bar{x}-\mu\right)^{2}\right)\right]}{\frac{1}{\sqrt{2\pi}} \frac{1}{\sqrt{n}}~ \text{exp}\left[-\frac{1}{2\left(\frac{1}{n}\right)} \left(t-\mu\right)^{2}\right]}\nonumber\\
+		&=\sqrt{n} \left(\frac{1}{\sqrt{2\pi}}\right)^{n-1} \text{exp}\left[-\frac{1}{2}\sum\limits_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}\right],\label{eq:conditional}
+		\end{align}
+		where the last line follows from the fact that $ \bar{x}=t $. Since the RHS of (\ref*{eq:conditional}) is independent of $ \mu $, we conclude that the sample mean $ \bar{X} $ is a sufficient statistic for the mean of a population following normal distribution when the variance is known. However, this is not true in general for other distributions.
+\end{exmp}
+\end{document}
