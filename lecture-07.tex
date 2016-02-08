@@ -157,7 +157,7 @@ Using \eqref{equation_showing_recursive_relation_for_sample_mean}, we have,
 nS_{n+1} ^2& =\sum\limits_{k=1}^{n+1} [X_{k}-\frac{1}{n+1} [X_{n+1} + n\overline{X_n}]]^2 , \nonumber \\
 & =\sum\limits_{k=1}^{n+1} [X_{k}-\frac{1}{n+1} [X_{n+1} + (n+1-1)\overline{X_n}]]^2 , \nonumber \\
 & =\sum\limits_{k=1}^{n+1} [X_{k}-\overline{X_n}-\frac{1}{n+1}[X_{n+1} - \overline{X_n}]]^2 , \nonumber \\
-& =\sum\limits_{k=1}^{n+1} [(X_{k}-\overline{X_n})^2+\frac{1}{(n+1)^2}[X_{n+1} - \overline{X_n}]^2-2 \frac{1}{n+1}[X_{n+1} - \overline{X_n}][X_{k}-\overline{X_n}]] , \nonumber \\
+& =\sum\limits_{k=1}^{n+1} [(X_{k}-\overline{X_n})^2+\frac{1}{n+1)^2}[X_{n+1} - \overline{X_n}]^2-2 \frac{1}{n+1}[X_{n+1} - \overline{X_n}][X_{k}-\overline{X_n}]] , \nonumber \\
 & Since~\sum_{i=1}^n(X_i-\overline{X})=0,we~have, \nonumber \\
 & =\sum\limits_{k=1}^{n+1} [(X_{k}-\overline{X_n})^2]+\frac{1}{n+1}[X_{n+1} - \overline{X_n}]^2-2 \frac{1}{n+1}[X_{n+1} - \overline{X_n}]^2 , \nonumber \\
 & =\sum\limits_{k=1}^{n} [(X_{k}-\overline{X_n})^2]+[1-\frac{1}{n+1}][X_{n+1} - \overline{X_n}]^2 , \nonumber \\
@@ -165,7 +165,7 @@ nS_{n+1} ^2& =\sum\limits_{k=1}^{n+1} [X_{k}-\frac{1}{n+1} [X_{n+1} + n\overline
 \end{align}
 Thus we have,
 \begin{equation} \label{equation_recursive_variance_n+1}
-nS_{n+1} ^2=(n-1)S_{n} ^2+[\frac{n}{(n+1}][X_{n+1} - \overline{X_n}]^2.
+nS_{n+1} ^2=(n-1)S_{n} ^2+[\frac{n}{n+1}][X_{n+1} - \overline{X_n}]^2.
 \end{equation}
 Replacing $n$ by $n-1$ in \eqref{equation_recursive_variance_n+1}, we get a recursive relation for sample variance as,
 \begin{equation} \label{equation_recursive_variance_n}
@@ -174,14 +174,14 @@ Replacing $n$ by $n-1$ in \eqref{equation_recursive_variance_n+1}, we get a recu
 If we take $n=2$ and use it in \eqref{equation_recursive_variance_n} and if we define $0\times S_1 ^2=0$, then from \eqref{equation_recursive_variance_n}, we have $S_2^2=\frac{1}{2}(X_2-X_1)^2$.Since the distribution of $\frac{1}{\sqrt{2}}(X_2-X_1)$ is Gaussian with parameter (0,1), part (a) of lemma  \ref{lemma_5.3.2_casella_berger} shows that $S_2 ^2 \sim \chi_1 ^2$.Proceeding with induction, let us assume that for $n=k$, $(k-1)S_k ^2 \sim \chi_{k-1} ^2$.\\
 So for $n=k+1$, we can write from \eqref{equation_recursive_variance_n+1},
 \begin{align}
-kS_{k+1} ^2=(k-1)S_{k} ^2+[\frac{k}{(k+1}][X_{k+1} - \overline{X_k}]^2.
+kS_{k+1} ^2=(k-1)S_{k} ^2+[\frac{k}{k+1}][X_{k+1} - \overline{X_k}]^2.
 \end{align}
-By inductive hypothesis, $(k-1)S_k ^2 \sim \chi_{k-1} ^2$, so if we can establish that $[\frac{k}{(k+1}][X_{k+1} - \overline{X_k}]^2\sim \chi_{1} ^2$ and is independent of $S_k ^2$, then from part (b) of lemma \ref{lemma_5.3.2_casella_berger}, $kS_{k+1} ^2\sim \chi_k ^2$ and the theorem will be proved.\\
+By inductive hypothesis, $(k-1)S_k ^2 \sim \chi_{k-1} ^2$, so if we can establish that $[\frac{k}{k+1}][X_{k+1} - \overline{X_k}]^2\sim \chi_{1} ^2$ and is independent of $S_k ^2$, then from part (b) of lemma \ref{lemma_5.3.2_casella_berger}, $kS_{k+1} ^2\sim \chi_k ^2$ and the theorem will be proved.\\
 The vector $(X_{k+1},\overline{X_k})$ is independent of $S_k ^2$ and so is any function of this vector. Furthermore, $(X_{k+1} - \overline{X_k})$ is a normally distributed random variable with mean 0 and variance,
 \begin{align}
 Var(X_{k+1} - \overline{X_k})=\frac{k+1}{k}. \nonumber.
 \end{align}
-and therefore $[\frac{k}{(k+1}][X_{k+1} - \overline{X_k}]^2\sim \chi_{1} ^2$. This completes our proof of the theorem.
+and therefore $[\frac{k}{k+1}][X_{k+1} - \overline{X_k}]^2\sim \chi_{1} ^2$. This completes our proof of the theorem.
 \end{proof}
 \section{Order Statistics}
 \begin{defn}
@@ -280,7 +280,7 @@ Hence, we have,
 \begin{equation} \label{equation1:cts_cdf_y}
 P(Y \geq j)= {\sum\limits_{k=j}^n} \binom{n}{k} F_X (x) ^{k} (1-F_X (x))^{n-k}.
 \end{equation}
-Since $P(Y \geq j)=P(X_j \leq x_i)=F_X{()j} (x)$, we will differentiate \eqref{equation1:cts_cdf_y} to obtain the $pdf$ of $X_{(j)}$.
+Since $P(Y \geq j)=P(X_j \leq x_i)=F_{X_(j)} (x)$, we will differentiate \eqref{equation1:cts_cdf_y} to obtain the $pdf$ of $X_{(j)}$.
 Thus,
 \begin{align}
 f_{X_{(j)}} (x)&=\frac{d(F_{X_{(j)}} (x))}{dx}, \nonumber \\
