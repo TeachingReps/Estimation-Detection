@@ -1,0 +1,252 @@
+\documentclass[a4paper,english,12pt]{article}
+\input{header}
+\usepackage{amsmath}
+
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\btheta}{\boldsymbol{\theta}}
+\newcommand{\bLambda}{\boldsymbol{\Lambda}}
+
+
+%opening
+
+\title{Lecture 9: Sufficient Statistics}
+\date{11 Feb 2016}
+\author{}
+
+\begin{document}
+\maketitle
+In the previous lecture, the concept and definition of sufficient statistics were covered. In this lecture, an equivalent definition for sufficient statistics, Factorisation Theorem, concept of minimal sufficient statistics and relation between sufficiency and hypothesis testing are discussed.
+\section{Sufficient Statistics}
+
+\begin{defn} 
+If $p_\theta(\bx)$ is the joint pdf (or pmf) of $\bX$ and $q_\theta(t)$ is the pdf (or pmf) of $T(\bX)$, then $T(\bX)$ is a sufficient statistic, if the ratio $\frac{p_\theta (\bx)}{q_\theta (T(\bx))}$ does not depend on $\theta,~ \forall \bx $.
+\end{defn}
+
+How can we find the sufficient statistics of a given population? Following theorem helps us in finding the sufficient statistics in a systematic way.
+
+\begin{thm}
+[Factorisation Theorem] Let $f_\theta (\bx)$ denote the joint pdf of a sample $\bx$ from population with parameter $\theta$. A statistic $T(\bX)$ is a sufficient statistic for $\theta$ if and only if there exists functions $g_\theta (t), h(\bx)$ such that for all sample points $\bx$ and all parameter points $\theta$, 
+\begin{equation}	\label{eq:thm1}
+f_\theta(\bx)=g_\theta(T(\bx))h(\bx). 
+\end{equation}
+\end{thm}
+
+\begin{proof}
+
+The following proof is for the discrete distribution. Suppose $T(\bX)$ is a sufficient statistic. Let $g_\theta(t) = P_\theta (T(\bx)=t)$ and $h(\bx)=P(\bX=\bx|T(\bX)=T(\bx))$. As $T(\bX)$ is a sufficient statistic, the conditional probability defining $h(\bx)$ does not depend on $\theta$. Thus the above choice is valid and we have,
+\begin{eqnarray}
+f_\theta(\bx) &=& P_\theta(\bX=\bx), \nonumber \\
+&=& P_\theta((\bX=\bx) \text { and } T(\bX)=T(\bx)),\nonumber \\
+&=& P_\theta(T(\bX)= T(\bx))P_\theta(\bX=\bx | T(\bX)=T(\bx)),\nonumber \\
+&=& g_\theta (T(\bX))h(\bx).
+\end{eqnarray}
+So factorisation ($\ref{eq:thm1}$) is proved. It is also clear that $P_\theta(T(\bX)=T(\bx)) = g_\theta (T(\bx))$. Thus, $g_\theta (T(\bx))$ is the pmf of $T(\bX)$.
+
+Now assume, factorisation ($\ref{eq:thm1}$) exists. Let $q_\theta(t)$ be the pmf of $T(\bX)$. To show $T(\bX)$ is sufficient, examine the ratio $\frac{f_\theta (\bx)}{q_\theta (T(\bx))}$. Define, $ A_{T(\bx)}={\by:T(\by)=T(\bx)}$.
+\begin{eqnarray}
+\frac{f_\theta (\bx)}{q_\theta (T(\bx))} &=& \frac{g_\theta (T(\bx))h(\bx)}{q_\theta (T(\bx))}, \label{eq:facthm1}\\
+&=& \frac{g_\theta (T(\bx))h(\bx)}{\sum_{\by \in A} {g_\theta (T(\bx))h(\by)}}, \label{eq:defpmf}\\
+&=& \frac{g_\theta (T(\bx))h(\bx)}{g_\theta (T(\bx)) \sum_{\by \in A} {h(\by)}}, \label{eq:tconst}\\
+&=& \frac{h(\bx)}{\sum_{\by \in A} {h(\by)}}. 
+\end{eqnarray}
+where, ($\ref{eq:facthm1}$) follows from ($\ref{eq:thm1}$), ($\ref{eq:defpmf}$) from the definition of pmf of $T$ and ($\ref{eq:tconst}$) because $T$ is constant on $ A_{T(\bx)}$.
+Since the ratio does not depend on $\theta$, $T(\bX)$ is a sufficient statistic for $\theta$.
+\end{proof}
+
+\begin{exmp} 
+[Normal sufficient statistics, with variance 1] \label{ex:norml}
+Let $X_1,...,X_n$ be iid $n(\mu, \sigma^2)$, where $\sigma^2=1$. Let $\bar{X}=(X_1+...+X_n)/n$. The joint pdf of the sample $\bX$ is
+\begin{eqnarray}
+f_\mu(\bx) &=& \prod_{i=1}^{n}{(2\pi)^{-\frac{1}{2}} \text{exp}\left(-\frac{(x_i-\mu)^2}{2}\right)}, \nonumber \\
+&=& (2\pi)^{-\frac{n}{2}}\text{exp}\left(-\sum_{i=1}^{n}{\frac{(x_i-\mu)^2}{2}}\right), \nonumber \\
+&=& (2\pi)^{-\frac{n}{2}}\text{exp}\left(-\sum_{i=1}^{n}{\frac{(x_i-\bar{x}+\bar{x}-\mu)^2}{2}}\right), \nonumber \\
+&=& (2\pi)^{-\frac{n}{2}}\text{exp}\left(-\frac{\left(\sum_{i=1}^{n}{(x_i-\bar{x})^2}+n(\bar{x}-\mu)^2\right)}{2}\right), \nonumber \\
+&=& (2\pi)^{-\frac{n}{2}}\text{exp}\left(-\frac{\sum_{i=1}^{n}{(x_i-\bar{x})^2}}{2}\right)\text{exp}\left(-\frac{n(\bar{x}-\mu)^2}{2}\right). \label{eq:pdffact}
+\end{eqnarray}
+The above expression for the pdf was already derived in the last lecture. \\
+Define:
+\begin{equation*}
+h(\bx)=(2\pi)^{-\frac{n}{2}}\text{exp}\left(-\frac{\sum_{i=1}^{n}{(x_i-\bar{x})^2}}{2}\right),\\
+\end{equation*}
+which does not depend on the unknown parameter $\mu$. The factor in equation ($\ref{eq:pdffact}$) that contains $\mu$ depend on the sample $\bx$ only through the function, $T(\bx)=\bar{x}$, the sample mean.\\
+So we have, 
+\begin{eqnarray}
+g_\mu(t) &=& \text{exp}\left(-\frac{n(t-\mu)^2}{2}\right); \\
+f_\mu(\bx)&=& g_\mu(T(\bx))h(\bx).
+\end{eqnarray}
+By Factorisation Theorem, $T(\bX)=\bar{X}$ is a sufficient statistic for $\mu$.
+\end{exmp}
+
+\begin{exmp}
+[Uniform sufficient statistics]
+Let $X_1,...,X_n$ be iid observations, from the discrete uniform distribution on $1,...,\theta$, where the unknown parameter $\theta$ is a positive integer and the pmf of $X_i$ is
+\begin{equation*}
+f_\theta(x) = 
+\begin{cases} 
+\frac{1}{\theta} ~~~~~ x=1,2,...,\theta. \\
+0 ~~~~~\text{otherwise}.
+\end{cases}
+\end{equation*}
+The analysis can be carried out using indicator function as follows:
+$\mathbb{I}_A(x)$ is the indicator function of set $A$, and is equal to 1, if $x \in A$ and equal to 0 otherwise. Let $\mathcal{N} = \{1,2,...\}$ be the set of positive integers and let $\mathcal{N}_\theta =\{1,2,...,\theta \}$. Then the joint pmf of $X_1,...,X_n$ is 
+
+\begin{eqnarray}
+f_\theta(x) = \prod_{i=1}^{n}{\theta^{-1}\mathbb{I}_{\mathcal{N}_\theta} (x_i)}, \nonumber \\
+= \theta^{-n}\prod_{i=1}^{n}{\mathbb{I}_{\mathcal{N}_\theta} (x_i)}.  \label{eq:txdef}
+\end{eqnarray}
+Define $T(\bx)=\displaystyle\max_i ~x_i$. Then,
+\begin{eqnarray}
+\prod_{i=1}^{n}{\mathbb{I}_{\mathcal{N}_\theta} (x_i)}=\left(\prod_{i=1}^{n}{\mathbb{I}_{\mathcal{N}} (x_i)}\right)\mathbb{I}_{\mathcal{N}_\theta} (T(\bx)). \label{eq:txpdffact}
+\end{eqnarray}
+Thus, from equations ($ \ref{eq:txdef} $) and ($ \ref{eq:txpdffact} $) we obtain
+\begin{equation}
+f_\theta(x) = \theta^{-n}\mathbb{I}_{\mathcal{N}_\theta} (T(\bx))\prod_{i=1}^{n}{\mathbb{I}_{\mathcal{N}} (x_i)}.  
+\end{equation}
+The first factor depends on $x_1,...,x_n$ only through the value of $T(\bx)=\displaystyle\max_i ~x_i$, and second factor does not depend on $\theta$. By the Factorisation Theorem, $T(\bx)=\displaystyle\max_i ~x_i$ is a sufficient statistic for $\theta$.
+
+\end{exmp}
+
+\begin{exmp}
+[Normal sufficient statistics, both parameters unknown]
+Consider a normal distribution as in example ($\ref{ex:norml}$), but with unknown variance, $\sigma^2$. The parameter vector is $\theta(\mu,\sigma^2)$. As in example ($\ref{ex:norml}$), we can write the joint pdf of $\bX$ as
+\begin{equation}
+f_\theta(\bx) = (2\pi\sigma^2)^{-\frac{n}{2}}\text{exp}\left(-\frac{\left(\sum_{i=1}^{n}{(x_i-\bar{x})^2}+n(\bar{x}-\mu)^2\right)}{2\sigma^2}\right). 
+\end{equation}
+Any part of the joint pdf that depends on either $\mu$ or $\sigma^2$ must be included in the $g$ function. The pdf depends on the sample $\bx$ only through the two values $T_1(\bx) = \bar{x}$ and $T_2(\bx) = s^2= \sum_{i=1}^{n}{\frac{(x_i-\bar{x})^2}{n-1}}$.
+So, define:
+\begin{eqnarray}
+h(\bx)&=& 1,	\nonumber \\
+g_\theta(t) &=& g_{(\mu,\sigma^2)}(t_1,t_2)=(2\pi\sigma^2)^{-\frac{n}{2}}\text{exp}\left(-\frac{(n-1)t_2+n(t_1-\mu)^2}{2\sigma^2}\right),\nonumber \\
+f_\theta(\bx) &=& g_{(\mu,\sigma^2)}(T(\bx))h(\bx). \nonumber \\
+\end{eqnarray}
+By Factorisation Theorem, $T(\bX)=(T_1(\bX),T_2(\bX)) = (\bar{(\bX)},S^2$) is a sufficient statistic for $(\mu,\sigma^2)$.
+
+It should be noted that the definition of a sufficient statistic is model dependent. For another model, that is, another family of densities, the sample mean and variance may not be a sufficient statistic for the population mean and variance.
+
+\end{exmp}
+
+\begin{defn}
+[Exponential family of distributions]
+An exponential family is a family of pdfs or pmfs of the following form:
+\begin{equation} \label{eq:exppdf}
+f_{\btheta}(x) = h(x)c(\btheta)exp[\sum_{i=1}^{k} W_i(\btheta)t_i(x)]  
+\end{equation}
+where $\btheta = (\theta_1 ....... \theta_d)$ , $W_i:R^d\rightarrow R$ and $t_i:R\rightarrow R$.
+\end{defn}
+ The pdf is an exponentiated weighted sums of functions of $x$ where the weight is controlled by $\btheta$. $c(\btheta)$ is the normalizing constant as $f_{\btheta}(x)$ is a pdf. $c(\btheta)$ is commonly called as the partition function.
+
+ The general exponential family generalizes a lot of results. Some of the known distributions can be expressed in the form given in (\ref{eq:exppdf})
+ 
+\begin{exmp}
+[Binomial distribution in terms of exponential family]
+\par Consider a random variable $X$ having a binomial distribution $B[n,p]$ with probability of success $p$. $n$ is the number of trials. 
+\begin{eqnarray}
+f(x|\theta) &=& \binom{n}{x}p^{x}(1-p)^{(n-x)},\nonumber \\
+&=& \binom{n}{x}\left(\dfrac{p}{1-p}\right)^x(1-p)^n,\nonumber \\
+&=& \binom{n}{x}exp\left[x log\left(\dfrac{p}{1-p}\right) + n log(1-p)\right].
+\end{eqnarray}
+ The binomial distribution is thus expressed in terms of the exponential family where $h(x) = \binom{n}{x}$, $c(\theta) = 1$, $W_1(\theta) = log\left(\dfrac{p}{1-p}\right)$, $t_1(x) = x$, $W_2(\theta) = log(1-p)$ and $t_2(x) = n$.
+\end {exmp}
+Similarly, normal distribution with unknown $\sigma_2$ and $\mu$, gamma distribution etc. can be represented in terms of the exponential family.
+ 
+\begin{thm}
+Let $X_1$,$X_2$,...,$X_n$ be iid observations from a pdf or pmf $f(x|\btheta)$ that belongs to an exponential family, then, 
+\begin{equation}
+T(\bX) = \left(\sum_{i=1}^{n}t_1(X_i), \sum_{i=1}^{n}t_2(X_i),.....,\sum_{i=1}^{n}t_k(X_i)\right)
+\end{equation}
+is a sufficient statistic for $\btheta$.
+\end{thm}
+
+\begin{proof}
+The pdf for an exponential family distribution is represented by the following structure:
+\begin{equation}
+f_{\btheta}(x) = h(x)c(\btheta)exp\left[\sum_{i=1}^{k} W_i(\btheta)t_i(x)\right].
+\end{equation}
+The above pdf can be represented as product of $h(x) = h(x)$ and $g_{\btheta}(T(x)) = c(\btheta)exp\left[\sum_{i=1}^{k} W_i(\btheta)t_i(x)\right]$ and hence according to the Factorization Theorem, $T(\bX)$ is the sufficient statistic. $T(x)$ in this case can be identified to be all $t_i(x)$ for $i=1,2,..,k$. Hence the theorem follows.
+\end{proof}
+
+\subsection{Minimal Sufficient Statistics}
+In the preceding section, we found one sufficient statistic for each model considered. In any problem, there may be many sufficient statistics. Out of all these, we are interested to find the smallest sufficient statistic.
+\begin{defn}
+A sufficient statistic $T(\bX)$ is called minimal sufficient statistic if for any other sufficient statistic $T'(\bX)$, $T(\bx)$ is a function of $T'(\bx)$ i.e. if $T'(\bx)=T'(\by)$ then $T(\bx)=T(\by)$.
+ \end{defn}
+A minimal sufficient statistic is a sufficient statistic which can be compared with every other sufficient statistic and hence can be viewed to be the dominant one. It is not unique though. For a minimal sufficient statistic, a one to one function is also a minimal sufficient statistic. 
+\begin{thm} \label {thm:find_mss}
+Let $f(\bx|\theta)$ be the pdf of a sample. Suppose there exists a function $T(\bx)$ such that, for every two sample points $\bx$ and $\by$, the ratio $\dfrac{f(\bx|\theta)}{f(\by|\theta)}$ doesn't depend on $\theta$ if and only if $T(\bx) = T(\by)$, then $T(\bX)$ is a minimal sufficient statistic.
+\end{thm}
+\begin{proof}
+Let $f(\bx|\theta)$ be the pdf of a sample, for all $\bx\in\boldsymbol\chi$ and $\theta$. Hence, $f(\bx|\theta)\geq 0$.
+Now, let us first show that the function $T(\bX)$ is a sufficient statistic. Let $\tau = \{t:t=T(\bx)$ for some $\bx\in\boldsymbol\chi\}$ be the image of $\boldsymbol\chi$ under $T(\bx)$. Now, lets define partition sets induced by $T(\bx)$ as
+\begin{equation}
+A_t=\{\bx:T(\bx) = t\}.
+\end{equation}
+For each $A_t$, choose and fix one element $\bx_t \in A_t$. For any $\bx\in\boldsymbol\chi$, $\bx_{T(\bx)}$ is the fixed element that is in the same set $A_t$ as $\bx$. Since $\bx$ and $\bx_{T(\bx)}$ are in the same set $A_t$, $T(\bx) = T(\bx_{T(\bx)})$ and hence $f(\bx|\theta)/f(\bx_{T(\bx)}|\theta)$ is constant as a function of $\theta$. Thus, we can define a function on $\boldsymbol\chi$ by $h(\bx) = f(\bx|\theta)/f(\bx_{T(\bx)}|\theta$) and $h$ does not depend on $\theta$. Define a function on $\tau$ by $g(t|\theta)=f(\bx_t|\theta)$. Then,
+\begin{eqnarray}
+f(\bx|\theta)&=&\dfrac{f(\bx_{T(\bx)}|\theta)f(\bx|\theta)}{f(\bx_{T(\bx)}|\theta)},\\
+&=&g(T(\bx)|\theta)h(\bx).
+\end{eqnarray}
+
+Now, we need to show that $T(\bX)$ is the minimal sufficient statistic. Let $T'(\bX)$ be any other sufficient statistic. By the Factorization Theorem, there exist functions $g'$ and $h'$ such that $f(\bx|\theta) = g'(T'(\bx)|\theta)h'(\bx).$ At any two sample points $\bx$ and $\by$, let $T'(\bx)$ = $T'(\by)$, then,
+\begin{eqnarray}
+\dfrac{f(\bx|\theta)}{f(\by|\theta)} &=& \dfrac{g'(T'(\bx)|\theta)h'(\bx)}{g'(T'(\by)|\theta)h'(\by)},\\
+&=& \dfrac{h'(\bx)}{h'(\by)}.
+\end{eqnarray}
+Hence, it does not depend on $\theta$ when $T'(\bx)=T'(\by)$. Thus, $T(\bX)$ is a function of $T'(\bX)$ and is the minimal sufficient statistic.
+\end{proof}
+\begin{exmp}
+[Normal minimal sufficient statistic]
+Let $X_1$,$X_2$,...,$X_n$ be iid with pdf $n(\mu,\sigma^2)$ where both $\mu$ and $\sigma^2$ are unknown. Let $\bx=(x_1....x_n)$ and $\by=(y_1....y_n)$ denote two sample points and let $\bar{x}$ and $\bar{y}$ denote the sample means and ${S_\bx}^2$ and ${S_\by}^2$ denote the sample variance of the samples $\bx$ and $\by$ respectively. Then,
+\begin{eqnarray}
+\dfrac{f(\bx|(\mu,\sigma^2))}{f(\by|(\mu,\sigma^2))} &=& \dfrac{(2\pi\sigma^2)^{-\tfrac{n}{2}}exp(-[n(\bar{x}-\mu)^2 + (n-1){S_{\bx}}^2])/(2\sigma^2)}{(2\pi\sigma^2)^{-\tfrac{n}{2}}exp(-[n(\bar{y}-\mu)^2 + (n-1){S_{\by}}^2])/(2\sigma^2)},\\
+&=&exp\left(\frac{n((\bar{y}-\mu)^2-(\bar{x}-\mu)^2)+(n-1)({S_{\bx}}^2-{S_{\by}}^2)}{2\sigma^2}\right),\\
+&=&exp\left(\frac{-n(\bar{x}^2-\bar{y}^2)+2n\mu(\bar{x}-\bar{y})-(n-1)({S_{\bx}}^2-{S_{\by}}^2))}{2\sigma^2}\right).
+\end{eqnarray}
+In this example, $\theta = (\mu,\sigma^2)$. Hence, the above ratio doesn't depend on $\theta$ if and only if $(\bar{x})^2 - (\bar{y})^2 = 0$ , $\bar{x} - \bar{y} = 0$ and ${S_{\bx}}^2-{S_{\by}}^2 = 0$. Thus, $\bar{x} = \bar{y}$ and ${S_{\bx}}^2 = {S_{\by}}^2$. According to theorem \ref{thm:find_mss}, $T(\bX) = (\bar{X},S^2)$ is a minimal sufficient statistic for $n(\mu,\sigma^2)$.
+\end{exmp}
+
+\begin{exmp}
+[Uniform minimal sufficient statistic]
+Suppose $X_1$,....,$X_n$ are iid uniform observations on interval $(\theta,\theta+1), ~\theta\in(-\infty,\infty)$, then the joint pdf of $\bX$ is
+\begin{eqnarray}
+f(\bx|\theta) &=&
+\begin{cases}
+1, &\mbox{if}~ \theta<x_i<\theta+1,\\
+0, &\mbox{otherwise}.
+\end{cases}
+\end{eqnarray}
+As $\theta<x_i$ for all $i=1,2,...,n$, then, $\theta<\displaystyle\min_i x_i$. Similarly, as $x_i<\theta+1$ for all $i=1,2....,n$, hence $\displaystyle\max_i x_i - 1 < \theta$. Hence, $f(\bx|\theta)$ can be written as,
+\begin{eqnarray}
+f(\bx|\theta) &=&
+\begin{cases}
+1, &\mbox{if} \displaystyle\max_i~ x_i - 1 < \theta < \displaystyle\min_i x_i,\\
+0, &\mbox{otherwise}.
+\end{cases}
+\end{eqnarray}
+Now, for any two samples $\bx$ and $\by$, $\dfrac{f(\bx|\theta)}{f(\by|\theta)}$ is positive if and only if $f(\bx|\theta) = f(\by|\theta) = 1 $. Hence, $\displaystyle\max_i x_i - 1 < \theta < \displaystyle\min_i x_i$ and $\displaystyle\max_i y_i - 1 < \theta < \displaystyle\min_i y_i$.
+Hence, $T(\bX)=(X_{(1)},X_{(n)})$ is a minimum sufficient statistic.
+\end{exmp}
+\section{Sufficient Statistics in Hypothesis Testing}
+ In the first few lectures, we learnt about detection using hypothesis testing. In this section, we will learn how sufficient statistics is related to hypothesis testing.
+\par All the hypothesis testing were likelihood ratio tests. Likelihood ratio tests using entire sample $\bX$ is equivalent to performing the likelihood ratio test using sufficient statistics $T(\bX)$. Hence, instead of considering the whole sample, we can just use the sufficient statistics in these tests.
+
+\begin{thm}
+Consider a composite hypothesis test with $H_0:\btheta\in{\bLambda}_0$,~$H_1:\btheta\in{\bLambda}_1$. Let $T(\bX)$ be a sufficient statistic for $\btheta$. Let the generalized likelihood ratio test (GLRT) be 
+\begin{equation}
+\lambda(\bx) =\dfrac{\displaystyle\max_{\btheta\in{\bLambda}_1} P_{\btheta}(x)}{\displaystyle\max_{\btheta\in{\bLambda}_0} P_{\btheta}(x)},
+\end{equation}
+and the GLRT statistic based on $T$ be
+\begin{equation}
+\lambda^*(t) =\dfrac{\displaystyle\max_{\btheta\in{\bLambda}_1} P_{\btheta}(T(\bx)=t)}{\displaystyle\max_{\btheta\in{\bLambda}_0} P_{\btheta}(T(\bx)=t)},
+\end{equation}
+then, 
+\begin{equation}
+\lambda(\bx) = \lambda^*(T(\bx)), 
+\end{equation}
+$\forall$ $\bx$ in the sample space.
+\end{thm}
+
+
+\end{document}
