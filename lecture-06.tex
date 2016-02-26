@@ -283,17 +283,17 @@ The "sample mean" is the statistic defined by taking the arithmetic average of v
 \begin{defn}
 The "sample variance" is the statistic defined by, 
 \begin{equation}
-s^2 = \frac{1}{n-1}  \sum_{i \in [n]} (X_i - \bar{X})^2.
+S^2 = \frac{1}{n-1}  \sum_{i \in [n]} (X_i - \bar{X})^2.
 \end{equation}
 \end{defn}
 \begin{defn}
-The "sample standard deviation" is the statistic defined by $\sigma = \sqrt{s^2}$.
+The "sample standard deviation" is the statistic defined by $\sigma = \sqrt{S^2}$.
 \end{defn}
 \begin{thm}
 Let $x_1, x_2,...x_n  \in \mathbb{R}$ and $\bar{x} = \frac{1}{n} \displaystyle \sum_{i=1}^{n} x_i$ then,
 \begin{eqnarray}
 &a)& ~ \min_{a} ~ \sum_{i=1}^{n} (x_i - a)^2 = \sum_{i=1}^{n} (x_i - \bar{x})^2,~\mbox{and} \\
-&b)& ~ (n-1)s^2 = \sum_{i=1}^{n} (x_i - \bar{x})^2 = \sum_{i=1}^{n} x_i^2 - n\bar{x}^2.
+&b)& ~ (n-1)S^2 = \sum_{i=1}^{n} (x_i - \bar{x})^2 = \sum_{i=1}^{n} x_i^2 - n\bar{x}^2.
 \end{eqnarray}
 \end{thm}
 \begin{proof}
@@ -320,7 +320,7 @@ Substituting $a = 0$ in the statement in eqn. (\ref{eq:pf1}),
 \end{enumerate}
 \end{proof}
 \begin{lem}
-Let $X_1, X_2, .... X_n$ be a random sample of size $n$ from a population and let $g(x)$ be a function such that $\mathbb{E}[g(x)]$ and $Var[g(x)]$ exist. Then,
+Let $X_1, X_2, .... X_n$ be a random sample of size $n$ from a population and let $g(X)$ be a function such that $\mathbb{E}[g(X_{1})]$ and $Var[g(X_{1})]$ exist. Then,
 \begin{eqnarray}
 &a).& ~\mathbb{E}\Big[ \sum_{i=1}^{n} g(X_i) \Big] = n \mathbb{E}[g(X_1)],~\mbox{and}\\
 &b).& ~Var \Big[ \sum_{i=1}^{n} g(X_i) \Big] = n Var[g(X_i)].

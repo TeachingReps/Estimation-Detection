@@ -40,7 +40,7 @@ part \textbf{(c)} can be proved as follows:
 \begin{thm}
 Let $X_1,X_2,....X_n$ be a random sample from a pmf or pdf $f(x|\theta)$, where,
 \begin{equation*}
-f(x|\theta)=h(x)c(\theta)\exp\left(\sum_{i=1}^{k}w_i(\theta)u_i\right)
+f(x|\theta)=h(x)c(\theta)\exp\left(\sum_{i=1}^{k}w_i(\theta)t_i(x)\right)
 \end{equation*} 
 is a member of an exponential family. Define statistics $T_1,T_2,....T_k$ as,
 \begin{equation*}
@@ -67,7 +67,7 @@ Let $X_1,....X_n$ be a random sample from a Normal distribution $\mathcal{N}(\mu
 \begin{enumerate}
 \item $\overline{X}$ and $S^2$ are independent random variables. 
 \item $\overline{X} \sim \mathcal{N}(\mu,\frac{\sigma^2}{n})$.
-\item $\frac{(n-1)S^2}{n}$ has a chi-squared distribution with $(n-1)$ degrees of freedom. 
+\item $\frac{(n-1)S^2}{\sigma^{2}}$ has a chi-squared distribution with $(n-1)$ degrees of freedom. 
 \end{enumerate}
 \end{thm}
 \begin{proof}
@@ -92,13 +92,13 @@ y_2&=x_2-\overline{x}, \nonumber \\
 \vdots \nonumber \\
 y_n&=x_n-\overline{x}.
 \end{align}
-This linear transformation has a Jacobian of $n$ and the distribution 
+This linear transformation has a Jacobian of $\frac{1}{n}$ and the distribution 
 \begin{align}
 f(y_1,\dots ,y_n)
 &= \frac{n}{{(2\pi)}^{\frac{n}{2}}}\exp\left[-\frac{1}{2}(y_1-\sum_{i=2}^ny_i)^2\right]\exp\left[-\frac{1}{2}\sum_{i=2}^n(y_i+y_1)^2\right], \qquad - \infty < y_i <\infty, \nonumber \\
 &=  {\left( \frac{n}{2\pi}\right)}^{1/2}\exp\left[\frac{-ny_1^2}{2}\right]~  \frac{n^{1/2}}{(2\pi)^{(n-1)/2}}\exp\left\lbrace-\frac{1}{2}\left[{\sum_{i=2}^ny_i^2+\left(\sum_{i=2}^ny_i\right)^2}\right]\right\rbrace.
 \end{align}
-Hence, the joint pdf factors and thus the random variables $Y_1,\dots ,Y_n$ are independent. 
+Hence, the joint pdf factors and the random variable $Y_1=\bar{X}$ is independent of $ \left(Y_{2},\ldots,Y_{n}\right)=\left(X_{2}-\bar{X},\ldots,X_{n}-\bar{X}\right) $. 
 \item Consider a random sample $X_1,\dots ,X_n$ obtained from $\mathcal{N}(\mu,\sigma^2)$. The moment generating function (mgf) of $X_i$, $i\in[n]$ is 
 \begin{align}
 M_{X_i}(t)=\exp{(\mu t +\frac{\sigma^2 t^2}{2})}.
@@ -164,7 +164,7 @@ Replacing $n$ by $n-1$ in \eqref{equation_recursive_variance_n+1}, we get a recu
 (n-1)S_{n} ^2=(n-2)S_{n-1} ^2+\frac{n-1}{n}[X_{n} - \overline{X}_{n-1}]^2.
 \end{equation} 
 If we take $n=2$ and use it in \eqref{equation_recursive_variance_n} and if we define $0\times S_1 ^2=0$, then from \eqref{equation_recursive_variance_n}, we have $S_2^2=\frac{1}{2}(X_2-X_1)^2$.Since the distribution of $\frac{1}{\sqrt{2}}(X_2-X_1)$ is Gaussian with parameter (0,1), part (a) of lemma  \ref{lemma_5.3.2_casella_berger} shows that $S_2 ^2 \sim \chi_1 ^2$. Proceeding with induction, let us assume that for $n=k$, $(k-1)S_k ^2 \sim \chi_{k-1} ^2$.
-\par So for $n=k+1$, we can write from \eqref{equation_recursive_variance_n+1},
+\par So for $n=k+1$, we can write from \eqref{equation_recursive_variance_n},
 \begin{align}
 kS_{k+1} ^2=(k-1)S_{k} ^2+\frac{k}{k+1}[X_{k+1} - \overline{X}_k]^2.
 \end{align}
@@ -262,7 +262,7 @@ P(X_{(j)} = x_i)={\sum\limits_{k=j}^n} \binom{n}{k} [P_i ^{k} (1-P_i)^{n-k} - P_
 This completes our proof. Here, for the case $i=1$, $P(X_{(j)} = x_i)=P(X_{(j)} \leq x_i)$. The definition of $P_0=0$,takes care of this situation.
 \end{proof}
 \begin{thm}
-Let $X_{1},X_{2}, \dots X_{n}$ denote the order statistics of a random sample, $X_1,X_2, \dots X_n$ with {\it cdf} $F_x (x)$ and {\it pdf} $f_X (x)$. Then the {\it pdf} of of $X_j$ is,
+Let $X_{1},X_{2}, \dots X_{n}$ denote the order statistics of a random sample, $X_1,X_2, \dots X_n$ with {\it cdf} $F_x (x)$ and {\it pdf} $f_X (x)$. Then the {\it pdf} of of $X_{(j)}$ is,
 \begin{equation}
 f_{X_{(j)}} (x)= \frac{n!}{(j-1)!(n-j)!} f_X (x) F_X (x) ^{j-1} [1 - F_X (x)]^{n-j}.
 \end{equation}
