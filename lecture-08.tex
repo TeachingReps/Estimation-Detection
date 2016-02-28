@@ -58,14 +58,14 @@ which may be rearranged to obtain a probabilistic estimate for $ \mu $ as follow
 \end{equation}
 For example, if $ \alpha=0.99 $,  (\ref*{eq:c,alpha_2}) provides us with a range of values in which $ \mu $ lies with probability $ 0.99 $.
 \par If both $ \sigma^{2} $ and $ \mu $ are unknown, the approach outlined in the preceding paragraph cannot be used. Instead, however, the sample variance $ S^{2}=\frac{1}{n-1}\sum\limits_{i=1}^{n} \left(X_{i}-\bar{X}\right)^{2} $ can be evaluated with the knowledge of sample values $ X_{1},\ldots,X_{n} $, and the quantity $ S=\sqrt{S^{2}} $ can be used in place of $ \sigma $ in  (\ref*{eq:c,alpha_1}). But, in order to do so, the distribution of the statistic $ T_{2}=\frac{\bar{X}-\mu}{\sqrt{S^{2}}/\sqrt{n}} $ has to necessarily be known.
-\par If $ X_{1},\ldots,X_{n}\stackrel{IID}{\sim} \mathcal{N}(\mu,\sigma^{2}) $, then we know that $ \frac{\bar{X}-\mu}{\sqrt{\sigma}/\sqrt{n}}\sim \mathcal{N}(0,1) $ and $ \frac{(n-1)S^{2}}{\sigma^{2}} \sim \chi_{n-1}^{2} $ (see Lecture $ 7 $), where $ \chi_{n-1}^{2} $ denotes the ch-squared distribution with $ n-1 $ degrees of freedom. Thus, the expression for $ T_{2} $ can be modified as follows:
+\par If $ X_{1},\ldots,X_{n}\stackrel{IID}{\sim} \mathcal{N}(\mu,\sigma^{2}) $, then we know that $ \frac{\bar{X}-\mu}{\sqrt{\sigma^{2}}/\sqrt{n}}\sim \mathcal{N}(0,1) $ and $ \frac{(n-1)S^{2}}{\sigma^{2}} \sim \chi_{n-1}^{2} $ (see Lecture $ 7 $), where $ \chi_{n-1}^{2} $ denotes the chi-squared distribution with $ n-1 $ degrees of freedom. Thus, the expression for $ T_{2} $ can be modified as follows:
 \begin{align}
 T_{2}&=\frac{\bar{X}-\mu}{\sqrt{S^{2}}/\sqrt{n}}\nonumber\\
      &=\frac{\left(\bar{X}-\mu\right)/\left(\sigma/\sqrt{n}\right)}{\sqrt{S^{2}/\sigma^2}}.\label{eq:T_{2}}
 \end{align}
-As pointed out before, the numerator of  (\ref*{eq:T_{2}}) is an $ \mathcal{N}(0,1) $ random variable and the denominator is a $ \sqrt{\frac{1}{n-1}\chi_{n-1}^{2}} $ random variable, independent of the denominator (since $ \bar{X} $ and $ S $ are independent random variables). Thus, the distribution of $ T_{2} $ can be found by solving the simplified problem of finding the distribution of $ U/\sqrt{V/p} $, where $ U $ is $ \mathcal{N}(0,1) $ and $ V $ is $ \chi_{p}^{2} $, $ p=n-1 $, and $ U $ and $ V $ are independent. This gives us Student's $ t $ distribution.
+As pointed out before, the numerator of  (\ref*{eq:T_{2}}) is an $ \mathcal{N}(0,1) $ random variable and the denominator is a $ \sqrt{\frac{1}{n-1}\chi_{n-1}^{2}} $ random variable, independent of the numerator (since $ \bar{X} $ and $ S $ are independent random variables). Thus, the distribution of $ T_{2} $ can be found by solving the simplified problem of finding the distribution of $ U/\sqrt{V/p} $, where $ U $ is $ \mathcal{N}(0,1) $ and $ V $ is $ \chi_{p}^{2} $, $ p=n-1 $, and $ U $ and $ V $ are independent. This gives us Student's $ t $ distribution.
 \begin{defn}
-	Let $ X_{1},\ldots,X_{n} $ be a random sample from $ \mathcal{N}(\mu,\sigma^{2}) $ distribution. The quantity $ \frac{\bar{X}-\mu}{\sqrt{S^{2}}/\sqrt{n}} $ has Student's $ t $ distribution with $ n-1 $ degrees of freedom. Equivalently, a random variable $ T $ has Student's $ t $ distribution with $ p $ degrees of freedom, and we write $ T\sim t_{p} $, if it has the following pdf:
+	Let $ X_{1},\ldots,X_{n} $ be a random sample from $ \mathcal{N}(\mu,\sigma^{2}) $ distribution. The quantity $ \frac{\bar{X}-\mu}{\sqrt{S^{2}}/\sqrt{n}} $ has Student's $ t $ distribution with $ n-1 $ degrees of freedom. Equivalently, a random variable $ T $ has Student's $ t $ distribution with $ p>0 $ degrees of freedom, and we write $ T\sim t_{p} $, if it has the following pdf:
 	\begin{equation}
 	f_{T}(t)=\frac{\Gamma\left(\frac{p+1}{2}\right)}{\Gamma\left(\frac{p}{2}\right)} \frac{1}{\sqrt{p\pi}} \frac{1}{\left(1+\frac{t^{2}}{p}\right)^{\frac{p+1}{2}}},~-\infty < t < \infty.\label{eq:pdf_ST}
 	\end{equation}
@@ -138,16 +138,16 @@ Since $ \frac{\bar{X}-\mu}{\sqrt{S^{2}}/\sqrt{n}} $ follows Student's $ t $ dist
 	Since (\ref*{eq:bernoulli}) is independent of $ \theta $, we conclude that $ T\left(\underline{X}\right) = \sum\limits_{i=1}^{n} X_i $ is a sufficient statistic for the parameter $ \theta $. 
 \end{exmp}
 \begin{exmp}[Normal Sufficient Statistic (when $ \sigma^{2} $ is known)]
-	Without loss of generality, let $ \sigma^{2}=1 $. Let $ X_{1},\ldots,X_{n} \stackrel{iid}{\sim} \mathcal{N}(\mu,1) $. Here, $ \mu $ is unknown, and the objective is to construct at a sufficient statistic for $ \mu $. Let
+	Without loss of generality, let $ \sigma^{2}=1 $. Let $ X_{1},\ldots,X_{n} \stackrel{IID}{\sim} \mathcal{N}(\mu,1) $. Here, $ \mu $ is unknown, and the objective is to construct at a sufficient statistic for $ \mu $. Let
 	\begin{equation}
 	T(\underline{X})=\frac{1}{n}\sum\limits_{i=1}^{n}X_{i} = \bar{X}\label{eq:T(X)},
 	\end{equation}
 	where $ \bar{X} $ is the sample mean. We wish to see if $ \bar{X} $ is a sufficient statistic for $ \mu $. We have
 	\begin{align}
 		f_{\underline{X}|T(\underline{X})}(\underline{x}|t)&=\frac{f_{\underline{X}}(\underline{x})}{f_{T(\underline{X})}(t)},\nonumber\\
-		&=\dfrac{\left(\frac{1}{\sqrt{2\pi}}\right)^{n} \text{exp}\left[-\frac{1}{2}\sum\limits_{i=1}^{n}\left(x_{i}-\mu\right)^{2}\right]}{\frac{1}{\sqrt{2\pi}} \frac{1}{\sqrt{n}}~ \text{exp}\left[-\frac{1}{2\left(\frac{1}{n}\right)} \left(t-\mu\right)^{2}\right]},\nonumber\\
-		&=\dfrac{\left(\frac{1}{\sqrt{2\pi}}\right)^{n} \text{exp}\left[-\frac{1}{2}\left(\sum\limits_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}+n\left(\bar{x}-\mu\right)^{2}\right)\right]}{\frac{1}{\sqrt{2\pi}} \frac{1}{\sqrt{n}}~ \text{exp}\left[-\frac{1}{2\left(\frac{1}{n}\right)} \left(t-\mu\right)^{2}\right]},\nonumber\\
-		&=\sqrt{n} \left(\frac{1}{\sqrt{2\pi}}\right)^{n-1} \text{exp}\left[-\frac{1}{2}\sum\limits_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}\right],\label{eq:conditional}
+		&=\dfrac{\left(\frac{1}{\sqrt{2\pi}}\right)^{n} \text{exp}\left[-\frac{1}{2}\sum\limits_{i=1}^{n}\left(x_{i}-\mu\right)^{2}\right]}{\frac{1}{\sqrt{2\pi \frac{1}{{n}}}} ~ \text{exp}\left[-\frac{1}{2\left(\frac{1}{n}\right)} \left(t-\mu\right)^{2}\right]},\nonumber\\
+		&=\dfrac{\left(\frac{1}{\sqrt{2\pi}}\right)^{n} \text{exp}\left[-\frac{1}{2}\left(\sum\limits_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}+n\left(\bar{x}-\mu\right)^{2}\right)\right]}{\frac{1}{\sqrt{2\pi}} {\sqrt{n}}~ \text{exp}\left[-\frac{1}{2\left(\frac{1}{n}\right)} \left(t-\mu\right)^{2}\right]},\nonumber\\
+		&=\frac{1}{\sqrt{n}} \left(\frac{1}{\sqrt{2\pi}}\right)^{n-1} \text{exp}\left[-\frac{1}{2}\sum\limits_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}\right],\label{eq:conditional}
 		\end{align}
 		where the last line follows from the fact that $ \bar{x}=t $. Since the RHS of (\ref*{eq:conditional}) is independent of $ \mu $, we conclude that the sample mean $ \bar{X} $ is a sufficient statistic for the mean of a population following normal distribution when the variance is known. However, this is not true in general for other distributions.
 \end{exmp}

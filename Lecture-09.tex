@@ -36,10 +36,10 @@ The following proof is for the discrete distribution. Suppose $T(\bX)$ is a suff
 f_\theta(\bx) &=& P_\theta(\bX=\bx), \nonumber \\
 &=& P_\theta((\bX=\bx) \text { and } T(\bX)=T(\bx)),\nonumber \\
 &=& P_\theta(T(\bX)= T(\bx))P_\theta(\bX=\bx | T(\bX)=T(\bx)),\nonumber \\
-&=& g_\theta (T(\bX))h(\bx).
+&=& g_\theta (T(\bx))h(\bx).
 \end{eqnarray}
 So factorization ($\ref{eq:thm1}$) is proved. It is also clear that $P_\theta(T(\bX)=T(\bx)) = g_\theta (T(\bx))$. Thus, $g_\theta (T(\bx))$ is the pmf of $T(\bX)$.
-\par Now assume, factorization ($\ref{eq:thm1}$) exists. Let $q_\theta(t)$ be the pmf of $T(\bX)$. To show $T(\bX)$ is sufficient, examine the ratio $\frac{f_\theta (\bx)}{q_\theta (T(\bx))}$. Define, $ A_{T(\bx)}={\by:T(\by)=T(\bx)}$.
+\par Now assume, factorization ($\ref{eq:thm1}$) exists. Let $q_\theta(t)$ be the pmf of $T(\bX)$. To show $T(\bX)$ is sufficient, examine the ratio $\frac{f_\theta (\bx)}{q_\theta (T(\bx))}$. Define, $ A_{T(\bx)}=\{\by:T(\by)=T(\bx)\}$.
 \begin{eqnarray}
 \frac{f_\theta (\bx)}{q_\theta (T(\bx))} &=& \frac{g_\theta (T(\bx))h(\bx)}{q_\theta (T(\bx))}, \label{eq:facthm1}\\
 &=& \frac{g_\theta (T(\bx))h(\bx)}{\sum_{\by \in A} {g_\theta (T(\bx))h(\by)}}, \label{eq:defpmf}\\
@@ -51,7 +51,7 @@ Since the ratio does not depend on $\theta$, $T(\bX)$ is a sufficient statistic 
 \end{proof}
 \begin{exmp} 
 [Normal sufficient statistics, with variance 1] \label{ex:norml}
-Let $X_1,...,X_n$ be iid $n(\mu, \sigma^2)$, where $\sigma^2=1$. Let $\bar{X}=(X_1+...+X_n)/n$. The joint pdf of the sample $\bX$ is
+Let $X_1,...,X_n$ be iid $\mathcal{N}(\mu, \sigma^2)$, where $\sigma^2=1$. Let $\bar{X}=(X_1+...+X_n)/n$. The joint pdf of the sample $\bX$ is
 \begin{eqnarray}
 f_\mu(\bx) &=& \prod_{i=1}^{n}{(2\pi)^{-\frac{1}{2}} \text{exp}\left(-\frac{(x_i-\mu)^2}{2}\right)}, \nonumber \\
 &=& (2\pi)^{-\frac{n}{2}}\text{exp}\left(-\sum_{i=1}^{n}{\frac{(x_i-\mu)^2}{2}}\right), \nonumber \\
@@ -73,7 +73,7 @@ By Factorization Theorem, $T(\bX)=\bar{X}$ is a sufficient statistic for $\mu$.
 \end{exmp}
 \begin{exmp}
 [Uniform sufficient statistics]
-Let $X_1,...,X_n$ be iid observations, from the discrete uniform distribution on $1,...,\theta$, where the unknown parameter $\theta$ is a positive integer and the pmf of $X_i$ is
+Let $X_1,...,X_n$ be iid observations, from the discrete uniform distribution on $\{1,...,\theta\}$, where the unknown parameter $\theta$ is a positive integer and the pmf of $X_i$ is
 \begin{equation*}
 f_\theta(x) = 
 \begin{cases} 
@@ -177,7 +177,7 @@ Hence, it does not depend on $\theta$ when $T'(\bx)=T'(\by)$. Thus, $T(\bX)$ is 
 \end{proof}
 \begin{exmp}
 [Normal minimal sufficient statistic]
-Let $X_1$,$X_2$,...,$X_n$ be iid with pdf $n(\mu,\sigma^2)$ where both $\mu$ and $\sigma^2$ are unknown. Let $\bx=(x_1....x_n)$ and $\by=(y_1....y_n)$ denote two sample points and let $\bar{x}$ and $\bar{y}$ denote the sample means and ${S_\bx}^2$ and ${S_\by}^2$ denote the sample variance of the samples $\bx$ and $\by$ respectively. Then,
+Let $X_1$,$X_2$,...,$X_n$ be iid with pdf $\mathcal{N}(\mu,\sigma^2)$ where both $\mu$ and $\sigma^2$ are unknown. Let $\bx=(x_1....x_n)$ and $\by=(y_1....y_n)$ denote two sample points and let $\bar{x}$ and $\bar{y}$ denote the sample means and ${S_\bx}^2$ and ${S_\by}^2$ denote the sample variance of the samples $\bx$ and $\by$ respectively. Then,
 \begin{eqnarray}
 \dfrac{f(\bx|(\mu,\sigma^2))}{f(\by|(\mu,\sigma^2))} &=& \dfrac{(2\pi\sigma^2)^{-\tfrac{n}{2}}\exp(-[n(\bar{x}-\mu)^2 + (n-1){S_{\bx}}^2])/(2\sigma^2)}{(2\pi\sigma^2)^{-\tfrac{n}{2}}\exp(-[n(\bar{y}-\mu)^2 + (n-1){S_{\by}}^2])/(2\sigma^2)},\\
 &=&\exp\left(\frac{n((\bar{y}-\mu)^2-(\bar{x}-\mu)^2)+(n-1)({S_{\bx}}^2-{S_{\by}}^2)}{2\sigma^2}\right),\\
@@ -212,11 +212,11 @@ In the first few lectures, we learnt about detection using hypothesis testing. I
 \begin{thm}
 Consider a composite hypothesis test with $H_0:\btheta\in{\bLambda}_0$,~$H_1:\btheta\in{\bLambda}_1$. Let $T(\bX)$ be a sufficient statistic for $\btheta$. Let the generalized likelihood ratio test (GLRT) be 
 \begin{equation}
-\lambda(\bx) =\dfrac{\displaystyle\max_{\btheta\in{\bLambda}_1} P_{\btheta}(x)}{\displaystyle\max_{\btheta\in{\bLambda}_0} P_{\btheta}(x)},
+\lambda(\bx) =\dfrac{\displaystyle\max_{\btheta\in{\bLambda}_1} P_{\btheta}(\bX=\bx)}{\displaystyle\max_{\btheta\in{\bLambda}_0} P_{\btheta}(\bX=\bx)},
 \end{equation}
 and the GLRT statistic based on $T$ be
 \begin{equation}
-\lambda^*(t) =\dfrac{\displaystyle\max_{\btheta\in{\bLambda}_1} P_{\btheta}(T(\bx)=t)}{\displaystyle\max_{\btheta\in{\bLambda}_0} P_{\btheta}(T(\bx)=t)},
+\lambda^*(t) =\dfrac{\displaystyle\max_{\btheta\in{\bLambda}_1} P_{\btheta}(T(\bX)=t)}{\displaystyle\max_{\btheta\in{\bLambda}_0} P_{\btheta}(T(\bX)=t)},
 \end{equation}
 then, 
 \begin{equation}

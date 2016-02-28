@@ -54,7 +54,7 @@ As discussed earlier, here the two signals $\underline{S}_{0}$ and $\underline{S
 \begin{eqnarray}
 \label{L(y)_coherent_initial}
 L (\underline{y})&=&\frac{p_{\underline{N}}(\underline{y}-\underline{s}_{1})}{p_{\underline{N}}(\underline{y}-\underline{s}_{0})},\nonumber\\
-&=&\frac{p_{\underline{N}}(y_{1}-s_{11},y_{1}-s_{12},...,y_{1}-s_{1n})} {p_{\underline{N}}(y_{1}-s_{01},y_{1}-s_{12},...,y_{1}-s_{0n})},
+&=&\frac{p_{\underline{N}}(y_{1}-s_{11},y_{2}-s_{12},...,y_{n}-s_{1n})} {p_{\underline{N}}(y_{1}-s_{01},y_{2}-s_{12},...,y_{n}-s_{0n})},
 \end{eqnarray}
 since the noise samples $N_{1},N_{2},...,N_{n}$ are statistically independent (by assumption). So we have
 \begin{equation}
@@ -68,9 +68,9 @@ L_(\underline{y})= \prod_{k=1}^{n}\frac{p_{N_{k}}(y_{k}-s_{1k})}{p_{N_{k}}(y_{k}
 Comparing this $L(\underline{y})$ to a threshold $\tau$ gives us the decision rule
 \begin{equation}
 \tilde\delta_{o}(\underline{y})=\begin{cases} 
-1 &<\\
+1 &>\\
 \gamma \hspace{20pt}\text{if } L(\underline{y}) &= \hspace{10pt}\tau.\\
-0 &>
+0 &<
 \end{cases}
 \end{equation}
 \begin{exmp}[Coherent Detection in i.i.d Gaussian Noise]
@@ -90,17 +90,17 @@ Taking log on both sides, log $L(\underline{y})$ can be expressed as
 Thus the decision rule becomes
 \begin{equation}
 {\tilde\delta_{o}(\underline{y})}= \begin{cases} 
-1 &<\\
+1 &>\\
 \gamma \hspace{20pt}\text{if }\sum_{k=1}^{n}s_{k}(y_{k}-s_{k}/2)&=\hspace{10pt}\sigma^2\log\tau,\\
-0 &>
+0 &<
 \end{cases}
 \end{equation}
 or equivalently
 \begin{equation}
 {\tilde\delta_{o}(\underline{y})}= \begin{cases} 
-1 &<\\
+1 &>\\
 \gamma \hspace{20pt}\text{if }\sum_{k=1}^{n}s_{k}y_{k}&=\hspace{10pt}\tau',\\
-0 &>
+0 &<
 \end{cases}
 \end{equation}
 where $\tau'\triangleq\sigma^2\log\tau+\frac{1}{2}\sum_{k=1}^{n}s_{k}^2$. This detector structure is depicted in Fig. \ref{fig:Fig1}.
@@ -179,7 +179,7 @@ Often in many detection problems the form of the received signals is known but n
 \label{hypothesis_local}
 &H_{0}: Y_{k} = N_{k}, \hspace{10pt}k=1,2,...,n\\
 \text{versus}\hspace{10pt}&
-\\&H_{1}: Y_{k} = N_{k}+\theta_{S_{k}}, \hspace{10pt}k=1,2,...,n,\hspace{10pt}\theta>0,
+\\&H_{1}: Y_{k} = N_{k}+\theta{s_{k}}, \hspace{10pt}k=1,2,...,n,\hspace{10pt}\theta>0,
 \end{split}
 \end{equation}
 where $\underline{s}=(s_{1},...,s_{n})^T$ is a known signal, $\underline{N}=(N_{1},...,N_{n})^T$ is a continuous random vector with i.i.d. components and marginal probability density functions $p_{N_{k}}$, and $\theta$ is an unknown signal-strength parameter, i.e. signal $s_{k}$ should have been scaled with unknown amplitude $\theta$, where the distribution is
@@ -195,7 +195,7 @@ L_{\theta}(\underline{y})=\prod_{k=1}^{n}\frac{p_{N_{k}}(y_{k}-\theta s_{k})}{p_
 The critical region for any $\theta$,
 $\Gamma_{\theta}=\{\underline{y}\in{\rm I\!R}^n|L_{\theta}(\underline{y})>\tau\}$ will generally depend on $\theta$. Hence a $uniformly\ most\ powerful$ (UMP) test may not exist. Instead, we can try to find a $locally\ most\ powerful$ (LMP) test. It is in some sense optimal when $\theta$ is very close to 0.
 \begin{note}
-Given $\alpha\in$ (0,1) the LMP test carries out
+Suppose that $ \Lambda_{0}=\{\theta_{0}\} $ and $ \Lambda_{1}=(\theta_{0},\infty) $. Given $\alpha\in$ $ (0,1) $ an $ \alpha $-level LMP test carries out
 \begin{equation}
 \max_{\delta} \left(P_{D}^\prime(\delta,\theta_{o})=\frac{\partial}{\partial\theta}P_{D}(\delta,\theta)\hspace{2pt}\Bigg|_{\theta=\theta_{o}} \right),\nonumber
 \end{equation}
