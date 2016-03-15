@@ -1,0 +1,416 @@
+\documentclass[a4paper,english,12pt]{article}
+\input{header}
+\usepackage{accents}
+
+\newcommand{\se}{\mathbb{E}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\spc}{\mathbb{P}}
+
+\DeclareMathOperator*{\mn}{min}
+\DeclareMathOperator*{\amn}{argmin}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+\newcommand{\Tau}{\mathrm{T}}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+%opening
+%\title{Lecture 15: Sequential Detection}
+%\author{}
+
+\begin{document}
+		\begin{center}
+			\Large{Lecture 16}\\
+			\vspace{12pt}
+			{\huge{Sequential Detection}}\\
+				\vspace{15pt}
+					March 03, 2016
+		\end{center}
+		\vspace{20pt}
+		
+	%	\maketitle
+\section{Introduction}
+In the last lecture, we introduced the idea of sequential detection. A sequential detector uses a random number of samples based on the observation sequence to achieve a desired level of performance. This is in contrast with fixed-sample-size detectors, which optimize the performance given a fixed number of samples.\\
+
+Recall that a sequential decision rule is the pair  $(\underline{\phi},\underline{\delta})$, with
+\begin{align*}
+\phi_{j}(Y_{1},\ldots,Y_{j})&\in\{0,1\},\\
+\text{and}~~\delta_{j}(Y_{1},\ldots,Y_{j})&\in\{H_{0},H_{1}\}.
+\end{align*}
+To find the optimal \textit{Bayesian} sequential decision rule, we assigned priors $\pi_{1}$ and $\pi_{0}=1-\pi_{1}$ to hypotheses $H_{1}$ and $H_{0}$, respectively. The optimal rule can be summarized as:\\
+If $~\pi_{1}\leq\pi_{L}$, stop and declare $H_{0}$\\
+\hspace{6pt}$\pi_{1}\geq\pi_{L}$, stop and declare $H_{1}$\\
+$~~~~~~~~~\pi_{1}\in(\pi_{L},\pi_{U})$, take one sample\\
+Update $\pi_{j}\rightarrow\pi_{j}(y)=\spc(H_{j}~\text{is true}/Y_{1}=y_{1})$, and recurse.\\
+
+The corresponding stopping and decision rules are\\
+ \begin{equation*}
+ \phi_{n}(y_{1},\ldots,y_{n})=
+ \begin{cases}
+ 0,& \text{if }\pi_{1}(y_{1},\ldots,y_{n})\in(\pi_{L},\pi_{U}),\\
+ 1,& \text{otherwise}.
+ \end{cases}
+ \end{equation*}
+ \begin{equation*}
+ \delta_{n}(y_{1},\ldots,y_{n})=
+ \begin{cases}
+ 1,& \text{if }\pi_{1}(y_{1},\ldots,y_{n})\geq\pi_{U},\\
+ 0,& \pi_{1}(y_{1},\ldots,y_{n})\leq\pi_{L}.
+ \end{cases}
+ \end{equation*}
+ 
+ Note that it is generally not easy to compute $\pi_{L}$ and $\pi_{U}$. Implementing the optimal test, however, is easy. We do so by first rewriting the optimal Bayes sequential test in terms of the likelihood ratio. Later, we will generalize this idea to what are called Sequential Probability Ratio Tests. The posterior probability can be computed using Bayes' rule (assuming $\spc_{0}$ and $\spc_{1}$ have densities $p_{0}$ and $p_{1}$, respectively):\\
+ \begin{align*}
+ \pi_{1}(y_{1}\ldots,y_{n})&=\spc(H_{1}/Y_{1}=y_{1},\ldots,Y_{n}=y_{n})\\
+ &=\frac{\spc(Y_{1}=y_{1},\ldots,Y_{n}=y_{n}/H_{1})\spc(H_{1})}{\sum_{i=0,1}\spc(Y_{1}=y_{1},\ldots,Y_{n}=y_{n}/H_{i})\spc(H_{i})}\\
+ &=\frac{\pi_{1}\Pi_{k=1}^{n}p_{1}(y_{k})}{\sum_{i=0,1}\pi_{i}\Pi_{k=1}^{n}p_{i}(y_{k})}\\
+ &=\frac{\pi_{1}L_{n}(y_{1},\ldots,y_{n})}{\pi_{1}L_{n}(y_{1},\ldots,y_{n})+\pi_{0}}.\\
+ \end{align*}
+ We can thus rewrite the optimal Bayes sequential test as
+ \begin{equation*}
+ \phi_{n}(y_{1},\ldots,y_{n})=
+ \begin{cases}
+ 0,& \text{if }L_{n}(y_{1},\ldots,y_{n})\in(\ubar{\pi},\bar{\pi}),\\
+ 1,& \text{otherwise},
+ \end{cases}
+ \end{equation*}
+ and
+ \begin{equation*}
+ \delta_{n}(y_{1},\ldots,y_{n})=
+ \begin{cases}
+ 1,& \text{if }L_{n}(y_{1},\ldots,y_{n})\geq\ubar{\pi},\\
+ 0,& L_{n}(y_{1},\ldots,y_{n})\leq\bar{\pi},
+ \end{cases}
+ \end{equation*}
+ where $\ubar{\pi}=\frac{\pi_{0}\pi_{L}}{\pi_{1}(1-\pi_{L})}$
+ , and $\bar{\pi}\frac{\pi_{0}\pi_{U}}{\pi_{1}(1-\pi_{U})}$.
+\section{Sequential Probability Ratio Test}
+In general, one can define a family of sequential tests called \textit{Sequential Probability Ratio Tests} (also called SPRT, Wald's SPRT), with boundaries $a$ and $b$ $(a\leq1\leq b).$ In particular, for any two real numbers $a$ and $b$ satisfying $0 < a \leq 1 \leq b < \infty$, the SPRT with boundaries $a$ and $b$ (denoted by SPRT$( a,b )$), is defined as,
+
+\[
+\phi_n(y_1,\ldots,y_n) =  
+\begin{cases}
+  0, & \text{if } a < \lambda(y_1,\ldots,y_n) < b\\
+  1, & \text{otherwise}
+
+\end{cases}
+\]
+and,
+
+\[
+\delta_n(y_1,\ldots,y_n) =  
+\begin{cases}
+  1, & \text{if } \lambda(y_1,\ldots,y_n) \geq a\\
+  0, & \text{if } \lambda(y_1,\ldots,y_n) \leq b.
+
+\end{cases}
+\] 
+Note that the rule is left arbitrary if $a=b$. Thus the SPRT($a,b$) continues sampling until the likelihood ratio $\lambda_n$ falls outside the ``boundaries" $a$ and $b$, and then chooses $H_1$ if $\lambda_n \geq b$ and $H_0$ if $\lambda_n \leq a$. \\\\
+\textbf{Few remarks:}
+\begin{enumerate}
+\item By convention, the likelihood ratio with no samples is taken to be one, \textit{i.e.,} $L_0 \equiv 1.$
+\item If $a=1<b$, then take no sample and output $H_0$.
+\item If $a<b=1$, then take no sample and output $H_1$.
+\item If $a=b=1$, then take no sample and choose $H_0$ or $H_1$ \textit{arbitrarily}.
+\end{enumerate}
+
+\subsection*{Example 1: Sequential detection of a constant signal}
+We now consider the problem of detecting a constant signal $\theta$ in additive zero-mean Gaussian noise. We have
+\begin{eqnarray*}
+H_0: Y_k=N_k, & k=1,2,3,\ldots,\\
+H_1: Y_k=N_k+\theta, & k=1,2,3,\ldots,
+\end{eqnarray*}
+where $\theta \in \mathbb{R}_+$ is a fixed number and $\{N_k\}_{k=1}^\infty$ is an i.i.d. sequence of noise samples distributed $\mathcal{N}(0,\sigma^2)$.\\
+We can calculate the likelihood ratio for this case as follows
+\begin{flalign*}
+L_n(\ubar{y}) = & \frac{p_1(\ubar{y})}{p_0(\ubar{y})}\\
+=& \prod_{k=1}^{n}\frac{\frac{1}{\sqrt{2\pi \sigma^2}}e^{-\frac{(y_k-\theta)^2}{2\sigma^2}}}{\frac{1}{\sqrt{2\pi \sigma^2}}e^{-\frac{y_k^2}{2\sigma^2}}}\\
+=&\exp\Big\{\sum_{k=1}^{n}\frac{\theta(y_k-\frac{\theta}{2})}{\sigma^2}\Big\}.
+\end{flalign*}
+Therefore, SPRT($a,b$) would suggest sampling until
+\begin{equation*}
+\sum_{k=1}^{n}\frac{\theta(y_k-\frac{\theta}{2})}{\sigma^2} \notin (\log a, \log b),
+\end{equation*}
+and declare,
+\begin{eqnarray*}
+H_0: \text{ if } \log{L_n} \leq \log{a},\\
+H_1: \text{ if } \log{L_n} \geq \log{b}.
+\end{eqnarray*}
+In addition to the optimality of SPRT $ (\ubar{\pi},\bar{\pi}) $ in the Bayesian setting, SPRT $ (a,b) $ also has an optimality property similar to that in the Neyman-Pearson type setting. To this end, let us first define some notations.\\
+Let\\
+\begin{eqnarray*}
+\mathbb{P}_F(\ubar{\phi},\ubar{\delta}) = \mathbb{P}_0[\delta_N(Y_1,\ldots,Y_N)=1],\\
+\mathbb{P}_M(\ubar{\phi},\ubar{\delta}) = \mathbb{P}_1[\delta_N(Y_1,\ldots,Y_N)=0],
+\end{eqnarray*}
+where,
+\begin{eqnarray*}
+N\equiv N(\ubar\phi)= &\text{Random time at which we stop.}\\
+=& \min\{n\geq 0, \phi_n(Y_1,\ldots,Y_n)=1\}.
+\end{eqnarray*}
+$N(\ubar\phi)$ is also called the sample number of $\ubar\phi$. We then have the following result.\\
+\subsection{Wald-Wolfowitz Theorem `98}
+\begin{theorem}
+Suppose that $ (\ubar\phi^*,\ubar\delta^*) $ represent the SPRT$ (a,b) $ and $ (\ubar\phi,\ubar\delta) $ is any other sequential test for which,
+\begin{eqnarray*}
+\mathbb{P}_F(\ubar\phi,\ubar\delta)\leq \mathbb{P}_F(\ubar\phi^*,\ubar\delta^*), \\
+\text{ and }\mathbb{P}_M(\ubar\phi,\ubar\delta) \leq \mathbb{P}_M(\ubar\phi^*,\ubar\delta^*)
+\end{eqnarray*}
+Then, $ \mathbb{E}_j[N(\ubar\phi)] \geq \mathbb{E}_j[N(\ubar\phi^*)] ~\forall j \in \{0,1\}. $
+\end{theorem}
+Thus we can see form the above result that for a given level of performance, no sequential decision rule has a smaller expected sample size than the SPRT with that performance. It should be noted here that a fixed sample size detector (no randomness in sample size as in the theorem) is a special case sequential decision rule. Hence the theorem asserts that the \textit{average} sample size of an SPRT is no larger than the sample size of a fixed sample size detector with the same performance. The theorem also implies that given expected sample sizes, no sequential decision rule has smaller error probabilities than the SPRT. 
+\par As is clear from the theorem, SPRTs turn out to be optimal in terms of $\mathbb{P}_F, \mathbb{P}_M$ and the number of samples if optimized altogether. Hence the natural question to ask is how to set $a$ and $b$ in an SPRT to achieve a desired performance (\textit{i.e.,} $\mathbb{P}_F, \mathbb{P}_M$). This question is the topic of interest for the next section.
+\subsection{Wald's Approximation}
+Suppose $(\ubar{\phi},\ubar{\delta})\equiv SPRT(a,b), a<1<b$ that achieves,
+\begin{flalign*}
+\alpha = &  \mathbb{P}_F(\ubar{\phi},\ubar{\delta})\\
+\gamma = & 1-\beta = \mathbb{P}_M(\ubar{\phi},\ubar{\delta}).
+\end{flalign*}
+The rejection region of $(\ubar\phi,\ubar\delta)$ is by definition,
+\begin{flalign*}
+\Gamma_1 = & \{y \in \mathbb{R}^\infty | L_N(y_1,\ldots,y_N)\geq b\},\\
+=& \bigcup\limits_{n=1}^{\infty}\{y \in \mathbb{R}^\infty |N=n, L_n(y_1,\ldots,y_n)\geq b\}.
+\end{flalign*}
+Let $\{Q_n\} \triangleq \{y \in \mathbb{R}^\infty |N=n, L_n(y_1,\ldots,y_n)\geq b\}.$ \\\\
+Clearly, $\{Q_n\}$ are mutually exclusive. We thus have
+\begin{flalign*}
+\alpha = & \mathbb{P}_0(\Gamma_1)\\
+=& \sum_{n=1}^{\infty} \mathbb{P}_0(Q_n)\\
+=& \sum_{n=1}^{\infty} \int_{Q_n} \prod_{k=1}^{n}[p_0(y_k)d(y_k)]\\
+\leq & \sum_{n=1}^{\infty} \int_{Q_n} \prod_{k=1}^{n}[p_1(y_k)d(y_k)]\times \frac{1}{b}.
+\end{flalign*}
+The last inequality follows from the fact that in $Q_n$ we have $\prod_{k=1}^{n}p_0(y_k)\leq \frac{1}{b}\times \prod_{k=1}^{n}p_1(y_k).$ Hence,
+\begin{flalign}
+\notag\alpha \leq & \frac{1}{b} \times \notag\mathbb{P}_1[L_N(Y_1,\ldots,Y_N) \geq b],\\
+\notag=& \frac{1}{b}\times \mathbb{P}_1[\Gamma_1],\\
+\notag=& \frac{1}{b} \times (1-\gamma),\\
+\Rightarrow \alpha \leq & \frac{1-\gamma}{b}. 
+\end{flalign}
+
+Letting $\{A_n\} \triangleq \{y \in \mathbb{R}^\infty |N=n, L_n(y_1,\ldots,y_n)\leq a\}$, we have \\
+\begin{flalign*}
+\gamma = & \mathbb{P}_1(\Tau_0),\\
+=& \sum_{n=1}^{\infty} \mathbb{P}_1(A_n),\\
+=& \sum_{n=1}^{\infty} \int_{A_n} \prod_{k=1}^{n}[p_1(y_k)d(y_k)],\\
+\leq & \sum_{n=1}^{\infty} \int_{A_n} \prod_{k=1}^{n}[p_0(y_k)d(y_k)]\times a.
+\end{flalign*}
+The last inequality follows from the fact that in $A_n$ we have $\prod_{k=1}^{n}p_1(y_k)\leq a \times \prod_{k=1}^{n}p_0(y_k).$ Hence,
+\begin{flalign}
+\notag\gamma \leq & a \times \mathbb{P}_0[L_N(Y_1,\ldots,Y_N) \leq b],\\
+\notag=& a\times \mathbb{P}_0[\Tau_0],\\
+\notag=& \frac{1}{b} \times (1-\alpha),\\
+\Rightarrow \gamma \leq & a(1-\alpha). 
+\end{flalign}
+Hence, from equations (1) and (2) we have,
+\begin{eqnarray}
+b\leq \frac{1-\gamma}{\alpha}\\
+\text{and, } a\geq \frac{\gamma}{1-\alpha}.
+\end{eqnarray}
+
+Note that these are inequalities, which mean that this is a conservative guideline to get $\mathbb{P}_F \leq \alpha$, and $\mathbb{P}_M \leq \gamma$ if one sets the corresponding $a$ and $b$ as given by equations (3) and (4). Moreover, if we assume that whenever $L_n(y_1,\ldots,y_n)$ crosses $a$ or $b$ and stops, the overshoot $(L_n-b)$ or $(a-L_n)$ is negligible, then we get 
+\begin{equation}
+b \approx \frac{1-\gamma}{\alpha} \text{and } a\approx \frac{\gamma}{1-\alpha}. 
+\end{equation}
+This is called \textit{Wald's approximation.}
+\subsection{Calculation of expected number of samples in a SPRT}
+\begin{lemma}[Wald's Lemma]
+Let $Z_1, Z_2, \ldots$ be i.i.d. random variables with mean $ \mu $. Let $K\geq 0$ be any integer valued random variable with finite expectation, $ \mathbb{E}[K] < \infty $ and such that the event $ \{K=k\} $ is completely determined by $(Z_1,\ldots, Z_k)$ $\forall k$. Then,
+\begin{equation}
+\mathbb{E}\Big[\sum_{i=1}^{K}Z_i\Big] = [\mathbb{E}K]\mu.
+\end{equation}
+\end{lemma}
+\begin{definition}[K-L divergence] Given two distributions $ P_1 $ and $ P_0 $ on $ \Gamma $, the K-L divergence between $ P_1 $ and $ P_0 $ is,
+\begin{equation*}
+D(P_1||P_0) = \mathbb{E}_1\Big[ \log{\frac{P_1(Y)}{P_0(Y)}}\Big].
+\end{equation*}
+\end{definition}
+\par Recall that $N = \min\{n\geq 0, \phi_n(Y_1,\ldots,Y_n)=1\}.$ Clearly, the event $\{N=n\}$ just depends on $Y_1,\ldots, Y_n.$ Additionally, if we assume that $\mathbb{E}[N]<\infty$, then we can write
+\begin{eqnarray}
+\notag\mathbb{E}_0[\log L_N(Y_1,\ldots, Y_n)] = & \mathbb{E}_0\Big[\sum_{k=1}^{N}\log \frac{p_1(Y_k)}{p_0(Y_k)}\Big]\\
+\notag=& \mathbb{E}_0[N].\mathbb{E}_0\Big[\log \frac{p_1(Y_k)}{p_0(Y_k)}\Big]\\
+=& -\mathbb{E}_0[N].D[P_0||P_1].
+\end{eqnarray}
+Here the second equality follows from a direct consequence Wald's lemma on the function $g_k(Y_k)\triangleq \log\frac{p_1(Y_k)}{p_0(Y_k)}$ and the second inequality follows from the definition of K-L divergence.\\
+Again, we can alternatively use the Wald's approximation which essentially says that at the stopping time either $L_n(Y_1,\ldots,Y_n) \approx a \text{ or } \approx b$. If we take the expectation of the likelihood over hypothesis $H_0$,
+\begin{equation}
+\mathbb{E}_0[\log L_n(Y_1,\ldots,Y_n)] \approx (\log a)(1-\alpha) + (\log b)\alpha.
+\end{equation}
+This is because under hypothesis $H_0$, the likelihood ratio can take the  value $a$ with probability $(1-\alpha)$ which is essentially $\mathbb{P}_0(\Gamma_0)$, or value $b$ with probability $(\alpha)$ which is essentially $\mathbb{P}_0(\Gamma_1)$.\\
+From (7) and (8) we can now write,
+\begin{eqnarray}
+\notag\mathbb{E}_0[N] \approx & \frac{(1-\alpha)\log a + \alpha\log b}{-D[P_0||P_1]},\\
+=& \frac{(1-\alpha)\log \frac{1-\alpha}{\gamma} + \alpha\log \frac{\alpha}{1-\gamma}}{D[P_0||P_1]}
+\end{eqnarray}
+Similarly, we can repeat the exercise to calculate the expected number of samples under hypothesis $H_1$.
+\begin{eqnarray}
+\notag\mathbb{E}_1[\log L_N(Y_1,\ldots, Y_n)] = & \mathbb{E}_1\Big[\sum_{k=1}^{N}\log \frac{p_1(Y_k)}{p_0(Y_k)}\Big]\\
+\notag=& \mathbb{E}_1[N].\mathbb{E}_1\Big[\log \frac{p_1(Y_k)}{p_0(Y_k)}\Big]\\
+=& \mathbb{E}_1[N].D[P_1||P_0].
+\end{eqnarray}
+Here the second equality follows from a direct consequence Wald's lemma on the function $g_k(Y_k)\triangleq \log\frac{p_1(Y_k)}{p_0(Y_k)}$, and the second inequality follows from the definition of K-L divergence.\\
+Again, we can alternatively use the Wald's approximation which essentially says that at the stopping time either $L_n(Y_1,\ldots,Y_n) \approx a \text{ or } \approx b$. If now  we take the expectation of the likelihood over hypothesis $H_1$,
+\begin{equation}
+\mathbb{E}_1[\log L_n(Y_1,\ldots,Y_n)] \approx (\log a)(\gamma) + (\log b)(1-\gamma).
+\end{equation}
+This is because under hypothesis $H_1$, the likelihood ratio can take the  value $a$ with probability $\gamma$ which is essentially $\mathbb{P}_1(\Tau_0)$, or value $b$ with probability $(1-\gamma)$ which is essentially $\mathbb{P}_1(\Tau_1)$.\\
+From (10) and (11) we can now write,
+\begin{eqnarray}
+\mathbb{E}_1[N] \approx & \frac{(1-\gamma)\log \frac{1-\gamma}{\alpha} + \gamma\log \frac{\gamma}{1-\alpha}}{D[P_1||P_0]}.
+\end{eqnarray}
+%\section{Introduction}
+%We are interested in processing of information-bearing signals to extract information. 
+%There are two types of problems of fundamental interest.
+%\begin{enumerate}
+%\item Detection: Finite number of possible situations
+%\item Estimation: ``Nearest'' to the possible situation
+%\end{enumerate}
+%We look at three examples of interest.
+%\begin{exmp}[Communication System] 
+%We need to estimate unknown analog signal from the received signal that is distorted and corrupted.
+%\begin{figure}[hhhh]
+%\centering
+%\input{Figures/analog}
+%\caption{Block diagram for analog communication.}
+%\label{Fig:AnalogComm}
+%\end{figure}
+%\end{exmp}
+%\begin{exmp}[Radar communication] 
+%Pulse electromagnetic waves are sent and received after possible reflection from a target if it exists. 
+%Target could be an aircraft, ship, spacecraft, missile etc.
+%If the target is detected, then one is interested in estimating range, angle, and velocity of the target. 
+%One may be interested in tracking the mobile target trajectory or even controlling it.
+%%\begin{figure}[hhhh]
+%%\centering
+%%\input{Figures/radar}
+%%\caption{Block diagram for Radar communication.}
+%%\label{Fig:RadarComm}
+%%\end{figure}
+%\end{exmp}
+%\begin{exmp}[Automatic Control]
+%In automatic control problem, given a linear time invariant system $H$, we need to design a controller $C$ for achieving a desired response through output signal $y(t)$. 
+%Typically, reference signal $x(t)$ is unknown in such systems, and only a noisy version of the state may be observable.
+%\begin{figure}[hhhh]
+%\centering
+%\input{Figures/AutoControl}
+%\caption{Block diagram for automatic control.}
+%\label{Fig:AutoControl}
+%\end{figure}
+%\end{exmp}
+%Other applications of estimation and detection theory are in seismology, radio astronomy, sonar, speech, signal, and image processing, biomedical signal processing, optimal communications etc.
+%
+%\section{Probability Review}
+%We denote observation space by $\Gamma$ equipped with a $\sigma$-algebra $\mathcal{G}$, that is a  measurable collection of sets.
+%Further, for all elements of $A \in \mathcal{G}$, we have a non-negative set function $P: \Gamma \to [0,1]$ that satisfies the following axioms of probability:
+%\begin{enumerate}
+%\item $P(\Gamma) = 1$,
+%\item for any disjoint countable collection of sets $\{A_n: n \in \N\}$, we have $P(\cup_nA_n) = \sum_n P(A_n)$.
+%\end{enumerate}
+%\begin{exmp}[Finite Observations] When observation space $\Gamma$ has finitely many elements, we can take $\mathcal{G} = \mathcal{P}(\Gamma)$. 
+%Further, specifying $P(\{\gamma\})$ for all $\gamma \in \Gamma$ completely specifies the probability set function.
+%\end{exmp}
+%\begin{exmp}[Euclidean Space] For the case when observation space $\Gamma = \R^n$, we take $\mathcal{G} = \mathcal{B}^n$, Borel $\sigma$-algebra on $\R^n$. 
+%For this case, it suffices to specify the set function $P(A)$ for  sets $A \in \mathcal{G}$ of the form $\{\gamma \in \Gamma: \gamma_i \leq x_i, i \in [n]\}$.
+%\end{exmp}
+%\begin{defn}[Expectation] For a real valued function $g: \Gamma \to \R$, we denote its expectation by $\E[g(Y)]$ and define it as
+%\begin{align*}
+%\E[g(Y)] = \int_{y \in \Gamma}g(y)dP(y).
+%\end{align*}
+%\end{defn}
+%
+%\section{Hypothesis Testing}
+%\begin{defn} A \textbf{hypothesis} is a statement about a population parameter.
+%\end{defn}
+%\begin{defn} The two complementary hypotheses in a hypothesis testing problem are called the \textbf{null hypothesis} and the \textbf{alternative hypothesis}, and denoted by $\mathcal{H}_0$ and $\mathcal{H}_1$ respectively.
+%\end{defn}
+%We assume that observation is a random variable $Y \in \Gamma$ distributed with probability set function $P_i$ when true hypothesis is $\mathcal{H}_i$ for $i \in \{0,1\}$.
+%\begin{defn} A \textbf{hypothesis test} is a rule $\delta: \Gamma \to \{0,1\}$ that specifies for all values of $y \in \Gamma$, index of the accepted true hypothesis $\mathcal{H}_{\delta(y)}$. 
+%\end{defn}
+%\begin{defn}
+%Region $\Gamma_1 = \{ y \in \Gamma: \delta(y) = 1 \}$ is called the \textbf{rejection region}, and $\Gamma_0 = \Gamma_1^c$ is called the \textbf{acceptance region}.
+%\end{defn}
+%\begin{defn} When the true underlying hypothesis is $\mathcal{H}_j$, the \textbf{cost} incurred on accepting hypothesis $\mathcal{H}_{i}$ is denoted by $C_{ij}$. Uniform cost is given by
+%\begin{align*}
+%C_{ij} = 1_{\{i \neq j\}}, i,j \in \{0,1\}.
+%\end{align*}
+%\end{defn}
+%\begin{defn} For each hypothesis $\mathcal{H}_i$, the \textbf{conditional risk} is denoted by $R_j(\delta)$ and defined as the expected cost incurred by the decision rule $\delta$, when it is the underlying true hypothesis. That is,
+%\begin{align*}
+%R_j(\delta) &= \E\left[ \sum_{i}C_{ij}1_{\{\delta(y) = i\}} | \mathcal{H}_j \text{ holds}\right] = \E_j\left[\sum_{i}C_{ij}1_{\{\delta(y) = i\}}\right]\\
+%&= C_{0j}P_j(\Gamma_0) + C_{1j}P_j(\Gamma_1).
+%\end{align*}
+%\end{defn}
+%Our objective is to design a decision rule $\delta$ that minimizes risk. Usually, costs of correct identification of the true hypothesis is low, and cost of incorrect identification is higher. Hence, minimizing risk for any hypothesis would be to ensure that probability $P_j(\Gamma_i)$ is low for $i \neq j$. One can't simultaneously decrease all decision regions $\{\Gamma_i \}$, since they form a partition of observation space $\Gamma$. 
+%
+%\subsection{Bayesian Hypothesis Testing}
+%In this approach, we assume a prior distribution $\pi$ on hypotheses to be true. Specifically, let $\pi_i$ denotes the prior probability of $\mathcal{H}_i$ being true.
+%\begin{defn} We can defined unconditional \textbf{risk} as expected value of risk over all possible hypotheses, denoted by $r(\delta)$. That is,
+%\begin{align*}
+%r(\delta) = \E R_j(\delta) = \sum_j R_j(\delta) \pi_j.
+%\end{align*} 
+%\end{defn}
+%\begin{defn} For two distributions $P_1(y)$ and $P_0(y)$ we can define likelihood ratio as $L(y) = \frac{dP_1}{dP_0}(y)$. When two distributions admit density, it is ratio of their densities at $y$. For discrete distributions, it is ratio of their probability mass functions at $y$.
+%\end{defn}
+%\begin{thm} For a Bayesian hypothesis testing problem optimal decision rule that minimizes unconditional risk for a prior distribution $\pi$ and costs $\{C_{ij}\}$ is a threshold based rule called likelihood ratio test . That is,
+%\begin{align*}
+%\delta_B(y) = 1_{\{ L(y) \geq \tau\}},
+%\end{align*}
+%where likelihood ratio $L(y) = \frac{dP_1}{dP_0}(y)$ and threshold $\tau = \frac{\pi_0(C_{10}-C_{00})}{\pi_1(C_{01}-C_{11})}$.
+%\end{thm}
+%\begin{proof}
+%We can write unconditional risk as 
+%\begin{align*}
+%r(\delta) = \sum_{j}\pi_jC_{0j} + \int_{y \in \Gamma_1}\sum_{j}\pi_j(C_{1j} - C_{0j})dP_j(y).
+%\end{align*}
+%Minimizing unconditional risk is equivalent to selecting rejection region $\Gamma_1$ such that the integrand is negative. That is,
+%\begin{align*}
+%\Gamma_1 = \{ y \in \Gamma: \sum_{j}\pi_j(C_{1j} - C_{0j}) dP_j(y) \leq 0 \}.
+%\end{align*}
+%By the definition of likelihood ratio and the threshold as defined in the theorem hypothesis, theorem follows.
+%\end{proof}
+%\begin{rem} For uniform cost, threshold $\tau = \frac{\pi_0}{\pi_1}$ and conditional risk 
+%\begin{align*}
+%r(\delta) = \pi_0P_0(\Gamma_1) + \pi_1P_1(\Gamma_0),
+%\end{align*}
+%is probability of error in detection. 
+%\end{rem}
+%\begin{defn} We can define \textbf{posterior} probability of hypothesis $\mathcal{H}_j$ being true conditioned on observation being $y$ as
+%\begin{align*} 
+%\pi_j(y) = \Pr\{ \mathcal{H}_j \text{ is true } | Y = y \} = \frac{\pi_j dP_j(y)}{\pi_0dP_0(y) + \pi_1dP_1(y)}.
+%\end{align*}
+%\end{defn}
+%\begin{rem}
+%Observe that rejection region can be written in terms of posterior probabilities as
+%\begin{align*}
+%\Gamma_1 = \{ y \in \Gamma: (C_{10}-C_{00})\pi_0(y) - (C_{01}-C_{11})\pi_1(y) \leq 0 \}.
+%\end{align*}
+%This is again a likelihood ratio test in term of ratio of posterior probabilities $L'(y) = \frac{\pi_1(y)}{\pi_0(y)}$ and threshold $\tau' = \frac{C_{10}-C_{00}}{C_{01}-C_{11}}$. That is, Bayes' decision rule is
+%\begin{align*}
+%\delta_B(y) = 1_{\{ L'(y) \geq \tau'\}}.
+%\end{align*}
+%\end{rem}
+%\begin{defn}
+%The expected cost of choosing hypothesis $\mathcal{H}_i$ given observation $y$ is called \textbf{posterior cost} and denoted as $R_i(y)$, where %can be computed in terms of posterior probabilities as 
+%\begin{align*}
+%R_i(y) = \E[\sum_{k,j}C_{kj}1_{\{\delta(y)=i\}}|Y = y] = \sum_{j}C_{ij}\pi_j(y) = C_{i0}\pi_0(y) + C_{i1}\pi_1(y).
+%\end{align*}
+%\end{defn}
+%\begin{rem}
+%Alternatively, one can also write rejection region in terms of posterior costs as 
+%\begin{align*}
+%\Gamma_1 =  \{ y \in \Gamma: R_0(y) \leq R_1(y)\}.
+%\end{align*}
+% Therefore, Bayes' decision rule can be interpreted as the one that minimizes the posterior cost of choosing a hypothesis when the observation is $y$. 
+% That is, 
+%\begin{align*}
+%\delta_B(y) = 1_{\{ \frac{R_1(y)}{R_0(y)} \geq 1 \}}.
+%\end{align*}
+%\end{rem}
+%\begin{rem}
+%For uniform cost, Bayes' decision rule is likelihood ratio test for posterior probabilities when the threshold is unity, That is,
+%\begin{align*}
+%\delta_B(y) = 1_{\{ L'(y) \geq 1 \}}.
+%\end{align*}
+%This is equivalent to maximizing a posterior probability of underlying hypothesis based on the observation. This is also called a MAP decision rule for binary hypothesis test.
+%\end{rem}
+\end{document}
