@@ -1,0 +1,216 @@
+\documentclass[a4paper,english,12pt]{article}
+\input{header}
+\title{Lecture 22: Maximum Likelihood Estimator}
+\date{March 29, 2016}
+\author{}
+\begin{document}
+\maketitle
+\maketitle
+\par In the first part of this lecture,we will deal with the consistency and asymptotic distribution of maximum likelihood estimator.The last part of the lecture focuses on signal estimation/tracking.
+\section{Consistency of Max-Likelihood Estimator}
+ \par An estimator is said to be consistent if it converges to the quantity being estimated.This section speaks about the consistency of MLE  and conditions under which MLE is consistent.
+ \par  Let $X_1,X_2,.....,X_n \overset{iid}{\sim } f(x|\theta), \theta \in \Theta \subseteq  \R$. Then,  Maximum Likelihood Estimate of $\theta$ is given by ,  
+\begin{equation}
+  \hat{\theta}_n=\underset{\theta \in \Theta}{arg max}\underbrace{\sum_{i=1}^{n}\log{f(X_i|\theta)}}_{L(X,\theta)}.
+\end{equation}
+\par The following theorem talks about of the consistency of the maximum likelihood estimator.At first, we state a loose version of the theorem and then a proof sketch is provided.\\
+\textbf{Loose Version of the theorem:}  Under regularity conditions on $ \{ f(x|\theta): \theta \in \Theta \}$ we have,
+$\hat{\theta}_n \xrightarrow{\mathbb{P}_\theta} \theta  ,\forall \theta \in \Theta$.
+\begin{proof} 
+If $L(X,\theta)$ is differentiable in $\theta$, then the derivative at $\theta = \hat{\theta}_n$ should be zero.
+\begin{eqnarray}
+{\frac{d}{d\theta}L(X,\theta)|_{\theta=\hat{\theta}_n}} = 0,\\
+\frac{1}{n}\sum_{i=1}^{n}\psi(X_i,\hat{\theta}_n)= 0,
+\end{eqnarray}
+where $ \psi(X,\theta) := \frac{d}{d\theta}\log f(X|\theta^{'})|_{\theta^{'}=\theta}$ is the score function at $\theta$.\\
+If $\theta^{'} \in \Theta$ is fixed,by Weak Law of Large Numbers we have,
+\begin{equation}
+\frac{1}{n}\sum_{i=1}^{n}\psi(X_i,\theta^{'}) \xrightarrow{n\rightarrow \infty} \E_\theta\big[\psi(X_1,\theta^{'})\big],
+\end{equation}
+\begin{equation}
+\E_\theta\big[\psi(X_1,\theta^{'})\big]=\int \bigg[ \frac{d}{d\theta}\log f(x|\theta)|_{\theta=\theta^{'}}\bigg]f(x|\theta)dx \overset{def}{=}J(\theta,\theta^{'}).
+\end{equation}
+\par Now,consider $J(\theta,\theta)= \E_\theta\big[\psi(X_1,\theta)\big] =0 $ (since expectation of score function is zero). So, $\theta^{'}=\theta$ is a root of the equation  $J(\theta,\theta^{'})=0$.\\\\
+Suppose that $\theta^{'}=\theta$ is the unique root of $J(\theta,\theta^{'})=0$.Suppose $J(\theta,\theta^{'})$ and $\frac{1}{n}\sum_{i=1}^{n}\psi(X_i,\theta^{'})$ are smooth functions of $\theta^{'}$
+,almost surely,then, \begin{enumerate}
+\item $\frac{1}{n}\sum_{i=1}^{n}\psi(X_i,\theta^{'}) \approx J(\theta, \theta^{'})$,
+\item $\frac{1}{n}\sum_{i=1}^{n}\psi(X_i,\theta) \approx J(\theta, \theta)=0$,
+\item $\frac{1}{n}\sum_{i=1}^{n}\psi(X_i,\hat{\theta}_n) =0$.
+\end{enumerate}
+From the above equations one can infer that  $\hat{\theta}_n \xrightarrow{\mathbb{P}_\theta} \theta$.
+\end{proof}
+The exact regularity conditions required for consistency of MLE is given in the theorem below: 
+\begin{thm}\textbf{(Consistency of MLEs)}
+ Suppose $X_1,X_2,.....,X_n \overset{iid}{\sim } f(x|\theta), \theta \in  \R$, and suppose
+\begin{enumerate}
+\item $\forall \theta^{'}$,log$f(X|\theta^{'})$ is differentiable in $\theta^{'}$ almost surely over $X \sim f(X|\theta)$.\\
+$J(\theta,\theta^{'}) := \E_\theta\big[\frac{d}{d\tilde{\theta}}\log f(X|\tilde{\theta})|_{\tilde{\theta}=\theta^{'} }\big]$ exists and is finite.
+\item  $J(\theta,\theta^{'})$ is continuous over $\theta^{'}$ and has a unique root at $\theta^{'}=\theta$ ,at which point it changes sign. 
+\item  $ \psi(X,\theta^{'})$ is continuous in $\theta^{'}$ almost surely over $X \sim f(X|\theta)$.
+\item $\forall n \geq 1$,  $\frac{1}{n}\sum_{i=1}^{n}\psi(X_i,\theta^{'})$ has a unique root $\hat{\theta}_n$.  
+\end{enumerate}
+Then,$\hat{\theta}_n \rightarrow \theta$ in probability.
+\end{thm}
+\section{Asymptotic Distribution of the MLE}
+\par In this section we will talk about the asymptotic distribution of the maximum likelihood estimate.The asymptotic efficiency of the MLE is also shown in this section. 
+\begin{thm}\textbf{(Asymptotic Normality of MLEs)}
+Let $X_1,X_2,.....,X_n \overset{iid}{\sim } f(x|\theta_0), \theta_0 \in  \R= \Theta$ and $\hat{\theta}_n$ be an MLE under regularity conditions on $ \{ f(x|\theta_0): \theta_0 \in \Theta \}$.\\
+Then,
+\begin{equation}
+\sqrt{n}(\hat{\theta}_n-\theta_0)\xrightarrow{\textbf{d}}\mathcal{N}(0,v(\theta_0)),
+\end{equation} 
+where, 
+\begin{equation}
+ v(\theta_0) = \frac{1}{\E_{\theta_0}\bigg [\Big(\frac{d}{d\theta^{'}}\log f(X|\theta^{'})\big|_{\theta^{'}=\theta_0}\Big)^{2}\bigg]}=\frac{1}{\text{Fisher Info at } \theta_0},
+ \end{equation}
+  is the Cramer-Rao Lower Bound for unbiased estimation  of $\theta_0$.
+\end{thm} 
+
+\begin{proof}
+\begin{equation}
+    \hat{\theta}_n=\underset{\theta}{arg max}\underbrace{\sum_{i=1}^{n}\log{f(X_i|\theta)}}_{L(X,\theta)}.
+\end{equation}
+Let
+\begin{equation}
+    L^{'}(X,\theta):=\frac{d}{d\theta^{'}}L(X,\theta^{'})|_{\theta{'}=\theta}.
+\end{equation}
+Consider the Taylor series of $L^{'}(X,\theta)$ around the point $\theta_0$,
+\begin{equation}
+    L^{'}(X,\theta)=L^{'}(X,\theta_0)+(\theta-\theta_0)L^{''}(X,\theta_0)+...\text{(higher order terms)},
+\end{equation}
+\begin{equation}
+    L^{'}(X,\theta)\approx L^{'}(X,\theta)+(\theta-\theta_0)L^{''}(X,\theta_0).
+\end{equation}
+At $\theta=\hat{\theta}_n$, from equation 2 we have,
+\begin{equation}
+    0=L^{'}(X,\theta_0)+(\hat{\theta}_n-\theta_0)L^{''}(X,\theta_0),
+\end{equation}
+which gives,
+\begin{align}
+    \sqrt{n}(\hat{\theta}_n-\theta_0)=&\frac{-\sqrt{n}L^{'}(X,\theta_0)}{L^{''}(X,\theta_0)}\nonumber \\
+    =&\frac{-\frac{1}{\sqrt{n}}L^{'}(X,\theta_0)}{\frac{1}{n}L^{''}(X,\theta_0)}.
+\end{align}
+Both the numerator and denominator are random variables.\\
+\textbf{Numerator}:
+\begin{align}
+   \frac{1}{\sqrt{n}}L^{'}(X,\theta_0)&=\frac{1}{\sqrt{n}}\sum_{i=1}^{n}\underbrace{\frac{d}{d\theta}\log f(X_i|\theta)|_{\theta=\theta_0}}_{\psi(X_i,\theta_0)}\nonumber\\
+    &=\frac{1}{\sqrt{n}}\sum_{i=1}^{n}[\psi(X_i,\theta_0)-\underbrace{\E_{\theta_0}(\psi(X_i,\theta_0))}_{=0}] \nonumber\\
+    &=\Big\{\frac{1}{\sqrt{n}\sqrt{Var_{\theta_0}(\psi(X_1,\theta_0))}}\sum_{i=1}^{n}\underbrace{\psi(X_i,\theta_0)-\E_{\theta_0}(\psi(X_i,\theta_0))}_{\text{i.i.d r.v}}\Big\}\sqrt{Var_{\theta_0}(\psi(X_1,\theta_0))}. 
+\end{align}
+\par The summation inside the curly bracket converges in distribution to Gaussian $\mathcal{N}(0,1)$  by the C.L.T. Hence, multiplication with $\sqrt{Var_{\theta_0}(\psi(X_1,\theta_0))}$ gives,
+\begin{equation}
+    \frac{1}{\sqrt{n}}L^{'}(X,\theta_0)\xrightarrow{\textbf{d}}\mathcal{N}\big(0,Var_{\theta_0}(\psi(X_1,\theta_0)\big),
+\end{equation}
+where $Var_{\theta_0}\big[\psi(X_1,\theta_0)\big]$ is the $\text{Fisher Info}(\theta_0)$.\\
+\textbf{Denominator:}\\
+\begin{equation}
+    \frac{1}{n}L^{''}(X,\theta_0)=\frac{1}{n}\sum_{i=1}^{n}\frac{d^2}{d\theta^2}\log f(X_i|\theta)\Big|_{\theta=\theta_0}.
+\end{equation}
+The  denominator converges to  $\text{Fisher Info}(\theta_0)$ as $n\to\infty$ by the W.L.L.N.
+\begin{equation}
+     \frac{1}{n}L^{''}(X,\theta_0)\xrightarrow[n\to{\infty}]{\textbf{W.L.L.N}}\E_{\theta_0}\bigg[\frac{d^2}{d\theta^2}\log f(X_i|\theta)\Big|_{\theta=\theta_0}\bigg]= -\text{Fisher Info}(\theta_0).
+\end{equation}
+Therefore,\\
+\begin{equation}
+    \frac{Numerator}{Denominator}\xrightarrow{\textbf{d}}\mathcal{N}\Big(0,\frac{1}{\text{Fisher Info}(\theta_0)}\Big)=\mathcal{N}(0,v(\theta_0)).
+\end{equation}
+\end{proof}
+\begin{rem}
+For large n,
+\begin{equation}
+\hat{\theta}_n-\theta \overset{(\approx)}{\sim} \mathcal{N}\bigg(0,\frac{v(\theta)}{n}\bigg),
+\end{equation}
+\begin{equation}
+ var_\theta[\hat{\theta}_n]=\frac{v(\theta)}{n}=\frac{1}{n \times \text{Fisher Info}(\theta)}.
+\end{equation}
+An estimate is said to be asymptotically efficient if it meets the CRLB.Therefore, MLE $\hat{\theta}_n$ is Asymptotically Efficient.
+\end{rem}
+\section{Signal Estimation/Tracking}
+\textbf{Goal:}Estimate the evolution of a dynamic system.\\
+\par Till now we were estimating time invariant parameters only, but now we are interested in parameters that vary with time. Such dynamic parameters are usually called a signal and hence the problem of estimating dynamic parameters is known as signal estimation or tracking. In general dynamic system model will be non-linear in nature but many of these non-linear systems can be approximated as linear systems.
+\subsection{Kalman-Bucy Filter}
+Here first we study \textbf{Linear Discrete time Dynamic System} which can be modeled with the following set of equations 
+\begin{align}
+  \underbar{X}_{n+1}=&\textbf{F}_n\underbar{X}_n+\textbf{G}_n\underbar{U}_n,\\
+   \underbar{Y}_n=&\textbf{H}_n\underbar{X}_n+\underbar{V}_n.
+\end{align}
+where $\underbar{X}_0,\underbar{X}_1,...$  are sequence of vectors in $\R^m$ representing  state of the system under study and $\underbar{Y}_0,\underbar{Y}_1,.. .$ in $\R^k$ are the observation sequence  of the system. $\underbar{U}_n$ in $\R^s$ is the Control/Process noise applied to the system. $\underbar{V}_n$ in $\R^k$ represents the measurement noise. The quantities $\textbf{F}_n,\textbf{G}_n,\textbf{H}_n$ are matrices $\forall n \geq 0$ of appropriate dimensions ($m\times m,m\times s$ and $k\times m$, respectively).\\\\
+\textbf{Applications:}
+\begin{enumerate}
+    \item Aircraft tracking, navigation: The positional coordinates and attitudinal coordinates are the states of interest in flight control.The inputs may consist of both control and random forces acting on the aircraft.In this case, the state equation describes the dynamics of the aircraft.
+    \item Chemical process control: The states may be quantities as temperature,pressure and concentration of various chemicals ,and the dynamics of the chemical process is described by the state equation. 
+    \item Radar systems: Estimating the position of the target and predicting the position of the target on the next scan.
+    \item Missile guidance
+    \item GPS receivers
+\end{enumerate}
+\begin{exmp}\textbf{1-D Kinematics}\\
+\\Consider a particle subjected to a force. Let the State $X_t$ be in $\R^2$  space. 
+\begin{equation}
+    \underbar{X}_t=(P_t,V_t),
+\end{equation}
+where $P_t$ represents the position of the particle and $V_t$ represents the velocity of the particle.
+\par Let the initial state of the particle be $(P_0,V_0)$.
+Suppose an acceleration of $A_t$ is applied to the particle. Then the system is looked at $t=0,1,2,...$ with a sampling time interval $\Delta\approx0$.
+\end{exmp}
+\begin{align}
+    V_t=&\frac{\Delta P_t}{\Delta}=\frac{P_{t+1}-P_t}{\Delta},\\
+    A_t=&\frac{\Delta V_t}{\Delta}=\frac{V_{t+1}-V_t}{\Delta}.
+\end{align}
+From the above equations we get,s
+\begin{align}
+    P_{t+1}=&P_t+\Delta V_t,\\
+    V_{t+1}=&V_t+\Delta A_t.
+\end{align}
+The above set of equations can be represented in matrix format given below.
+\begin{equation}
+\begin{bmatrix}
+P_{t+1}\\
+V_{t+1}
+\end{bmatrix}
+=
+\begin{bmatrix}
+1    &\Delta\\
+0    &1
+\end{bmatrix}
+\begin{bmatrix}
+P_t\\
+V_t
+\end{bmatrix}
++
+\begin{bmatrix}
+0\\
+\Delta\\
+\end{bmatrix}
+A_t.
+\end{equation}
+Suppose the particle position  is measured with noise.
+\begin{equation}
+    Y_t=
+    \begin{bmatrix}
+    1   &0
+    \end{bmatrix}
+    \begin{bmatrix}
+    P_t\\
+    V_t
+    \end{bmatrix}
+    + N_t.
+\end{equation}
+\par Now our goal is to estimate $X_U$ using only the observations $[\underbar{Y}_0,\underbar{Y}_1,...\underbar{Y}_t]\equiv \underbar{Y}_0^t $.
+We can classify the signal estimation problem into three types:
+\begin{enumerate}
+  \item $U<t$ gives SMOOTHING PROBLEM.
+  \item $U=t$ gives FILTERING PROBLEM.
+  \item $U>t$ gives PREDICTION PROBLEM.
+\end{enumerate}
+\par A \textbf{very important special case} of signal estimation is "Linear Dynamical System Driven by Gaussian noise/controls".
+\begin{align}
+   \underbar{X}_{n+1}=&\textbf{F}_n\underbar{X}_n+\textbf{G}_n\underbar{U}_n,\\
+   \underbar{Y}_n=&\textbf{H}_n\underbar{X}_n+\underbar{V}_n.
+\end{align}
+Here $\{X_0\sim\mathcal{N}(\underbar{m}_0,\Sigma_0)\}$ and $\{\underbar{V}_n\}$, $\{\underbar{U}_n\}$ are independent sequences of independent, zero-mean Gaussian vectors  independent of $X_0$.\\
+\\\textbf{Filtering:}
+Want to estimate $\underbar{X}_t$ given $\underbar{Y}_0^t$ and minimize the square error. Let the estimate be $\hat{X}_{t|t}$ then our criterion is to minimize,
+\begin{equation}
+    \E\Big[||\hat{X}_{t|t}-X_t||^2\Big].
+\end{equation}
+\end{document}
