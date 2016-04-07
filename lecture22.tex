@@ -8,152 +8,149 @@
 %\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
 \begin{document}
 %22nd March 2016
-\title{Lecture 22: Best Unbiased Estimator}
+\title{Lecture 20: Best Unbiased Estimator}
 \date{22 March 2016}
 \author{}
 \maketitle
-\section{Best Unbiased Estimation and Sufficient Statistic Rao-Blackwell Theorem}
-"Conditioning on estimator on a sufficient statistics preserves bias and reduces variance."
-\subsection{Uniqueness of Best Unbiased Estimator(BUE)}
+\section{Best unbiased estimation, sufficient statistics and Rao-Blackwell theorem}
+``Conditioning an estimator on a sufficient statistic preserves bias and reduces variance."
+\subsection{Uniqueness of Best Unbiased Estimator (BUE)}
 \begin{thm} 
-If W is a BUE of $g(\theta)$, then W is unique.
+If $W$ is a BUE of $g(\theta)$, then $W$ is unique.
 \end{thm}
-\begin{flushleft}
-\textbf{Proof:} Suppose that there exists $W^1$, another BUE of $g(\theta)$.
-\end{flushleft}
-Consider, 
+\begin{proof}
+Suppose that there exists $W^1$, another BUE of $g(\theta)$. Consider, 
+\begin{equation}
+W^*=\frac{1}{2}(W+W^1).
+\end{equation}
+We have,
 \begin{align}
-W^*:&=\frac{1}{2}(W+W^1)\\
-E_\theta[W^*] &= g(\theta)\\
-Var_\theta[W^*] &= \frac{1}{4}Var_\theta[W]+\frac{1}{4}Var_\theta[W^1]+\frac{1}{2}Cov_\theta[W,W^1]
+E_\theta[W^*] &= g(\theta),~\mbox{and}\\
+Var_\theta[W^*] &= \frac{1}{4}Var_\theta[W]+\frac{1}{4}Var_\theta[W^1]+\frac{1}{2}Cov_\theta[W,W^1].
 \end{align}
-by cauchy-schwartz inequality,
+Using Cauchy-Schwartz inequality, we get,
 \begin{align}
 \nonumber
-Var_\theta[W^*]&\leq\frac{1}{4}Var_\theta[W]+\frac{1}{4}Var_\theta[W^1]+\frac{1}{2}\sqrt{(Var_\theta[W])^2}\\
-Var_\theta[W^*]&\leq Var_\theta[W]
+Var_\theta[W^*]&\leq\frac{1}{4}Var_\theta[W]+\frac{1}{4}Var_\theta[W^1]+\frac{1}{2}\sqrt{(Var_\theta[W])^2}\\ \label{eqn:1}
+Var_\theta[W^*]&\leq Var_\theta[W].
 \end{align}
-Since W is a BUE of $g(\theta)$, $Var[W^*]$ cannot be less than $Var[W]$.
-So equality must hold in  cauchy-schwartz inequality. Therefore,\\
+Since $W$ is a BUE of $g(\theta)$, $Var[W^*]$ cannot be less than $Var[W]$.
+So eqn. \eqref{eqn:1} must hold with equality. 
+\par Let $W^1=a(\theta) W + b(\theta)$, then
 \begin{align}
-W^1&=a(\theta) W + b(\theta)\\
-Cov_\theta[W,W']&=Cov_\theta[W,(a(\theta)W+b(\theta))]\\
-Cov_\theta[W,W']&=a(\theta)Var_\theta(W)
+Cov_\theta[W,W^1]&=Cov_\theta[W,(a(\theta)W+b(\theta))],\nonumber\\
+Cov_\theta[W,W^1]&=a(\theta)Var_\theta(W).
 \end{align}
-by cauchy-schwartz,
+From eqn. \eqref{eqn:1} using the definition $W^*$, we get
 \begin{align}
-Cov_\theta[W,W']&=a(\theta)Var_\theta(W)=Var_\theta(W)
+Cov_\theta[W,W^1]&=Var_\theta(W).
 \end{align}
-Which shows that 
-\begin{align}
-a(\theta)=1\, for \,all \,\theta.
+This gives,
+\begin{align}\label{eqn:lab2}
+a(\theta)=1,~\forall \theta.
 \end{align}
-As $W$ and $W'$ are unbiased estimators it follows that,
-\begin{align}
-b(\theta)=0. 
-\end{align}
-From (5),(9) and (10),\\
+As $W$ and $W^1$ are unbiased estimators it follows that, $b(\theta)=0$. Hence,
 \begin{center}
-$W=W'$
+$W=W^1$,
 \end{center}
-Which shows that $W$ is unique if it is a BUE of some function $g(\theta).$
-\begin{center}
-Hence Proved.
-\end{center}
-\subsection{Characterisation of BUE}
+which shows that $W$ is unique if it is a BUE of some function $g(\theta)$.
+\end{proof}
+\subsection{Characterization of BUE}
 \begin{thm}
-If $\mathbb{E}_\theta[W]=g(\theta)$ for all $\theta\in\Theta$, then W is a BUE of $g(\theta)$ if and only if $W$  is uncorrelated with all unbiased estimator of $0$(could be any function $W(x)$ with Zero Expectaion).
+If $\mathbb{E}_\theta[W]=g(\theta)$ for all $\theta\in\Theta$, then $W$ is a BUE of $g(\theta)$ if and only if $W$ is uncorrelated with all unbiased estimator of $0$ (could be any function $W(x)$ with zero expectation).
 \end{thm} 
-\begin{flushleft}
-\textbf{Proof:}
-\end{flushleft}
-To prove the "if" statement,
-Assume that $W$ is the BUE of $g(\theta)$.
-Let $U$ be an unbiased estimator of 0. That is, $$\mathbb{E}_\theta[U]=0 \,for\, all\, \theta.$$
-Then the estimator $$W_a:=W+aU,\,a\in\mathbb{R}$$ is an unbiased estimator of $g(\theta)$
+\begin{proof}
+To prove the ``if" statement, assume that $W$ is the BUE of $g(\theta)$. Let $U$ be an unbiased estimator of $0$, that is, 
+\begin{equation*}
+\mathbb{E}_\theta[U]=0 ~\forall\, \theta.
+\end{equation*}
+Then, the estimator 
+\begin{equation*}
+W_a:=W+aU,\,a\in\mathbb{R}
+\end{equation*}
+is an unbiased estimator of $g(\theta)$.
 \begin{align}
 \nonumber
-Var_\theta[W_a]&=Var_\theta[W+aU]\\
-&=Var_\theta[W]+2aCov_\theta[W,U]+a^2Var_\theta[U]
+Var_\theta[W_a]&=Var_\theta[W+aU],\\
+&=Var_\theta[W]+2aCov_\theta[W,U]+a^2Var_\theta[U].
 \end{align}
-\underline{Case 1:} $Cov_\theta[W,U]<0$ for some $\theta$.
+\underline{Case 1:} Let $Cov_\theta[W,U]<0$ for some $\theta$.
 Which makes, 
 \begin{align}
-2aCov_\theta[W,U]+a^2Var_\theta[U]<0 \, \, \,if\, \, \, a\in\ \left(0,\frac{-2Cov_\theta[W,U]}{Var_\theta[U]} \right)
+2aCov_\theta[W,U]+a^2Var_\theta[U]<0 \, \, \,\mbox{if}\, \, \, a\in\ \left(0,\frac{-2Cov_\theta[W,U]}{Var_\theta[U]} \right)
 \end{align}
 \underline{Case 2:} $Cov_\theta[W,U]>0.$
-Which makes $Var_\theta[W_a]<Var_\theta[W]$ by a suitable choice of a.
-Both cases 1 and 2 lead to contradictions. Therefore, $$Cov_\theta[W,U]=0$$
-To prove the "only if" statement,\\
-Assume that $ Cov_\theta[W,U]=0, \,\,\forall \,\theta$ whenever $\mathbb{E}_\theta[U]=0\,\, , \forall \,\theta$.
-Let $W'$ be any other unbiased estimator of $g(\theta)$.
+This gives $Var_\theta[W_a]<Var_\theta[W]$ for a suitable choice of $a$.
+\par Both cases 1 and 2 lead to contradictions. Therefore, $Cov_\theta[W,U]=0$.
+\par To prove the "only if" statement, let us assume that $ Cov_\theta[W,U]=0, \,\,\forall \,\theta$, whenever $\mathbb{E}_\theta[U]=0\,\, , \forall \,\theta$. Let $W'$ be any other unbiased estimator of $g(\theta)$.
 \begin{align*}
-\mathbb{E}_\theta[W]&=\mathbb{E}_\theta[W']=g(\theta)\\
-W'&=W+(W'-W)
+\mathbb{E}_\theta[W]&=\mathbb{E}_\theta[W']=g(\theta).
 \end{align*}
-Note that $W-W'$ is the unbiased estimator of 0.
+Consider $W'=W+(W'-W)$, (note that $W-W'$ is the unbiased estimator of $0$),
 \begin{align*}
 Var[W']&=Var[W]+2Cov(W,W'-W)+Var(W'-W)\\
-&=0, \,\, \textrm{by hypothesis.}\\
+%&=0, \,\, \textrm{by hypothesis.}\\
 &\geq Var[W]
 \end{align*}
-Therefore, $W$ is a BUE of $g(\theta)$.\\
+Therefore, $W$ is a BUE of $g(\theta)$.
+\end{proof}
 \begin{cor} 
-If the only unbiased estimator of 0 is 0 itself, then $W$ is the BUE of $\mathbb{E}_\theta[W]$.\\
+If the only unbiased estimator of $0$ is $0$ itself, then $W$ is the BUE of $\mathbb{E}_\theta[W]$.
 \end{cor}
 \begin{defn}
-A family of pdfs $\{f(x|\theta),\theta \in \Theta \}$ over $\mathbb{R}^d$ is said to be complete if
-$$\forall\,\, \theta\in \Theta : \mathbb{R}^d\rightarrow \mathbb{R}, \,\, \mathbb{E}_\theta[g(x)]=0, \,\, \forall\, g$$
+A family of pdfs $\{f(x|\theta),\theta \in \Theta \}$ over $\mathbb{R}^d$ is said to be complete, if
+\begin{equation*}
+\mathbb{E}_\theta[g(x)]=0, \,\, \forall\,\, \theta\in \Theta, \,\, \forall\, g: \mathbb{R}^d\rightarrow \mathbb{R}~~\mbox{implies}~\mathbb{P}[g(x)=0]=1.
+\end{equation*}
 \end{defn}
-\begin{center}
-Which implies,  $\mathbb{P}[g(x)=0]=1$ 
-\end{center} 
 \begin{exmp}
-
-The binomial family(with known number of trails),
-$$\{Bin(n,\theta): \theta\in[0 1]\}$$ is complete if, $$\sum \limits_{m=0}^n {n \choose m}\theta^m(1-\theta)^{n-m} g(m)=0 $$
-which implies that, $$g(m)=0\,\, \forall \,\, m=1,2,\dots,n$$
+The binomial family (with known number of trails),
+\begin{equation*}
+\{Bin(n,\theta): \theta\in[0 1]\}
+\end{equation*}
+is complete if, 
+\begin{equation*}
+\sum \limits_{m=0}^n {n \choose m}\theta^m(1-\theta)^{n-m} g(m)=0.
+\end{equation*}
+This requires, $$g(m)=0,\,\,\,\, m=1,2,\dots,n$$
 \end{exmp}
 \begin{defn}
-Let $X \sim f(x|\theta)$. A statistic $T(X)$ said to be a complete statistic if the family of pdfs or pmfs of $T(X)$ induced by the pdf or pmf of $X$ is complete. 
+Let $X \sim f(x|\theta)$. A statistic $T(X)$ said to be a ``complete statistic" if the family of pdfs (or pmfs) of $T(X)$ induced by the pdf (or pmf) of $X$ is complete. 
 \end{defn}
-\subsection{BUE and Complete, Sufficient Statistic}
+\subsection{BUE and complete sufficient statistic}
 \begin{thm}
-Let $T$ be a complete and sufficient statistic for $\theta.$ Let $\Phi(T)$ be any estimator based on T. Then $\Phi(T)$ is the BUE of its expectaiton, $\mathbb{E}_\theta[\Phi(T)].$
+Let $T$ be a complete and sufficient statistic for $\theta$. Let $\Phi(T)$ be any estimator based on $T$. Then $\Phi(T)$ is the BUE of its expectation, $\mathbb{E}_\theta[\Phi(T)]$.
 \end{thm}
-\begin{flushleft}
-\textbf{Proof:}
-\end{flushleft}
-The family of distributions $ \{ Q_ \theta: \theta \in \Theta \}$ of T(X), included by $X \sim f(x| \theta)$ is complete, which implies that no unbiased estimator of 0 based on T other 0 exists.\\
-It follows that $T(X)$ is uncorrelated with all unbiased estimators of 0 based on $T.$
-\begin{center}
-Therefore, T is the BUE of $g(\theta):=\mathbb{E}_\theta[T].$ 
-\end{center}
-\begin{exmp} Uniform BUE
-\begin{center}
-Let $X_1,X_2,\dots,X_n \overset{iid}{\sim} Unif[0 \,\,\theta], \,\, \theta\in(0\,\, \infty)$\\
-Let $Y:=\max\limits_{i=1}^n X_i, \,\, \{X_i\overset{iid}{\sim}Unif[0\,\,\theta]\} $\\ 
-\hfill \break
-$\displaystyle{ \frac{Y}{\theta} \sim Beta(n,1)}$\\
-\hfill \break
-$\mathbb{E}[Y]=(\frac{n}{n+1}) \theta $
-\end{center}
+\begin{proof}
+The family of distributions $ \{ Q_ \theta: \theta \in \Theta \}$ of $T(X)$, included by $X \sim f(x| \theta)$ is complete, which implies that no unbiased estimator of $0$ based on $T$ other-than $0$ exists. It follows that $T(X)$ is uncorrelated with all unbiased estimators of $0$ based on $T$. \par Therefore, $T$ is the BUE of $g(\theta):=\mathbb{E}_\theta[T]$. 
+\end{proof}
+\begin{exmp} Uniform BUE:\\
+Let $X_1,X_2,\dots,X_n \overset{iid}{\sim} Unif[0 \,\,\theta], \,\, \theta\in(0\,\, \infty)$, and let $Y:=\underset{i=1,\dots,n}{\max}~X_i, $. We have,
+\begin{equation}
+\frac{Y}{\theta} \sim Beta(n,1)
+\end{equation}
+and 
+$\mathbb{E}[Y]=(\frac{n}{n+1}) \theta $.
 \end{exmp}
-Remark:\\
 \begin{rem}
-If T is a finite dimensional complete and sufficient statistic then T is a minimal sufficient statistic. 
+If $T$ is a finite dimensional complete and sufficient statistic then $T$ is a minimal sufficient statistic. 
 \end{rem}
 \subsection{Sufficiency, Minimal Sufficiency and Completeness for Exponential families}
 \begin{thm}
-Suppose $X_1,X_2,\dots,X_n \overset{iid}{\sim} f(x|\theta),$ where $f(x|\theta)=h(x)C(\theta)\exp\{\sum \limits_{i=1}^k\theta_i t_i(x)\}$\\
-and $\theta\equiv(\theta_1,\theta_2,\dots,\theta_k)\subseteq\Theta\subseteq\mathbb{R}^k, \,\, t_i:\Gamma\rightarrow\mathbb{R}.$\\
-with the joint pdf or pmf being $$f(x_1,x_2,\dots,x_n|\theta)=\left(\prod\limits_{i=1}^n h(x_i)\right) \left(C(\theta)\right)^n \exp\left(\sum\limits_{i=1}^k \theta_i \sum\limits_{j=1}^n t_i(x_j) \right)$$\\
-Consider the statistic $$T(X_1,X_2,\dots,X_n)= \left(\sum t_1(X_j)\right).\left(\sum t_2(X_j)\right)\dots \left(\sum t_k(X_j)\right)$$
+Suppose $X_1,X_2,\dots,X_n \overset{iid}{\sim} f(x|\theta),$ where $f(x|\theta)=h(x)C(\theta)\exp\{\sum \limits_{i=1}^k\theta_i t_i(x)\}$, and $\theta\equiv(\theta_1,\theta_2,\dots,\theta_k)\subseteq\Theta\subseteq\mathbb{R}^k, \,\, t_i:\Gamma\rightarrow\mathbb{R}$,
+with the joint pdf (or pmf) being 
+\begin{equation*}
+f(x_1,x_2,\dots,x_n|\theta)=\left(\prod\limits_{i=1}^n h(x_i)\right) \left(C(\theta)\right)^n \exp\left(\sum\limits_{i=1}^k \theta_i \sum\limits_{j=1}^n t_i(x_j) \right).
+\end{equation*}
+Consider the statistic 
+\begin{equation*}
+T(X_1,X_2,\dots,X_n)= \left(\sum_{j=1}^n t_1(X_j)\right).\left(\sum_{j=1}^n t_2(X_j)\right)\dots \left(\sum_{j=1}^n t_k(X_j)\right),
+\end{equation*}
 $T(X)$ is,
 \begin{itemize}
-\item A sufficient statistic for  $\theta.$
-\item A minimal sufficient statistic for $\theta$ when $\theta_1,\dots,\theta_k$ do not satisfy a linear relation. (That is $\Theta$ is not to be condotioned in a vector space of dimension less than k)
-\item A complete sufficient statistic of $\Theta$ contains a k-dimensional rectangle i.e., a set of the form $[a_1,\,\, b_1]\times[a_2, \,\, b_2]\times\dots\times[a_k, \,\, b_k].$
+\item A sufficient statistic for  $\theta$.
+\item A minimal sufficient statistic for $\theta$, when $\theta_1,\dots,\theta_k$ do not satisfy a linear relation. (That is $\Theta$ is not to be conditioned in a vector space of dimension less than $k$).
+\item A complete sufficient statistic of $\Theta$ contains a $k$-dimensional rectangle i.e., a set of the form $[a_1,\,\, b_1]\times[a_2, \,\, b_2]\times\dots\times[a_k, \,\, b_k]$.
 \end{itemize}
 \end{thm}
 \end{document}s
