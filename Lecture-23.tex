@@ -1,0 +1,181 @@
+\documentclass[a4paper,english,12pt]{article}
+%\input{header}
+\title{Lecture 23: Kalman Filtering}
+\date{March 31, 2016}
+\author{}
+\usepackage[fleqn]{amsmath}
+\usepackage{txfonts}
+\usepackage{amsmath}
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+\begin{document}
+\maketitle
+\maketitle
+ \section{Linear Dynamic Systems}
+Ctnd.. from last class(Lecture-22)\\
+\par A \textbf{very important special case} of signal estimation is "Linear Dynamical System Driven by Gaussian noise/controls".
+Here the state and observation equations are of the following form,
+ \begin{align}
+  \underline{X}_{t+1} &= \textbf{F}_t\underline{X}_t + \textbf{G}_t \underline{U}_t \\
+  \underline{Y}_t &= \textbf{H}_t\underline{X}_t + \underline{V}_t
+\end{align}
+
+  Where $\{U_t\}$ and $\{V_t\}$ are independent sequence of independent, zero-mean Gaussian vectors  independent of the initial condition $\underline{X}_0$. Also $\underline{X}_0 \sim \mathcal{N}(\underline{m}_0,\mathbf{\Sigma}_0)$.\\\\
+  $Cov(U_t)=Q_t, Cov(V_t)=R_t$\\\\
+  \underline{Filtering} : Estimate $\underline{X}_t$ given $(\underline{Y}_0,...,\underline{Y}_t) \equiv \underline{Y}_0^t$\\\\
+  \underline{Prediction} : Estimate $\underline{X}_{t+1}$ given $(\underline{Y}_0,...,\underline{Y}_t) \equiv \underline{Y}_0^t$\\\\
+  \underline{Criterion} : Minimise mean square error of estimator $\underline{\hat{X}}_{t|t} : \mathbb{E}[||\underline{\hat{X}}_{t|t} - \underline{X}_t||_2^2]$\\\\
+  \underline{Conceptual Solution :} Parametric Estimation, where
+  $\textbf{Y}=(\underline{Y}_0,...,\underline{Y}_t)=\underline{Y}_0^t\sim f(y|\theta)$
+  where, $\Theta \equiv \underline{X}_0^t \equiv (\underline{X}_0,...,\underline{X}_t)$
+  Prior on $\Theta$ is the distribution of $\underline{X}_0^t$ induced by the distribution of 
+  $\underline{X}_0$ and $\{\underline{U}_n\}_{n=0}^t$
+  \begin{align}
+  \textbf{Y}&\sim f(y|\theta)\\
+  \textbf{Y} &= \textbf{H}\Theta + \textbf{V}
+  \end{align}
+  \begin{equation}
+   \left[\begin{array}{c}
+         \underline{Y_0}\\
+         \vdots\\
+         \colon\\
+         \underline{Y_t}
+        \end{array}\right] = 
+       \left[\begin{array}{cccc}
+         H_0\\
+         \ & H_1\\
+         \ &\ &\ddots\\
+         \ &\ &\ &H_t
+        \end{array}\right] 
+        \left[\begin{array}{c}
+         \underline{X_0}\\
+         \vdots\\
+         \colon\\
+         \underline{X_t}
+        \end{array}\right] + 
+        \left[\begin{array}{c}
+         \underline{V_0}\\
+         \vdots\\
+         \colon\\
+         \underline{V_t}
+        \end{array}\right]
+ \end{equation}\\
+  Loss function : $L(g(\theta),\textbf{W(\textbf{Y}))} = ||\theta_t - \textbf{W(\textbf{Y}}))||_2^2$\\
+  From Bayesian estimation, the best estimator is $\mathbb{E}[g(\theta)|\textbf{Y}]=
+  \mathbb{E}[\underline{X}_t|\underline{Y}_0...\underline{Y}_t]$\\\\
+ \textbf{\underline{Theorem:} Discrete time Kalman-Bucy Filter}\\
+  For the linear dynamic system represented by the set of equations (1) and (2), the optimal squared error estimates,
+  \begin{align*}
+  \underline{\hat{X}}_{t|t}\ &:= \mathbb{E}[\underline{X}_t|\underline{Y}_0^t],\\
+  \underline{\hat{X}}_{t+1|t}\ &:= \mathbb{E}[\underline{X}_{t+1}|\underline{Y}_0^t]
+  \end{align*}
+   obey the following recursions,
+ \begin{align*}
+  (M1)\ \ \ \underline{\hat{X}}_{t|t}&=\underline{\hat{X}}_{t|t-1} + \textbf{K}_t(\underline{Y}_t-\textbf{H}_t\underline{\hat{X}}_{t|t-1}, t=0,1,...\\
+  (T1)\ \ \ \underline{\hat{X}}_{t+1|t}&=\textbf{F}\underline{\hat{X}}_{t|t}
+ \end{align*} 
+with initialization,
+\begin{align*}
+\underline{\hat{X}}_{0|-1}&=\underline{m}_0=\mathbb{E}[\underline{X}_0],\\
+\textbf{K}_t&:= \mathbf{\Sigma}_{t|t-1} \textbf{H}_t^T(\textbf{H}_t \mathbf{\Sigma}_{t|t-1}\textbf{H}_t^T+\textbf{R}_t)^{-1}
+\end{align*}
+where,
+\begin{align*}
+\mathbf{\Sigma}_{0|-1}&:= \mathbf{\Sigma}_0,\\
+\mathbf{\Sigma}_{t|t-1}&:= Cov(\underline{X}_t|\underline{Y}_0^t)=Cov(\underbrace{(\underline{X}_t-\underline{\hat{X}}_{t|t-1})}_{prediction\ error}|\underline{Y}_0^t)
+\end{align*}
+More over, the covariance matrices satisfy the recursion,
+\begin{align*}
+(M2)\ \ \ \mathbf{\Sigma}_{t|t}&=\mathbf{\Sigma}_{t|t-1}-\textbf{K}_t\textbf{H}_t\mathbf{\Sigma}_{t|t-1}\\
+(T2)\ \ \ \mathbf{\Sigma}_{t+1|t}&=\textbf{F}_t\mathbf{\Sigma}_{t|t}\textbf{F}_t^T + \textbf{G}_t\textbf{Q}_t\textbf{G}_t^T\\
+\underline{X}_{t+1}&=\textbf{F}_t\underline{X}_t+\textbf{G}_t\underline{U}_t\\
+\underline{Y}_t&=\textbf{H}_t\underline{X}_t+\underline{V}_t
+\end{align*}
+\underline{Remark:} K-B Filter gives a sequential rule to output estimates.\\\\
+\underline{Proof:} Lets show (T1) and (T2).
+\begin{align*}
+  \underline{\hat{X}}_{t+1|t}&=\mathbb{E}[\underline{X}_{t+1}|\underline{Y}_0^t]\\
+  &=\mathbb{E}[\textbf{F}_t\underline{X}_t+ \textbf{G}_t\underline{U}_t|\underline{Y}_0^t]\\
+  &=\textbf{F}_t\mathbb{E}[\underline{X}_t|\underline{Y}_0^t]+\textbf{G}_t\mathbb{E}[\underline{U}_t|\underline{Y}_0^t]\\
+  &=\textbf{F}_t\underline{\hat{X}}_{t|t}\\
+ \mathbf{\Sigma}_{t+1|t}&=Cov(\underline{X}_{t+1}|\underline{Y}_0^t)\\
+ &=Cov(\textbf{F}_t\underline{X}_t+\textbf{G}_t\underline{U}_t|\underline{Y}_0^t)\\
+ &=Cov(\textbf{F}_t\underline{X}_t|\underline{Y}_0^t)+Cov(\textbf{G}_t\underline{U}_t|\underline{Y}_0^t)\\
+ &=\textbf{F}_tCov(\underline{X}_t|\underline{Y}_0^t)\textbf{F}_t^T+\textbf{G}_tCov(\underline{U}_t|\underline{Y}_0^t)\textbf{G}_t^T\\
+ &=\textbf{F}_t\mathbf{\Sigma}_{t|t}\textbf{F}_t^T+\textbf{G}_t\textbf{Q}_t\textbf{G}_t^T
+ \end{align*}
+ \underline{Proof of (M1)}\\\\
+ \underline{Lemma:} 
+ Suppose $A \in \mathbb{R}^n, B \in\mathbb{R}$ are jointly Gaussian random vectors with $\mathbb{E[A]=\underline{\mu}}_A,
+ \mathbb{E}[B]=\underline{\mu}_B,$
+ \begin{align*}
+ Cov(A)&=\mathbf{\Sigma}_A, Cov(B)=\mathbf{\Sigma}_B\\
+ Cov(A,B)&=\mathbb{E}[(A-\underline{\mu}_A)(B-\underline{\mu}_B)^T]\\
+ &=\mathbf{\Sigma}_{AB}=\mathbf{\Sigma}_{BA}^T
+ \end{align*}
+ Then the conditional distribution of $B$ given $A$ is (multivariate) Gaussian, with mean,
+ \begin{align*}
+ \underline{\mu}_{B|A}&=\underline{\mu}_B+\mathbf{\Sigma}_{BA}+\mathbf{\Sigma}_A^{-1}(A-\underline{\mu}_A)
+ \end{align*}
+ and covariance,
+ \begin{align*}
+ \mathbf{\Sigma}_{B|A}&=\mathbf{\Sigma}_B-\mathbf{\Sigma}_{BA}\mathbf{\Sigma}_A^{-1}\mathbf{\Sigma}_{AB}
+ \end{align*}
+ Consider, 
+ \begin{align*}
+  \underline{Y}_t=\textbf{H}_t\underline{X}_t+\underline{V}_t
+ \end{align*}
+\underline{Observations:}
+\begin{enumerate}
+ \item $ \underline{X}_t$ is conditionally Gaussian given $\underline{Y}_0^{t-1}\ (\underline{X}_t$ \&$\underline{Y}_0^{t-1}$ are 
+ linear transformations of $\underline{X}_0, \{\underline{U}_n\}_n, \{\underline{V}_n\}_n$ )
+ \item Given $\underline{Y}_0^{t-1}, \underline{X}_t\sim\mathcal{N}(\underline{\hat{X}}_{t|t-1}, \mathbf{\Sigma}_{t|t-1})$
+ \item $\underline{V}_t$ is Gaussian
+ \item Given $\underline{Y}_0^{t-1}, \underline{V}_t\independent\underline{X}_t (Because \underline{V}_t\independent(\underline{X}_o, \underline{U}_0^{t-1}
+ \underline{V}_0^{t-1}$))
+\end{enumerate}
+Hence, Given $ \underline{Y}_0^{t-1}$, the equation $\underline{Y}_t=\textbf{H}_t\underline{X}_t+\underline{V}_t$, 
+where $\textbf{X}$ and $\textbf{V}$  are independent Gaussians. Therefore by \textit{Lemma} Given $\underline{Y}_0^{t-1}$, 
+the conditional distribution of $\underline{X}_t$ given $\underline{Y}_t$ is Gaussian with mean,
+\noindent
+\begin{align*}
+\underline{\mu}_B+ \mathbf{\Sigma}_{BA}\mathbf{\Sigma}_A^{-1}(A-\underline{\mu}_A)&=\underline{\hat{X}}_{t|t-1}+\mathbb{E}[(\underline{X}_t)-\underline{\hat{X}}_{t|t-1})(\underline{Y}_t\\
+&\qquad\qquad\qquad\qquad-\mathbb{E}[\underline{Y}_t|\underline{Y}_0^{t-1}]^T|\underline{Y}_0^{t-1})]\\
+Cov(\underline{Y}_t|\underline{Y}_0^{t-1})^{-1}(\underline{Y}_t-\mathbb{E}[\underline{Y}_t|\underline{Y}_0^{t-1}])&=\underline{\hat{X}}_{t|t-1}+\mathbf{\Sigma}_{t|t-1}\textbf{H}_t^T(\textbf{H}_t\mathbf(\Sigma_{t|t-1}\textbf{H}_t^T\\
+&\qquad\qquad\qquad\qquad+\textbf{R}_t)^{-1}(\underline{Y}_t-\textbf{H}_t\underline{\hat{X}}_{t|t-1})\\
+&=\underline{\hat{X}}_{t|t-1}+\textbf{K}_t(\underline{Y}_t-\textbf{H}_t\underline{\hat{X}}_{t|t-1})\\
+&=\mathbb{E}[\underline{X}_{t}|\underline{Y}_0^t]\\
+&=\underline{\hat{X}}_{t|t}
+\end{align*}
+and similarly for the conditioinal covariance of $\underline{X}_t$ given $\underline{Y}_t$, given $\underline{Y}_0^{t-1}$.
+\\\\ \underline{Notes:-}
+\begin{enumerate}
+ \item The KB Filter computes both an estimate $(\underline{\hat{X}}_{t|t},\underline{\hat{X}}{t+1|t})$
+and its mean square error(MSE) given covariance $(\mathbf{\Sigma}_{t|t}\mathbf{\Sigma}_{t+1|t})$
+ \item The sequence of conditional covariance $\{\mathbf{\Sigma}_{t|t}\}_{t=0}^\infty$ does not
+ depend on the observations $\{\underline{Y}_t\}_{t=0}^\infty$.
+ \item Consider the vector $\underline{Y}_t=\underline{Y}_t-\textbf{H}_t\underline{\hat{X}}_{t|t-1}$.
+\end{enumerate}
+\noindent
+ $\underline{I}_t$ is a "correction" term representing error in predicting the observations:
+called the innovation at time t.
+\\\\ \underline{Claim:-}
+\\\\ $\{\underline{I}_t\}_{t=0}^\infty$ is a sequence of zero mean independant gaussian vectors.\\
+\newpage
+\noindent
+\underline{Proof:-}
+\\\\ Gaussian (Since $\underline{Y}_t$ and $\textbf{H}_t\underline{\hat{X}}_{t|t-1}$ are Gaussians.
+\begin{align*}
+ \mathbb{E}[\underline{I}_t]&=\mathbb{E}[\underline{Y}_t-\textbf{H}_t\underline{\hat{X}}_{t|t-1}]\\
+ &=\mathbb{E}[\underline{Y}_t-\mathbb{E}[\textbf{H}_t\underline{ X}_{t}|\underline{Y}_0^{t-1}]]\\
+ &=\mathbb{E}[\textbf{H}_t\underline{X}_t-\mathbb{E}[\textbf{H}_t\underline{X}_t|\underline{Y}_0^{t-1}]]\\
+ &=\mathbb{E}[\mathbb{E}[\textbf{H}_t\underline{X}_t-\mathbb{E}[\textbf{H}_t\underline{X}_t|\underline{Y}_0^{t-1}]]|\underline{Y}_0^{t-1}]\\
+ &=0\\
+ \newline\forall s<t,\ \ \ \ 
+\mathbb{E}[\underline{I}_t\textbf{I}_s^T]&=\mathbb{E}[\mathbb{e}[\underline{I}_t\textbf{I}_s^T|\underline{Y}_0^s]]\\
+ &=\mathbb{E}[\mathbb{E}[\underline{I}_t|\underline{Y}_0^s]\textbf{I}_s^T]  \ \ \ \ \ ( Where\ \  \mathbb{E}[\underline{I}_t|\underline{Y}_0^s]=\mathbb{E}[(\underline{Y}_t-\textbf{H}_t\underline{\hat X}_{t|t-1})|\underline{Y}_0^s]=0)
+\\
+ &=0
+ \end{align*}
+ \end{document}
+
