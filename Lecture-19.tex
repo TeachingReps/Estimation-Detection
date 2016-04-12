@@ -8,218 +8,196 @@
 \newcommand{\bx}{\mathbf{x}}
 \newcommand{\bX}{\mathbf{X}}
 
-\title{Lecture 19: Cramer-Rao lower bound}
+\title{Lecture 19: Cram\'{e}r-Rao lower bound}
 \date{17 March 2016}
 \begin{document}
 \author{}
 \maketitle
 \section{Cram\'{e}r-Rao Lower Bound (CRLB)(Continued from Lecture 18)}
-Let $\bX \sim f(x|\theta), \theta \in \R$ \\
-Suppose :\\
-\begin{equation}
-	\frac{d}{d\theta} \E[h(\bX)]=\int \frac{\partial}{\partial\theta} [h(\bx)f(\bx|\theta] d\bx
+Let $\bX \sim f(x|\theta), \theta \in \R$.
+Suppose:
+\begin{equation}\label{eqn:1}
+	\frac{d}{d\theta} \E[h(\bX)]=\int \frac{\partial}{\partial\theta} [h(\bx)f(\bx|\theta] d\bx.
 \end{equation}
-(Domain of the above integration does not depend on $\theta$) \\
- For $h(\bx)$ $\equiv$ $W(\bx)$, where   $W(\bx)$  is  an  estimator, \\Now for h $\equiv 1$.\\
+(domain of the above integration does not depend on $\theta$) for $h(\bx)= W(\bx)$, where $W(\bx)$ is an estimator. Now for $h = 1$,
  \begin{equation}
- Var_{\theta} (W) \geq \frac{(\frac{d}{d\theta} \E_{\theta}[W])^2}{\E_{\theta}[(\frac{\partial}{\partial\theta} \log (f(x|\theta)))^2]}
+ Var_{\theta} (W) \geq \frac{(\frac{d}{d\theta} \E_{\theta}[W])^2}{\E_{\theta}[(\frac{\partial}{\partial\theta} \log (f(x|\theta)))^2]}.
  \end{equation}
- Sufficient condition for (1) to hold :
+ The Sufficient condition required for \eqref{eqn:1},
  \begin{equation}
- \frac{d}{d\theta} \int_{\Gamma} f(x,\theta) d\bx = \int_{\Gamma} \frac{\partial}{\partial\theta}  f(x,\theta) d\bx
+ \frac{d}{d\theta} \int_{\Gamma} f(x,\theta) d\bx = \int_{\Gamma} \frac{\partial}{\partial\theta}  f(x,\theta) d\bx,
  \end{equation}
- When either,
+holds when either,
  \begin{enumerate}
- 	\item $\Gamma \subseteq \R^d $ is compact (Closed and Bounded) \& $\frac{\partial}{\partial\theta}  f(x,\theta) dX$ is continuous over all x. 
+ 	\item $\Gamma \subseteq \R^d $ is compact (closed and bounded), and $\frac{\partial}{\partial\theta}  f(x,\theta)$ is continuous over all $x$, or
  	\item $\int_{\Gamma} |\frac{\partial}{\partial\theta}  f(x,\theta)| d\bx <\infty$.
  \end{enumerate}
 \subsection{Multivariate CRLB}
-Let $\bX \sim f(x|\theta), \theta \in \Theta, \Theta \subseteq \R^d$ and $W(\bX)$ is an estimator
+Let $\bX \sim f(x|\theta), \theta \in \Theta, \Theta \subseteq \R^d$ and $W(\bX)$ is an estimator,
 \begin{equation}
-\frac{\partial}{\partial\theta_i} \E_{\theta_i}[h(\bX)]=\int \frac{\partial}{\partial\theta_i} [h(\bx)f(\bx|\theta] d\bx, \quad \forall i \in [d]
+\frac{\partial}{\partial\theta_i} \E_{\theta_i}[h(\bX)]=\int \frac{\partial}{\partial\theta_i} [h(\bx)f(\bx|\theta)] d\bx, \quad \forall i \in [d]
 \end{equation}
-for $h \equiv W$, \\$h \equiv 1$
-Then,
+for $h = W$. Then,
 \begin{equation}
 Var_\theta(W) \geq (\triangledown_\theta\psi)^TI(\theta)^{-1}(\triangledown_\theta\psi)
 \end{equation}
-where \\
-$\psi(\theta) = \E_\theta[W(X)]$, \\
-$I(\theta)_{i,j} = \E_\theta[\frac{\partial}{\partial\theta_i} \log(f(\bx|\theta))\frac{\partial}{\partial\theta_j} \log(f(\bx|\theta))]$ \\
-
+where, $\psi(\theta) = \E_\theta[W(X)]$, and $I(\theta)_{i,j} = \E_\theta[\frac{\partial}{\partial\theta_i} \log(f(\bx|\theta))\frac{\partial}{\partial\theta_j} \log(f(\bx|\theta))]$.
 \begin{cor}[CRLB for iid Samples]
-If the assumptions of Cramer-Rao Inequality are satisfied and, additionally, if $X_1, ... , X_n$ be iid $\sim f(x|\theta)$, then
-
-\begin{equation}
-Var_{\theta} W(\bX) \geq \frac{(\frac{d}{d\theta} \E_{\theta}W(\bX))^2}{n\E_{\theta}[(\frac{\partial}{\partial\theta} \log (f(X|\theta)))^2]}
-\end{equation}
-
+If the assumptions of Cramer-Rao inequality are satisfied and, additionally, if $X_1,\dots, X_n$ be iid $\sim f(x|\theta)$, then
+\begin{equation*}
+Var_{\theta} W(\bX) \geq \frac{(\frac{d}{d\theta} \E_{\theta}W(\bX))^2}{n\E_{\theta}[(\frac{\partial}{\partial\theta} \log (f(X|\theta)))^2]}.
+\end{equation*}
+\end{cor}
 \begin{proof}
 To prove this we only need to show
 \begin{equation}
-\E_\theta[(\frac{\partial}{\partial\theta} \log \prod_{i=1}^{n} f(X_i|\theta))^2] = n\E_\theta[(\frac{\partial}{\partial\theta} \log f(X|\theta))^2]
+\E_\theta\left[\left(\frac{\partial}{\partial\theta} \log \prod_{i=1}^{n} f(X_i|\theta)\right)^2\right] = n\E_\theta\left[\left(\frac{\partial}{\partial\theta} \log f(X|\theta)\right)^2\right].
 \end{equation}
-Since $X_1, ... , X_n$ are independent,
-
+Since $X_1,\dots, X_n$ are independent,
+\begin{align*}
+\E_\theta\left[\left(\frac{\partial}{\partial\theta} \log \prod_{i=1}^{n} f(X_i|\theta)\right)^2\right]&= \E_\theta\left[\left(\sum_{i=1}^{n}\frac{\partial}{\partial\theta} \log  f(X_i|\theta)\right)^2\right], \\
+&= \sum_{i=1}^{n}\E_\theta\left[\left(\frac{\partial}{\partial\theta} \log  f(X_i|\theta)\right)^2\right] +\\&\hspace{20pt} \sum_{i \neq j}\E_\theta\left[\frac{\partial}{\partial\theta} \log  f(X_i|\theta))\frac{\partial}{\partial\theta} \log  f(X_j|\theta)\right].
+\end{align*}
+For $i\neq j$, we have
 \begin{eqnarray*}
-\E_\theta[(\frac{\partial}{\partial\theta} \log \prod_{i=1}^{n} f(X_i|\theta))^2] &=& \E_\theta[(\sum_{i=1}^{n}\frac{\partial}{\partial\theta} \log  f(X_i|\theta))^2] \\
-&=& \sum_{i=1}^{n}\E_\theta[(\frac{\partial}{\partial\theta} \log  f(X_i|\theta))^2] + \sum_{i \neq j}\E_\theta[(\frac{\partial}{\partial\theta} \log  f(X_i|\theta))\frac{\partial}{\partial\theta} \log  f(X_j|\theta)]
+\E_\theta\left[\frac{\partial}{\partial\theta} \log  f(X_i|\theta)\frac{\partial}{\partial\theta} \log  f(X_j|\theta)\right] &=& \E_\theta\left[\frac{\partial}{\partial\theta} \log  f(X_i|\theta)\right]\E_\theta\left[\frac{\partial}{\partial\theta} \log  f(X_j|\theta)\right], \\
+&=& 0.
 \end{eqnarray*}
-for $i\neq j$ we have
-\begin{eqnarray*}
-\E_\theta[\frac{\partial}{\partial\theta} \log  f(X_i|\theta)\frac{\partial}{\partial\theta} \log  f(X_j|\theta)] &=& \E_\theta[\frac{\partial}{\partial\theta} \log  f(X_i|\theta)]\E_\theta[\frac{\partial}{\partial\theta} \log  f(X_j|\theta)] \\
-&=& 0
-\end{eqnarray*}
-therefor
-\begin{eqnarray*}
-\E_\theta[(\frac{\partial}{\partial\theta} \log \prod_{i=1}^{n} f(X_i|\theta))^2] &=& \sum_{i=1}^{n}\E_\theta[(\frac{\partial}{\partial\theta} \log  f(X_i|\theta))^2] \\
-&=& n\E_\theta[(\frac{\partial}{\partial\theta} \log f(X|\theta))^2]
-\end{eqnarray*}
-
+Therefore
+\begin{eqnarray}
+\E_\theta\left[\left(\frac{\partial}{\partial\theta} \log \prod_{i=1}^{n} f(X_i|\theta)\right)^2\right] &=& \sum_{i=1}^{n}\E_\theta\left[\left(\frac{\partial}{\partial\theta} \log  f(X_i|\theta)\right)^2\right] \nonumber\\
+&=& n\E_\theta\left[\left(\frac{\partial}{\partial\theta} \log f(X|\theta)\right)^2\right].
+\end{eqnarray}
 \end{proof}
-\end{cor}
-
-The quantity $\E_\theta[(\frac{\partial}{\partial\theta} \log(f(x|\theta))^2]$ is called the Fisher Information of the sample and $\frac{\partial}{\partial\theta} \log f(X|\theta)$ is called the Score Function.
-
+The quantity $\E_\theta[(\frac{\partial}{\partial\theta} \log(f(x|\theta))^2]$ is called the Fisher information of the sample and $\frac{\partial}{\partial\theta} \log f(X|\theta)$ is called the {\it score function}.
 \begin{lem}
 If $f(x|\theta), \theta \in \Theta$ satisfies
-\begin{equation}
-\frac{d}{d\theta} \E_\theta[\frac{\partial}{\partial\theta} \log f(X|\theta)] = \int \frac{\partial^2}{\partial\theta^2}[\log f(x|\theta).f(x|\theta)] dx
-\end{equation}
-Then, the Fisher Information
-\begin{equation}
-\E_\theta[(\frac{\partial}{\partial\theta} \log(f(X|\theta))^2] = -\E_\theta[\frac{\partial^2}{\partial\theta^2}\log(f(X|\theta))]
-\end{equation}
-Note: This is true for Exponential family distribution
 \begin{equation*}
-f(x|\theta)=h(x)c(\theta)\exp\left(\sum_{i=1}^{k}w_i(\theta)t_i(x)\right)
+\frac{d}{d\theta} \E_\theta\left[\frac{\partial}{\partial\theta} \log f(X|\theta)\right] = \int \frac{\partial^2}{\partial\theta^2}[\log f(x|\theta).f(x|\theta)] dx,
 \end{equation*}
+then, the Fisher information
+\begin{equation}
+\E_\theta\left[\left(\frac{\partial}{\partial\theta} \log(f(X|\theta)\right)^2\right] = -\E_\theta\left[\frac{\partial^2}{\partial\theta^2}\log(f(X|\theta))\right].
+\end{equation}
 \end{lem}
-
-
-
-\begin{exmp}[Poisson CRLB]
-Let $X_1,...,X_n$ be iid Poisson($\lambda$), $\lambda>0$ and $W(X)$ is an Estimator of $\lambda$.
+\begin{note}
+This is true for Exponential family distribution
 \begin{equation*}
-\frac{d}{d\lambda}\E_\lambda[W] = 1
+f(x|\theta)=h(x)c(\theta)\exp\left(\sum_{i=1}^{k}w_i(\theta)t_i(x)\right).
+\end{equation*}
+\end{note}
+\begin{exmp}[Poisson CRLB]
+\par Let $X_1,\dots,X_n$ be iid Poisson($\lambda$), $\lambda>0$ and $W(X)$ is an estimator of $\lambda$.
+\begin{equation*}
+\frac{d}{d\lambda}\E_\lambda[W] = 1.
 \end{equation*}
 \begin{eqnarray*}
-\E_\theta[(\frac{\partial}{\partial\theta} \log \prod_{i=1}^{n} f(X_i|\theta))^2] &=& 
--\E_\lambda[\frac{\partial^2}{\partial\lambda^2}\log(\frac{e^{-\lambda}\lambda^X}{X!})] \\ &=& -\E_\lambda[\frac{\partial^2}{\partial\lambda^2}(-\lambda+X\log\lambda-\log X!)] \\
-&=&-\E_\lambda[\frac{-X}{\lambda^2}] \\
-&=&\frac{1}{\lambda}.
+\E_\theta\left[\left(\frac{\partial}{\partial\theta} \log \prod_{i=1}^{n} f(X_i|\theta)\right)^2\right] &=& 
+-n\E_\lambda\left[\frac{\partial^2}{\partial\lambda^2}\log\left(\frac{e^{-\lambda}\lambda^X}{X!}\right)\right], \\ &=& -n\E_\lambda\left[\frac{\partial^2}{\partial\lambda^2}(-\lambda+X\log\lambda-\log X!)\right], \\
+&=&-n\E_\lambda\left[\frac{-X}{\lambda^2}\right], \\
+&=&\frac{n}{\lambda}.
 \end{eqnarray*}
-Hence for any unbiased estimator W, of $\lambda$, we must have
+Hence for any unbiased estimator $W$, of $\lambda$, we must have
 \begin{equation}
-Var_\lambda[W] \geq \frac{\lambda}{n}
+Var_\lambda[W] \geq \frac{\lambda}{n}.
 \end{equation}
-Since
-\begin{eqnarray*}
-Var_\lambda[\bar{X}] &=& Var_\lambda[\frac{1}{n}\sum_{i=1}^{n}X_i] \\
-&=& \frac{\lambda}{n},
-\end{eqnarray*}
+Since,
+\begin{eqnarray}
+Var_\lambda[\bar{X}] = Var_\lambda[\frac{1}{n}\sum_{i=1}^{n}X_i]=\frac{\lambda}{n},
+\end{eqnarray}
 $\bar{X}$ is a best unbiased estimator of $\lambda$.
 \end{exmp}
-
 \begin{exmp}[Normal CRLB]
-Let $X_1,...,X_n$ be Normal iid $\mathcal{N}(\mu,\sigma^{2})$
+\par Let $X_1,\dots,X_n$ be Normal iid $\mathcal{N}(\mu,\sigma^{2})$
 \begin{enumerate}
-\item Unbiased estimation of $\mu$ :\\
+\item Unbiased estimation of $\mu$:
 $\bar{X}$ meets CRLB
-\item Unbiased estimation of Variance($\sigma^{2}$) :\\
-\end{enumerate}
-The Normal pdf satisfies the assumption of the Cramer-Rao theorem and lemma, so we have
+\item Unbiased estimation of Variance($\sigma^{2}$): Normal pdf satisfies the assumption of the Cramer-Rao theorem and lemma, so we have
 \begin{eqnarray*}
-\frac{\partial^2}{\partial(\sigma^2)^{2}}\log\{\frac{1}{\sqrt{2\pi\sigma^{2}}}e^{\frac{-(x-\mu)^{2}}{2\sigma^{2}}}\} &=& \frac{\partial^2}{\partial(\sigma^2)^{2}}\{\log(\frac{1}{\sqrt{\sigma^{2}}})-\frac{(x-\mu)^{2}}{2\sigma^{2}}\} \\ &=&\frac{1}{2\sigma^{4}}-\frac{(x-\mu)^{2}}{\sigma^{6}}
+\frac{\partial^2}{\partial(\sigma^2)^{2}}\log\{\frac{1}{\sqrt{2\pi\sigma^{2}}}e^{\frac{-(x-\mu)^{2}}{2\sigma^{2}}}\} &=& \frac{\partial^2}{\partial(\sigma^2)^{2}}\{\log(\frac{1}{\sqrt{\sigma^{2}}})-\frac{(x-\mu)^{2}}{2\sigma^{2}}\}, \\ &=&\frac{1}{2\sigma^{4}}-\frac{(x-\mu)^{2}}{\sigma^{6}},
 \end{eqnarray*}
 and
 \begin{eqnarray*}
--\E_(\mu,\sigma^{2})[\frac{\partial^2}{\partial(\sigma^2)^{2}}\log(f(X|(\mu,\sigma^{2}))] &=& -\E_(\mu,\sigma^{2})[\frac{1}{2\sigma^{4}}-\frac{(x-\mu)^{2}}{\sigma^{6}}] \\ &=& \frac{-1}{2\sigma^{4}}+\frac{1}{\sigma^{4}} \\ &=& \frac{1}{2\sigma^{4}}
+-\E_(\mu,\sigma^{2})\left[\frac{\partial^2}{\partial(\sigma^2)^{2}}\log(f(X|(\mu,\sigma^{2}))\right] &=& -\E_(\mu,\sigma^{2})\left[\frac{1}{2\sigma^{4}}-\frac{(x-\mu)^{2}}{\sigma^{6}}\right], \\ &=& \frac{-1}{2\sigma^{4}}+\frac{1}{\sigma^{4}}, \\ &=& \frac{1}{2\sigma^{4}}.
 \end{eqnarray*}
 Thus CRLB for any unbiased estimator $W$ of $\sigma^{2}$ is
 \begin{equation}
-Var[W] \geq \frac{2\sigma^{4}}{n}
+Var[W] \geq \frac{2\sigma^{4}}{n}.
 \end{equation}
 We saw earlier that
 \begin{equation*}
-Var[S^{2}]=\frac{2\sigma^{4}}{n-1}
+Var[S^{2}]=\frac{2\sigma^{4}}{n-1}.
 \end{equation*}
-Thus $S^2$ does not attain the Cramer-Rao Lower Bound.
+Hence, $S^2$ does not attain the Cramer-Rao Lower Bound.
+\end{enumerate}
 \end{exmp}
-
 \begin{cor}[Attainment of CRLB]
-Let $\bX \sim f(x|\theta)$. W(X) be an unbiased estimator of $g(\theta)$ and f,W satisfy the condition of CRLB Hypothesis. Then W attains the CRLB if and only if $\exists$ a function $a(\theta)$ such that
+par Let $\bX \sim f(x|\theta)$. $W(X)$ be an unbiased estimator of $g(\theta)$ and $f,~W$ satisfy the condition of CRLB Hypothesis. Then $W$ attains the CRLB if and only if $\exists$ a function $a(\theta)$ such that
 \begin{equation}
-\frac{\partial}{\partial\theta} \log(f(\bx|\theta)) = a(\theta)[W(\bx)-g(\theta)], \quad \forall \theta
+\frac{\partial}{\partial\theta} \log(f(\bx|\theta)) = a(\theta)[W(\bx)-g(\theta)], \quad \forall \theta.
 \end{equation}
 (i.e. the Score function is a affine function of the estimator)
+\end{cor}
 \begin{proof}
-for any two random variable A and B
+For any two random variables $A$ and $B$
 \begin{equation}
 Cov(A,B)^2 \leq Var(A)Var(B)
 \end{equation}
 \begin{equation}
 \E[AB]^2 \leq \E[A^2]\E[B^2]
-\end{equation} \\
-Thus we can have equality in CRLB if and only if
-\begin{equation}
-(A-\E[A]) = \alpha(B-\E[B])
 \end{equation}
-Where $A = \frac{\partial}{\partial\theta} \log(f(\bx|\theta))$, and $B=W$ \\ \\
-Recalling that $\E_\theta[W] = g(\theta)$ and $\E_\theta[\frac{\partial}{\partial\theta} \log f(\bx|\theta)] = 0$
+We can have equality in CRLB if and only if
 \begin{equation}
-\frac{\partial}{\partial\theta} \log(f(\bx|\theta)) = \alpha(\theta)[W-g(\theta)], \quad \forall \theta
+(A-\E[A]) = \alpha(B-\E[B]),
+\end{equation}
+where $A = \frac{\partial}{\partial\theta} \log(f(\bx|\theta))$, and $B=W$.
+\par Recalling that $\E_\theta[W] = g(\theta)$ and $\E_\theta[\frac{\partial}{\partial\theta} \log f(\bx|\theta)] = 0$,
+\begin{equation}
+\frac{\partial}{\partial\theta} \log(f(\bx|\theta)) = \alpha(\theta)[W-g(\theta)], \quad \forall \theta.
 \end{equation}
 \end{proof}
-\end{cor}
-
 \begin{exmp}[Application]
-Let $X_1,...,X_n \sim \mathcal{N}(\mu,\sigma^{2})$, then we have
+\par Let $X_1,\dots,X_n \sim \mathcal{N}(\mu,\sigma^{2})$, then we have
 \begin{equation}
-L(\mu,\sigma^2|\bx) = \frac{1}{(2\pi\sigma^2)^{n/2}}exp\{-\frac{1}{2}\sum_{i=1}^{n}\frac{(x_i-\mu)^2}{\sigma^2}\}
+L(\mu,\sigma^2|\bx) = \frac{1}{(2\pi\sigma^2)^{n/2}}\exp\{-\frac{1}{2}\sum_{i=1}^{n}\frac{(x_i-\mu)^2}{\sigma^2}\}
 \end{equation}
 and hence
 \begin{eqnarray}
-\frac{\partial}{\partial\sigma^2}\log L(\mu,\sigma^2|\bx) &=& -\frac{n}{2\sigma^2} + \frac{1}{2}\sum_{i=1}^{n}\frac{(x_i-\mu)^2}{\sigma^4}\\
-&=& \frac{n}{2\sigma^4}\{\sum_{i=1}^{n}\frac{(x_i-\mu)^2}{n} - \sigma^2\}
+\frac{\partial}{\partial\sigma^2}\log L(\mu,\sigma^2|\bx) &=& -\frac{n}{2\sigma^2} + \frac{1}{2}\sum_{i=1}^{n}\frac{(x_i-\mu)^2}{\sigma^4},\nonumber\\
+&=& \frac{n}{2\sigma^4}\{\sum_{i=1}^{n}\frac{(x_i-\mu)^2}{n} - \sigma^2\}.
 \end{eqnarray}
 Thus taking $a(\sigma^2) = \frac{n}{2\sigma^4}$ shows that the best estimator of $\sigma^2$ is $\sum_{i=1}^{n}{(x_i-\mu)^2}/{n}$, which is calculable only if $\mu$ is known. If $\mu$ is unknown, the bound can not be attained.
 \end{exmp}
-
 \section{Unbiased Estimation \& Sufficient Statistics}
-Recall that a sufficient statistics $T(X)$, for $\theta$, where $X \sim f(x|\theta)$ is one for which $P(X|T(X))$ does not depend on $\theta$. \\
-Thus Sufficient statistics help in finding low variance estimator
-
+Recall that a sufficient statistics $T(X)$, for $\theta$, where $X \sim f(x|\theta)$ is one for which $P(X|T(X))$ does not depend on $\theta$. Thus sufficient statistics help in finding low variance estimator.
 \begin{thm}[Rao-Blackwell]
-Let $X \sim f(x|\theta)$,$\theta \in \Theta$ and W(X) be any unbiased estimator of $g(\theta)$ and $T$ be a sufficient statistics of $\theta$. Define the estimator $\phi = \E[W|T]$ (i.e. $\phi(x) = \E[W(X)|T(X) = T(x)]$)
-Then,
+Let $X \sim f(x|\theta)$,$\theta \in \Theta$ and $W(X)$ be any unbiased estimator of $g(\theta)$ and $T$ be a sufficient statistics of $\theta$. Define the estimator $\phi = \E[W|T]$ (i.e. $\phi(x) = \E[W(X)|T(X) = T(x)]$). Then,
 \begin{enumerate}
 \item $\E_\theta[\phi] = g(\theta), \quad \forall \theta$
 \item $Var_\theta[\phi] \leq Var_\theta[W], \quad \forall \theta$.
 \end{enumerate}
-That is $\phi$ is a uniformly better unbiased estimator of $g(\theta)$ (in the sense of MSE)
+That is $\phi$ is a uniformly better unbiased estimator of $g(\theta)$ (in the sense of MSE).
+\end{thm}
 \begin{proof}
-\begin{eqnarray*}
-g(\theta) &=& \E_\theta[W]\\
-&=& \E_\theta[\E_\theta[W|T]] \\
-&=& \E_\theta[\phi]
-\end{eqnarray*}
-So $\phi$ is unbiased for$g(\theta)$.
-
+\begin{eqnarray}
+g(\theta) &=& \E_\theta[W],\nonumber\\
+&=& \E_\theta[\E_\theta[W|T]]. \nonumber\\
+&=& \E_\theta[\phi].
+\end{eqnarray}
+So $\phi$ is unbiased for $g(\theta)$.
 \begin{lem}
 For two random variables $X \& Y$
 \begin{equation}
-Var[X] = Vax[\E[X|Y]]  + \E[Var[X|Y]]
+Var[X] = Vax[\E[X|Y]]  + \E[Var[X|Y]].
 \end{equation}	
 \end{lem}
-
-Thus using the above lemma
-\begin{eqnarray*}
-Var_\theta[W] &=& Var_\theta[\E[W|T]] + \E_\theta[Var_\theta[W|T]]\\ &=&  Var_\theta[\phi] + \E_\theta[Var_\theta[W|T]] \\ 
-&\geq& Var_\theta[\phi], \quad (Var_\theta[W|T]\geq 0)
-\end{eqnarray*}
+Using the above lemma
+\begin{eqnarray}
+Var_\theta[W] &=& Var_\theta[\E[W|T]] + \E_\theta[Var_\theta[W|T]],\nonumber\\ 
+&=&  Var_\theta[\phi] + \E_\theta[Var_\theta[W|T]], \nonumber\\ 
+&\geq& Var_\theta[\phi], \quad (Var_\theta[W|T]\geq 0).
+\end{eqnarray}
 Hence $\phi$ is uniformly better then $W$.
 \end{proof}
-\end{thm}
 
 \end{document}
