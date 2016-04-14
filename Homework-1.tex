@@ -1,0 +1,102 @@
+\documentclass[a4paper,english,10pt]{article}
+\input{header}
+\usepackage{etex,enumitem,hyperref,tikz,pgfplots}
+%opening
+\title{Homework 1}
+%\author{Deadline}
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+\item \hyperlink{solution1}{Problem 1}\\
+Suppose ${\bf Y}$ is a random variable that under hypothesis $H_0$ has pdf,
+\begin{equation*}\nonumber
+	\nonumber
+	p_0(y)=\begin{cases}
+		\frac{2}{3}(y+1),~~~0\leq y\leq 1\\
+		0,~~~~~~~~~~~~\mbox{otherwise.}
+	\end{cases}
+\end{equation*}
+and, under hypothesis $H_1$ has pdf
+\begin{equation*}\nonumber
+	\nonumber
+	p_1(y)=\begin{cases}
+		1,~~~~~~~~~0\leq y\leq 1\\
+		0,~~~~~~~~~\mbox{otherwise.}
+	\end{cases}
+\end{equation*}
+\begin{enumerate}[label=(\alph*)]
+	\item Find the Bayes rule and minimum bayes risk for testing $H_0~versus~H_1$ with uniform cost, and equal priors.
+	\item Draw the two pdfs, and identify the threshold $\tau$ in the Bayes rule assuming uniform cost, and equal priors. Discuss the effect of $\pi_0$ on the threshold $\tau$ (Hint: you can use the posterior probabilities $\pi_i(y)$ to illustrate).	
+	\item Find the minimax rule and minimax risk for uniform costs.
+	\item Find the Neyman-Pearson rule and the corresponding detection probability for false-alarm probability $\alpha \in (0,1)$.		
+\end{enumerate}
+\item \hyperlink{solution2}{Problem 2}\\
+Consider the hypothesis pair
+\begin{equation*}\nonumber
+	H_0:~Y=N
+\end{equation*}
+\hspace{120pt}versus
+\begin{equation*}\nonumber
+	H_0:~Y=N+S
+\end{equation*}
+where $N$ and $S$ are independent random variables each having pdf
+\begin{equation*}\nonumber
+	p(x)=\begin{cases}
+		e^{-x},~~~x\geq 0\\
+		0,~~~~~~x<0.
+	\end{cases}	
+\end{equation*}
+\begin{enumerate}
+\item Find the likelihood ratio between $H_0$ and $H_1$.
+\item Find the Bayes rule and the minimum bayes risk with the costs $C_{00}=C_{11}=0$, $C_{01}=2C_{10}=1$, and the prior $\pi_0=\frac{1}{4}$.
+\item Find the minimax decision rule and the corresponding risk with the cost structure defined above.
+\item Find the threshold and detection probability for $\alpha$-level Neyman Pearson test.
+%\item Consider a multiple observation scenario, in which $M$ independent observations are made $\mathcal{Y}=\{y_1,y_2,\dots,y_M\}$ (i.i.d observations). Find the likelihood ratio, and an $\alpha$ level Neyman-Pearson test.
+\end{enumerate}
+\item \hyperlink{solution3}{Problem 3}\\ 
+Generalize the formulation and solution of Bayesian Hypothesis testing for $M$-ary hypothesis testing, where $M>2$.
+\item \hyperlink{solution4}{Problem 4}\\
+Suppose we have a real observation $Y$ and binary hypotheses described by the following pair of pdf's:
+\begin{equation}\nonumber
+p_0(y)=\begin{cases}
+1-|y|,~~\mbox{if}~|y|\leq 1\\
+0,~~~~~~~~~\mbox{if}~|y|> 1
+\end{cases}
+\end{equation}
+and
+\begin{equation}\nonumber
+p_1(y)=\begin{cases}
+(2-|y|)/4,~~\mbox{if}~|y|\leq 2\\
+0,~~~~~~~~~~~~~~~\mbox{if}~|y|> 2.
+\end{cases}
+\end{equation}
+\begin{enumerate}
+\item Assume that the costs are given by,
+\begin{eqnarray*}
+	C_{01}=2C_{10} >0\\
+	C_{00}=C_{11}=0.
+\end{eqnarray*}
+Find the minimax test of $H_0$ versus $H_1$ and the corresponding minimax risk.
+\item Find the Neyman-Pearson test of $H_0$ versus $H_1$ with false-alarm probability $\alpha$. Find the corresponding detection probability.
+\end{enumerate}
+\item  \hyperlink{solution5}{Problem 5}
+Consider the transmission of a QPSK signal over a noisy communication channel. The observations under each Hypotheses have the form,
+\begin{equation*}
+Y_i=A_i+N	
+\end{equation*}
+where $A_i\in \{-1-j,-1+j,1-j,1+j\},~j=\sqrt{-1}$, and noise $N$ follows zero mean circularly symmetric complex Gaussian distribution $N\sim\mathcal{CN}(0,\sigma^2)$. 
+\begin{enumerate}[label=(\alph{*}).]
+\item Design the decision rule which minimizes Bayes risk for this case, and compute the minimum Bayes risk, assume uniform cost and equal priors. 
+\item Is it possible to formulate the QPSK detection problem as two separate Binary Hypothesis testing problems. If so, design the minimum bayes rules, and comment on the decision regions. What happens when the noise is not circularly symmetric (real and imaginary parts of the noise are correlated).
+\item Illustrate what happens to the decision regions when the QPSK symbols are $A_i\in\{-1,-j,1,j\}$ instead of the symbols descibed  above. 
+\end{enumerate}
+\end{enumerate}
+\newpage
+\par{\centering\Large {Solutions}\par}
+\input{Solution1.tex}
+\input{Solution2.tex}
+\input{Solution3.tex}
+\input{Solution4.tex}
+\input{Solution5.tex}
+\end{document}
