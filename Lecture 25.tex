@@ -1,0 +1,306 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath}
+\usepackage{array}
+
+\begin{document}
+\begin{center}
+\huge{LECTURE 25 : LEVINSON FILTERING}
+
+\large{07 APRIL 2016}
+\end{center}
+
+
+Levinson filtering is concerned with one-step prediction of a random sequence whose second order statistics are stationary in time.\newline
+%\begin{huge}
+
+\textbf{GOAL}:-
+%\end{huge}
+Find the best linear estimator of ${Y_{t+1}}$ from given observations (${Y_0}$,${Y_1}$,...,${Y_t}$).
+Observation sequence $(Y_n)$ ,where $n \epsilon(-\infty,\infty)$ with mean zero and autocovariance function is called wide sense stationary process(w.s.s), such that the given condition is satisfied\newline
+
+$C_y(\tau)$ = E[$Y_0$,$Y_\tau$]  ,     for all        $ \tau \in \mathbf{Z}$\\
+
+We know that, $X_t = Y_{t + 1}$ so the cross-covariance function of {$X_n$} = $Y_{n+1}$ and {$Y_n$}, where $n \epsilon(-\infty,\infty)$ is thus\\
+\begin{align*}
+C_{X,Y}(t,l) &= Cov(X_t,Y_l) \\
+& =  Cov(Y_{t+1},Y_l) \\
+& = C_y(t+1-l)
+\end{align*}
+The Wiener Hopf equation i.e {$\sigma_{XY} = \sum_yh_t$ which becomes 
+\[
+\begin{bmatrix}
+C_y(t+1)\\
+\vdots\\
+C_y(1)
+\end{bmatrix}
+=
+\begin{bmatrix}
+C_y(0) & \ldots & C_y(t)\\
+\vdots & \ddots & \vdots\\
+C_y(t) & \ldots & C_y(0)
+\end{bmatrix}
+\quad
+\begin{bmatrix}
+h_{t,0}\\
+\vdots\\
+h_{t,t}
+\end{bmatrix}
+\]\\
+a set of equations known as \emph{Yule Walker equations}\\
+
+
+\emph{FACT}:-\\
+\begin{equation*}
+\mathbf{\sum_{Y}^{0:t}} =
+\begin{bmatrix}
+C_y(0) & \ldots & C_y(t)\\
+\vdots & \ddots & \vdots\\
+C_y(t) & \ldots & C_y(0)
+\end{bmatrix}
+\end{equation*}
+
+where $\sum_{Y}^{0:t}$ is a Toeplitz matrix , which means that its enries are constant along the diagonals. Also Toeplitz matrix can be inverted in number of operations that is of the order of $t^2$.\\
+
+
+\textbf{Levinson Durbin algorithm} :- A way to output ($h_{t,0}$,\ldots,$h_{t,t}$) in number of operations is of the order of $t^2$.\\
+
+Let  $\hat{Y}_{t+1}$ = $-\sum_{n=0}^t a_{{t+1},{t+1-n}}Y_n$, then Yule Walker equation becomes\\
+
+\begin{equation}
+-\begin{bmatrix}
+C_y(t+1)\\
+\vdots\\
+C_y(1)
+\end{bmatrix}
+= \begin{bmatrix}
+C_y(0) & \ldots & C_y(t)\\
+\vdots & \ddots & \vdots\\
+C_y(t) & \ldots & C_y(0)
+\end{bmatrix}\quad 
+\begin{bmatrix}
+a_{t+1,t+1})\\
+\vdots\\
+a_{t+1,1}
+\end{bmatrix}
+\end{equation}\\
+Let $\epsilon_{t+1} := \hat{Y}_{t+1}-Y_{t+1}$ \\
+and let\begin{align*} \epsilon_{t+1} &= E[\epsilon_{t+1}^2]\\
+&= E[\epsilon_{t+1}(-\sum_{n=0}^t a_{t+1,t+1-n}Y_n-Y_{t+1})]\\
+&= E[-\epsilon_{t+1}Y_{t+1}]\\
+&= -E[(-\sum_{n=0}^t a_{t+1,t+1-n}Y_n-Y_{t+1})Y_{t+1}]\\
+&= C_Y(0)+\sum_{n=0}^t C_y(t+1-n)a_{t+1,t+1-n}\\
+\end{align*}\\
+Now transform equation (1) by\\
+(a) made LHS=$\vec{0}$\\
+ \\
+\[
+\begin{bmatrix}
+0\\
+\vdots\\
+0 
+\end{bmatrix} = 
+\begin{bmatrix}
+C_Y(0) &\ldots &C_Y(t) &C_Y(t+1)\\
+\vdots &\ddots &\vdots &\vdots\\
+c_Y(t) &\ldots &C_Y(0) &C_Y(1)
+
+\end{bmatrix}
+\begin{bmatrix}
+a_{t+1,t+1}\\
+\vdots\\
+a_{t+1,1}\\
+1
+\end{bmatrix}
+\]
+
+
+(b) added equation for $\epsilon_{t+1}$\\
+\begin{equation}
+\begin{bmatrix}
+0\\
+\vdots\\
+0 \\
+\epsilon_{t+1}
+\end{bmatrix} = 
+\begin{bmatrix}
+C_Y(0) &\ldots &C_Y(t+1)\\
+\vdots &\ddots &\vdots\\
+c_Y(t) &\ldots &C_Y(1)\\
+C_Y(t+1) &\ldots &\ldots C_y(0)
+
+\end{bmatrix}
+\begin{bmatrix}
+a_{t+1,t+1}\\
+\vdots\\
+a_{t+1,1}\\
+1\\
+\end{bmatrix}
+\end{equation}\\
+Now normal equation for prediction at order $(t+1)$\\
+
+Lets add an extra equation
+\begin{equation}
+\begin{bmatrix}
+\alpha_{t+1}\\
+0\\
+\vdots\\
+0 \\
+\epsilon_{t+1}
+\end{bmatrix} = 
+\begin{bmatrix}
+C_Y(0) &\ldots &C_Y(t+1) &c_y(t+2)\\
+C_Y(1) &C_Y(0) &\ldots &C_Y(t+1)\\
+\vdots &\vdots &\ddots &\vdots\\
+C_Y(t+1) &C_Y(t+1) &\ldots &C_Y(0)
+
+
+\end{bmatrix}
+\begin{bmatrix}
+0\\
+a_{t+1,t+1}\\
+\vdots\\
+a_{t+1,1}\\
+1\\
+\end{bmatrix}
+\end{equation}
+where $\alpha_{t+1} := C_y(1)a_{t+1,t+1} + \ldots + C_y(t+1)a_{t+1,1} + C_y(t+2)$\\
+%$\alpha_{t+1} :=  C_y(t+2) + \sum_{n=0)^t C_y(n+1)a_{t+1,t+1-n} $
+
+
+Transforming equation (3) by reversing rows and then columns\\
+\begin{equation}
+\begin{bmatrix}
+\epsilon_{t+1}\\
+0\\
+\vdots\\
+0 \\
+\alpha_{t+1}
+\end{bmatrix} = 
+\begin{bmatrix}
+C_Y(0) &\ldots &C_Y(t+1) &c_y(t+2)\\
+C_Y(1) &C_Y(0) &\ldots &C_Y(t+1)\\
+\vdots &\vdots &\ddots &\vdots\\
+C_Y(t+2) &C_Y(t+1) &\ldots &C_Y(0)
+\end{bmatrix}
+\begin{bmatrix}
+1\\
+a_{t+1,1}\\
+\vdots\\
+a_{t+1,t+1}\\
+0\\
+\end{bmatrix}
+\end{equation}\\
+Now multiplying equation (4) with $K_{t+1}$ and then adding with equation (3)\\
+Where $K_{t+1} = -\frac{\alpha_{t+1}}{\epsilon_{t+1}}$\\
+\begin{equation}
+\begin{bmatrix}
+0 \\
+\vdots\\
+\vdots\\
+0\\
+\epsilon_{t+1}-\frac{\alpha_{t+1}^2}{\epsilon_{t+1}}
+\end{bmatrix} = 
+\begin{bmatrix}
+C_Y(0) &\ldots &C_Y(t+1) &c_y(t+2)\\
+C_Y(1) &C_Y(0) &\ldots &C_Y(t+1)\\
+\vdots &\vdots &\ddots &\vdots\\
+C_Y(t+2) &C_Y(t+1) &\ldots &C_Y(0)
+\end{bmatrix}\quad 
+\begin{bmatrix}
+b_{t+2,t+2}\\
+\vdots\\
+\vdots\\
+b_{t+2,1}
+\end{bmatrix}
+\end{equation}\\
+Comparing the form of equation (5) and (2), by inspection\\
+$\epsilon_{t+2} = \epsilon_{t+1} - \frac{\alpha_{t+1}^2}{\epsilon_{t+1}} = \epsilon_{t+1} - \frac{(K_{t+1}\epsilon_{t+1})^2}{\epsilon_{t+1}} = \epsilon_{t+1}(1-K_{t+1}^2)$\\
+
+For order of t operations \\
+$a_{t+2,t+2} = K_{t+1}$\\
+$a_{t+2,t+2-n} = a_{t+1,t+2-n} + K_{t+1}a_{t+1-n}$\\
+where $1\leq n \leq t+1$\\
+
+EXAMPLE (1)\\
+Time : 0\\
+Observation : $\phi$\\
+To Predict : $Y_0$\\
+Operations :\\ 
+a. $\hat{Y_0}=0$\\
+b. $\epsilon_{0}=C_y(0)$\\
+c. $k_0=-\frac{C_y(1)}{C_y(0)}$\\
+    
+EXAMPLE (2)\\ 
+Time : 1\\
+Observation : $Y_0$ \\ 
+To Predict : $Y_1$\\
+Operations :\\ 
+a. $a_{1,1} = K_0$\\
+b. $\epsilon_1 = (1-K_0^2)\epsilon_0$\\
+c. $k_1 = -\frac{[C_Y(2) + C_Y(1)a_{1,1}]}{\epsilon_1}$\\
+
+EXAMPLE (3)\\
+Time : 2\\
+Observation : $Y_0,Y_1$ \\
+To Predict : $Y_2$\\
+Operations :  \\
+a. $a_{2,2} = K_1$\\
+b. $a_{2,1} = a_{1,1} + k_1a_{1,1}$\\
+c. $\epsilon_2 = (1-K_1^2)\epsilon_1$\\
+d. $k_2 = -\frac{[C_Y(3) + C_Y(2)a_{2,1} + C_Y(1)a_{2,2}]}{\epsilon_2}$\\
+
+
+\textbf{Pseudocode-Levinson Durbin}:-\\
+
+The algorithm is initiated by\\
+$\epsilon_{0} = C_y(0)$ and $K_0 = -\frac{C_Y(1)}{C_Y(0)}$\\
+
+For t=1,2,3.......\\
+$a_{t,t} = K_{t-1}$\\
+$a_{t,t-n} = a_{t-1,t-n} + K_{t-1}a_{t-1-n}$\\
+where 1 $\leq n \leq t-1$\\
+$\epsilon_t = \epsilon_{t-1}(1-k_{t-1}^2)$\\
+$k_t$ = -$\frac{C_y(t+1) + \sum_{n=0}^{t-1}C_y(n+1)a_{t,t-n}}{\epsilon_t}$\\
+
+\textbf{Remarks}:-\\
+
+1. Interpretation of $K_t$:-\\
+
+By Orthogonality condition 'error and observation are orthogonal' such that\\
+$(Y_t-\hat{Y_t})\quad \coprod \quad (Y_0,Y_1,....Y_{t-1})$\\
+but error ($Y_t - \hat{Y_t}$) need not be orthogonal to $Y_{-1}$ and hence \\
+\begin{align*}
+E[(Y_t - \hat{Y_t})Y_{-1}] &= E[(Y_t + \sum_{n=0}^{t-1}a_{t,t-n}Y_n)Y_{-1}]\\
+&= C_Y(t+1) + \sum_{n=0}^{t-1}a_{t,t-n}C_Y(n+1)\\
+&= \alpha_t\\
+\end{align*}
+
+Hence
+\begin{align*}
+K_t &= -\frac{\alpha_t}{\epsilon_t} \\
+&= \frac{E[(\hat{Y_t}-Y_t)Y_{-1}]}{E[(\hat{Y_t}-Y_t)^2]}\\
+&= \frac{Cov[\hat{Y_t}-Y_t,Y_{-1}]}{E[(\hat{Y_t}-Y_t)^2]}\\
+\end{align*}
+where $K_t$: PARCOR(Partial Correlation Coefficient)\\
+
+2. Mean square error(MSE) at time 't' is monotone\\
+$\epsilon_{0} \geq \epsilon_{1} \geq \epsilon_{2} \geq ........... $ \\
+
+Suppose for all 'M' such that\\
+$\epsilon_m=\epsilon_{m+1}=.....$\\
+
+This is called "STALLING"\\
+
+Where 
+\begin{equation*}
+\mathbf{M} = 
+\begin{bmatrix}
+C_Y(0) &\ldots &C_Y(t) &C_Y(t+1)\\
+\vdots &\ddots &\vdots &\vdots\\
+C_Y(t) &\ldots &C_Y(0) &C_Y(1)
+
+\end{bmatrix}
+\end{equation*}\\
+When STALLING occurs the prediction error become orthogonal.
+
+\end{document}
