@@ -1,19 +1,118 @@
 \documentclass[a4paper,english,12pt]{article}
-\usepackage{enumitem} 
-\usepackage{answers}
-
-\usepackage{stackengine}
-\stackMath
 \input{header}
-
+\newcommand{\ubar}[1]{\underline{#1}}
 %opening
 \title{Solutions Homework - 2}
 \author{}
 
 \begin{document}
 \maketitle
-\section{Solution 1}
-\textbf{(a) : } The LMP test is
+
+\begin{enumerate}
+\item \hyperlink{solution1}{Problem 1}\\
+Consider the composite hypothesis testing problem:
+\begin{align*}
+H_0:&~Y~\mbox{has density }p_0(y)=\frac{1}{2}e^{-|y|},\hspace{5pt}y\in \mathbbm{R}\\
+versus&\\
+H_1:&~Y~\mbox{has density }p_1(y)=\frac{1}{2}e^{-|y-\theta|},\hspace{5pt}y\in \mathbbm{R},\theta>0.
+\end{align*}
+\begin{enumerate}
+\item Describe the locally most powerful $\alpha$-level test and derive its power function.
+\item Does a uniformly most powerful test exist? If so, find it and derive its power function. If not, find the generalized likelihood ratio test for $H_0~versus~H_1$.
+\end{enumerate}
+\item \hyperlink{solution2}{Problem 2}\\
+Consider the following pair of hypotheses concerning a sequence $Y_1,Y_2,\dots,Y_n$ of independent random variables,
+\begin{align*}
+H_0:&~Y_k\sim \mathcal{N}(0,\sigma^2),\hspace{5pt}k=1,2,\dots,n\\
+versus&\\
+H_1:&~Y_k\sim \mathcal{N}(\mu,\sigma^2),\hspace{5pt}k=1,2,\dots,n
+\end{align*}
+where $\mu$ is a known constant and $\sigma>0$ is unknown.
+\par Does there exist a uniformly most powerful test. If so, find it and show that it is UMP. If not, show why and find the generalized likelihood ratio test.
+\item \hyperlink{solution3}{Problem 3}\\
+Consider the random sample $X_1,X_2,\dots,X_n$ with $X_i\sim \mathcal{N}(\mu,\sigma^2)$, and the statistic $T_1(X)=\frac{\bar{X}-\mu}{\sigma/\sqrt{n}}$, where  $\bar{X}=\frac{1}{n}\sum\limits_{i=1}^{n} X_i$.
+\begin{enumerate}
+\item Consider $\sigma^2$ is known, and $\mu$ is unknown. Derive the expression for the minimum number of samples $n$ required for $\mathbbm{P}(|T_1(X)|\leq\alpha)\geq \gamma$, where $\alpha>0$, and $0\leq \gamma \leq 1$.
+\item Consider $\sigma^2$ also to be unknown, and derive the expression for the minimum number of samples $n$ required for the $t$-statistic defined in class $\mathbbm{P}(|T_2(X)\leq\alpha)\geq \gamma$, where $\alpha>0$, and $0\leq \gamma \leq 1$.
+\item Programming exercise: Plot the distribution of the $T_1$ and $T_2$ statistics for $n\in {1000,10000,50000}$, for the case  $X_i\sim \mathcal{N}(2,2)$. (Hint: Generate several random samples of size $n$ from the given distribution and plot the histogram).
+\item Verify the results from (a), (b) above using the distributions computed in (c).
+\end{enumerate} 
+\item \hyperlink{solution4}{Problem 4}\\
+The measurements from an experiment with $n$ independent trials follow the below model,
+\begin{equation*}
+y_k=\alpha x_k + \epsilon_k,~k=1,2,\dots,n
+\end{equation*}
+where $\{x_k\}$ are known parameters which depend on the observation instance, and $\epsilon_k$ is the noise in the measurement process. Assume noise to be independent and identically distributed Gaussian distributed with mean zero and some unknown standard deviation $\sigma$. 
+\begin{enumerate}
+\item Consider the statistic ${\hat \alpha}=\frac{1}{\left(\sum\limits_{k=1}^{n} x_k^2\right)}\sum\limits_{k=1}^{n} y_kx_k$. Derive the distribution of ${\hat \alpha}$. 
+\item Programming exercise: Generate random samples from the measurement model described above with $x_k=k$, and $\sigma=1$, compute the statistic ${\hat \alpha}$, and find the minimum number of samples $n$ required for $|{\hat \alpha}-\alpha|<0.99$.
+\end{enumerate}
+\item \hyperlink{solution5}{Problem 5}\\
+Consider the M-ary decision problem: $(\Gamma=\mathcal{R}^n)$
+\begin{eqnarray*}
+H_0:~\ubar{Y}=\ubar{N}+\ubar{s}_0\\
+H_1:~\ubar{Y}=\ubar{N}+\ubar{s}_1\\
+\vdots\hspace{30pt}\\
+H_{M-1}:~\ubar{Y}=\ubar{N}+\ubar{s}_M\\
+\end{eqnarray*}
+where $\ubar{s}_0,\ubar{s}_1,\dots,\ubar{s}_M$ are known signals with equal energies, $\|\ubar{s}_0\|^2=\|\ubar{s}_1\|^2=\dots=\|\ubar{s}_{M-1}\|^2$.
+\begin{enumerate}
+\item Assuming $\ubar{N}=\mathcal{N}(\ubar{0},\sigma^2 {\bf I})$, find the decision rule achieving minimum error probability when all hypotheses are equally likely.
+\item Assuming further that the signal are orthogonal, show that minimum error probability is given by
+\begin{equation*}
+P_e=1-\frac{1}{\sqrt{2\pi}}\int\limits_{-\infty}^{\infty} \left[\Phi(x)\right]^{M-1}e^{-(x-d)^2/2}~dx
+\end{equation*}
+where $d^2=\|\ubar{s}_0\|^2/\sigma^2$, $x=\ubar{s}_0^T\ubar{Y}/(\sigma \|\ubar{s}_0\|)$.
+\end{enumerate}
+\item  \hyperlink{solution6}{Problem 6}\\
+Consider an observed random $n$-vector $\ubar{Y}$ that satisfies one of the two hypotheses:
+\begin{gather*}
+H_0: \ubar{Y}=\ubar{N},\\
+versus\hspace{200pt}\\
+H_1: \ubar{Y}=\ubar{N}+A\left[(1-\Theta)\ubar{s}^{(0)}+\Theta\ubar{s}^{(1)}\right],
+\end{gather*}
+where $\ubar{N}=\mathcal{N}(\ubar{0},{\bf I})$; the quantity $A$ is a nonrandom positive scalar; the random parameter $\Theta$ is independent of $\ubar{N}$ and takes on the values $0$ and $1$ with equal probabilities; and the signals $\ubar{s}^{(0)}$ and $\ubar{s}^{(1)}$ are known orthonormal signals.
+\begin{enumerate}
+\item Suppose the value of $A$ is known. Find the likelihood ratio between the hypotheses $H_0$ and $H_1$.
+\item Consider now the composite hypothesis-testing problem:
+\begin{gather*}
+H_0: A=0,\\
+versus\hspace{100pt}\\
+H_1: A>0.
+\end{gather*}
+Find the locally most powerful test of level $\alpha$. Draw the corresponding detector structure.
+\end{enumerate}
+\item  \hyperlink{solution7}{Problem 7}\\
+Consider the model
+\begin{equation}
+Y_k=\theta^{1/2} s_kR_k+N_k,~k=1,2,\dots,n
+\end{equation}
+where $s_1,s_2,\dots,s_n$ is a known signal sequence, $\theta\geq0$ is a constant, and $R_1,R_2,\dots,R_n,N_1,N_2,\dots,N_n$ are i.i.d. $\mathcal{N}(0,1)$ random variables
+\begin{enumerate}
+\item Consider the hypothesis pair,
+\begin{gather*}
+H_0: \theta=0,\\
+versus\hspace{100pt}\\
+H_1: \theta=A
+\end{gather*}
+where $A$ is a known positive constant. Describe the structure of the Neyman-Pearson detector.
+\item Consider the hypothesis pair,
+\begin{gather*}
+H_0: \theta=0,\\
+versus\hspace{100pt}\\
+H_1: \theta>0.
+\end{gather*}
+Under what conditions on $s_1,s_2,\dots,s_n$ does a UMP exist?
+\item For the hypothesis pair of part (b) with $s_1,s_2,\dots,s_n$ general, is there a locally optimum detector? If so find it. If not, describe the generalized likelihood ratio test.
+\end{enumerate}
+\item \hyperlink{solution8}{Problem 8}\\
+Let $X_1, ..., X_n$ be i.i.d samples from a Poisson($\lambda$) distribution. What is a nontrivial sufficient statistic for $\lambda$?
+\end{enumerate}
+
+\newpage
+\par{\centering\Large {Solutions}\par}
+\hypertarget{solution1}{\subsection*{Solution 1}}
+\subsubsection*{(a).} The LMP test is
 \begin{equation*}
 \tilde{\delta}_{lo}(y) =
 \left\{
@@ -60,7 +159,7 @@ This implies that
 	\end{array}
 \right.
 \end{equation*}
-the randomizatgion is 
+the randomization is 
 \begin{equation*}
 \gamma = \frac{\alpha - \mathnormal{P}_0(sgn(\gamma)>\eta)}{\mathnormal{P}_0(sgn(\gamma)-\eta)}=
 \left\{
@@ -129,239 +228,260 @@ from which
 					\end{array}
 				\right.
 \end{equation*}
-Clearly, we must know $\theta$ to set $\eta'$, and thus the NP critical region depends on $\theta$. This implies that there is no UMP test.
-
-The generalized likelihood ration test uses this statistic 
+Clearly, we must know $\theta$ to set $\eta'$, and thus the NP critical region depends on $\theta$. This implies that there is no UMP test. The generalized likelihood ration test uses this statistic 
 \begin{align*}
-\sup_{\theta>0}e^{|y|-|y-\theta|}&=exp\left\{\sup_{\theta>0}(|y|-|y-\theta|)\right\} \\
-			  &=\left\{
-					\begin{array}{ll}
+\sup_{\theta>0}e^{|y|-|y-\theta|}&=\exp\left\{\sup_{\theta>0}(|y|-|y-\theta|)\right\} \\
+			  &=\begin{cases}
 						1  & \mbox{if } y<0\\
 						e^{y} & \mbox{if } y\geq 0.
-					\end{array}
-				\right.
+			  \end{cases}			 
 \end{align*}
 %========================================================================================================
-\section{Solution 2}
-$$H_0\,:\,Y_k\sim \mathcal{N}(0,\sigma^2), \, \,\,\,k=1,2, ...... ,n$$\\
-         $$versus$$\\
- $$H_1\,:\,Y_k\sim \mathcal{N}(\mu,\sigma^2), \, \,\,\,k=1,2, ...... ,n$$\\        
- $$Y_1,Y_2,.....,Y_n \, are \, independent \, random \, variables.$$\\
- \textbf{(a) : } $\mu$ is known constant,
- $\sigma$ is unknown.\\
+\hypertarget{solution2}{\subsection*{Solution 2}}
 \begin{align*}
-L(y)=\frac{P_1(\underline{y})}{P_0(\underline{y})}&=\frac{{\left(\frac{1}{\sigma \sqrt{2 \pi}}\right)}^n \,\,\substack{n\\ \Pi \\ {i=1}}\, e^{\frac{-(y_i - \mu)^2}{2 \sigma^2}}}{ \, e^{\frac{-(y_i)^2}{2 \sigma^2}}}\\
- L(y)&=\frac{\,\,\, e^{\sum\limits_{i=1}^n \frac{-(y_i - \mu)^2}{2 \sigma^2}}}{\, e^{\sum\limits_{i=1}^n\frac{-(y_i)^2}{2 \sigma^2}}}\\
- L(y)&=e^{\left(\frac{\mu}{2 \sigma^2}\sum\limits_{i=1}^n(2y_i-\mu)\right)}\\
+H_0:&~Y_k\sim \mathcal{N}(0,\sigma^2),\hspace{5pt}k=1,2,\dots,n\\
+versus&\\
+H_1:&~Y_k\sim \mathcal{N}(\mu,\sigma^2),\hspace{5pt}k=1,2,\dots,n
 \end{align*}
- To determine, whether the UMP exists or not,we will find:\\
-
- $$P_F(\substack{\sim \\ \delta})=P_0(\Gamma^\prime)=\alpha$$\\
- 
+where $Y_1,Y_2,.....,Y_n$ are independent random variables.
+\subsubsection*{(a). $\mu$ is known constant, $\sigma$ is unknown.}
+\begin{align*}
+L(y)=\frac{P_1(\underline{y})}{P_0(\underline{y})}&=\frac{\prod\limits_{i=1}^{n} e^{\frac{-(y_i - \mu)^2}{2 \sigma^2}}}{ \prod\limits_{i=1}^{n} e^{\frac{-y_i^2}{2 \sigma^2}}}\\
+&=\frac{\,\,\, e^{-\sum\limits_{i=1}^n \frac{(y_i - \mu)^2}{2 \sigma^2}}}{\, e^{-\sum\limits_{i=1}^n\frac{y_i^2}{2 \sigma^2}}}\\
+&=e^{\left[\frac{\mu}{2 \sigma^2}\sum\limits_{i=1}^n(2y_i-\mu)\right]}
+\end{align*}
+To determine, whether the UMP exists or not,we need to solve,
+\begin{equation}
+P_F(\tilde{\delta})=P_0(\Gamma')=\alpha,
+\end{equation}
+where,
  \begin{equation}
-where,\,\substack{\sim \\ \delta}= \left \{
+\tilde{\delta}= \left \{
   \begin{aligned}
     &1, && \text{if}\ L(\underline{y})\geq\tau \\
     &0, && \text{if}\ L(\underline{y})<\tau 
   \end{aligned} \right.
 \end{equation}
+We have,
 \begin{align*}
-P_0(L(\underline{y})\geq\tau)&=P_0 (e^{\left( \frac{\mu}{2 \sigma^2}\sum\limits_{i=1}^n(2y_i-\mu)\right)} \geq \tau)\\
-let \tau \prime &=ln(\tau),\sum\limits_{i=1}^n \mu = n \mu,\\
+P_0(L(\underline{y})\geq\tau)&=P_0 (e^{\left( \frac{\mu}{2 \sigma^2}\sum\limits_{i=1}^n(2y_i-\mu)\right)} \geq \tau).
 \end{align*}
+Let $\tau' =ln(\tau)$, we get,
 \begin{align*}
-=P_0 \left(\sum\limits_{i=1}^n y_i\geq\frac{\tau \prime \sigma^2}{\mu}+\frac{n\mu}{2}\right)
+P_0(\Gamma')=P_0 \left(\sum\limits_{i=1}^n y_i\geq\frac{\tau' \sigma^2}{\mu}+\frac{n\mu}{2}\right).
 \end{align*}
-under $P_0$, each $y_i \sim \mathcal{N}(0,\sigma^2)$ then $\sum\limits_{i=1}^ny_i \sim \mathcal{N}(0,\sigma^2 n)$\\
+Under $P_0$, each $y_i \sim \mathcal{N}(0,\sigma^2)$, hence $\sum\limits_{i=1}^ny_i \sim \mathcal{N}(0,\sigma^2 n)$, let $\frac{\tau \prime \sigma^2}{\mu}+\frac{n\mu}{2}=\tau''$,
 \begin{align*}
-let \,\,\,\frac{\tau \prime \sigma^2}{\mu}+\frac{n\mu}{2}&=\tau \prime\prime \\
-&=1-\phi\left(\frac{\tau \prime \prime}{\sqrt{n}\, \sigma}\right) (or) Q\left(\frac{\tau \prime \prime}{\sqrt{n}\, \sigma}\right)\\
-so,\,Q\left(\frac{\tau \prime \prime}{\sqrt{n}\, \sigma}\right)&=\alpha\Rightarrow \,\, \tau \prime \prime=\sqrt{n}\,\sigma \, Q^{-1}(\alpha)\\
+P_0(\Gamma')=1-\phi\left(\frac{\tau''}{\sqrt{n}\, \sigma}\right)=Q\left(\frac{\tau''}{\sqrt{n}\, \sigma}\right).
 \end{align*}
-$$\therefore \Gamma_1=\left \{ \sum\limits_{i=1}^n y_i\geq \sqrt{n}\,\sigma \, Q^{-1}(\alpha) \right \}, \,\, depends\,\, on\,\, unknwon \,\, \sigma.$$\\
-Hence UMP doesn't exists.\\
-NOTE: If $\mu$ is the Unknown quantity instead of $\sigma$ in this problem then the UMP exists(this is the most general case).\\
-\\
-\textbf{(b) : }\begin{Large}
-\underline{Generalized Likelyhood Ratio Test(GLRT):}\\
-\end{Large}
+Now,
+\begin{equation*}
+Q\left(\frac{\tau''}{\sqrt{n}\, \sigma}\right)=\alpha\Rightarrow \,\, \tau''=\sqrt{n}\,\sigma \, Q^{-1}(\alpha).
+\end{equation*}
+Therefore, $\Gamma_1=\left \{ \sum\limits_{i=1}^n y_i\geq \sqrt{n}\,\sigma \, Q^{-1}(\alpha) \right \}$ depends on the unknown $\sigma$, hence UMP doesn't exist.
+\begin{note}
+If $\mu$ is the Unknown quantity instead of $\sigma$ in this problem then the UMP exists (this is the most general case).
+\end{note}
+\subsubsection*{(b). Generalized Likelyhood Ratio Test(GLRT)}
 \begin{align*}
-L(\underline{y})&=\frac{\substack{max\\ \\ \theta \in{\bigwedge}_1} P_\theta \left( \underline{y} \right)}{\substack{max\\ \\ \theta \in{\bigwedge}_0} P_\theta \left( \underline{y} \right)} here\, \theta \in (mean,\sigma^2),{\bigwedge}_1 \in (\mu,\sigma^2),{\bigwedge}_0 \in (0,\sigma^2).\\
-&=\frac{\substack{max\\ \\ \sigma >0 \,\,\,\,} P_1(\underline{y})}{\substack{max\\ \\ \sigma >0 \,\,\,\,} P_0(\underline{y})}\\
-&=\frac{\substack{max\\ \\ \sigma >0 \,\,\,\,}\, \left(\frac{1}{\sigma \sqrt{2\pi}}\right)^n e^{- \sum \limits_{i=1}^n \frac{(y_i-\mu)^2}{2\sigma^2}}}{\substack{max\\ \\ \sigma >0 \,\,\,\,}\left(\frac{1}{\sigma \sqrt{2\pi}}\right)^n e^{- \sum \limits_{i=1}^n\frac{(y_i)^2}{2\sigma^2}}}\\
+L(\underline{y})=\frac{\underset{\theta \in \Lambda_1}{\max} P_\theta \left( \underline{y} \right)}{\underset{\theta \in \Lambda_0}{\max} P_\theta \left( \underline{y} \right)}.
 \end{align*}
-consider denominator,\\
-$$\substack{max\\ \\ \sigma >0 \,\,\,\,}\left(\frac{1}{\sigma \sqrt{2\pi}}\right)^n \, e^{-\frac{ \norm{\underline{y}}^2}{2 \sigma^2}}=\substack{max\\ \\ \sigma >0 \,\,\,\,}e^{ln\left(\left(\frac{1}{\sigma\, \sqrt{2 \pi}}\right)^n - \frac{\norm{\underline{y}}^2}{2\sigma^2}\right)}\,\,\,\,\,\, where \norm{\underline{y}}^2=\sum \limits_{i=1}^n$$ \\
-$$equivalently,\,\,\,\,\substack{max\\ \\ \sigma >0 \,\,\,\,}n\,ln\left(\frac{1}{\sigma \sqrt{2 \pi}}\right)-\frac{\norm{\underline{y}}^2}{2\sigma^2}=f(\sigma)$$\\
-$$\frac{\partial f(\sigma)}{\partial \sigma}=0\Rightarrow \frac{-n}{\sigma \sqrt{2\pi}}\, \sqrt{2\pi}-\frac{\norm{\underline{y}}^2(-2)}{2\,\sigma^3}=0$$\\
-$$\frac{-n}{\sigma}+\frac{\norm{\underline{y}}^2}{\sigma^3}=0\Rightarrow n\sigma^3=\norm{\underline{y}}^2 \sigma$$\\
-$$\sigma(n\sigma^2 - \norm{\underline{y}}^2)=0\Rightarrow \sigma^2 = \frac{\norm{\underline{y}}^2}{n}\,\,\,\,\,\,\, and \,\, \sigma > 0 \Rightarrow \sigma \neq 0.$$\\
-similarely for numerator also, we get,$\sigma^2=\frac{\norm{\underline{y}-\mu}^2}{n}.$\\
+here $\theta = (\hat{\mu},\sigma^2),~\Lambda_1 =(\hat{\mu}=\mu,\sigma^2),~\mbox{and}~\Lambda_0 = (\hat{\mu}=0,\sigma^2)$.\\
 \begin{align*}
-L(y)&=\frac{\left(\frac{1}{\sqrt{2\pi}}\right)^n \left(\frac{n}{\norm{\underline{y}-\mu}^2}\right)e^{\left(-\frac{ \norm{\underline{y}-\mu}^2}{2 \frac{\norm{\underline{y}-\mu}^2}{n}} \right)}}{\left(\frac{1}{\sqrt{2\pi}}\right)^n \left(\frac{n}{\norm{\underline{y}}^2}\right)e^{\left(-\frac{ \norm{\underline{y}}^2}{2 \frac{\norm{\underline{y}}^2}{n}} \right)}}=\left(\frac{\norm{\underline{y}}^2}{\norm{\underline{y}-\mu}^2}\right)^{\frac{n}{2}}\\
-L(\underline{y})&=\left(\frac{\sum \limits_{i=1}^n y_i^2}{\sum \limits_{i=1}^n (y_i - \mu)^2}\right)^{\frac{n}{2}}\\
+&=\frac{\underset{\sigma >0}{\max}~P_1(\underline{y})}{\underset{\sigma >0}{\max}~P_0(\underline{y})}\\
+&=\frac{\underset{\sigma >0}{\max}~\left(\frac{1}{\sigma \sqrt{2\pi}}\right)^n e^{- \sum \limits_{i=1}^n \frac{(y_i-\mu)^2}{2\sigma^2}}}{\underset{\sigma >0}{\max}~\left(\frac{1}{\sigma \sqrt{2\pi}}\right)^n e^{- \sum \limits_{i=1}^n\frac{y_i^2}{2\sigma^2}}}\\
 \end{align*}
+consider denominator,
+\begin{equation*}
+\underset{\sigma >0}{\max}~\left(\frac{1}{\sigma \sqrt{2\pi}}\right)^n \, e^{-\frac{ \norm{\underline{y}}^2}{2 \sigma^2}}=\underset{\sigma >0}{\max}~e^{\ln\left(\left(\frac{1}{\sigma\, \sqrt{2 \pi}}\right)^n - \frac{\norm{\underline{y}}^2}{2\sigma^2}\right)},
+\end{equation*}
+where $\norm{\underline{y}}^2=\sum \limits_{i=1}^n y_i^2$. Equivalently,
+\begin{equation*}
+\underset{\sigma >0}{\max}~n\,ln\left(\frac{1}{\sigma \sqrt{2 \pi}}\right)-\frac{\norm{\underline{y}}^2}{2\sigma^2}\triangleq f(\sigma)
+\end{equation*}
+Consider $\frac{\partial f(\sigma)}{\partial \sigma}=0$, this gives,
+\begin{equation*}
+\frac{-n}{\sigma }+\frac{\norm{\underline{y}}^2}{\sigma^3}=0.
+\end{equation*}
+This gives,
+\begin{equation*}
+\sigma^2 = \frac{\norm{\underline{y}}^2}{n}.
+\end{equation*}
+Similarely for the numerator, we get, $\sigma^2=\frac{\norm{\underline{y}-\mu}^2}{n}$.
+\begin{align*}
+L(y)&=\frac{\left(\frac{1}{\sqrt{2\pi}}\right)^n \left(\frac{n}{\norm{\underline{y}-\mu}^2}\right)^{n/2}e^{\left(-\frac{ \norm{\underline{y}-\mu}^2}{2 \frac{\norm{\underline{y}-\mu}^2}{n}} \right)}}{\left(\frac{1}{\sqrt{2\pi}}\right)^n \left(\frac{n}{\norm{\underline{y}}^2}\right)^{n/2}e^{\left(-\frac{ \norm{\underline{y}}^2}{2 \frac{\norm{\underline{y}}^2}{n}} \right)}}=\left(\frac{\norm{\underline{y}}^2}{\norm{\underline{y}-\mu}^2}\right)^{\frac{n}{2}}
+\end{align*}
+Hence, the test statistic,
+\begin{equation*}
+L(\underline{y})=\left(\frac{\sum \limits_{i=1}^n y_i^2}{\sum \limits_{i=1}^n (y_i - \mu)^2}\right)^{\frac{n}{2}}.
+\end{equation*}
 %========================================================================================================
-
-\section{Solution 4}
+\hypertarget{solution4}{\subsection*{Solution 4}}
 \begin{equation*}
 y_k=\alpha x_k+\epsilon_k, \ k = 1,2,\dots,n
-\textbf{(a) :}
 \end{equation*}
-where $\{x_k\}$ are known parameters and $\epsilon_k \sim \mathcal{N}(0,\sigma^2)$
+where $\{x_k\}$ are known parameters and $\epsilon_k \sim \mathcal{N}(0,\sigma^2)$.
+\subsubsection*{(a).}
 \begin{align*}
-\widehat{\alpha }&=\frac{1}{\sum\limits_{k=1}^{n}x_{k}^2}\sum\limits_{k=1}^{n}y_{k}x_{k}\\
+\hat{\alpha }&=\frac{1}{\sum\limits_{k=1}^{n}x_{k}^2}\sum\limits_{k=1}^{n}y_{k}x_{k}\\
   &=\frac{1}{\sum\limits_{k=1}^{n}x_{k}^2}\sum\limits_{k=1}^{n}(\alpha x_{k}+\epsilon_{k})x_{k}\\
   &=\frac{1}{\sum\limits_{k=1}^{n}x_{k}^2}\sum\limits_{k=1}^{n}(\alpha x_{k}^2+\epsilon_{k} x_{k})\\
   &=\frac{1}{\sum\limits_{k=1}^{n} x_{k}^2}\alpha\sum_{k=1}^nx_k^2+\frac{1}{\sum\limits_{k=1}^{n} x_{k}^2}\sum_{k=1}^n x_k\epsilon_k\\
   &=\alpha+\frac{1}{\sum\limits_{k=1}^{n} x_{k}^2}\sum_{k=1}^n x_k\epsilon_k.
 \end{align*}
-Since $\epsilon_k \sim \mathcal{N}(0,\sigma^2)$ $mean(\widehat{\alpha})=\alpha$ and $var(\widehat{\alpha})=\frac{\sum_{k=1}^nx_k^2\sigma^2}{\left(\sum_{k=1}^nx_k^2\right)^2}=\frac{\sigma^2}{\sum_{k=1}^nx_k^2}$
+Since $\epsilon_k \sim \mathcal{N}(0,\sigma^2)$, $\mathbb{E}\{\hat{\alpha}\}=\alpha$ and $var(\hat{\alpha})=\frac{\sum_{k=1}^nx_k^2\sigma^2}{\left(\sum_{k=1}^nx_k^2\right)^2}=\frac{\sigma^2}{\sum_{k=1}^nx_k^2}$.
 %========================================================================================================
-\section{Solution 5}
-\textbf{(a) :}
+\hypertarget{solution5}{\subsection*{Solution 5}}
+\subsubsection*{(a).} For uniform cost, the decision rule in $M$-ary hypothesis testing takes the form,
 \begin{equation*}
-P_{e}=1-\frac{1}{M}\left[\sum\limits_{i=0}^{M-1}\int_{\Gamma_{i}}\frac{1}{({2\pi\sigma^2})^\frac{n}{2}}  e^{-\frac{(y-s_{i})^T(y-s_{i})}{\sigma^2}}dy\right]
-\end{equation*} 
-minimising $P_{e}$  is equivalent to choosing  $\Gamma_{i}$  such that  $ \cup^{i=0}_{M-1}\Gamma_{i}=R^n $  
-that result is maximum
-\begin{equation*}
-\sum\limits_{i=0}^{M-1}\int_{\Gamma_{i}}\frac{1}{({2\pi\sigma^2})^\frac{n}{2}}  e^{-\frac{(y-s_{i})^T(y-s_{i})}{\sigma^2}}dy
+\Gamma_i=\left\lbrace y\in \Gamma \left|  \pi_i p_i(y)= \underset{1\leq k \leq M}{\max}~\pi_k p_k(y)\right.\right\rbrace.
 \end{equation*}
-Cliam: The above term is minimised by choosing the shortest euclidean distance decoder.
-Proof by contradiction,
-Let $ \Gamma'\in \Gamma_{0} $ (without loss of generality) but for any $x$ in $\Gamma'$
-${(x-s_{0})^T(x-s_{0})}>{(x-s_{1})^T(x-s_{1})}$ i.e.,  $\Gamma'$ is nearer to $s_{1}$ than $s_{0}$.
-Thus,
+Given the hypotheses are equally likely, 
 \begin{equation*}
-\int_{\Gamma'}\frac{1}{({2\pi\sigma^2})^\frac{n}{2}}  e^{-\frac{(y-s_{0})^T(y-s_{0})}{\sigma^2}}dy < \int_{\Gamma}\frac{1}{({2\pi\sigma^2})^\frac{n}{2}}  e^{-\frac{(y-s_{1})^T(y-s_{1})}{\sigma^2}}dy
+\Gamma_i=\left\lbrace y\in \Gamma \left|  p_i(y)= \underset{1\leq k \leq M}{\max}~p_k(y)\right.\right\rbrace.
 \end{equation*}
-Thus, the probability of correct detection would be maximised if $\Gamma' \in \Gamma_{i} $ when $\Gamma'$ is nearestto $s_{i}$\newline
- \textbf{(b) :} When all signals are orthogonal the signals may be represented in a rotated space as.
-$[||s_{0}||,0,0,......]$\\
-$[0 ,||s_{0}||,0,0,......]$\\
-$[0,0,||s_{0}||,0,0,......]$\\
-$[0,0,0,||s_{0}||,0,0,......]$
-and so on.
+This is equivalent to,
+\begin{equation*}
+\Gamma_i=\left\lbrace y\in \Gamma \left|  (y-s_{i})^T(y-s_{i})= \underset{1\leq k \leq M}{\min}~(y-s_{k})^T(y-s_{k})\right.\right\rbrace.
+\end{equation*}
+or equivalently,
+\begin{equation*}
+\Gamma_i=\left\lbrace y\in \Gamma \left|  y^Ts_{i}= \underset{1\leq k \leq M}{\max}~y^Ts_{k}\right.\right\rbrace.
+\end{equation*}
+Thus, the probability of error is minimised if $\Gamma' \in \Gamma_{i} $ when $\Gamma'$ is nearest to $s_{i}$.
+\subsubsection*{(b).} 
+The probability of error is,
+\begin{equation*}
+P_e=\frac{1}{M}\sum\limits_{k=1}^{M}p_k(\Gamma_k^c),
+\end{equation*}
+and $p_k(\Gamma_k^c)=1-p_k\left(\underset{1\leq i\neq k \leq M}{\max}~y^Ts_{i}< y^Ts_{k}\right)$.
+\par Now, $y^Ts_{1},y^Ts_{2},\dots,y^Ts_{M}$ are independent Gaussian random variables under $H_k$ with variances $\sigma^2\|s_1\|^2$, and mean zero for $i\neq k$ and mean $\|s_1\|^2$ for $i=k$. Consider,
 \begin{align*}
-P_{e}&=1-\frac{1}{M}\left[\sum\limits_{i=0}^{M-1}\int_{\Gamma_{i}}\frac{1}{({2\pi\sigma^2})^\frac{n}{2}}  e^{-\frac{(y-s_{i})^T(y-s_{i})}{2\sigma^2}}dy\right]\\
-	&= 1-\frac{1}{M}\sum\limits_{i=0}^{M-1}\int_{\Gamma_{i}'}\frac{1}{({2\pi})^{n}}  e^{-\frac{(\underline{x}-d_{i})^T(\underline{x}-d_{i})}{2} }dx
+p_k\left(\underset{1\leq i\neq k \leq M}{\max}~y^Ts_{i}< y^Ts_{k}\right)=\frac{1}{\sqrt{2\pi}\sigma\|s_1\|}\int\limits_{-\infty}^{\infty} p_k\left(\underset{1\leq i\neq k \leq M}{\max}~y^Ts_{i}< z\right)\exp\left(-\frac{(z-\|s_1\|^2)}{2\sigma^2 \|s_1\|^2}\right)~dz.
 \end{align*}
-where $d_{i}=\frac{s_{i}}{\sigma}$ and $\underline{x}=\frac{y}{\sigma}$
-Since from part(a) we know that this is the shortest distance detector.
+Now,
+\begin{align*}
+p_k\left(\underset{1\leq i\neq k \leq M}{\max}~y^Ts_{i}< z\right)&=p_k\left( \underset{1\leq i\neq k \leq M}{\cap}~\{y^Ts_{i}< z\}\right)\\
+&=\prod\limits_{1\leq i\neq k \leq M} p_k\left( y^Ts_{i}< z\right),\\
+&=\left[ \Phi\left(\frac{z}{\sigma \|s_1\|} \right)\right]^{M-1}
+\end{align*}
+Substituting this result in the equation for $P_e$, we get,
 \begin{equation*}
-\int_{\Gamma_{i}'}\frac{1}{({2\pi})^{n}}  e^{-\frac{(\underline{x}-d_{i})^T(\underline{x}-d_{i})}{2}} dx = \int_{-\infty}^{\infty}[\phi(x)]^{(M-1)}e^{-\frac{(x-d)^2}{2}}dx
+P_e=1-\frac{1}{\sqrt{2\pi}}\int\limits_{-\infty}^{\infty} \left[\Phi(x)\right]^{M-1}e^{-(x-d)^2/2}~dx
 \end{equation*}
-where $ d=\frac{||s_{0}||}{\sigma}$.
-Since the region closest to $s_{i}$ is given by $\{ y :y_{i} \ is\ the\ highest\ omponent\}$
+where $d^2=\|\ubar{s}_1\|^2/\sigma^2$, $x=\ubar{s}_1^T\ubar{Y}/(\sigma \|\ubar{s}_1\|)$.
 %=========================================================================================================
 
-\section{Solution 6}
-
-$$H_0:\underline{Y}=\underline{N}$$\\
-$$H_1:\underline{Y}=\underline{N}+A[(1-\Theta)\underline{S^{(0)}}+\Theta\underline{S^{(1)}}]$$\\
-$$\underline{N}=N(\underline{0},I)$$\\
-$$A>0$$\\
-$$\Theta\sim\{0,1\}$$\\
-\textbf{(a) : }
-Given A is known,\\
-Under $H_0,\underline{Y}\sim\mathcal{N}(A\underline{s^{(0)}},I)\,\,\,\,H_1,\underline{Y}\sim\mathcal{N}(A\underline{s^{(1)}},I)$ with probability $\frac{1}{2},\frac{1}{2}$ respectively.\\
+\hypertarget{solution6}{\subsection*{Solution 6}}
+\begin{gather*}
+H_0: \ubar{Y}=\ubar{N},\\
+versus\hspace{200pt}\\
+H_1: \ubar{Y}=\ubar{N}+A\left[(1-\Theta)\ubar{s}^{(0)}+\Theta\ubar{s}^{(1)}\right],
+\end{gather*}
+where 
+$\underline{N}=\mathcal{N}(\underline{0},I)$, $A>0$, and $\Theta\in\{0,1\}$.
+\subsubsection*{(a).}
+Given A is known, under $H_1,~\underline{Y}\sim\mathcal{N}(A\underline{s}^{(0)},I),$ or $\underline{Y}\sim\mathcal{N}(A\underline{s}^{(1)},I)$ with equal probabilities $(\frac{1}{2},\frac{1}{2})$.
 \begin{align*}
-L(\underline{y})=\frac{P_1\left(\underline{y}\right)}{P_0\left(\underline{y}\right)}&=\frac{\frac{1}{2}\frac{1}{(2\pi)^{\frac{n}{2}}}e^{-\frac{1}{2}\left(\underline{y}-A \underline{(s^{(0)})} \right)^T \left(\underline{y}-A \underline{(s^{(0)})} \right)} +\frac{1}{2}\frac{1}{(2\pi)^{\frac{n}{2}}}e^{-\frac{1}{2}\left(\underline{y}-A \underline{(s^{(1)})} \right)^T \left(\underline{y}-A \underline{(s^{(1)})} \right)} }{\frac{1}{(2\pi)^{\frac{n}{2}}} e^{(-\frac{1}{2}\underline{y}^T \,\underline{y})}}\\
-&=\frac{1}{2}e^{(A^2 {\underline{s}^{(0)}}^T \underline{s}^{(0)})- 2 A {\underline{s}^{(0)}}^T \underline{y})} + \frac{1}{2}e^{(A^2 {\underline{s}^{(0)}}^T \underline{s}^{(1)})- 2 A {\underline{s}^{(1)}}^T \underline{y})}\\
-&=\frac{1}{2} e^{\left(\frac{A^2}{2}- A {\underline{s}^{(0)}}^T \underline{y}\right)}+\frac{1}{2} e^{\left(\frac{A^2}{2}- A {\underline{s}^{(1)}}^T \underline{y}\right)}\\
+L(\underline{y})=\frac{P_1\left(\underline{y}\right)}{P_0\left(\underline{y}\right)}&=\frac{\frac{1}{2}\frac{1}{(2\pi)^{\frac{n}{2}}}e^{-\frac{1}{2}\left(\underline{y}-A \underline{s}^{(0)} \right)^T \left(\underline{y}-A \underline{s}^{(0)} \right)} +\frac{1}{2}\frac{1}{(2\pi)^{\frac{n}{2}}}e^{-\frac{1}{2}\left(\underline{y}-A \underline{s}^{(1)} \right)^T \left(\underline{y}-A \underline{s}^{(1)} \right)} }{\frac{1}{(2\pi)^{\frac{n}{2}}} e^{(-\frac{1}{2}\underline{y}^T \,\underline{y})}}\\
+&=\frac{1}{2}\exp\{(A^2 {\underline{s}^{(0)}}^T \underline{s}^{(0)})- 2 A {\underline{s}^{(0)}}^T \underline{y})\} + \frac{1}{2}\exp\{(A^2 {\underline{s}^{(0)}}^T \underline{s}^{(1)})- 2 A {\underline{s}^{(1)}}^T \underline{y})\}.
 \end{align*}
-\textbf{(b) : }
-$$H_0: A=0$$\\
-$versus$\\ 
-$$H_1:  A>0$$\\
-$$\frac{\left.\frac{\partial(P_1(\underline{y}))}{\partial(A)}\right|_{A=0}}{P_0(\underline{y})}=\left. \frac{\partial(L(\underline{y}))}{\partial
-(A)} \right|_{A=0} $$ $\because P_0(\underline{y})$ doesn'tdepend on A.\\
+This gives the likelihood ratio,
+\begin{equation*}
+L(\underline{y})=\frac{1}{2} \exp\{\left({A^2}- A (\underline{s}^{(0)}+\underline{s}^{(1)})^T \underline{y}\right)\}
+\end{equation*}
+\subsubsection*{(b).}
+\begin{gather*}
+H_0: A=0,\\
+versus\hspace{100pt}\\
+H_1: A>0.
+\end{gather*}
+We have,
+\begin{equation*}
+\frac{\left.\frac{\partial(P_1(\underline{y}))}{\partial A}\right|_{A=0}}{P_0(\underline{y})}=\left. \frac{\partial(L(\underline{y}))}{\partial
+A} \right|_{A=0},
+\end{equation*}
+since $\because P_0(\underline{y})$ doesn't depend on $A$. It can be easily shown that,
 \begin{align*}
-L(\underline{y})&=- \left(A-{\underline{s}^{(0)}}^T \underline{y}\right) \frac{1}{2} e^{\left(\frac{A^2}{2}-A{\underline{s}^{(0)}}^T \underline{y}\right)}- \left(A-{\underline{s}^{(1)}}^T \underline{y}\right) \frac{1}{2} e^{\left(\frac{A^2}{2}-A{\underline{s}^{(1)}}^T \underline{y}\right)}\\
-&=\frac{1}{2}({\underline{s}^{(0)}}^T \underline{y} + {\underline{s}^{(1)}}^T \underline{y})\\
-&=\sum \limits_{k=1}^{n} \underline{y}_k ({\underline{s}_k}^{(0)}+{\underline{s}_k}^{(1)})\\
+L(\underline{y})={({\underline{s}}^{(0)} + {\underline{s}}^{(1)})}^T \underline{y}.
 \end{align*}
-
-\textbf{(c) : }
-under $H_0,\underline{Y}\sim\mathcal{N}(\underline{0},I),$\\
-$$T(\underline{y})={({\underline{s}}^{(0)} + {\underline{s}}^{(1)})}^T \underline{y} \sim \mathcal{N}(\underline{0},{({\underline{s}}^{(0)} + {\underline{s}}^{(1)})}^T I {({\underline{s}}^{(0)} + {\underline{s}}^{(1)})}) $$\\
-$$\sim \mathcal{N}(\underline{0},2)$$\\
-Randamization not needed. $\gamma = 0 \, or \, choose \,  \gamma = 1.$\\
-$set \,  P_F=P_0(T(\underline{y} > \eta)=\alpha,$\\
+Now, under $H_0,~\underline{Y}\sim\mathcal{N}(\underline{0},I)$, hence,
+\begin{equation*}
+T(\underline{y})={({\underline{s}}^{(0)} + {\underline{s}}^{(1)})}^T \underline{y} \sim \mathcal{N}(\underline{0},{({\underline{s}}^{(0)} + {\underline{s}}^{(1)})}^T{({\underline{s}}^{(0)} + {\underline{s}}^{(1)})})=\mathcal{N}(\underline{0},2)
+\end{equation*}
+Randamization not needed. Set $P_F=P_0(T(\underline{y}) > \eta)=\alpha,$ we get,
 \begin{align*}
-Q\left( \frac{\eta}{\sqrt{2}}\right)&=\alpha\\
-\eta &= \sqrt{2} Q^{-1} \left(\alpha \right)\\
-P_D&=P_1(T(\underline{y})>\eta)\\
+Q\left( \frac{\eta}{\sqrt{2}}\right)&=\alpha,
 \end{align*}
-$$under \, H_0,\underline{Y}\sim\mathcal{N}(A\underline{s^{(0)}},I)\, w.p \, \frac{1}{2}$$\\
-$$\,\,\,\,\,\,\, H_1,\underline{Y}\sim\mathcal{N}(A\underline{s^{(1)}},I) \, w.p \, \frac{1}{2},$$\\
-$$T(\underline{y})\sim \mathcal{N}(A,2)$$\\
-\begin{align*}
-P_D(for\, a\, given\, A)&=P_1(T(\underline{y})>\eta)\\
-&=Q\left( \frac{\eta - A}{\sqrt{2}}\right)\\
-&=Q\left( Q^{-1}(\alpha)-\frac{A}{\sqrt{2}}\right)\\
-\end{align*}
-
+or $\eta = \sqrt{2} Q^{-1} \left(\alpha \right)$. The detector correlates the input vector with the sum of signals ${\underline{s}}^{(0)}, {\underline{s}}^{(1)}$ and tests it against the $\eta$ value obtained.
 %=========================================================================================================
-\section{Solution 7}
-$$Y_k=\theta^{\frac{1}{2}}S_kR_k+N_k,\,\,\, k=1,2.....,n $$
-Where $S_1,S_2,...,S_n$ is known signal sequence,$\theta\geq0$ is constant.
-$R_1,R_2,....,R_n,N_1,N_2,...,N_n \sim \mathcal{N}(0,1).$\\
-\textbf{(a) : }
-$$H_0: \theta=0$$\\
-$versus$\\ 
-$$H_1:  \theta=A$$\\
-$Y_k\overset{H_0}{\sim} \mathcal{N}(0,1) \&  Y_k's \, are \,\, independ
-ent.$\\
-$$Y\overset{H_0}{\sim} \mathcal{N}(0,I)$$\\
-
-$$Y_k\overset{H_0}{\sim} \mathcal{N}(0,HA{S_k}^2) \, \& \, \, Y_k's \, are \,\, independ
-ent.$$\\
-$$Y\overset{H_1}{\sim} \mathcal{N}(0,C), \, where \,\\,c=diag(AS_1^2+1,....,AS_n^2+1).$$\\
+\hypertarget{solution7}{\subsection*{Solution 7}}
+\begin{equation*}
+Y_k=\theta^{\frac{1}{2}}S_kR_k+N_k,\,\,\, k=1,2,\dots,n 
+\end{equation*}
+where $S_1,S_2,...,S_n$ is a known signal sequence, $\theta\geq0$ is constant, and $R_1, \dots, R_n,N_1,\dots, N_n \sim \mathcal{N}(0,1)$.
+\subsubsection*{(a).}
+\begin{gather*}
+H_0: \theta=0,\\
+versus\hspace{100pt}\\
+H_1: \theta=A.
+\end{gather*}
+$Y_k's$ are independent, and,
+\begin{gather*}
+Y\overset{H_0}{\sim} \mathcal{N}(0,I),\\
+Y\overset{H_1}{\sim} \mathcal{N}(0,C),
+\end{gather*}
+where $C=diag(AS_1^2+1,....,AS_n^2+1)$.
 \begin{align*}
-L(Y)=\frac{P_{\frac{Y}{H_1}}\left(\frac{y}{H_1}\right)}{P_{\frac{Y}{H_0}}\left(\frac{y}{H_0}\right)}&=\frac{1}{\left(\prod\limits_{k=1}
-^{n}(AS_k^2+1)\right)^\frac{1}{2}}exp\left\{\frac{1}{2}\sum\limits_{k=1}^n(y_k^2-\frac{y_k^2}{AS_k^2+1})\right\}\\
+L(Y)=\frac{P_{{Y}|{H_1}}\left({y}|{H_1}\right)}{P_{{Y}|{H_0}}\left({y}|{H_0}\right)}&=\frac{1}{\left(\prod\limits_{k=1}
+^{n}(AS_k^2+1)\right)^\frac{1}{2}}\exp\left\{\frac{1}{2}\sum\limits_{k=1}^n\left(y_k^2-\frac{y_k^2}{AS_k^2+1}\right)\right\},\\
 &=\frac{1}{\left(\prod\limits_{k=1}
-^{n}(AS_k^2+1)\right)^\frac{1}{2}}exp\left\{\frac{1}{2}\sum\limits_{k=1}^n\left(\frac{AS_k^2y_K2}{1+AS_k^2}\right) \right\}\\
+^{n}(AS_k^2+1)\right)^\frac{1}{2}}\exp\left\{\frac{1}{2}\sum\limits_{k=1}^n\left(\frac{AS_k^2y_k^2}{1+AS_k^2}\right) \right\}.
 \end{align*}
-In this point $A,S_1,S_2,....,S_n$ are known.\\
-$$\sum\limits_{k=1}^n\left(\frac{AS_k^2y_K2}{1+AS_k^2}\right)y_k^2=T(Y)$$\\
-$$ T(Y) \substack{H_0\\\gtrless\\ H_1} \gamma$$
-$T(Y)$ is Chi-Square distributed.\\
-\textbf{(b) : }
-$$H_0: \theta=0$$\\
-$versus$\\ 
-$$H_1:  \theta>0$$\\
-From Part(a)\\
-$$L(Y)=\frac{1}{\left(\prod\limits_{k=1}
-^{n}(\theta S_k^2+1)\right)^\frac{1}{2}}exp\left(\frac{1}{2}\sum\limits_{k=1}^n\frac{\theta S_k^2}{\theta S_k^2+1}y_k^2\right)\substack{H_0\\\gtrless\\ H_1}\gamma\prime$$\\
-If all the $S_k$'s are of equall magnitude,we have a test statistic independent of the actual value$S_k$'s take and the positive value $\theta$ takes.\\
-If $|S_1|=|S_2|=.....=|S_n|$, UMP exists.\\
-\textbf{(c) : }
-Locally Most Powerful test:\\
-$$\left.\frac{\partial L(Y)}{\partial\theta}\right|_{\theta=0}\substack{H_0\\\gtrless\\ H_1}\gamma$$\\
-$$\sum\limits_{k=1}^n\frac{\theta S_k^2}{\theta S_k^2+1}y_k^2\substack{H_0\\\gtrless\\ H_1}\gamma$$\\
-$$\left.\sum\limits_{k=1}^n\frac{(\theta S_k^2+1)S_k^2-\theta S_k^2(S_k^2)}{(\theta S_k^2+1)^2}\right|_{\theta=0}(y_k^2)\substack{H_0\\\gtrless\\ H_1}\gamma$$\\
-$$\sum\limits_{k=1}^nS_k^2y_k^2\gtrless\gamma$$\\
-$$\sum\limits_{k=1}^nS_k^2y_k^2 \substack{H_0\\\gtrless\\ H_1} \gamma$$\\
-Above condition is LMP test condition at $\theta=0$.\\
-But we need $S_k$ values to compute.Hence LMP doesn't exists.
+Given $A,S_1,S_2,....,S_n$ are known,
+\begin{equation*}
+T(Y)=\sum\limits_{k=1}^n\left(\frac{AS_k^2}{1+AS_k^2}\right)y_k^2,
+\end{equation*}
+and the Neyman-Pearson test is,
+\begin{equation*}
+T(Y) \substack{H_0\\\gtrless\\ H_1} \gamma.
+\end{equation*}
+Detector has a weighted sum of squares form.
+\subsubsection*{(b).}
+\begin{gather*}
+H_0: \theta=0,\\
+versus\hspace{100pt}\\
+H_1: \theta>0.
+\end{gather*}
+From Part(a),
+\begin{equation*}
+L(Y)=\frac{1}{\left(\prod\limits_{k=1}
+^{n}(\theta S_k^2+1)\right)^\frac{1}{2}}\exp\left(\frac{1}{2}\sum\limits_{k=1}^n\frac{\theta S_k^2}{\theta S_k^2+1}y_k^2\right)\substack{H_0\\\gtrless\\ H_1}\gamma'
+\end{equation*}
+If all the $S_k$'s are of equal magnitude, we have a test statistic independent of the actual values that $S_k$'s take and the value of $\theta$. If $|S_1|=|S_2|=.....=|S_n|$, UMP exists.
+\subsubsection*{(c). Locally Most Powerful test}
+\begin{align*}
+\left.\frac{\partial L(Y)}{\partial\theta}\right|_{\theta=0}& \substack{H_0\\\gtrless\\ H_1}\gamma\\
+\left.\sum\limits_{k=1}^n \frac{\partial}{\partial\theta}\left[\frac{\theta S_k^2}{\theta S_k^2+1}\right]\right|_{\theta=0} y_k^2~& \substack{H_0\\\gtrless\\ H_1}\gamma\\
+\left.\sum\limits_{k=1}^n\frac{(\theta S_k^2+1)S_k^2-\theta S_k^2(S_k^2)}{(\theta S_k^2+1)^2}\right|_{\theta=0}y_k^2&\substack{H_0\\\gtrless\\ H_1}\gamma\\
+\sum\limits_{k=1}^nS_k^2y_k^2&\gtrless\gamma
+\end{align*}
+This gives LMP test statistic as a function of $S_k$ values.
+(The question must have been does UMP exist for general values of $S_k$, if not derive the GLRT statistic).
 %\end{enumerate}
 %========================================================================================================
-
-\section{Solution 8}
+\hypertarget{solution8}{\subsection*{Solution 8}}
 Poisson Distribution has pdf
 \begin{equation*}
-f(x|\lambda)=\frac{\lambda^x}{x!}e^{-\lambda} \ for \ x=1,2,\dots
+f(x|\lambda)=\frac{\lambda^x}{x!}e^{-\lambda},~~x\in \{1,2,\dots\}
 \end{equation*}
-and the joint pdf is
+and the joint pdf for a random sample of size $n$ is,
 \begin{equation*}
-f(x_1,\dots,x_n|\lambda)=\frac{\lambda^{\sum x_i}}{\prod_{i=1}^n x_i!}e^{-n\lambda}=\frac{1}{\prod_{i=1}^n X_i!}e^{-n\lambda}\lambda^{\sum X_i}.
+f(x_1,\dots,x_n|\lambda)=\frac{\lambda^{\sum x_i}}{\prod_{i=1}^n x_i!}e^{-n\lambda}.
 \end{equation*}
-Therefore we can take
+Let us define,
 \begin{equation*}
-u(x_1,\dots,x_n)=\frac{1}{\prod_{i=1}^n X_i!}, \ T(x_1,\dots,x_n)=\sum_{i=1}^n  x_i \ and v(T,\lambda)=e^{-n\lambda}\lambda^T.
+u(x_1,\dots,x_n)=\frac{1}{\prod_{i=1}^n X_i!}, \ T(x_1,\dots,x_n)=\sum_{i=1}^n  x_i~\mbox{and}~v(T,\lambda)=e^{-n\lambda}\lambda^T.
 \end{equation*}
-Therefore by Neyman-Fisher factorization criterion $T=\sum_{i=1}^n X_i$ is a sufficient statistics.
+By Neyman-Fisher factorization criterion, we can say that $T=\sum_{i=1}^n X_i$ is a sufficient statistic.
 \end{document}
