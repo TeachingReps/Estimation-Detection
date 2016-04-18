@@ -94,9 +94,412 @@ where $A_i\in \{-1-j,-1+j,1-j,1+j\},~j=\sqrt{-1}$, and noise $N$ follows zero me
 \end{enumerate}
 \newpage
 \par{\centering\Large {Solutions}\par}
-\input{Solution1.tex}
-\input{Solution2.tex}
-\input{Solution3.tex}
-\input{Solution4.tex}
-\input{Solution5.tex}
+\hypertarget{solution1}{ Solution to Problem 1:}\\
+\begin{enumerate}[label=(\alph*).]
+	\item Bayes rule for a Binary hypothesis testing problem is,
+	\begin{equation*}
+		\delta_B(y)=\mathbbm{1}_{\{L(y)\geq\tau\}},
+	\end{equation*}
+	where, likelihood ratio $L(y)=\frac{p_1(y)}{p_0(y)}$, and threshold $\tau=\frac{\pi_0 (C_{10}-C_{00})}{\pi_1 (C_{01}-C_{11})}$. For the case of uniform costs and equal priors, $(C_{00}=C_{11}=0;C_{10}=C_{01}=1)$, and  $\pi_0=\pi_1=0.5$.\\
+	Given the parameters, we have
+		\begin{equation*}		
+			\nonumber
+			L(y)=\frac{3}{2(y+1)},~~~0\leq y\leq 1,
+		\end{equation*}
+	and $\tau=1$. Simplifying $\frac{3}{2(y+1)} \geq 1$, we get the decision rule,
+	\begin{equation*}
+		\delta_B(y)=\mathbbm{1}_{y \leq 0.5}.
+	\end{equation*}	
+	For this rule, the two risks are,
+	\begin{equation*}
+		R_0(\delta_B)=\int\limits_{0}^{0.5} \frac{2}{3}(y+1)~dy=\frac{5}{12}
+	\end{equation*}			
+	\begin{equation*}
+		R_1(\delta_B)=\int\limits_{0.5}^{1} 1~dy=\frac{1}{2}.
+	\end{equation*}				
+	and	total risk,
+	\begin{equation*}
+		R(\delta_B)=\pi_0 R_0(\delta_B)+\pi_1 R_1(\delta_B)=\frac{1}{2}\times\frac{5}{12}+\frac{1}{2}\times\frac{1}{2}=\frac{11}{24}
+	\end{equation*}	
+\item
+\begin{figure*} %[htb]
+\begin{minipage}[b]{.45\textwidth}
+	\begin{tikzpicture}[scale=4]				
+%	\draw[step=1.0,black,thin] (-1,-1) grid (3,3);
+	\draw [<->,thick] (0,1.5) node (yaxis) [above] {$p(y)$}
+        |- (1.5,0) node (xaxis) [right] {$y$};
+    \draw (0,2/3) coordinate (a_1) -- (1,4/3) coordinate (a_2) node [above, sloped] (TextNode) {$p_0(y)$};
+        \draw (0,1) coordinate (b_1) -- (1,1) coordinate (b_2) node [ above, sloped] (TextNode) {$p_1(y)$};    
+ \draw[dotted] (0.5,0) coordinate (c_1) -- (0.5,1) coordinate (c_2);            
+\foreach \x/\xtext in {1/1, 0.5/\frac{1}{2},}
+    \draw[shift={(\x,0)}] (0pt,1pt) -- (0pt,-1pt) node[below] {$\xtext$};        
+\foreach \y/\ytext in {1/1, 0.66/\frac{2}{3}, 1.33/\frac{4}{3}}
+    \draw[shift={(0,\y)}] (1pt,0pt) -- (-1pt,0pt) node[left] {$\ytext$};    
+	\end{tikzpicture}
+	\centerline{$\pi_0=0.5$}
+\end{minipage}
+\begin{minipage}[b]{0.45\textwidth}
+	\begin{tikzpicture}[scale=4]				
+%	\draw[step=1.0,black,thin] (-1,-1) grid (3,3);
+	\draw [<->,thick] (0,1.5) node (yaxis) [above] {$\pi(y)$}
+        |- (1.5,0) node (xaxis) [right] {$y$};
+    \draw (0,2/7) coordinate (a_1) -- (1,4/7) coordinate (a_2) node [midway, below, sloped] (TextNode) {$\pi_0(y)$};
+        \draw (0,4/7) coordinate (b_1) -- (1,4/7) coordinate (b_2) node [ above, sloped] (TextNode) {$\pi_1(y)$};                
+\foreach \x/\xtext in {1/1, 0.5/\frac{1}{2},}
+    \draw[shift={(\x,0)}] (0pt,1pt) -- (0pt,-1pt) node[below] {$\xtext$};        
+\foreach \y/\ytext in {1/1, 0.285/\frac{2}{7}, 0.57/\frac{4}{7}}
+    \draw[shift={(0,\y)}] (1pt,0pt) -- (-1pt,0pt) node[left] {$\ytext$};    
+	\end{tikzpicture}
+		\centerline{$\pi_0=\frac{3}{7}$}
+\end{minipage}
+\begin{minipage}[b]{.45\textwidth}
+	\begin{tikzpicture}[scale=4]				
+%	\draw[step=1.0,black,thin] (-1,-1) grid (3,3);
+	\draw [<->,thick] (0,1.5) node (yaxis) [above] {$\pi(y)$}
+        |- (1.5,0) node (xaxis) [right] {$y$};
+    \draw (0,2/5) coordinate (a_1) -- (1,4/5) coordinate (a_2) node [midway, above, sloped] (TextNode) {$\pi_0(y)$};
+        \draw (0,2/5) coordinate (b_1) -- (1,2/5) coordinate (b_2) node [above, sloped] (TextNode) {$\pi_1(y)$};    
+\foreach \x/\xtext in {1/1}
+    \draw[shift={(\x,0)}] (0pt,1pt) -- (0pt,-1pt) node[below] {$\xtext$};        
+\foreach \y/\ytext in {1/1, 0.4/\frac{2}{5}, 0.8/\frac{4}{5}}
+    \draw[shift={(0,\y)}] (1pt,0pt) -- (-1pt,0pt) node[left] {$\ytext$};    
+	\end{tikzpicture}
+			\centerline{$\pi_0=\frac{3}{5}$}
+\end{minipage}
+\hspace{35pt}
+\begin{minipage}[b]{.45\textwidth}
+	\begin{tikzpicture}[scale=4]				
+%	\draw[step=1.0,black,thin] (-1,-1) grid (3,3);
+	\draw [<->,thick] (0,1.5) node (yaxis) [above] {$\pi(y)$}
+        |- (1.5,0) node (xaxis) [right] {$y$};
+    \draw (0,0.36) coordinate (a_1) -- (1,0.72) coordinate (a_2) node [midway, above, sloped] (TextNode) {$\pi_0(y)$};
+        \draw (0,0.45) coordinate (b_1) -- (1,0.45) coordinate (b_2) node [above, sloped] (TextNode) {$\pi_1(y)$};    
+\foreach \x/\xtext in {1/1}
+    \draw[shift={(\x,0)}] (0pt,1pt) -- (0pt,-1pt) node[below] {$\xtext$};        
+\foreach \y/\ytext in {1/1}
+    \draw[shift={(0,\y)}] (1pt,0pt) -- (-1pt,0pt) node[left] {$\ytext$};    
+	\end{tikzpicture}
+			\centerline{$\pi_0=0.55$}
+\end{minipage}
+\caption{Problem 1 (b)}
+\end{figure*}
+\begin{itemize}
+	\item For equal prior case, $p_1(y)>p_0(y)$ for $y<0.5$, hence decision rule is $y<0.5$.
+	\item For $\pi_0<\frac{3}{7}$, $\pi_1(y)>\pi_0(y),~\forall 0 \leq y \leq 1$, hence decision rule is $y\geq 0$, and $\Gamma_1=\mathcal{G}$.		 
+	\item For $\pi_0>\frac{3}{5}$, $\pi_1(y)<\pi_0(y),~\forall 0 \leq y \leq 1$, hence decision rule is $y \geq 1$, or equivalenty $\Gamma_1=\{\}$.		 	
+	\item For $\frac{3}{7}<\pi_0<\frac{3}{5}$, decision rule depends on $\pi_0$; $\delta_B(y)=\mathbbm{1}_{\{y\leq \frac{1}{2}(\frac{3}{\pi_0}-5)\}}$
+\end{itemize}
+\item Consider the case $\frac{3}{7}<\pi_0<\frac{3}{5}$, we can write,
+\begin{equation*}
+	R_0(\delta_\tau)=\int\limits_{0}^{\tau} \frac{2}{3}(y+1)~dy=\frac{\tau^2}{3}+\frac{2\tau}{3},
+\end{equation*}
+and
+\begin{equation*}
+	R_1(\delta_\tau)=\int\limits_{\tau}^{1} 1~dy=1-\tau.
+\end{equation*}
+For difference values of $\pi_0$, the conditional risks are,
+\begin{equation*}
+	R_0({\delta})=\begin{cases}
+		1~~~~~~~~~~~~~~~~0\leq \pi \leq \frac{3}{7}, \\
+		\frac{\tau^2}{3}+\frac{2\tau}{3}~~~~~~~~\frac{3}{7} < \pi \leq \frac{3}{5}, \\
+		0~~~~~~~~~~~~~~~~\frac{3}{5} < \pi \leq 1, 
+	\end{cases}
+\end{equation*}
+and
+\begin{equation*}
+	R_1({\delta})=\begin{cases}
+		0~~~~~~~~~~~~~~~~0\leq \pi \leq \frac{3}{7}, \\
+		1-\tau~~~~~~~~~~\frac{3}{7} < \pi \leq \frac{3}{5}, \\
+		1~~~~~~~~~~~~~~~~\frac{3}{5} < \pi \leq 1.
+	\end{cases}
+\end{equation*}
+According to the minimix criterion, $R_1(\delta)=R_0(\delta)$,
+\begin{eqnarray*}
+	\frac{\tau^2}{3}+\frac{2\tau}{3}=1-\tau	\\\nonumber
+	\tau^2+5\tau-3=0
+\end{eqnarray*}
+This gives $\tau=\frac{\sqrt{37}-5}{2}$. Substituting for $\tau=\frac{1}{2}(\frac{3}{\pi_0}-5)$, we get $\pi_0=\frac{3}{\sqrt{37}}$. Corresponding minimax risk is $V(\pi_L)=\frac{\sqrt{37}+7}{2}$ 
+\item Neyman-Pearson test will have the form,
+\begin{equation*}
+\delta_{NP}(y)=\begin{cases}
+1,~~~~if~\frac{3}{2(y+1)}>\eta,\\
+\gamma_0,~~if \frac{3}{2(y+1)}=\eta,\\
+0,~~~if \frac{3}{2(y+1)}<\eta.
+\end{cases}
+\end{equation*}
+Equivalently,
+\begin{equation*}
+\delta_{NP}(y)=\begin{cases}
+1,~~~~if~y<\eta',\\
+\gamma_0,~~if y=\eta',\\
+0,~~~if y>\eta',
+\end{cases}
+\end{equation*}
+where $\eta'=\frac{3}{2\eta}-1$. Now,
+\begin{equation*}
+P_F(\delta_{NP})=P_0(\Gamma_1)=\int\limits_{0}^{\eta'} \frac{2}{3}(y+1) dy=\begin{cases}
+0,~~~~~~~~~~~~~~~if~\eta'\leq 0,\\
+\frac{2\eta'}{3}(\frac{\eta'}{2}+1),~~~if~0 < \eta' <1,\\
+1,~~~~~~~~~~~~~~~if~\eta'\geq 1.
+\end{cases}
+\end{equation*}
+For $\alpha\in (0,1)$, we need,
+\begin{equation*}
+\frac{2\eta'}{3}(\frac{\eta'}{2}+1)=\alpha,
+\end{equation*}
+which gives, $\eta'=-1+\sqrt{1+3\alpha}$. The test will then be,
+\begin{equation*}
+\delta_{NP}(y)=\begin{cases}
+1,~~~~if~y\leq -1+\sqrt{1+3\alpha},\\
+0,~~~if y>-1+\sqrt{1+3\alpha},
+\end{cases}
+\end{equation*}
+The corresponding detection probability is,
+\begin{equation*}
+P_D(\delta_{NP})=P_1(\Gamma_1)=\int\limits_{0}^{\eta'}~dy=-1+\sqrt{1+3\alpha}.
+\end{equation*}
+\end{enumerate}
+\hypertarget{solution2}{ Solution to Problem 2:}\\
+\begin{enumerate}[label=(\alph*).]
+\item The distribution under $H_0$ is,
+\begin{equation*}
+	p_0(y)=\begin{cases}
+		e^{-y},~~~y\geq 0\\	
+		0,~~~~~~y<0.
+	\end{cases}	
+\end{equation*}
+Under $H_1$, 
+\begin{equation*}
+p_1(y)=\int\limits_{0}^{y} e^{-s} e^{s-y}~ds,~~y\geq 0
+\end{equation*}
+which can be simplified to, 
+\begin{equation*}
+p_1(y)=\begin{cases}
+		ye^{-y},~~~y\geq 0\\	
+		0,~~~~~~y<0.
+	\end{cases}	
+\end{equation*}
+Likelihood ratio,
+\begin{equation*}
+	L(y)=y
+\end{equation*}
+\item The threshold,
+\begin{equation*}
+	\tau=\frac{\pi_0 }{1-\pi_0} \frac{(C_{10}-C_{00})}{(C_{01}-C_{11})}
+\end{equation*}
+Substituting for $\pi_0=\frac{1}{4}$, and $C_{00}=C_{11}=0$, $C_{01}=2C_{10}=1$, we get $\tau=\frac{1}{6}$. Bayes rule for this case is,
+\begin{equation*}
+	\delta_B(y)=\mathbbm{1}_{\{y\geq \frac{1}{6}\}}.
+\end{equation*}
+\begin{equation*}
+	P_0(\Gamma_1)=\int\limits_{\frac{1}{6}}^{\infty} e^{-y}~dy=e^{-\frac{1}{6}}.
+\end{equation*}
+\begin{equation*}
+	P_1(\Gamma_0)=\int\limits_{0}^{\frac{1}{6}} ye^{-y}~dy=1-e^{-\frac{1}{6}}-\frac{1}{6}e^{-\frac{1}{6}}.
+\end{equation*}
+Conditional risks,
+\begin{equation*}
+R_0(\delta_B)=\frac{1}{2}e^{-\frac{1}{6}},~R_1(\delta_B)=1-\frac{7}{6}e^{-\frac{1}{6}}.
+\end{equation*}
+and Total bayes risk,
+\begin{equation*}
+	r(\delta_B)=\frac{1}{8}e^{-\frac{1}{6}}+\frac{3}{4}-\frac{21}{24}e^{-\frac{1}{6}}=\frac{3}{4}(1-e^{-\frac{1}{6}}).
+\end{equation*}
+\item Interms of threshold ($\tau$), the conditional risks can be written as,
+ \begin{equation*}
+ R_0(\delta_B)=\frac{1}{2}e^{-\tau},~R_1(\delta_B)=1-(1+\tau)e^{-\tau}.
+ \end{equation*}
+ Minimax condition requires $R_0(\delta_B)=R_1(\delta_B)$.
+ \begin{equation*}
+	\frac{1}{2}e^{-\tau}=1-(1+\tau)e^{-\tau}
+ \end{equation*}
+ The solution for $\tau$ should satisty the equation,
+ \begin{equation*}
+	\left(\frac{3}{2}+\tau_L\right)=e^{\tau_L}
+ \end{equation*}
+ The decision rule corresponds to $\pi_{0L}$, which can be obtained from $\tau_L=\frac{\pi_{0L}}{2(1-\pi_{0L})}$, and minimax risk is $V(\pi_L)=\frac{1}{2}e^{-\tau_L}$.
+ \item The Neyman-Pearson test will have the form,
+ \begin{equation*}
+	\delta_{NP}(y)=\begin{cases}
+		1,~~~~if~L(y)> \eta,\\
+		\gamma_0,~~if~L(y)=\eta,\\
+		0,~~~if~L(y)<\eta.
+	\end{cases}
+ \end{equation*}
+ Since $L(y)=y$, we have,
+ \begin{equation*}
+P_{FA}=\int\limits_{\eta}^{\infty} e^{-y}~dy=e^{-\eta}.
+ \end{equation*}
+Setting this equal to $\alpha$, we get $\eta=\ln(1/\alpha)$. The test is,
+ \begin{equation*}
+	\delta_{NP}(y)=\begin{cases}
+		1,~~~~if~y\geq \ln(1/\alpha),\\
+		0,~~~~if~y<\ln(1/\alpha).
+	\end{cases}
+ \end{equation*}
+ The Probability of detection is,
+ \begin{equation*}
+	\int\limits_{\eta}^{\infty}ye^{-y}~dy=(1+\eta) e^{-\eta}=\alpha(1-\ln(\alpha))
+ \end{equation*}
+\end{enumerate}
+\hypertarget{solution3}{Solution to Problem 3:}\\
+For the $M$-ary Hypothesis testing, we have,
+\begin{equation*}
+R_j(\delta)=\sum\limits_{i=1}^{M} C_{ij} P_j(\Gamma_i),
+\end{equation*}
+and the total risk,
+\begin{equation*}
+r(\delta)=\sum\limits_{j=1}^{M}\pi_j \sum\limits_{i=1}^{M} C_{ij} P_j(\Gamma_i),
+\end{equation*}
+We can write,
+\begin{eqnarray*}
+r(\delta)=\sum\limits_{i=1}^{M} \sum\limits_{j=1}^{M}\pi_j C_{ij} P_j(\Gamma_i),\\
+=\sum\limits_{i=1}^{M} \int\limits_{\Gamma_i} \sum\limits_{j=1}^{M}\pi_j C_{ij} p_j(y)~dy,\\
+\end{eqnarray*}
+This will be minimized, if for each $y$, the decision region is chosen such that $\sum\limits_{j=1}^{M}\pi_j C_{ij} p_j(y)$ is minimum, i.e.,
+\begin{equation*}
+\Gamma_i=\left\lbrace y\in \Gamma \left|  \sum\limits_{j=1}^{M}\pi_j C_{ij} p_j(y)= \underset{1\leq k \leq M}{\min} \sum\limits_{j=1}^{M}\pi_j C_{kj} p_j(y)\right.\right\rbrace.
+\end{equation*}
+\hypertarget{solution4}{Solution to Problem 4:}
+\begin{enumerate}[label=(\alph{*}).]
+\item For the given $p_0(y)$, and $p_1(y)$, any decision rule will have the form,
+\begin{equation*}
+\delta(y)=\begin{cases}
+1,\hspace{42pt}|y|\geq 1\\
+\mathbbm{1}_{\{L(y)\geq \tau\}},\hspace{5pt} |y|<1.
+\end{cases}
+\end{equation*}
+For $|y|<1$, we have,
+\begin{equation*}
+	L(y)=\frac{2-|y|}{4(1-|y|)}
+\end{equation*}
+Now,
+\begin{eqnarray*}
+	\frac{2-|y|}{4(1-|y|)} \geq \tau,\\
+	(4\tau-1)|y|\geq (4\tau-2).
+\end{eqnarray*}
+Note that the decision rule requires $(4\tau-2)>0$, and $(4\tau-1)>0$, i.e., $\pi_0>\frac{1}{2}$ (where we substituted $\tau=\frac{\pi_0}{2(1-\pi_0)}$). For $\pi_0\leq 0.5$, we have $\Gamma_1=[-1,1]$, and $\Gamma_0=\{\}$, and the minimum risk over all decision rules equals $C_{11}=0$, i.e., $V(\pi_0)=C_{10}\pi_0$, for $\pi_0\leq 0.5$.
+\begin{equation*}
+	|y|\geq \frac{(4\tau-2)}{(4\tau-1)}.
+\end{equation*}
+Interms of $\pi_0$, we have 
+\begin{equation*}
+	|y|\geq \frac{(4\pi_0-2)}{(3\pi_0-1)}.
+\end{equation*}
+For $|y|>\eta$, we have,
+\begin{equation*}
+R_0(\delta)=C_{10} (1-\eta)^2,
+\end{equation*}
+and
+\begin{equation*}
+R_1(\delta)=C_{01} (\eta-\frac{\eta^2}{4})=2C_{10} (\eta-\frac{\eta^2}{4}).
+\end{equation*}
+Now $V(\pi_0)$ is,
+\begin{eqnarray*}
+	V(\pi_0)=\pi_0 R_0(\delta_{\pi_0})+\pi_1 R_1(\delta_{\pi_0})\\
+	V(\pi_0)=\pi_0 C_{10} (1-\eta)^2+(1-\pi_0) 2C_{10} (\eta-\frac{\eta^2}{4});~\eta=\frac{(4\pi_0-2)}{(3\pi_0-1)}
+\end{eqnarray*}
+Substituting and simplifying, we get,
+\begin{equation*}
+V(\pi_0)=C_{10} \left(\pi_0-\frac{(4\pi_0-2)^2}{2(3\pi_0-1)}\right)
+\end{equation*}
+\begin{figure*}[h]
+\centering
+\begin{tikzpicture}[scale=1.25]
+    \begin{axis}[xmin=0, xmax=1, ymin=0,ymax=0.7,xlabel={$\pi_0$},
+           ylabel={$\frac{V(\pi_0)}{C_{10}}$},xtick={0,0.1,...,1},]
+       \addplot [blue,domain=0:0.5, samples=200]{x};       
+       \addplot [blue,domain=0.5:1, samples=200]{x-((4*x-2)^2)/(2*(3*x-1))};       \addplot[dotted, thick, samples=50, smooth,domain=0:1,magenta] coordinates {(0.5,0)(0.5,0.5)};         
+    \end{axis}
+\end{tikzpicture}
+\caption{$V(\pi_0)$}
+\label{fig:prob4}
+\end{figure*}
+This function $V(\pi_0)$ is shown in Fig. \ref{fig:prob4}. The maximum occurs for $\pi_0>\frac{1}{2}$. 
+Setting $R_0(\delta)=R_1(\delta)$, we have,
+\begin{equation*}
+C_{10} (1-\eta)^2=2C_{10} (\eta-\frac{\eta^2}{4}),
+\end{equation*}
+which gives the solution $\eta=\frac{4- \sqrt{10}}{3}$. Substituting, we get for $\eta=\frac{(4\pi_0-2)}{(3\pi_0-1)}$, we get $\pi_0=\frac{2+\sqrt{10}}{3\sqrt{10}}$. Corresponding minimax risk is $(\frac{\sqrt{10}-1}{3})^2$.
+\item 
+The Neyman-Pearson test will have the form,
+ \begin{equation*}
+	\delta_{NP}(y)=\begin{cases}
+		1,~~~~if~L(y)> \eta',\\
+		\gamma_0,~~if~L(y)=\eta',\\
+		0,~~~if~L(y)<\eta'.
+	\end{cases}
+ \end{equation*}
+ The decision rule in the current case will have the form (since $y$ has a continuous density),
+  \begin{equation*}
+ 	\delta_{NP}(y)=\begin{cases}
+ 		1,~~~~if~|y|\geq \eta,\\
+ 		0,~~~if~|y|<\eta.
+ 	\end{cases}
+  \end{equation*}
+The false alarm probability,
+\begin{equation*}
+P_{FA}=P_0(\Gamma_1)=(1-\eta)^2.
+\end{equation*}  
+For $\alpha\in(0,1)$, by setting $P_{FA}=\alpha$, we get $(1-\eta)^2=\alpha$, which gives $\eta=1-\sqrt{\alpha}$. The detection probability is,
+\begin{equation*}
+P_D=P_1(\Gamma_1)=2 \int\limits_{\eta}^{2} \frac{2-y}{4}~dy=1-\eta+\eta^2/4.
+\end{equation*}
+substituting $\eta=1-\sqrt{\alpha}$, we get, $P_D=\sqrt{\alpha}+\frac{(1-\sqrt{\alpha})^2}{4}$.
+\end{enumerate}
+\hypertarget{solution5}{ Solution to Problem 5:}\\
+\begin{enumerate}[label=(\alph{*}).]
+\item As discussed in Problem 3, the decision region for Hypothesis $i$, will be,
+\begin{equation*}
+\Gamma_i=\left\lbrace y\in \Gamma \left| \sum\limits_{j=1}^{M}\pi_jC_{ij}p_j(y)=\underset{1\leq k\leq M}{\min} \sum\limits_{k=1}^{M}\pi_jC_{kj}p_j(y)\right.\right\rbrace
+\end{equation*}
+For the uniform cost scenario, this will be equivalent to,
+\begin{equation*}
+\Gamma_i=\left\lbrace y\in \Gamma \left| p_i(y)=\underset{1\leq k\leq M}{\max} p_k(y)\right.\right\rbrace
+\end{equation*}
+\begin{equation*}
+\Gamma_i=\left\lbrace y\in \Gamma \left| \exp\left(-\frac{1}{\sigma^2}|Y-A_i|^2\right)=\underset{1\leq k\leq M}{\max} \exp\left(-\frac{1}{\sigma^2}|Y-A_k|^2\right)\right.\right\rbrace
+\end{equation*}
+which is,
+\begin{equation*}
+\Gamma_i=\left\lbrace y\in \Gamma \left| |Y-A_i|^2=\underset{1\leq k\leq M}{\min} |Y-A_k|^2\right.\right\rbrace
+\end{equation*}
+i.e., assign the received signal to the nearest QPSK symbol. The decision regions are shown in the figure \ref{fig:DecReg}.
+Minimum Bayes risk will be the same as the conditional risk for any Hypothesis. From the symbol $1+j$, we can compute the Bayes risk as one minus the area the Gaussian curve with mean $(1,1)$ in first orthant. For this case, it will be equal to,
+\begin{equation*}
+R_B=1-\left(\Phi\left(\frac{-1}{\sigma^2}\right)\right)^2
+\end{equation*}
+\begin{figure}[h]
+\begin{minipage}[b]{0.45\textwidth}
+\begin{tikzpicture}[scale=1.5]				
+%\draw[help lines, color=gray!30, dashed] (-2,-2) grid (2,2);
+\fill[gray!80] (0,0) -- (0,2) -- (2,2) -- (2,0) -- cycle;
+\draw[->, thick] (-2,0)--(2,0) ;
+\draw[->, thick] (0,-2)--(0,2) ;
+\draw[red,fill=red] (-1,-1) circle(0.2ex) node[below]{(-1-j)};
+\draw[red,fill=red] (-1,1) circle(0.2ex) node[above]{(1-j)};
+\draw[red,fill=red] (1,-1) circle(0.2ex) node[below]{(-1+j)};
+\draw[red,fill=red] (1,1) circle(0.2ex) node[above]{(1+j)};
+\end{tikzpicture}
+\centerline{(a)}
+\end{minipage}
+\begin{minipage}[b]{0.45\textwidth}
+\begin{tikzpicture}[scale=1.5]				
+%\draw[help lines, color=gray!30, dashed] (-2,-2) grid (2,2);
+\fill[gray!80] (0,0) -- (2,2) -- (2,-2) -- (0,0) -- cycle;
+\draw[->, thick] (-2,0)--(2,0) ;
+\draw[->, thick] (0,-2)--(0,2) ;
+\draw[red,fill=red] (-1,0) circle(0.2ex) node[below]{-1};
+\draw[red,fill=red] (0,1) circle(0.2ex) node[above,left]{j};
+\draw[red,fill=red] (1,0) circle(0.2ex) node[below]{1};
+\draw[red,fill=red] (0,-1) circle(0.2ex) node[below,left]{-j};
+\end{tikzpicture}
+\centerline{(b)}
+\end{minipage}
+\caption{Decision regions}
+\label{fig:DecReg}
+\end{figure}
+\item Given the noise is circularly symmetric, the marginal distribution noise along each axis will be Gaussian distributed, and the Hypothesis testing problem can be split into two Binary Hypothesis testing problems one on the real part and the second on the imaginary part of the observation. For the real part, the decision region will have the form $\delta(y_{re})=\mathbbm{1}_{y_{re}\geq 0}$, (similarly for the imaginary part). Final decision region will be the intersection of the decision regions obtained using the two tests. In the case of correlated real and imaginary part, it is not possible to separate the test into two Binary Hypothesis tests.
+\item The decision regions are as shown in Figure. \ref{fig:DecReg}(b)
+\end{enumerate}
 \end{document}
