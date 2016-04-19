@@ -1,5 +1,6 @@
 \documentclass[a4paper,english,12pt]{article}
 \input{header}
+\usepackage{enumitem}
 \newcommand{\ubar}[1]{\underline{#1}}
 %opening
 \title{Solutions Homework - 2}
@@ -33,7 +34,7 @@ where $\mu$ is a known constant and $\sigma>0$ is unknown.
 Consider the random sample $X_1,X_2,\dots,X_n$ with $X_i\sim \mathcal{N}(\mu,\sigma^2)$, and the statistic $T_1(X)=\frac{\bar{X}-\mu}{\sigma/\sqrt{n}}$, where  $\bar{X}=\frac{1}{n}\sum\limits_{i=1}^{n} X_i$.
 \begin{enumerate}
 \item Consider $\sigma^2$ is known, and $\mu$ is unknown. Derive the expression for the minimum number of samples $n$ required for $\mathbbm{P}(|T_1(X)|\leq\alpha)\geq \gamma$, where $\alpha>0$, and $0\leq \gamma \leq 1$.
-\item Consider $\sigma^2$ also to be unknown, and derive the expression for the minimum number of samples $n$ required for the $t$-statistic defined in class $\mathbbm{P}(|T_2(X)\leq\alpha)\geq \gamma$, where $\alpha>0$, and $0\leq \gamma \leq 1$.
+\item Consider $\sigma^2$ also to be unknown, and derive the expression for the minimum number of samples $n$ required for the $t$-statistic defined in class $\mathbbm{P}(|T_2(X)|\leq\alpha)\geq \gamma$, where $\alpha>0$, and $0\leq \gamma \leq 1$.
 \item Programming exercise: Plot the distribution of the $T_1$ and $T_2$ statistics for $n\in {1000,10000,50000}$, for the case  $X_i\sim \mathcal{N}(2,2)$. (Hint: Generate several random samples of size $n$ from the given distribution and plot the histogram).
 \item Verify the results from (a), (b) above using the distributions computed in (c).
 \end{enumerate} 
@@ -244,7 +245,8 @@ versus&\\
 H_1:&~Y_k\sim \mathcal{N}(\mu,\sigma^2),\hspace{5pt}k=1,2,\dots,n
 \end{align*}
 where $Y_1,Y_2,.....,Y_n$ are independent random variables.
-\subsubsection*{(a). $\mu$ is known constant, $\sigma$ is unknown.}
+\begin{enumerate}[label=(\alph*).]
+\item {$\mu$ is known constant, $\sigma$ is unknown.}
 \begin{align*}
 L(y)=\frac{P_1(\underline{y})}{P_0(\underline{y})}&=\frac{\prod\limits_{i=1}^{n} e^{\frac{-(y_i - \mu)^2}{2 \sigma^2}}}{ \prod\limits_{i=1}^{n} e^{\frac{-y_i^2}{2 \sigma^2}}}\\
 &=\frac{\,\,\, e^{-\sum\limits_{i=1}^n \frac{(y_i - \mu)^2}{2 \sigma^2}}}{\, e^{-\sum\limits_{i=1}^n\frac{y_i^2}{2 \sigma^2}}}\\
@@ -282,28 +284,28 @@ Therefore, $\Gamma_1=\left \{ \sum\limits_{i=1}^n y_i\geq \sqrt{n}\,\sigma \, Q^
 \begin{note}
 If $\mu$ is the Unknown quantity instead of $\sigma$ in this problem then the UMP exists (this is the most general case).
 \end{note}
-\subsubsection*{(b). Generalized Likelyhood Ratio Test(GLRT)}
+\item Generalized Likelyhood Ratio Test(GLRT):
 \begin{align*}
 L(\underline{y})=\frac{\underset{\theta \in \Lambda_1}{\max} P_\theta \left( \underline{y} \right)}{\underset{\theta \in \Lambda_0}{\max} P_\theta \left( \underline{y} \right)}.
 \end{align*}
 here $\theta = (\hat{\mu},\sigma^2),~\Lambda_1 =(\hat{\mu}=\mu,\sigma^2),~\mbox{and}~\Lambda_0 = (\hat{\mu}=0,\sigma^2)$.\\
 \begin{align*}
 &=\frac{\underset{\sigma >0}{\max}~P_1(\underline{y})}{\underset{\sigma >0}{\max}~P_0(\underline{y})}\\
-&=\frac{\underset{\sigma >0}{\max}~\left(\frac{1}{\sigma \sqrt{2\pi}}\right)^n e^{- \sum \limits_{i=1}^n \frac{(y_i-\mu)^2}{2\sigma^2}}}{\underset{\sigma >0}{\max}~\left(\frac{1}{\sigma \sqrt{2\pi}}\right)^n e^{- \sum \limits_{i=1}^n\frac{y_i^2}{2\sigma^2}}}\\
+&=\frac{\underset{\sigma >0}{\max}~\left(\frac{1}{\sigma \sqrt{2\pi}}\right)^n e^{- \sum \limits_{i=1}^n \frac{(y_i-\mu)^2}{2\sigma^2}}}{\underset{\sigma >0}{\max}~\left(\frac{1}{\sigma \sqrt{2\pi}}\right)^n e^{- \sum \limits_{i=1}^n\frac{y_i^2}{2\sigma^2}}}.
 \end{align*}
-consider denominator,
+Consider denominator,
 \begin{equation*}
 \underset{\sigma >0}{\max}~\left(\frac{1}{\sigma \sqrt{2\pi}}\right)^n \, e^{-\frac{ \norm{\underline{y}}^2}{2 \sigma^2}}=\underset{\sigma >0}{\max}~e^{\ln\left(\left(\frac{1}{\sigma\, \sqrt{2 \pi}}\right)^n - \frac{\norm{\underline{y}}^2}{2\sigma^2}\right)},
 \end{equation*}
 where $\norm{\underline{y}}^2=\sum \limits_{i=1}^n y_i^2$. Equivalently,
 \begin{equation*}
-\underset{\sigma >0}{\max}~n\,ln\left(\frac{1}{\sigma \sqrt{2 \pi}}\right)-\frac{\norm{\underline{y}}^2}{2\sigma^2}\triangleq f(\sigma)
+\underset{\sigma >0}{\max}~n\ln\left(\frac{1}{\sigma \sqrt{2 \pi}}\right)-\frac{\norm{\underline{y}}^2}{2\sigma^2}\triangleq f(\sigma)
 \end{equation*}
 Consider $\frac{\partial f(\sigma)}{\partial \sigma}=0$, this gives,
 \begin{equation*}
-\frac{-n}{\sigma }+\frac{\norm{\underline{y}}^2}{\sigma^3}=0.
+\frac{-n}{\sigma }+\frac{\norm{\underline{y}}^2}{\sigma^3}=0,
 \end{equation*}
-This gives,
+which gives the solution as,
 \begin{equation*}
 \sigma^2 = \frac{\norm{\underline{y}}^2}{n}.
 \end{equation*}
@@ -315,13 +317,48 @@ Hence, the test statistic,
 \begin{equation*}
 L(\underline{y})=\left(\frac{\sum \limits_{i=1}^n y_i^2}{\sum \limits_{i=1}^n (y_i - \mu)^2}\right)^{\frac{n}{2}}.
 \end{equation*}
+\end{enumerate}
+\hypertarget{solution3}{\subsection*{Solution 3}}
+Given random sample $X_1,X_2,\dots,X_n$ with $X_i\sim \mathcal{N}(\mu,\sigma^2)$, and the statistic $T_1(X)=\frac{\bar{X}-\mu}{\sigma/\sqrt{n}}$, where  $\bar{X}=\frac{1}{n}\sum\limits_{i=1}^{n} X_i$.
+\begin{enumerate}[label=(\alph*).]
+\item $T_1(X)$ as defined above is Gaussian distributed with mean zero and variance $1$ (independent of $n$). The expression for $\mathbbm{P}(|T_1(X)|\leq\alpha)\geq \gamma$ is independent of $n$. 
+\par Consider an alternate definition of the same test statistic $T_1'(X)=\frac{\bar{X}-\mu}{\sigma}$. $T_1'(X)$ is Gaussian distributed with mean zero and variance $1/n$. For this definition,
+\begin{equation*}
+\mathbbm{P}(|T_1'(X)|\leq\alpha)=2\Phi(\sqrt{n}\alpha)-1.
+\end{equation*}
+Now,
+\begin{align*}
+\mathbbm{P}(|T_1'(X)|\leq\alpha)&\geq \gamma,\\
+2\Phi(\sqrt{n}\alpha)-1&\geq \gamma,\\
+\sqrt{n}&\geq \frac{1}{\alpha}\Phi^{-1}\left(\frac{1+\gamma}{2}\right),
+\end{align*}
+or,
+\begin{equation*}
+n\geq \frac{1}{\alpha^2}\left[\Phi^{-1}\left(\frac{1+\gamma}{2}\right)\right]^2.
+\end{equation*}
+\item Consider the statistic, $T_2(X)=\frac{\bar{X}-\mu}{\sqrt{S^2}}$, and the probability, $\mathbbm{P}(|T_2(X)|\leq\alpha)$.
+\begin{align*}
+\mathbbm{P}(|T_2(X)|\leq\alpha)&=\mathbbm{P}(\sqrt{n}|T_2(X)|\leq\sqrt{n}\alpha),\\
+&=\mathbbm{P}\left(\frac{|\bar{X}-\mu|}{\sqrt{S^2}/\sqrt{n}}\leq\sqrt{n}\alpha\right)
+\end{align*}
+Let $T_2'(X)=\frac{\bar{X}-\mu}{\sqrt{S^2}/\sqrt{n}}$, $T_2'(X)$ has t-distribution with $n-1$ degrees of freedom. Now,
+\begin{align*}
+\mathbbm{P}(|T_2(X)|\leq\alpha)&\geq \gamma,\\
+Q(\sqrt{n}\alpha)\geq \gamma,\\
+\sqrt{n}\geq \frac{1}{\alpha}Q^{-1}(\gamma),
+\end{align*}
+or 
+\begin{equation*}
+n \geq \frac{1}{\alpha^2}\left[Q^{-1}(\gamma)\right]^2.
+\end{equation*}
+In the above expressions, we used the definition $Q(x)=\mathbbm{P}(|y|\leq x)$ for $y$ distributed as student's-t with $n-1$ degree of freedom.
+\end{enumerate}
 %========================================================================================================
 \hypertarget{solution4}{\subsection*{Solution 4}}
 \begin{equation*}
 y_k=\alpha x_k+\epsilon_k, \ k = 1,2,\dots,n
 \end{equation*}
 where $\{x_k\}$ are known parameters and $\epsilon_k \sim \mathcal{N}(0,\sigma^2)$.
-\subsubsection*{(a).}
 \begin{align*}
 \hat{\alpha }&=\frac{1}{\sum\limits_{k=1}^{n}x_{k}^2}\sum\limits_{k=1}^{n}y_{k}x_{k}\\
   &=\frac{1}{\sum\limits_{k=1}^{n}x_{k}^2}\sum\limits_{k=1}^{n}(\alpha x_{k}+\epsilon_{k})x_{k}\\
@@ -332,7 +369,8 @@ where $\{x_k\}$ are known parameters and $\epsilon_k \sim \mathcal{N}(0,\sigma^2
 Since $\epsilon_k \sim \mathcal{N}(0,\sigma^2)$, $\mathbb{E}\{\hat{\alpha}\}=\alpha$ and $var(\hat{\alpha})=\frac{\sum_{k=1}^nx_k^2\sigma^2}{\left(\sum_{k=1}^nx_k^2\right)^2}=\frac{\sigma^2}{\sum_{k=1}^nx_k^2}$.
 %========================================================================================================
 \hypertarget{solution5}{\subsection*{Solution 5}}
-\subsubsection*{(a).} For uniform cost, the decision rule in $M$-ary hypothesis testing takes the form,
+\begin{enumerate}[label=(\alph*).]
+\item For uniform cost, the decision rule in $M$-ary hypothesis testing takes the form,
 \begin{equation*}
 \Gamma_i=\left\lbrace y\in \Gamma \left|  \pi_i p_i(y)= \underset{1\leq k \leq M}{\max}~\pi_k p_k(y)\right.\right\rbrace.
 \end{equation*}
@@ -349,8 +387,7 @@ or equivalently,
 \Gamma_i=\left\lbrace y\in \Gamma \left|  y^Ts_{i}= \underset{1\leq k \leq M}{\max}~y^Ts_{k}\right.\right\rbrace.
 \end{equation*}
 Thus, the probability of error is minimised if $\Gamma' \in \Gamma_{i} $ when $\Gamma'$ is nearest to $s_{i}$.
-\subsubsection*{(b).} 
-The probability of error is,
+\item The probability of error is,
 \begin{equation*}
 P_e=\frac{1}{M}\sum\limits_{k=1}^{M}p_k(\Gamma_k^c),
 \end{equation*}
@@ -370,6 +407,7 @@ Substituting this result in the equation for $P_e$, we get,
 P_e=1-\frac{1}{\sqrt{2\pi}}\int\limits_{-\infty}^{\infty} \left[\Phi(x)\right]^{M-1}e^{-(x-d)^2/2}~dx
 \end{equation*}
 where $d^2=\|\ubar{s}_1\|^2/\sigma^2$, $x=\ubar{s}_1^T\ubar{Y}/(\sigma \|\ubar{s}_1\|)$.
+\end{enumerate}
 %=========================================================================================================
 
 \hypertarget{solution6}{\subsection*{Solution 6}}
@@ -380,8 +418,8 @@ H_1: \ubar{Y}=\ubar{N}+A\left[(1-\Theta)\ubar{s}^{(0)}+\Theta\ubar{s}^{(1)}\righ
 \end{gather*}
 where 
 $\underline{N}=\mathcal{N}(\underline{0},I)$, $A>0$, and $\Theta\in\{0,1\}$.
-\subsubsection*{(a).}
-Given A is known, under $H_1,~\underline{Y}\sim\mathcal{N}(A\underline{s}^{(0)},I),$ or $\underline{Y}\sim\mathcal{N}(A\underline{s}^{(1)},I)$ with equal probabilities $(\frac{1}{2},\frac{1}{2})$.
+\begin{enumerate}[label=(\alph*).]
+\item Given A is known, under $H_1,~\underline{Y}\sim\mathcal{N}(A\underline{s}^{(0)},I),$ or $\underline{Y}\sim\mathcal{N}(A\underline{s}^{(1)},I)$ with equal probabilities $(\frac{1}{2},\frac{1}{2})$.
 \begin{align*}
 L(\underline{y})=\frac{P_1\left(\underline{y}\right)}{P_0\left(\underline{y}\right)}&=\frac{\frac{1}{2}\frac{1}{(2\pi)^{\frac{n}{2}}}e^{-\frac{1}{2}\left(\underline{y}-A \underline{s}^{(0)} \right)^T \left(\underline{y}-A \underline{s}^{(0)} \right)} +\frac{1}{2}\frac{1}{(2\pi)^{\frac{n}{2}}}e^{-\frac{1}{2}\left(\underline{y}-A \underline{s}^{(1)} \right)^T \left(\underline{y}-A \underline{s}^{(1)} \right)} }{\frac{1}{(2\pi)^{\frac{n}{2}}} e^{(-\frac{1}{2}\underline{y}^T \,\underline{y})}}\\
 &=\frac{1}{2}\exp\{(A^2 {\underline{s}^{(0)}}^T \underline{s}^{(0)})- 2 A {\underline{s}^{(0)}}^T \underline{y})\} + \frac{1}{2}\exp\{(A^2 {\underline{s}^{(0)}}^T \underline{s}^{(1)})- 2 A {\underline{s}^{(1)}}^T \underline{y})\}.
@@ -390,8 +428,7 @@ This gives the likelihood ratio,
 \begin{equation*}
 L(\underline{y})=\frac{1}{2} \exp\{\left({A^2}- A (\underline{s}^{(0)}+\underline{s}^{(1)})^T \underline{y}\right)\}
 \end{equation*}
-\subsubsection*{(b).}
-\begin{gather*}
+\item \begin{gather*}
 H_0: A=0,\\
 versus\hspace{100pt}\\
 H_1: A>0.
@@ -414,14 +451,15 @@ Randamization not needed. Set $P_F=P_0(T(\underline{y}) > \eta)=\alpha,$ we get,
 Q\left( \frac{\eta}{\sqrt{2}}\right)&=\alpha,
 \end{align*}
 or $\eta = \sqrt{2} Q^{-1} \left(\alpha \right)$. The detector correlates the input vector with the sum of signals ${\underline{s}}^{(0)}, {\underline{s}}^{(1)}$ and tests it against the $\eta$ value obtained.
+\end{enumerate}
 %=========================================================================================================
 \hypertarget{solution7}{\subsection*{Solution 7}}
 \begin{equation*}
 Y_k=\theta^{\frac{1}{2}}S_kR_k+N_k,\,\,\, k=1,2,\dots,n 
 \end{equation*}
 where $S_1,S_2,...,S_n$ is a known signal sequence, $\theta\geq0$ is constant, and $R_1, \dots, R_n,N_1,\dots, N_n \sim \mathcal{N}(0,1)$.
-\subsubsection*{(a).}
-\begin{gather*}
+\begin{enumerate}[label=(\alph*).]
+\item \begin{gather*}
 H_0: \theta=0,\\
 versus\hspace{100pt}\\
 H_1: \theta=A.
@@ -447,7 +485,7 @@ and the Neyman-Pearson test is,
 T(Y) \substack{H_0\\\gtrless\\ H_1} \gamma.
 \end{equation*}
 Detector has a weighted sum of squares form.
-\subsubsection*{(b).}
+\item 
 \begin{gather*}
 H_0: \theta=0,\\
 versus\hspace{100pt}\\
@@ -459,7 +497,7 @@ L(Y)=\frac{1}{\left(\prod\limits_{k=1}
 ^{n}(\theta S_k^2+1)\right)^\frac{1}{2}}\exp\left(\frac{1}{2}\sum\limits_{k=1}^n\frac{\theta S_k^2}{\theta S_k^2+1}y_k^2\right)\substack{H_0\\\gtrless\\ H_1}\gamma'
 \end{equation*}
 If all the $S_k$'s are of equal magnitude, we have a test statistic independent of the actual values that $S_k$'s take and the value of $\theta$. If $|S_1|=|S_2|=.....=|S_n|$, UMP exists.
-\subsubsection*{(c). Locally Most Powerful test}
+\item 
 \begin{align*}
 \left.\frac{\partial L(Y)}{\partial\theta}\right|_{\theta=0}& \substack{H_0\\\gtrless\\ H_1}\gamma\\
 \left.\sum\limits_{k=1}^n \frac{\partial}{\partial\theta}\left[\frac{\theta S_k^2}{\theta S_k^2+1}\right]\right|_{\theta=0} y_k^2~& \substack{H_0\\\gtrless\\ H_1}\gamma\\
@@ -468,6 +506,7 @@ If all the $S_k$'s are of equal magnitude, we have a test statistic independent 
 \end{align*}
 This gives LMP test statistic as a function of $S_k$ values.
 (The question must have been does UMP exist for general values of $S_k$, if not derive the GLRT statistic).
+\end{enumerate}
 %\end{enumerate}
 %========================================================================================================
 \hypertarget{solution8}{\subsection*{Solution 8}}
