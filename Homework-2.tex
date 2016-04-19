@@ -3,7 +3,7 @@
 \usepackage{enumitem}
 \newcommand{\ubar}[1]{\underline{#1}}
 %opening
-\title{Solutions Homework - 2}
+\title{Homework-2}
 \author{}
 
 \begin{document}
@@ -113,121 +113,111 @@ Let $X_1, ..., X_n$ be i.i.d samples from a Poisson($\lambda$) distribution. Wha
 \newpage
 \par{\centering\Large {Solutions}\par}
 \hypertarget{solution1}{\subsection*{Solution 1}}
-\subsubsection*{(a).} The LMP test is
+\begin{enumerate}[label=(\alph*).]
+\item The LMP test is
 \begin{equation*}
 \tilde{\delta}_{lo}(y) =
-\left\{
-	\begin{array}{ll}
+\begin{cases}
 		1  & \mbox{if } \frac{\partial \mathnormal{P}_{\theta}(y)}{\partial \theta} |_{\theta=0}>\eta \mathnormal{p}_0(y)\\
 		\gamma & \mbox{if } \frac{\partial \mathnormal{P}_{\theta}(y)}{\partial \theta} |_{\theta=0}=\eta \mathnormal{p}_0(y)\\
-		0 & \mbox{if } \frac{\partial \mathnormal{P}_{\theta}(y)}{\partial \theta} |_{\theta=0}<\eta \mathnormal{p}_0(y)\\
-	\end{array}
-\right.
+		0 & \mbox{if } \frac{\partial \mathnormal{P}_{\theta}(y)}{\partial \theta} |_{\theta=0}<\eta \mathnormal{p}_0(y).
+\end{cases}
 \end{equation*}
-we have
+For the given densities, we get,
 \begin{equation*}
 \frac{\frac{\partial \mathnormal{P}_{\theta}(y)}{\partial \theta} |_{\theta=0}}{\mathnormal{p}_0(y)}= sgn(y)
 \end{equation*}
 thus
 \begin{equation*}
 \tilde{\delta}_{lo}(y) =
-\left\{
-	\begin{array}{ll}
+\begin{cases}
 		1  & \mbox{if } sgn(y)>\eta\\
 		\gamma & \mbox{if } sgn(y)=\eta\\
 		0 & \mbox{if } sgn(y)<\eta.
-	\end{array}
-\right.
+\end{cases}
 \end{equation*}
 To set the threshold $\eta$, we consider
 \begin{equation*}
-\mathnormal{P}_0(sgn(\gamma)>\eta) =
-\left\{
-	\begin{array}{ll}
+\mathnormal{P}_0(sgn(y)>\eta) =
+\begin{cases}
 		0  & \mbox{if } \eta \geq 1\\
 		0.5 & \mbox{if } -1 \leq \eta < 1\\
 		1 & \mbox{if } \eta <-1.
-	\end{array}
-\right.
+\end{cases}
 \end{equation*}
 This implies that
 \begin{equation*}
 \eta =
-\left\{
-	\begin{array}{ll}
+\begin{cases}
 		1  & \mbox{if } 0<\alpha<0.5\\
 		-1 & \mbox{if } 0.5\leq \alpha < 1
-	\end{array}
-\right.
+\end{cases}
 \end{equation*}
-the randomization is 
+The randomization is 
 \begin{equation*}
 \gamma = \frac{\alpha - \mathnormal{P}_0(sgn(\gamma)>\eta)}{\mathnormal{P}_0(sgn(\gamma)-\eta)}=
-\left\{
-	\begin{array}{ll}
+\begin{cases}
 		2\alpha  & \mbox{if } 0<\alpha<0.5\\
 		2\alpha -1 & \mbox{if } 0.5\leq \alpha < 1
-	\end{array}
-\right.
+\end{cases}
 \end{equation*}
-The LMP test is, thus
+The LMP test for $0<\alpha < 0.5$ is,
 \begin{equation*}
 \tilde{\delta}_{lo}(y) =
-\left\{
-	\begin{array}{ll}
+\begin{cases}
 		2\alpha  & \mbox{if } y>0\\
 		0 & \mbox{if } y\leq 0
-	\end{array}
-\right.
+\end{cases}
 \end{equation*}
-for $0<\alpha < 0.5$, and it is
+and for $0.5\leq \alpha < 1$, it is
 \begin{equation*}
 \tilde{\delta}_{lo}(y) =
-\left\{
-	\begin{array}{ll}
+\begin{cases}
 		1  & \mbox{if } y\geq0\\
-		2\alpha - 1 & \mbox{if } y< 0
-	\end{array}
-\right.
+		2\alpha - 1 & \mbox{if } y< 0.
+\end{cases}
 \end{equation*}
-for $0.5\leq \alpha < 1$
-for fixed $\theta>0$, detection probability as
+For fixed $\theta>0$, detection probability as
 \begin{align*}
-\mathnormal{P}_D(\tilde{\delta}_{l_{0}};\theta) &=\mathnormal{P}_{\theta}(sgn(Y)>\eta)+\gamma \mathnormal{P}_{\theta}(sgn(Y)=\eta)\\
-									&=\left\{
-											\begin{array}{ll}
-												2\alpha \int_0^{\infty}\frac{1}{2}e^{-| y-\theta|}dy  & \mbox{if } 0<\alpha<0.5\\
-												\int_0^{\infty}\frac{1}{2}e^{-| y-\theta|}dy+(2\alpha-1)\int_{-\infty}^{0}\frac{1}{2}e^{-| y-\theta|}dy & \mbox{if } 0.5\leq \alpha < 1
-											\end{array}
-										\right.\\
-									&=\left\{
-											\begin{array}{ll}
-												\alpha(2-e^{-\theta})  & \mbox{if } 0<\alpha<0.5\\
-												1+(\alpha-1)e^{-\theta} & \mbox{if } 0.5\leq \alpha < 1
-											\end{array}
-										\right.
+\mathnormal{P}_D(\tilde{\delta}_{l_{0}};\theta) 
+&=\mathnormal{P}_{\theta}(sgn(Y)>\eta)+\gamma \mathnormal{P}_{\theta}(sgn(Y)=\eta)\\
+	&=\begin{cases}
+		2\alpha \int_0^{\infty}\frac{1}{2}e^{-| y-\theta|}dy  & \mbox{if } 0<\alpha<0.5\\
+		\int_0^{\infty}\frac{1}{2}e^{-| y-\theta|}dy+(2\alpha-1)\int_{-\infty}^{0}\frac{1}{2}e^{-| y-\theta|}dy & \mbox{if } 0.5\leq \alpha < 1		
+	\end{cases}\\
+	&=\begin{cases}
+		\alpha(2-e^{-\theta})  & \mbox{if } 0<\alpha<0.5\\
+		1+(\alpha-1)e^{-\theta} & \mbox{if } 0.5\leq \alpha < 1
+	\end{cases}									
 \end{align*}
-
-\textbf{(b) : } For fixed $\theta$, the NP critical region
+\item The log-likelihood ratio takes the form,
+\begin{equation*}
+T(y)=\log\left(\frac{P_1(y)}{P_0(y)}\right)=|y|-|y-\theta|.
+\end{equation*}
+N-P test using $T(y)$ takes the form,
+\begin{equation*}
+\delta(y)=\begin{cases}
+1~~~\mbox{if }T(y)\geq \eta'\\
+0~~~\mbox{if }T(y)< \eta'
+\end{cases}.
+\end{equation*}
+For fixed $\theta$, the NP critical region
 \begin{align*}
 \Gamma_{\theta}&=\left\{|y|-|y-\theta|>\eta'\right\} \\
-			  &=\left\{
-					\begin{array}{ll}
+			  &=\begin{cases}
 						(-\infty,\infty)  & \mbox{if } \eta'<-\theta\\
 						((\frac{\eta'+\theta}{2}),\infty) & \mbox{if } -\theta\leq\eta'\leq\theta\\
-						\phi & \mbox{if} \eta'>\theta
-					\end{array}
-				\right.
+						\phi & \mbox{if } \eta'>\theta
+			  \end{cases}
 \end{align*}
-from which
+From which, we get
 \begin{equation*}
-\mathnormal{P}_0(\Gamma_{\theta})=\left\{
-					\begin{array}{ll}
-						1 & \mbox{if } \eta'<-\theta\\
-						\frac{1}{2}e^{-\frac{(\eta'+\theta)}{2}} & \mbox{if } -\theta\leq\eta'\leq\theta\\
-						 0 & \mbox{if} \eta'>\theta
-					\end{array}
-				\right.
+\mathnormal{P}_0(\Gamma_{\theta})=
+\begin{cases}
+1 & \mbox{if } \eta'<-\theta\\
+\frac{1}{2}e^{-\frac{(\eta'+\theta)}{2}} & \mbox{if } -\theta\leq\eta'\leq\theta\\
+0 & \mbox{if } \eta'>\theta
+\end{cases}
 \end{equation*}
 Clearly, we must know $\theta$ to set $\eta'$, and thus the NP critical region depends on $\theta$. This implies that there is no UMP test. The generalized likelihood ration test uses this statistic 
 \begin{align*}
@@ -237,6 +227,8 @@ Clearly, we must know $\theta$ to set $\eta'$, and thus the NP critical region d
 						e^{y} & \mbox{if } y\geq 0.
 			  \end{cases}			 
 \end{align*}
+\end{enumerate}
+
 %========================================================================================================
 \hypertarget{solution2}{\subsection*{Solution 2}}
 \begin{align*}
