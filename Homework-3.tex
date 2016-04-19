@@ -1,650 +1,499 @@
-\documentclass[]{article}
-
+\documentclass[a4paper,english,12pt]{article}
+\input{header}
+\usepackage{enumitem}
 %opening
-\title{Homework-3 Solutions}
+\title{Homework-3}
 \author{}
-\usepackage{graphicx}
+
 \begin{document}
-
 \maketitle 
-\begin{flushleft}
-$1)\;$ Given  \\
-\end{flushleft}	
-$
-\hspace{3cm}p_0(y) =
-\left\{
-\begin{array}{lr}
-1& 0 \le y \le 1 \\
-0& $otherwise$
-\end{array}
-\right.
-$    \\
-
-and \\
-
-$
-\hspace{2.5cm}p_1(y)=
-\left\{
-\begin{array}{lr}
-2y& 0 \le y \le 1 \\
-0& $otherwise$
-\end{array}
-\right.
-$\\
-
-$
- Y_1,Y_2,.....,Y_n$ are iid \\
- 
-$\hspace{1cm} P_F(\delta)\leq\exp(-s\tau+\mu_{T,0}(s)) $ \\
-
-$ \hspace{1cm}P_M(\delta)\leq\exp(\tau)\exp(-s\tau+\mu_{T,0}(s)) $  \\
-
-where 
-$\hspace{0.5cm}\mu_{T,0}(s)=\log E_0[e^{(s\log L(y)}] $\\
-
-$\hspace{2.75cm}=\log E_0[L(y)^{s}] $ \\ 
-
-The Likelihood Ratio is \\
-
-$ \hspace{1cm}L(y)=\prod_{i=1}^{n}\frac{p_1(y_{i})}{p_0(y_{i})} $
-$ =\prod_{i=1}^{n} 2y_{i} $
-$ =2^{n}\prod_{i=1}^{n} y_{i} $ \\
-
-$\hspace{1cm} E_0[L(y)^{s}] = 2^{ns} (E_{0}[y_{1}^{s}])^{n} $
-$ = 2^{ns}(\int_{0}^{1}y^{ns}ds)^{n} $ 
-$ = \frac{2^{ns}}{n(s + 1)} $ \\
-
-$\hspace{1cm} \mu_{T,0}(s) = ns\log2 - n\log(s + 1) $ \\
-
-Case1: $\;\tau<n\log2 $\\
-
-$ \hspace{1cm}P_F(\delta)\leq 1 $ \\
-
-$ \hspace{1cm}P_M(\delta)\leq \exp(\tau) $ \\
-
- Case2: $\;\tau>n\log2  $\\
-
-$ \hspace{1cm}P_F(\delta)\leq \exp(-\tau) $\\
- 
-$ \hspace{1cm}P_M(\delta)\leq 1 $ \\
-  
-\begin{flushleft}
-$2)$ Given
-\end{flushleft}
-
-$Y_1,Y_2,.....$ are iid Bernouli observations with distribution
-\begin{center}
-$H_0\;: P(Y_k=1)=1-P(Y_k=0)= \frac{1}{3}$\\
-$H_1\;: P(Y_k=1)=1-P(Y_k=0)= \frac{2}{3}$
-\end{center}
-
-
-$a)\;$From Wald's approximation,\\
-
-$\hspace{1cm}$A$\cong\frac{\gamma}{1-\alpha}$\\
-
-$\hspace{1cm}$B$\cong\frac{1-\gamma}{\alpha}$\\
-
-$\hspace{0.5cm}\Rightarrow A\leq\frac{0.01}{0.99} \;\;\Rightarrow\; A\leq\frac{1}{99}$\\
-
-$\hspace{1cm}B\geq\frac{0.99}{0.01} \;\;\Rightarrow\; B\geq99$\\
-
-The likelihood ratio is given by $$\; L(Y_k)= \log\frac{P(Y_k\mid\;H_1)}{P(Y_k\mid\;H_0)} =
-\left\{
-\begin{array}{lr}
-\log2&;Y_k=1 \\
--\log2&;Y_k=0
-\end{array}
-\right.$$
-
-The SPRT(Sequential Probability Ratio Test) compares the cummulative 
-
-likelihood ratio test to an upper and lower threshold. It declares one of the 
-
-hypothesis when the hypothesis crosses the corresponding threshold.\\
-
-
-$b)\;$ Consider hypothesis $\;H_1$\\
-
-
-By Chernoff Bound 
-$\gamma \simeq\;\exp(-2n(P-\frac{1}{2})^{2})
-$ where $P=P(Y_k=1\mid\;H_1)=\frac{2}{3}$
-
-Hence $\exp(-10) = \;\exp(-\frac{n}{18})$ giving $n = 180 \;$samples\\
-
-$ c)\hspace{0.5cm}P^{*}=max(P_{F},P_{M})$=0.01
-
-
-$\hspace{0.9cm}\alpha=P_{F}$
-
-$\hspace{0.9cm}\gamma=P_{M}$
-
-$\hspace{0.5cm}\Rightarrow max(\alpha,\gamma)=0.01$\\
-
-
-
-If we choose $A\leq\frac{1}{99}$ and $B\geq99,$ we can always have $P^{*}=0.01$\\
-
-$\hspace{1cm}$E$[N\mid H_0]= (\frac{1}{\mu_0})[(1-\alpha)\log(\frac{\gamma}{1-\alpha})+\alpha\;\log(\frac{1-\gamma}{\alpha})]$\\
-
-$\hspace{1cm}$E$[N\mid H_1]= (\frac{1}{\mu_1})[\gamma\;\log(\frac{\gamma}{1-\alpha})+(1-\gamma)\log(\frac{1-\gamma}{\alpha})]$\\
-
-$\hspace{1cm}$$\mu_{j}=E[\log(\frac{P_{1}(Y_{1})}{P_{0}(Y_{1})})\mid\;H_{j}]$\\
-
-$\hspace{1cm}\mu_{0}=\frac{1}{3}\log(\frac{\frac{2}{3}}{\frac{1}{3}}) +\frac{2}{3}\log(\frac{\frac{1}{3}}{\frac{2}{3}})$\\
-
-$\hspace{1.5cm}=\frac{1}{3}\log2 - \frac{2}{3} \log2$\\
-
-$\hspace{1.5cm}= - \frac{1}{3} \log2$\\
-
-$\hspace{1cm}\mu_{1}=\frac{2}{3}\log(\frac{\frac{2}{3}}{\frac{1}{3}}) +\frac{1}{3}\log(\frac{\frac{1}{3}}{\frac{2}{3}})$\\
-
-$\hspace{1.5cm}=\frac{2}{3}\log2 - \frac{1}{3} \log2$\\
-
-$\hspace{1.5cm}= \frac{1}{3} \log2$\\
-
-Choose$ \;A=\frac{1}{99},B=99 \Rightarrow \alpha=\gamma=0.01$\\
-
-Then $\;$$E[N\mid H_0]= \frac{-3}{\log2}[0.99\log(\frac{0.01}{0.99})+0.01\log(\frac{0.99}{0.01})]$\\
-
-$\hspace{2.7cm}$$=\frac{-3}{\log2}[0.99\log(\frac{1}{99})+0.01\log(99)]$\\
-
-$\hspace{2.7cm}$$=\frac{-3}{\log2}[-0.99\log(99)+0.01\log(99)]$\\
-
-$\hspace{2.7cm}$$=\frac{3\times0.98}{\log2}\;\log(99)$\\
-
-$\hspace{2.7cm}$$=19.49$\\
-
-$\hspace{1cm}$$E[N\mid H_1]= \frac{3}{log2}[0.01\log(\frac{0.01}{0.99})+0.99
-\log(\frac{0.99}{0.01})]$\\
-
-$\hspace{2.7cm}$$=\frac{3}{\log2}[-0.01\log(99)+0.99\log(99)]$\\
-
-$\hspace{2.7cm}$$=\frac{2.94\;\log(99)}{\log2}$\\
-
-$\hspace{2.7cm}$$=19.49$\\
-
-The calculated values of $E[N\mid H_0]$ and $E[N\mid H_1]$
-will vary depending on 
-
-the exact $\alpha$,$\gamma$ we choose and in effect the A and B choosen.
-
-\begin{flushleft}
-3) Let $\bar{\phi}$ = $\{\phi_{j};j=0,1,2,...\}$ be a stopping rule and\\
-
-$\hspace{1cm}\bar{\delta}$ = $\{\delta_{j};j=0,1,2,...\}$ be a terminal decision rule
-\end{flushleft}
-
-A sequential decision rule is pair of sequences$(\bar{\phi},\bar{\delta})$ the rule $(\bar{\phi},\bar{\delta})$ makes the 
-
-decision $\delta_{N}(y_{1},y_{2},...y_{N})$ where N is the stopping time defined by
-
-$N=\min\{n\mid \phi_{n}(y_{1},y_{2},...y_{n})=1\}$\\
-
-The sequential decision rule of n-samples is defined by\\
-
-$
-\hspace{2.5cm}\phi_{j}(y_{1},...,y_{j})=
-\left\{
-\begin{array}{lr}
-0& $\hspace{1.5cm}$   ; j\neq n \\
-1&  $\hspace{1.5cm}$     ;  j=n
-\end{array}
-\right.
-$\\
-
-$
-\hspace{2.5cm}\delta_{j}(y_{1},...,y_{j})=
-\left\{
-\begin{array}{lr}
-\delta(y_{1},...,y_{n})& ; j= n \\
-1& ; j\neq n
-\end{array}
-\right.
-$\\
-
-The priors $ \pi_{1}$ and $ \pi_{0}$ are assigned to hypothesis $ H_{1} $ and $H_{0},$ respectively
-
-the Bayes risk is given by\\
-
-$\hspace{2cm}$
-$r(\bar{\phi},\bar{\delta})=(1-\pi_{1})R_{0}(\bar{\phi},\bar{\delta})+\pi_{1}R_{1}(\bar{\phi},\bar{\delta})$\\
-
-Consider the function\\
-
-$\hspace{2cm}$
-$V^{*}(\pi_{1})$=min $r(\bar{\phi},\bar{\delta})$\\
-
-The relationship between Bayes risk and uniform costs has been divided
-
-into two decisions rules.
-The one that takes no samples and decides $H_{1}$
-
-$($i.e., $\phi_{0}=\delta_{0}=1)$ and the one that takes no samples and decides $H_{0}$
-
-$($i.e., $\phi_{0}=1-\delta_{0}=1)$ \\
-
-$ \hspace{2cm}$ $r(\bar{\phi},\bar{\delta})\mid_{\phi_{0}=\delta_{0}=1}=(1-\pi_{1})$
-
+\begin{enumerate}
+\subsection*{Chernoff Bound}
+\item \hyperlink{solution1}{Problem 1}\\
+Investigate the Chernoff bound for testing between the two marginal densities
+\begin{align*}
+p_0(y)&=\begin{cases}
+1~\hspace{5pt}\mbox{if}~0\leq y \leq 1\\
+0~\hspace{5pt}\mbox{otherwise}
+\end{cases}\\
+\mbox{and},\hspace{40pt}&\\
+p_1(y)&=\begin{cases}
+2y~\hspace{5pt}\mbox{if}~0\leq y \leq 1\\
+0~\hspace{10pt}\mbox{otherwise}
+\end{cases}
+\end{align*}
+for a sequence of i.i.d observations, $Y_1,Y_2,\dots,Y_n$; i.e., compute the bounds on $P_F(\delta(\tau))$ and $P_M(\delta(\tau))$.
+\subsection*{SPRTs}
+\item \hyperlink{solution2}{Problem 2}\\
+Consider a sequence of i.i.d Bernoulli observations, $Y_1,Y_2,\dots,$ with distribution
+\begin{equation*}
+P(Y_k=1)=1-P(Y_k=0)=1/3
+\end{equation*}
+under hypothesis $H_0$, and 
+\begin{equation*}
+P(Y_k=1)=1-P(Y_k=0)=2/3
+\end{equation*}
+under hypothesis $H_1$.
+\begin{enumerate}
+\item Use Wald's approximation to suggest values of $A$ and $B$ so that the SPRT $(A,B)$ has maximum error probability $p^*=\max(P_F,P_M)$ approximately equal to $0.01$. Describe the resulting test in detail. Also, using Wald's approximations, give an approximation for the expected sample sizes $E\{N|H_0\}$ and $E\{N|H_1\}$.
+\item Find an integer $n$ as small as you can so that the maximum error probability for the optimal test with {\em fixed} sample size $n$ is no more than $0.01$. Compare $n$ to the expected sample sizes found in part (a) (Note: you can use a Chernoff bound estimate to find $n$, rather than finding the actual smallest possible $n$).
+\item Compute $p^*,~E\{N|H_0\},$ and $E\{N|H_1\}$ exactly for the test you found in part (a), and compare with the approximate values you found in part (a). [Hint: use the fact that SPRT you found in part (a) is equivalent to SPRT ($A',B'$) where $A'$ and $B'$ are integer powers of $2$.]
+\end{enumerate}
+\item \hyperlink{solution3}{Problem 3}\\
+Let $\underline{\phi}=\{\phi_j;j=0,1,\dots,\}$ be a stopping rule ($\phi_j:\mathcal{R}^j\rightarrow \{0,1\}$) and $\underline{\delta}=\{\delta_j;j=0,1,\dots,\}$ be a terminal decision rule ($\phi_j:\mathcal{R}^j\rightarrow \{0,1\}$), $\delta_j$ being a decision rule on ($\mathcal{R}^j,\mathcal{B}^j$) for each $j \geq 0$.
+\begin{equation*}
+\phi_j(y_1,\dots,y_j)=\begin{cases}
+0~\hspace{5pt}\mbox{if}~j\neq n\\
+1~\hspace{5pt}\mbox{if}~j= n
+\end{cases}
+\end{equation*}
+\begin{equation*}
+\delta_j(y_1,\dots,y_j)=\begin{cases}
+\delta(y_1,\dots,y_n)~\hspace{5pt}\mbox{if}~j= n\\
+\mbox{arbitrary}~\hspace{20pt}\mbox{if}~j\neq n
+\end{cases}
+\end{equation*}
+And, 
+\begin{equation*}
+r(\underline{\phi},\underline{\delta})=(1-\pi_1)R_0(\underline{\phi},\underline{\delta})+\pi_1 R_1(\underline{\phi},\underline{\delta})
+\end{equation*}
+where,
+\begin{equation*}
+R_0(\underline{\phi},\underline{\delta})=\mathbb{E}_0\{\delta_N(Y_1,\dots,Y_N)\}+C\mathbb{E}_0\{N\},
+\end{equation*}
+\begin{equation*}
+R_1(\underline{\phi},\underline{\delta})=1-\mathbb{E}_1\{\delta_N(Y_1,\dots,Y_N)\}+C\mathbb{E}_1\{N\}.
+\end{equation*}
+Show that 
+\begin{equation*}
+V^*(\pi_1) \triangleq \underset{\underset{\phi_0=0}{\underline{\phi},\underline{\delta}}}{\min}~r(\underline{\phi},\underline{\delta}),\hspace{20pt}0\leq \pi_1 \leq 1
+\end{equation*}
+is concave, and equal to $C$ at $\pi_1=0$ and $\pi_1=1$.
+\subsection*{Estimation}
+\item \hyperlink{solution4}{Problem 4}\\
+Let $X_1,\dots,X_n$ be a random sample from the pdf,
+\begin{equation*}
+f(x|\theta)=\theta x^{-2},\hspace{20pt}0<\theta\leq x < \infty.
+\end{equation*}
+\begin{enumerate}
+\item What is a sufficient statistic for $\theta$?
+\item Find the MLE of $\theta$.
+\item Find the method of moments estimator of $\theta$.
+\end{enumerate}
+\item \hyperlink{solution5}{Problem 5}\\
+{\bf Gaussian conjugate priors: }
+\begin{enumerate}
+\item Show that the class of normal distributions is a conjugate prior family for the class of normal distributions with known variance, say variance 1.
+\item Show that a normal-inverse gamma distributions is conjugate prior for the class of normal distributions.
+[Hint: The Normal inverse-gamma distribution has the form: \\ $f(\mu,\sigma^2|\mu_0,\lambda,\alpha,\beta)=\frac{\sqrt{\gamma}}{\sigma\sqrt{2\pi}} \frac{\beta^\alpha}{\Gamma(\alpha)} \left(\frac{1}{\sigma^2}\right)^{\alpha+1} \exp\left(-\frac{2\beta+\lambda(\mu-\mu_0)^2}{2\sigma^2} \right),~\mu \in \mathcal{R},~\sigma^2 \in \mathcal{R}^+.$]
+\end{enumerate}
+\item \hyperlink{solution6}{Problem 6}\\
+Consider a Bernoulli random variable $X$ with distribution,
+\begin{equation*}
+P(X=1)=1-P(X=0)=p.
+\end{equation*}
+Find the maximum likelihood estimate (MLE) for $p$, given an iid random sample $X_1,X_2,\dots,X_n$.
+\item \hyperlink{solution7}{Problem 7}\\
+Let $X_1,X_2,\dots,X_n$ be an iid random sample drawn from a Poisson distribution with parameter $\lambda$, $X_i\sim Poi(\lambda)$. Consider two unbiased estimators $\overline{X}=\frac{1}{n}\sum\limits_{i=1}^{n} x_i$, and $S^2=\frac{1}{n-1} \sum\limits_{i=1}^{n} x_i^2$. Which one has lower Mean-Square-Error (MSE)?
+\item \hyperlink{solution8}{Problem 8}\\
+\begin{enumerate}
+\item Let $X_1,X_2,\dots,X_n~\in\mathcal{R}$ be an iid random sample drawn from a Normal distribution with known variance $\sigma^2$, $X_i\sim \mathcal{N}(\mu,\sigma^2)$. Compute the Cramer-Rao Lower Bound (CRLB) for the variance of an unbiased estimator of mean $\mu$.
+\item Repeat part (a) for $X_1,X_2,\dots,X_n~\in\mathcal{R}^d$, where $X_i\sim \mathcal{N}(\boldsymbol{\mu},\boldsymbol{\Sigma})$ iid, $\boldsymbol{\Sigma}\in \mathcal{R}^{d\times d}$ is the covariance matrix.
+\end{enumerate}
+\item \hyperlink{solution9}{Problem 9}\\
+Consider the noisy signal model,
+\begin{equation}
+Y=X+N,
+\end{equation}
+where $N$ is a complex Gaussian random variable with mean zero and variance $\sigma^2$ (iid real and imaginary parts). Let $X=A\exp(j\phi)$ is complex valued, with constant amplitude $A$ and random phase $\phi$ distributed as uniform in $[0~2\pi]$. Derive the Maximum Likelihood estimate for the amplitude $A=|X|$. [Hint: Use the approximation $I_0(x)\approx \frac{e^x}{\sqrt{2\pi x}}$ wherever necessary, $I_0(x)=\frac{1}{2\pi} \int\limits_{0}^{2\pi} \exp[x\cos(\tau)]~d\tau$ is Bessel function of zero'th order].
+\end{enumerate}
+\newpage
+\par{\centering\Large {Solutions}\par}
+\hypertarget{solution1}{\subsection*{Solution 1}}
+Given,
+\begin{align*}
+p_0(y)&=\begin{cases}
+1~\hspace{5pt}\mbox{if}~0\leq y \leq 1\\
+0~\hspace{5pt}\mbox{otherwise}
+\end{cases}\\
+\mbox{and},\hspace{40pt}&\\
+p_1(y)&=\begin{cases}
+2y~\hspace{5pt}\mbox{if}~0\leq y \leq 1\\
+0~\hspace{10pt}\mbox{otherwise}
+\end{cases}
+\end{align*}
+for a sequence of i.i.d observations, $Y_1,Y_2,\dots,Y_n$. We have,
+\begin{align*}
+P_F(\delta)&\leq\exp(-s\tau+\mu_{T,0}(s)),~s>0,\\
+P_M(\delta)&\leq\exp(\tau)\exp(-s\tau+\mu_{T,0}(s)), s\leq 1.
+\end{align*} 
+where, $\mu_{T,0}(s)=\log \mathbb{E}_0[e^{(s\log L(y)}]=\log \mathbb{E}_0[L(y)^{s}]$. The Likelihood Ratio is,
+\begin{align*}
+L(y)&=\prod_{i=1}^{n}\frac{p_1(y_{i})}{p_0(y_{i})},\\
+&=\prod_{i=1}^{n} 2y_{i},\\
+&=2^{n}\prod_{i=1}^{n} y_{i}.
+\end{align*}
+We get,
+\begin{equation*}
+E_0[L(y)^{s}] = 2^{ns} (E_{0}[y_{1}^{s}])^{n}= 2^{ns}(\int_{0}^{1}y^{s}ds)^{n}= \frac{2^{ns}}{(s + 1)^n}.
+\end{equation*}
+Hence, $\mu_{T,0}(s) = ns\log2 - n\log(s + 1)$.
+\begin{enumerate}
+\item[Case 1:] $\;\tau<n\log2 $.
+In this case, $P_F(\delta)\leq 1 $, and $P_M(\delta)\leq \exp(\tau) $.
+\item[Case 2:] $\;\tau>n\log2  $.
+Here, $P_F(\delta)\leq \exp(-\tau)$, and $P_M(\delta)\leq 1 $.
+\end{enumerate}
+
+\hypertarget{solution2}{\subsection*{Solution 2}}
+Given $Y_1,Y_2,.....$ are iid Bernoulli observations with distribution
+\begin{equation*}
+P(Y_k=1)=1-P(Y_k=0)=1/3
+\end{equation*}
+under hypothesis $H_0$, and 
+\begin{equation*}
+P(Y_k=1)=1-P(Y_k=0)=2/3
+\end{equation*}
+under hypothesis $H_1$.
+\begin{enumerate}[label=(\alph*).]
+\item From Wald's approximation,
+\begin{equation*}
+A \cong\frac{\gamma}{1-\alpha},~B\cong\frac{1-\gamma}{\alpha}.
+\end{equation*}
+Substituting for $\alpha=\gamma=0.01$, we get
+\begin{equation*}
+A\leq\frac{1}{99},~B\geq99.
+\end{equation*}
+The likelihood ratio is given by,
+\begin{equation*}
+L(Y_k)= \log\frac{P(Y_k|\;H_1)}{P(Y_k|\;H_0)} =
+\begin{cases}
+\log2~~~~~~~~Y_k=1 \\
+-\log2~~~~~Y_k=0
+\end{cases}
+\end{equation*}
+The SPRT(Sequential Probability Ratio Test) compares the cumulative likelihood ratio test to an upper and lower threshold. It declares one of the hypothesis when the hypothesis crosses the corresponding threshold.
+\item Consider hypothesis $\;H_1$, using Chernoff bound we get,
+\begin{equation*}
+\gamma \simeq\;\exp(-2n(P-\frac{1}{2})^{2})
+\end{equation*}
+where $P=P(Y_k=1|\;H_1)=\frac{2}{3}$. Hence $0.01 = \;\exp(-\frac{n}{18})$ giving $n = 36 \ln 10\approx 83 \;$samples.
+\item $P^{*}=max(P_{F},P_{M})=0.01$. If we choose $A\leq\frac{1}{99}$ and $B\geq99,$ we can always have $P^{*}=0.01$.
+\begin{align*}
+E[N| H_0]&= (\frac{1}{\mu_0})[(1-\alpha)\log(\frac{\gamma}{1-\alpha})+\alpha\;\log(\frac{1-\gamma}{\alpha})],\\
+E[N| H_1]&= (\frac{1}{\mu_1})[\gamma\;\log(\frac{\gamma}{1-\alpha})+(1-\gamma)\log(\frac{1-\gamma}{\alpha})].
+\end{align*}
+where $\mu_{j}=\mathbb{E}\left[\log\left(\frac{P_{1}(Y_{1})}{P_{0}(Y_{1})}\right)|\;H_{j}\right]$.
+\begin{align*}
+\mu_{0}=\frac{1}{3}\log\left(\frac{\frac{2}{3}}{\frac{1}{3}}\right) +\frac{2}{3}\log\left(\frac{\frac{1}{3}}{\frac{2}{3}}\right)=\frac{1}{3}\log2 - \frac{2}{3} \log2=- \frac{1}{3} \log2.
+\end{align*}
+\begin{align*}
+\mu_{1}=\frac{2}{3}\log\left(\frac{\frac{2}{3}}{\frac{1}{3}}\right) +\frac{1}{3}\log\left(\frac{\frac{1}{3}}{\frac{2}{3}}\right)=\frac{2}{3}\log2 - \frac{1}{3} \log2=\frac{1}{3} \log2.
+\end{align*}
+\end{enumerate}
+Choose$ \;A=\frac{1}{99},~B=99$ gives $\alpha=\gamma=0.01$. Then 
+\begin{equation*}
+\mathbb{E}[N| H_0]= \frac{-3}{\log2}[0.99\log(\frac{0.01}{0.99})+0.01\log(\frac{0.99}{0.01})]=19.49,
+\end{equation*}
 and
-
-$ \hspace{2cm} $
-$r(\bar{\phi},\bar{\delta})\mid_{\phi_{0}=1-\delta_{0}=1}=\pi_{1} $ \\
-
-\begin{figure}[ht!]
-\centering
-\includegraphics[width=90mm]{1.png}
-\caption{Relationships yielding the Bayes sequential rule for uniform
-costs of errors and cost С per sample. \label{overflow}}
-\end{figure}
-
-By inspection of the figure, we see that Bayes rule for a fixed prior $\pi_{1}$ is \\
-
-$
-\hspace{2.5cm}\phi_{0}=
-\left\{
-\begin{array}{lr}
-1-\delta_{0} = 1& \pi_{1}\leq\pi_{L} \\
-\delta_{0} = 1& \pi_{L}\geq\pi_{U}
-\end{array}
-\right.
-$\\ 
-
-and it is the decision rule with the minimum Bayes risk among all $(\bar \phi,\bar \delta)$ with
-
-$\phi_{0}$ if $\pi_{L}<\pi_{1}<\pi_{U} $. So if $\pi_{1}\leq\pi_{L}$ we take no samples and choose $H_{0}$, if
-
-$\pi_{1}\geq \pi_{U}$ we take no samples and choose $H_{1}$. Otherwise we take atleast one 
-
-sample.
-
-\begin{flushleft}
-4) Let $X_1,X_2,....X_n$ be a random sample
-\end{flushleft}
-
-$\hspace{1cm}f(x\mid\theta)=\theta\;x^{-2} \; ;\;0<\theta\leq\;x<\infty$\\
-
-The maximum likelihood estimator of $\theta$ is $L_\theta(x) = \prod_{i=1}^{n} f(x_i\mid\theta)$\\
-
-a)$\;\;\;f(\bar{x}\mid\theta)= \prod_{i=1}^{n} f(x_i\mid\theta)$\\
-
-$\hspace{1.85cm}=\prod_{i=1}^{n} \theta\;x_{i}^{-2} I_{[\theta,\infty]}(x_{i})$\\
-
-$\hspace{1.85cm}=(\prod_{i=1}^{n} \;x_{i}^{-2})\theta^{n}I_{[\theta,\infty]}(x_{(1)}) \hspace{1cm} ( x_{(1)}$ is minimum of X)\\
-
-Hence by factorzation theorem $X_{(1)}$ is a sufficient statistic for $\theta$\\
-
-b) $\;L(\theta\mid\bar{x}) = \theta^{n}(\prod_{i=1}^{n} \;x_{i}^{-2})I_{[\theta,\infty]}(x_{(1)})$\\
-
-$\theta^{n}$ is increasing in $\theta$. The second term of above equation doesn't depend on
-
-$\theta$. So to maximize the MLE $L(\theta\mid\bar x)$, we want to make $\theta$ as large as possible.
-
-But because of the indicator function\\
-
-$\hspace{2cm}L(\theta\mid\bar x)$ = 0 ; $\theta>x_{(1)}$\\
-
-Thus, $\hspace{1cm}\hat{\theta} = x_{(1)}$\\
-
-c) $\hspace{1cm}$E[X] = $\int_\theta^{\infty}\theta x^{-1}\,dx = \infty $ \\
-
-Thus the method of moments estimator of $ \theta $  doesn't exit.\\
-
-\begin{flushleft}
-5) a) If the posterior distributions are in the same family as the prior  
-\end{flushleft} 
-
-probability distribution, the prior and posterior are then called conjugate 
-
-distributions, and the prior is called a conjugate prior for the likelihood func-
-
-tion.\\
-
-By Bayes' rule $P(\mu \mid x) = \frac{P(x\mid \mu)P(\mu)}{P(x)}$\\
-
-Since P(x) is independent of $\mu$ the above equation can be written as\\
-
-$\hspace{3cm}P(\mu \mid x) \propto P(x\mid \mu)P(\mu)$\\
-
-i.e., Posterior distribution $\propto$ Likelihood $\times$ Prior distribution\\
-
-$X_1,X_2,....,X_n$ is a random sample with $X_i \sim N(\mu,\sigma_{x}^{2})$
-
-Likelihood function, 
-
-$\hspace{3cm}P(X \mid \mu) = \prod_{i=1}^{n} \frac{1}{\sqrt{2\pi \sigma^{2}}} \;e^{-\frac{(x_{i}-\mu)^{2}}{2\sigma_{x}^{2}}}$
-
-Prior function,
-
-$\hspace{3.5cm} P(\mu) = \frac{1}{\sqrt{2\pi \sigma^{2}}} e^{-\frac{(\mu-\mu_{0})^{2}}{2\sigma_{\mu}^{2}}}$\\
-
-Likelihood $\times$ Prior = $\prod_{i=1}^{n} \frac{1}{\sqrt{2\pi \sigma^{2}}} \;e^{-\frac{(x_{i}-\mu)^{2}}{2\sigma_{x}^{2}}} \times \frac{1}{\sqrt{2\pi \sigma^{2}}} e^{\frac{(\mu-\mu_{0})^{2}}{2\sigma_{\mu}^{2}}} $\\
-
-$\hspace{3cm} = \frac{1}{(\sqrt{2\pi \sigma^{2}})^{n}} \;e^{-\frac{\sum_{i=1}^{n}(x_{i}-\mu)^{2}}{2\sigma_{x}^{2}}} \times \frac{1}{\sqrt{2\pi \sigma^{2}}} e^{-\frac{(\mu-\mu_{0})^{2}}{2\sigma_{\mu}^{2}}}$\\
-
-$\hspace{3cm} \propto \;e^{-\frac{\sum_{i=1}^{n}(x_{i}-\mu)^{2}}{2\sigma_{x}^{2}}} \times e^{-\frac{(\mu-\mu_{0})^{2}}{2\sigma_{\mu}^{2}}}$ $\hspace{0.5cm}$(constants are ignored)\\
-
-$\hspace{3cm} \propto \exp[{\frac{-\sum_{i=1}^{n}x_{i}^{2}+2\mu n \bar X-n\mu^{2}}{2\sigma_{x}^{2}}}-\frac{\mu^{2} - 2\mu \mu_{0}+\mu_{0^{2}}}{2\sigma_{\mu}^{2}}]$\\
-
-We are interested only in distribution of $\mu$, neglect the terms not having $\mu$\\
-
-$\hspace{3cm} \propto \exp[\frac{2\mu n\bar X -n\mu^{2}}{2\sigma_{x}^{2}} - \frac{\mu^{2} - 2\mu \mu_{0}}{2\sigma_{\mu}^{2}}]$\\
-
-$\hspace{3cm} \propto \exp[-\frac{\mu^{2}}{2}(\frac{1}{\sigma_{\mu}^{2}}+\frac{n}{\sigma_{x}^{2}}) - \mu(\frac{\mu_{0}}{\sigma_{\mu}^{2}}+\frac{n\bar X}{\sigma_{x}^{2}}]) \hspace{2cm} (1)$\\
-
-Let  $\hspace{0.3cm}\sigma_{\mu}^{'^{2}} = [\frac{1}{\sigma_{\mu}^{2}}+\frac{n}{\sigma_{x}^{2}}]^{-1}$\\
-
-$\hspace{1cm} \mu^{'} = \sigma_{\mu}^{'^{2}}[\frac{\mu_{0}}{\sigma_{\mu}^{2}}+\frac{n\bar X}{\sigma_{x}^{2}}]$\\
-
-Substitute $\sigma_{\mu}^{'^{2}}, \mu^{'}$ in (1)\\
-
-$\hspace{3cm}\propto \exp[-\frac{\mu^{2}}{2\sigma_{\mu}^{'^{2}}}+\frac{\mu \mu^{'}}{\sigma_{\mu}^{'^{2}}}]$\\
-
-Multiply the above term by a constant\\
-
-$\hspace{3cm} = \exp[-\frac{\mu^{2}}{2\sigma_{\mu}^{'^{2}}}+\frac{\mu \mu^{'}}{\sigma_{\mu}^{'^{2}}}-\frac{\mu^{'^{2}}}{2\sigma_{\mu}^{'^{2}}}] \hspace{3.5cm} (2)$\\
-
-$\hspace{3cm} = \exp[-\frac{(\mu-\mu^{'})^{2}}{2\sigma_{\mu}^{2}}]$
-
-Normalizing (2) so that it is equal to one when integrated over sample space, 
-
-we get
-
-$\hspace{3cm} = \frac{1}{\sqrt{2\pi \sigma_{\mu}^{'^{2}}}} e^{-\frac{(\mu-\mu^{'})^{2}}{2\sigma_{\mu}^{2}}}$\\
-
-which is posterior distribution that is in the same family as prior distribution.
-
-Therefore the class of normal distributions is a conjugate prior family for 
-
-the class of normal distributions with known variance\\ 
-
-b) The likelihood function a normally distributed random sample is 
-
-$\hspace{3cm}f(X \mid \mu) = \prod_{i=1}^{n} \frac{1}{\sqrt{2\pi \sigma^{2}}} \;e^{-\frac{(x_{i}-\mu)^{2}}{2\sigma^{2}}}$\\
-
-The normal inverse-gamma distribution has the form\\
-
-$\hspace{3cm} f(\mu, \sigma^{2}\mid \mu_{0}, \lambda,\alpha,\beta) =  \frac{\sqrt{\gamma}}{\sigma\sqrt{2\pi}} \frac{\beta^{\alpha}}{\Gamma(\alpha)} (\frac{1}{\sigma^{2}})^{\alpha + 1} \exp(-\frac{2\beta + \lambda(\mu - \mu_{0})^{2}}{2\sigma^{2}}) $\\
-
-Posterior $\propto$ Likelihood $\times$ Prior 
-
-Likelihood $\times$ Prior = $\frac{1}{(\sqrt{2\pi \sigma^{2}})^{n}} \;\exp\{-\frac{\sum_{i=1}^{n}(x_{i}-\mu)^{2}}{2\sigma^{2}}\} \times \frac{\sqrt{\gamma}}{\sigma\sqrt{2\pi}} \frac{\beta^{\alpha}}{\Gamma(\alpha)} (\frac{1}{\sigma^{2}})^{\alpha + 1} \exp\{-\frac{2\beta + \lambda(\mu - \mu_{0})^{2}}{2\sigma^{2}}\}$\\
-
-$\hspace{2.9cm} \propto (\frac{1}{\sigma^{2}})^{\alpha + \frac{n}{2} + 1} \exp\{-\frac{2\beta + \sum_{i=1}^{n}(x_{i}-\mu)^{2} + \lambda(\mu - \mu_{0})^{2}}{2\sigma^{2}}\}$\\
-
-$\hspace{2.9cm} \propto (\frac{1}{\sigma^{2}})^{\alpha + \frac{n}{2} + 1} \exp\{-\frac{2\beta + \sum_{i=1}^{n}x_{i}^{2}- 2\mu\sum_{i=1}^{n}x_{i}+ n\mu^{2} + \lambda(\mu^{2} - 2\mu\mu_{0} + \mu_{0}^{2})}{2\sigma^{2}}\}$\\
-
-$\hspace{2.9cm} \propto (\frac{1}{\sigma^{2}})^{\alpha + \frac{n}{2} + 1} \exp\{-\frac{2\beta + (\lambda + n)\mu^{2} - \mu(2\lambda\mu_{0} + 2\sum_{i=1}^{n} x_i) + \lambda\mu_{0}^{2} + \sum_{i=1}^{n} x_i^{2}}{2\sigma^{2}}\}$\\
-
-Ignore the terms not having $\mu$ or $\sigma^{2}$
-
-$\hspace{2.9cm} \propto (\frac{1}{\sigma^{2}})^{\alpha + \frac{n}{2} + 1} \exp\{-\frac{2\beta + (\lambda + n)(\mu^{2} - 2\mu(\frac{\lambda\mu_{0} + 2\sum_{i=1}^{n} x_i }{\lambda + n}))}{2\sigma^{2}}\}$\\
-
-Multiply the above term by a constant
-
-$\hspace{2.9cm} = (\frac{1}{\sigma^{2}})^{\alpha + \frac{n}{2} + 1} \exp\{-\frac{2\beta + (\lambda + n)(\mu^{2} - 2\mu(\frac{\lambda\mu_{0} + 2\sum_{i=1}^{n} x_i }{\lambda + n}) + (\frac{\lambda\mu_{0} + 2\sum_{i=1}^{n} x_i }{\lambda + n})^{2} )}{2\sigma^{2}}\}$
-
-$\hspace{2.9cm} = (\frac{1}{\sigma^{2}})^{\alpha + \frac{n}{2} + 1} \exp\{-\frac{2\beta + (\lambda + n)(\mu - (\frac{\lambda\mu_{0} + 2\sum_{i=1}^{n} x_i }{\lambda + n}))^{2}}{2\sigma^{2}}\}$\\
-
-Normalizing the above term so that it is equal to one when integrated over
-
-sample space, we get\\
-
-$\hspace{2.9cm} = \frac{\sqrt{\gamma}}{\sigma\sqrt{2\pi}} \frac{\beta^{\alpha}}{\Gamma(\alpha + \frac{n}{2})} (\frac{1}{\sigma^{2}})^{\alpha + \frac{n}{2} + 1}  \exp\{-\frac{2\beta + (\lambda + n)(\mu - (\frac{\lambda\mu_{0} + 2\sum_{i=1}^{n} x_i }{\lambda + n}))^{2}}{2\sigma^{2}}\}$\\
-
-$\hspace{2.9cm} = \frac{\sqrt{\gamma}}{\sigma\sqrt{2\pi}} \frac{\beta^{\alpha}}{\Gamma(\alpha^{'})} (\frac{1}{\sigma^{2}})^{\alpha^{'} + 1}  \exp\{-\frac{2\beta + \lambda^{'}(\mu - \mu^{'})^{2}}{2\sigma^{2}}\}$\\
-
-which is posterior distribution that is in the same family as the prior distri-
-
-bution i.e., normal-inverse gamma distribution.\\
-
-where $\hspace{1cm}\alpha^{'} = \alpha + \frac{n}{2}$\\
-
-$\hspace{2cm} \lambda^{'} = \lambda + n$\\
-
-$\hspace{1cm} \mu^{'} = \frac{\lambda\mu_{0}\; +\; 2\sum_{i=1}^{n} x_i }{\lambda + n}$\\
-
-Therefore a normal-inverse gamma distributions is conjugate prior for the 
-
-class of normal distributions.
-
-\begin{flushleft}
-6) X is a Bernouli random variable with distribution
-\end{flushleft}
-
-\begin{center}
-$P(X=1)= 1-P(X=0)= p$
-\end{center}
-
-$\hspace{2cm}$f$(x_1,x_2,....,x_n\mid\;p)= \prod_{i=1}^{n}p^{x_i}(1-p)^{x_{i}}$\\
-
-$\hspace{2cm} L(\theta\mid\bar{x})= p^{\sum_{i=1}^{n}x_{i}} (1-p)^{n-\sum_{i=1}^{n}x_{i}}$\\
-
-$\hspace{3cm} = p^{\alpha}(1-p)^{n-\alpha}$ $\hspace{1cm}$(where $\alpha = \sum_{i=1}^{n}x_{i}$)\\
-
-$\hspace{2cm}y= \ln L(\theta\mid\bar{x}) = \alpha\ln p + (n-\alpha)\ln(1-p)$\\
-
-Differentiating $y$ w.r.t $p$ and equating it to zero\\
-
-$\hspace{2cm} \frac{\partial y}{\partial p} = 0$\\
-
-$\hspace{1.5cm}\Rightarrow \frac{\alpha}{p} + \frac{n-\alpha}{1-p}(-1)=0$\\
-
-$\hspace{1.5cm} \Rightarrow \alpha = np$\\
-
-$\hspace{2cm}  p = \frac{n}{\alpha}$\\
-
-$\hspace{1.5cm} \frac{\partial^{2}y}{\partial p^{2}} = -\frac{\alpha}{p^{2}} - \frac{n-\alpha}{(1-p)^{2}}<0$ \\
-
-Hence MLE for $p$ is $\frac{\alpha}{n}=\frac{\sum_{i=1}^{n}x_{i}}{n}$
-
-
-
-\begin{flushleft}
-7) Let $X_1,X_2....X_n$ be an iid random sample drawn from a Poisson 
-\end{flushleft}
-
-distribution with parameter $\lambda, X_{i}\sim\;poison(\lambda)$\\
-
-$\hspace{1cm}\bar X=\frac{1}{n}\sum_{i=1}^{n} \;x_{i}$\\
-
-$\hspace{1cm}S^{2}=\frac{1}{n-1}\sum_{i=1}^{n} \;x_{i}^{2}$\\
-
-$\hspace{1cm}E[\bar{X}] = \frac{1}{n}(n\lambda) = \lambda$\\
-
-$\hspace{1cm}E[S^{2}] = \frac{1}{n-1}\sum_{i=1}^{n} \;E[x_{i}^{2}]$\\
-
-$\hspace{2cm}=\frac{n(\lambda+\lambda^{2})}{n-1} = \tau(\lambda)$\\
-
-$\hspace{1cm}$var$(\bar{X})= \frac{1}{n^{2}}
-\sum_{i=1}^{n} $var$(x_{i})$\\
-
-$\hspace{2cm} = \frac{n\lambda}{n^{2}} = \frac{\lambda}{n}$\\
-
-$\hspace{1cm}$ var$(S^{2}) = \frac{1}{(n-1)^{2}} \sum_{i=1}^{n} $var$(x_{i}^{2})$\\
-
-$\hspace{1cm}$var$(x_{i}^{2})$ = E$[x_{i}^{4}]$ - (E$[x_{i}^{2}])^{2}$\\
-
-$\hspace{1cm}$ E$[x^{4}] = \sum_{k=0}^{\infty} k^{4} \frac{e^{-\lambda}\lambda^{k}}{k\,!}$\\
-
-$\hspace{2cm}$ =$ e^{-\lambda}\sum_{k=1}^{\infty} \frac{k^{4}\lambda^{k}}{(k-1)\,!}$\\
-
-for m=k-1\\
- 
-$\hspace{1cm}$ E$[x^{4}]$ = $e^{-\lambda}\sum_{m=0}^{\infty} \frac{(m+1)^{3}\lambda^{m+1}}{m\,!}$ \\
- 
- 
-$ \hspace{2cm} $= $\lambda\sum_{m=0}^{\infty} e^{-\lambda}\frac{(m+1)^{3}\lambda^{m}}{m\,!}$ \\
- 
-$ \hspace{2cm} $= $\lambda\sum_{m=0}^{\infty} e^{-\lambda}\frac{(m^{3}+3m^{2}+3m+1)\lambda^{m}}{m\,!}$ \\
- 
-
-$ \hspace{2cm} $= $\lambda[E[x^{3}]+3E[x^{2}]+3E[x]+1]$ \\
-
-$ \hspace{2cm} $= $\lambda[\lambda(E[x^{2}]+2E[X]+1)+3E[x^{2}]+3E[x]+1]$ \\
-
-$ \hspace{2cm} $=
-$\lambda[\lambda(\lambda^{2}+\lambda+2\lambda+1)+3(\lambda^{2}+\lambda)+3\lambda+1]$ \\
-
-By simplifying we will get\\
-
-$\hspace{1cm}$ E$[x^{4}]$=$ \lambda^{4}+6\lambda^{3}+7\lambda^{2}+\lambda $\\
-
-$\hspace{1cm}$ var$(x_i^{2})$= E$[x_{i}^{4}]$-(E$[x_i^{2}])^{2} $ \\
- 
-$\hspace{2cm}$=$\lambda^{4}+6\lambda^{3}+7\lambda^{2}+\lambda-(\lambda^{2}+\lambda)^{2} $\\
- 
-$\hspace{2cm}$=$4\lambda^{3}+6\lambda^{2}+\lambda$\\
-
-$\hspace{0.8cm}\Rightarrow$ var$(S^{2}) = \frac{n}{(n-1)^{2}} (4\lambda^{3} + 6\lambda^{2} + \lambda) $\\
-
-var($S^{2}$) is higher than var($\bar X$)
-
-Therefore $\bar X$ has lower mean square error
-
-\begin{flushleft}
-8) Let $X_1,X_2,....X_n\;\epsilon\;R$ be an iid random sample
-\end{flushleft}
-
-$\hspace{2cm}X_i\sim N(\mu,\sigma^{2})$\\
-
-a) $\bar X$ be an unbiased estimator of $\mu$\\
-
-The pdf of normal distribution is\\
-
-$\hspace{2cm} f_{X}(x;\mu) = \frac{1}{\sqrt{2\pi\sigma^{2}}} e^{-\frac{(x-\mu)^{2}}{2\sigma^{2}}}$\\
-
-Cramer-Rao lower bound for unbiased estmator is\\
-
-$\hspace{2cm}$var($\bar X$) $\geq \frac{1}{nFI}$\\
-
-First we need to find Fisher Information(FI)\\
-
-$\hspace{2cm}$ FI = $-E[\frac{\partial^{2}}{\partial\mu^{2}} \ln f_{X}(x;\mu)]$
-
-$\hspace{1.5cm} \ln f_{X}(x;\mu) = \ln(\frac{1}{\sqrt{2\pi\sigma^{2}}} e^{-\frac{(x-\mu)^{2}}{2\sigma^{2}}}) $
-
-$\hspace{3.25cm} = -\ln\sigma\sqrt{2\pi} - \frac{(x-\mu)^{2}}{2\sigma^{2}}$\\
-
-$\hspace{1.75cm} \frac{\partial \ln f(x;\mu)}{\partial \mu} = \frac{(x-\mu)^{2}}{\sigma^{2}}$
-
-$\hspace{1.65cm} \frac{\partial^{2} \ln f(x;\mu)}{\partial \mu^{2}} = -\frac{1}{\sigma^{2}}$\\
-
-$\hspace{2cm}$ FI = -$E[-\frac{1}{\sigma^{2}}] = \frac{1}{\sigma^{2}}$
-
+\begin{equation*}
+\mathbb{E}[N| H_1]= \frac{3}{log2}[0.01\log(\frac{0.01}{0.99})+0.99
+\log(\frac{0.99}{0.01})]=19.49.
+\end{equation*}
+The calculated values of $E[N| H_0]$ and $E[N| H_1]$ will vary depending on the exact $\alpha$,$\gamma$ we choose and in effect the $A$ and $B$ chosen.
+\hypertarget{solution3}{\subsection*{Solution 3}}
+Let $\bar{\phi}$ = $\{\phi_{j};j=0,1,2,...\}$ be a stopping rule and, $\bar{\delta}=\{\delta_{j};j=0,1,2,...\}$ be a terminal decision rule. A sequential decision rule is pair of sequences $(\bar{\phi},\bar{\delta})$, the rule $(\bar{\phi},\bar{\delta})$ makes the  decision $\delta_{N}(y_{1},y_{2},...y_{N})$, where $N$ is the stopping time defined as,
+\begin{equation}
+N=\min\{n| \phi_{n}(y_{1},y_{2},...y_{n})=1\}
+\end{equation}
+The sequential decision rule of $n$-samples is defined by,
+\begin{equation*}
+\phi_j(y_1,\dots,y_j)=\begin{cases}
+0~\hspace{5pt}\mbox{if}~j\neq n\\
+1~\hspace{5pt}\mbox{if}~j= n
+\end{cases}
+\end{equation*}
+\begin{equation*}
+\delta_j(y_1,\dots,y_j)=\begin{cases}
+\delta(y_1,\dots,y_n)~\hspace{5pt}\mbox{if}~j= n\\
+\mbox{arbitrary}~\hspace{20pt}\mbox{if}~j\neq n
+\end{cases}
+\end{equation*}
+The priors $ \pi_{1}$ and $ \pi_{0}$ are assigned to hypothesis $ H_{1} $ and $H_{0},$ respectively. The Bayes risk is given by,
+\begin{equation*}
+r(\bar{\phi},\bar{\delta})=(1-\pi_1)R_0(\bar{\phi},\bar{\delta})+\pi_1 R_1(\bar{\phi},\bar{\delta})
+\end{equation*}
+Consider the function,
+\begin{equation*}
+V^*(\pi_1) \triangleq \underset{\underset{\phi_0=0}{\underline{\phi},\underline{\delta}}}{\min}~r(\underline{\phi},\underline{\delta}),\hspace{20pt}0\leq \pi_1 \leq 1.
+\end{equation*}
+The relationship between Bayes risk and uniform costs has been divided into two decisions rules.
+The one that takes no samples and decides $H_{1}$, (i.e., $\phi_{0}=\delta_{0}=1$) and the one that takes no samples and decides $H_{0}$, (i.e., $\phi_{0}=1-\delta_{0}=1$).
+\begin{equation*}
+r(\bar{\phi},\bar{\delta})|_{\phi_{0}=\delta_{0}=1}=(1-\pi_{1}),
+\end{equation*}
+and,
+\begin{equation*}
+r(\bar{\phi},\bar{\delta})|_{\phi_{0}=1-\delta_{0}=1}=\pi_{1}.
+\end{equation*}
+%\begin{figure}[ht!]
+%\centering
+%\includegraphics[width=90mm]{1.png}
+%\caption{Relationships yielding the Bayes sequential rule for uniform
+%costs of errors and cost С per sample. \label{overflow}}
+%\end{figure}
+By inspection of the figure, we see that Bayes rule for a fixed prior $\pi_{1}$ is,
+\begin{equation*}
+\phi_{0}=
+\begin{cases}
+1-\delta_{0} = 1~~~~\pi_{1}\leq\pi_{L} \\
+\delta_{0} = 1~~~~~~~\pi_{L}\geq\pi_{U}
+\end{cases}
+\end{equation*}
+and it is the decision rule with the minimum Bayes risk among all $(\bar \phi,\bar \delta)$ with $\phi_{0}$ if $\pi_{L}<\pi_{1}<\pi_{U} $. So if $\pi_{1}\leq\pi_{L}$ we take no samples and choose $H_{0}$, if $\pi_{1}\geq \pi_{U}$ we take no samples and choose $H_{1}$. Otherwise we take at-least one sample.
+\hypertarget{solution4}{\subsection*{Solution 4}}
+Let $X_1,X_2,....X_n$ be a random sample, $f(x|\theta)=\theta\;x^{-2} \; ;\;0<\theta\leq\;x<\infty$. The maximum likelihood estimator of $\theta$ maximizes $L_\theta(x) = \prod_{i=1}^{n} f(x_i|\theta)$.
+\begin{enumerate}[label=(\alph*).]
+\item 
+\begin{align*}
+f(\bar{x}|\theta)&= \prod_{i=1}^{n} f(x_i|\theta),\\
+&=\prod_{i=1}^{n} \theta\;x_{i}^{-2} I_{[\theta,\infty]}(x_{i}),\\
+&=(\prod_{i=1}^{n} \;x_{i}^{-2})\theta^{n}I_{[\theta,\infty]}(x_{(1)}) \hspace{1cm} ( x_{(1)} \mbox{ is minimum of } X).
+\end{align*}
+Hence by factorization theorem $X_{(1)}$ is a sufficient statistic for $\theta$.
+\item 
+\begin{equation*}
+L(\theta|\bar{x}) = \theta^{n}(\prod_{i=1}^{n} \;x_{i}^{-2})I_{[\theta,\infty]}(x_{(1)})
+\end{equation*}
+$\theta^{n}$ is increasing in $\theta$. The second term of above equation doesn't depend on $\theta$. So to maximize the MLE $L(\theta|\bar x)$, we want to make $\theta$ as large as possible. But because of the indicator function,
+\begin{equation*}
+L(\theta|\bar x) = 0 ;~\theta>x_{(1)}.
+\end{equation*}
+Thus, $\hat{\theta} = x_{(1)}$.
+\item $E[X] = \int_\theta^{\infty}\theta x^{-1}\,dx = \infty $. Hence, the method of moments estimator of $ \theta $  doesn't exit.
+\end{enumerate}
+\hypertarget{solution5}{\subsection*{Solution 5}}
+\begin{enumerate}[label=(\alph*).]
+\item If the posterior distributions are in the same family as the prior probability distribution, the prior and posterior are then called conjugate distributions, and the prior is called a conjugate prior for the likelihood function. By Bayes' rule $P(\mu | x) = \frac{P(x| \mu)P(\mu)}{P(x)}$. Since $P(x)$ is independent of $\mu$ the above equation can be written as,
+\begin{equation*}
+P(\mu | x) \propto P(x| \mu)P(\mu).
+\end{equation*}
+i.e., 
+\begin{equation*}
+\mbox{posterior distribution} \propto \mbox{Likelihood} \times \mbox{Prior distribution}.
+\end{equation*}
+$X_1,X_2,....,X_n$ is an iid random sample with $X_i \sim N(\mu,\sigma_{x}^{2})$. The likelihood function is,
+\begin{equation*}
+P(X | \mu) = \prod_{i=1}^{n} \frac{1}{\sqrt{2\pi \sigma^{2}}} \;e^{-\frac{(x_{i}-\mu)^{2}}{2\sigma_{x}^{2}}},
+\end{equation*}
+and the prior,
+\begin{equation*}
+P(\mu) = \frac{1}{\sqrt{2\pi \sigma^{2}}} e^{-\frac{(\mu-\mu_{0})^{2}}{2\sigma_{\mu}^{2}}}.
+\end{equation*}
+Now,
+\begin{align*}
+\mbox{Likelihood} \times \mbox{Prior} &= \prod_{i=1}^{n} \frac{1}{\sqrt{2\pi \sigma^{2}}} \;e^{-\frac{(x_{i}-\mu)^{2}}{2\sigma_{x}^{2}}} \times \frac{1}{\sqrt{2\pi \sigma^{2}}} e^{\frac{(\mu-\mu_{0})^{2}}{2\sigma_{\mu}^{2}}},\\
+P(\mu | x)&= \frac{1}{(\sqrt{2\pi \sigma^{2}})^{n}} \;e^{-\frac{\sum_{i=1}^{n}(x_{i}-\mu)^{2}}{2\sigma_{x}^{2}}} \times \frac{1}{\sqrt{2\pi \sigma^{2}}} e^{-\frac{(\mu-\mu_{0})^{2}}{2\sigma_{\mu}^{2}}},\\
+&\propto \;e^{-\frac{\sum_{i=1}^{n}(x_{i}-\mu)^{2}}{2\sigma_{x}^{2}}} \times e^{-\frac{(\mu-\mu_{0})^{2}}{2\sigma_{\mu}^{2}}},\\
+&=\exp\left[{\frac{-\sum_{i=1}^{n}x_{i}^{2}+2\mu n \bar X-n\mu^{2}}{2\sigma_{x}^{2}}}-\frac{\mu^{2} - 2\mu \mu_{0}+\mu_{0^{2}}}{2\sigma_{\mu}^{2}}\right].
+\end{align*}
+We are interested only in distribution of $\mu$, neglecting the terms not having $\mu$, we get
+\begin{align*}
+P(\mu | x)&\propto \exp\left[\frac{2\mu n\bar X -n\mu^{2}}{2\sigma_{x}^{2}} - \frac{\mu^{2} - 2\mu \mu_{0}}{2\sigma_{\mu}^{2}}\right],\\
+&\propto \exp\left[-\frac{\mu^{2}}{2}(\frac{1}{\sigma_{\mu}^{2}}+\frac{n}{\sigma_{x}^{2}}) - \mu(\frac{\mu_{0}}{\sigma_{\mu}^{2}}+\frac{n\bar X}{\sigma_{x}^{2}}\right]).
+\end{align*}
+Let, $\sigma_{\mu'}^{^{2}} = [\frac{1}{\sigma_{\mu}^{2}}+\frac{n}{\sigma_{x}^{2}}]^{-1}$, $\mu' = \sigma_{\mu'}^{2}[\frac{\mu_{0}}{\sigma_{\mu}^{2}}+\frac{n\bar X}{\sigma_{x}^{2}}]$. Substituting $\sigma_{\mu'}^{^{2}}, \mu'$ in above equations, we get
+\begin{equation*}
+P(\mu | x)\propto \exp\left[-\frac{\mu^{2}}{2\sigma_{\mu'}^{2}}+\frac{\mu \mu'}{\sigma_{\mu'}^{2}}\right].
+\end{equation*}
+Multiply the above term by a constant,
+\begin{align*}
+P(\mu | x)&\propto \exp\left[-\frac{\mu^{2}}{2\sigma_{\mu}^{'^{2}}}+\frac{\mu \mu^{'}}{\sigma_{\mu}^{'^{2}}}-\frac{\mu^{'^{2}}}{2\sigma_{\mu}^{'^{2}}}\right],\\
+&= \exp\left[-\frac{(\mu-\mu^{'})^{2}}{2\sigma_{\mu}^{2}}\right].
+\end{align*}
+Normalizing the above equation, so that it is equal to one when integrated over sample space, we get,
+\begin{equation*}
+f(\mu|X)= \frac{1}{\sqrt{2\pi \sigma_{\mu}^{'^{2}}}} e^{-\frac{(\mu-\mu^{'})^{2}}{2\sigma_{\mu}^{2}}}.
+\end{equation*}
+which is the posterior distribution that is in the same family as prior distribution. Therefore the class of normal distributions is a conjugate prior family for the class of normal distributions with known variance.
+\item The likelihood function a normally distributed random sample is,
+\begin{equation*}
+f(X | \mu) = \prod_{i=1}^{n} \frac{1}{\sqrt{2\pi \sigma^{2}}} \;e^{-\frac{(x_{i}-\mu)^{2}}{2\sigma^{2}}}.
+\end{equation*}
+The normal inverse-gamma distribution has the form,
+\begin{equation*}
+f(\mu, \sigma^{2}| \mu_{0}, \lambda,\alpha,\beta) =  \frac{\sqrt{\gamma}}{\sigma\sqrt{2\pi}} \frac{\beta^{\alpha}}{\Gamma(\alpha)} (\frac{1}{\sigma^{2}})^{\alpha + 1} \exp(-\frac{2\beta + \lambda(\mu - \mu_{0})^{2}}{2\sigma^{2}}).
+\end{equation*}
+Now,
+\begin{align*}
+f(\mu, \sigma^{2}| X)&=\frac{1}{(\sqrt{2\pi \sigma^{2}})^{n}} \;\exp\{-\frac{\sum_{i=1}^{n}(x_{i}-\mu)^{2}}{2\sigma^{2}}\} \times \frac{\sqrt{\gamma}}{\sigma\sqrt{2\pi}} \frac{\beta^{\alpha}}{\Gamma(\alpha)} (\frac{1}{\sigma^{2}})^{\alpha + 1} \exp\{-\frac{2\beta + \lambda(\mu - \mu_{0})^{2}}{2\sigma^{2}}\},\\
+&\propto (\frac{1}{\sigma^{2}})^{\alpha + \frac{n}{2} + 1} \exp\{-\frac{2\beta + \sum_{i=1}^{n}(x_{i}-\mu)^{2} + \lambda(\mu - \mu_{0})^{2}}{2\sigma^{2}}\},\\
+&= (\frac{1}{\sigma^{2}})^{\alpha + \frac{n}{2} + 1} \exp\{-\frac{2\beta + \sum_{i=1}^{n}x_{i}^{2}- 2\mu\sum_{i=1}^{n}x_{i}+ n\mu^{2} + \lambda(\mu^{2} - 2\mu\mu_{0} + \mu_{0}^{2})}{2\sigma^{2}}\},\\
+&= (\frac{1}{\sigma^{2}})^{\alpha + \frac{n}{2} + 1} \exp\{-\frac{2\beta + (\lambda + n)\mu^{2} - \mu(2\lambda\mu_{0} + 2\sum_{i=1}^{n} x_i) + \lambda\mu_{0}^{2} + \sum_{i=1}^{n} x_i^{2}}{2\sigma^{2}}\}.
+\end{align*}
+\end{enumerate}
+Ignoring the terms not having $\mu$ or $\sigma^{2}$, 
+\begin{align*}
+f(\mu, \sigma^{2}| X)&\propto (\frac{1}{\sigma^{2}})^{\alpha + \frac{n}{2} + 1} \exp\{-\frac{2\beta + (\lambda + n)(\mu^{2} - 2\mu(\frac{\lambda\mu_{0} + 2\sum_{i=1}^{n} x_i }{\lambda + n}))}{2\sigma^{2}}\}.
+\end{align*}
+On completing square form,
+\begin{align*}
+f(\mu, \sigma^{2}| X)&\propto (\frac{1}{\sigma^{2}})^{\alpha + \frac{n}{2} + 1} \exp\{-\frac{2\beta + (\lambda + n)(\mu^{2} - 2\mu(\frac{\lambda\mu_{0} + 2\sum_{i=1}^{n} x_i }{\lambda + n}) + (\frac{\lambda\mu_{0} + 2\sum_{i=1}^{n} x_i }{\lambda + n})^{2} )}{2\sigma^{2}}\},\\
+&(\frac{1}{\sigma^{2}})^{\alpha + \frac{n}{2} + 1} \exp\{-\frac{2\beta + (\lambda + n)(\mu - (\frac{\lambda\mu_{0} + 2\sum_{i=1}^{n} x_i }{\lambda + n}))^{2}}{2\sigma^{2}}\}.
+\end{align*}
+Normalizing the above term so that it is equal to one when integrated over sample space, we get
+\begin{align*}
+f(\mu, \sigma^{2}| X)&= \frac{\sqrt{\gamma}}{\sigma\sqrt{2\pi}} \frac{\beta^{\alpha}}{\Gamma(\alpha + \frac{n}{2})} (\frac{1}{\sigma^{2}})^{\alpha + \frac{n}{2} + 1}  \exp\{-\frac{2\beta + (\lambda + n)(\mu - (\frac{\lambda\mu_{0} + 2\sum_{i=1}^{n} x_i }{\lambda + n}))^{2}}{2\sigma^{2}}\},\\
+&= \frac{\sqrt{\gamma}}{\sigma\sqrt{2\pi}} \frac{\beta^{\alpha}}{\Gamma(\alpha')} (\frac{1}{\sigma^{2}})^{\alpha' + 1}  \exp\{-\frac{2\beta + \lambda'(\mu - \mu')^{2}}{2\sigma^{2}}\}.
+\end{align*}
+which is posterior distribution that is in the same family as the prior distribution i.e., normal-inverse gamma distribution, where $\alpha' = \alpha + \frac{n}{2}$, $\lambda' = \lambda + n$, $\mu' = \frac{\lambda\mu_{0}\; +\; 2\sum_{i=1}^{n} x_i }{\lambda + n}$. Therefore a normal-inverse gamma distributions is conjugate prior for the class of normal distributions.
+\hypertarget{solution6}{\subsection*{Solution 6}}
+$X$ is a Bernoulli random variable with distribution $P(X=1)= 1-P(X=0)= p$.
+\begin{equation*}
+f(x_1,x_2,....,x_n|\;p)= \prod_{i=1}^{n}p^{x_i}(1-p)^{x_{i}}
+\end{equation*}
+and,
+\begin{align*}
+L(\theta|\bar{x})&= p^{\sum_{i=1}^{n}x_{i}} (1-p)^{n-\sum_{i=1}^{n}x_{i}},\\
+&=p^{\alpha}(1-p)^{n-\alpha}\hspace{1cm}~(\mbox{where}~\alpha = \sum_{i=1}^{n}x_{i})
+\end{align*}
+Let
+\begin{equation*}
+y= \ln L(\theta|\bar{x}) = \alpha\ln p + (n-\alpha)\ln(1-p)
+\end{equation*}
+Differentiating $y$ w.r.t $p$ and equating it to zero, we get,
+\begin{equation*}
+\frac{\alpha}{p} + \frac{n-\alpha}{1-p}(-1)=0.
+\end{equation*}
+This gives $\hat{p} = \frac{\alpha}{n}$. Also,
+\begin{equation*}
+\frac{\partial^{2}y}{\partial p^{2}} = -\frac{\alpha}{p^{2}} - \frac{n-\alpha}{(1-p)^{2}}<0.
+\end{equation*}
+Hence MLE for $p$ is $\hat{p}=\frac{\alpha}{n}=\frac{1}{n}\sum_{i=1}^{n}x_{i}$.
+
+\hypertarget{solution7}{\subsection*{Solution 7}}
+Let $X_1,X_2....X_n$ be an iid random sample drawn from a Poisson distribution with parameter $\lambda,~X_{i}\sim\;poison(\lambda)$. Let $\bar X=\frac{1}{n}\sum_{i=1}^{n}x_{i}$, and $S^{2}=\frac{1}{n-1}\sum_{i=1}^{n}x_{i}^{2}$.
+\begin{equation*}
+\mathbb{E}[\bar{X}] = \frac{1}{n}(n\lambda) = \lambda.
+\end{equation*}
+\begin{align*}
+\mathbb{E}[S^{2}] &= \frac{1}{n-1}\sum_{i=1}^{n} \;\mathbb{E}[x_{i}^{2}],\\
+&=\frac{n(\lambda+\lambda^{2})}{n-1} = \tau(\lambda).
+\end{align*}
+We have,
+\begin{align*}
+Var(\bar{X})&= \frac{1}{n^{2}}
+\sum_{i=1}^{n} Var(x_{i}),\\
+&= \frac{n\lambda}{n^{2}} = \frac{\lambda}{n}.
+\end{align*}
+\begin{equation*}
+Var(S^{2}) = \frac{1}{(n-1)^{2}} \sum_{i=1}^{n} Var(x_{i}^{2}),
+\end{equation*}
+\begin{equation*}
+Var(x_{i}^{2}) = \mathbb{E}[x_{i}^{4}] - (\mathbb{E}[x_{i}^{2}])^{2},
+\end{equation*}
+\begin{equation*}
+\mathbb{E}[x^{4}] = \sum_{k=0}^{\infty} k^{4} \frac{e^{-\lambda}\lambda^{k}}{k\,!}=e^{-\lambda}\sum_{k=1}^{\infty} \frac{k^{4}\lambda^{k}}{(k-1)\,!}.
+\end{equation*}
+For m=k-1,
+\begin{align*}
+E[x^{4}]&=e^{-\lambda}\sum_{m=0}^{\infty} \frac{(m+1)^{3}\lambda^{m+1}}{m\,!},\\
+&=\lambda\sum_{m=0}^{\infty} e^{-\lambda}\frac{(m+1)^{3}\lambda^{m}}{m\,!},\\
+&= \lambda\sum_{m=0}^{\infty} e^{-\lambda}\frac{(m^{3}+3m^{2}+3m+1)\lambda^{m}}{m\,!},\\
+&=\lambda[E[x^{3}]+3E[x^{2}]+3E[x]+1],\\
+&=\lambda[\lambda(E[x^{2}]+2E[X]+1)+3E[x^{2}]+3E[x]+1],\\
+&=\lambda[\lambda(\lambda^{2}+\lambda+2\lambda+1)+3(\lambda^{2}+\lambda)+3\lambda+1].
+\end{align*} 
+On simplification, we get,
+\begin{align*}
+\mathbb{E}[x^{4}]=\lambda^{4}+6\lambda^{3}+7\lambda^{2}+\lambda,
+\end{align*}
+and
+\begin{align*}
+Var(x_i^{2})&=\mathbb{E}[x_{i}^{4}]-(\mathbb{E}[x_i^{2}])^{2},\\
+&=\lambda^{4}+6\lambda^{3}+7\lambda^{2}+\lambda-(\lambda^{2}+\lambda)^{2},\\
+&=4\lambda^{3}+6\lambda^{2}+\lambda.
+\end{align*}
+\begin{equation*}
+Var(S^{2}) = \frac{n}{(n-1)^{2}} (4\lambda^{3} + 6\lambda^{2} + \lambda).
+\end{equation*}
+$Var(S^{2})$ is higher than var($\bar X$). Therefore $\bar X$ has lower mean square error.
+\hypertarget{solution8}{\subsection*{Solution 8}}
+Let $X_1,X_2,....X_n\;\epsilon\;R$ be an iid random sample, $X_i\sim N(\mu,\sigma^{2})$.
+\subsubsection*{(a).}
+Let $\bar X$ be an unbiased estimator of $\mu$. The pdf of normal distribution is,
+\begin{equation*}
+f_{X}(x;\mu) = \frac{1}{\sqrt{2\pi\sigma^{2}}} e^{-\frac{(x-\mu)^{2}}{2\sigma^{2}}}.
+\end{equation*}
+Cramer-Rao lower bound for unbiased estimator is $Var(\bar X)\geq \frac{1}{nFI}$. First we need to find Fisher Information (FI),
+\begin{equation*}
+FI = -\mathbb{E}\left[\frac{\partial^{2}}{\partial\mu^{2}} \ln f_{X}(x;\mu)\right].
+\end{equation*}
+Now,
+\begin{equation*}
+\ln f_{X}(x;\mu) = \ln\left(\frac{1}{\sqrt{2\pi\sigma^{2}}} e^{-\frac{(x-\mu)^{2}}{2\sigma^{2}}}\right)=-\ln\sigma\sqrt{2\pi} - \frac{(x-\mu)^{2}}{2\sigma^{2}}.
+\end{equation*}
+Differentiating twice, we get, $\frac{\partial^{2} \ln f(x;\mu)}{\partial \mu^{2}} = -\frac{1}{\sigma^{2}}$, hence, $FI =-\mathbb{E}[-\frac{1}{\sigma^{2}}] = \frac{1}{\sigma^{2}}$. Therefore, 
+\begin{equation*}
+Var(\bar X) \geq \frac{\sigma^{2}}{n}.
+\end{equation*}
+\subsubsection*{(b).}
+$X_1,X_2....X_n\; \in \;R^{d}$, where $X_i \sim \mathcal{N}({\bf \mu},{\bf \Sigma}),~{\bf \Sigma}\in R^{d\times d}$ is the covariance matrix.
+\begin{equation*}
+P_{\bar X}(\bar x) = \frac{1}{(2\pi)^{\frac{n}{2}} {|\Sigma|^{\frac{1}{2}}}} e^{-\frac{1}{2} (\bar x - \bar \mu)^{T} \Sigma^{-1} (\bar x - \bar \mu)}
+\end{equation*}
+where $\bar{\mu} = \mathbb{E}[\bar X] $, $ \Sigma = \mathbb{E}[(\bar X - \bar \mu)^{T} (\bar X - \bar \mu)]$. A covariance matrix is always non-negative definite (i.e., $\bar x^{T}\Sigma \bar x \geq 0 )$. We assume that $\Sigma$ is positive definite (i.e., $\bar x^{T}\Sigma \bar x > 0$, except for $x=0$). The positive definite property of $\Sigma$ implies that $|\Sigma|>0$ and that $\Sigma^{-1}$ exists.
+\begin{align*}
+\ln P_{\bar X}(\bar x) &= -\frac{n}{2}\ln2\pi - \frac{1}{2}\ln | \Sigma | - \frac{1}{2}(\bar x- \bar{\mu})^{T}\Sigma^{-1}(\bar x- \bar \mu),\\
+&= - \frac{n}{2}\ln2\pi - \frac{1}{2}\ln | \Sigma | - \frac{1}{2} (\bar x^{T}\Sigma^{-1} \bar x - \bar x^{T} \Sigma^{-1} \bar \mu - \bar \mu^{T} \Sigma^{-1} \bar \mu + \bar \mu^{T} \Sigma^{-1}\bar \mu),\\
+&= - \frac{n}{2}\ln2\pi - \frac{1}{2}\ln | \Sigma | - \frac{1}{2} (\bar x^{T}\Sigma^{-1} \bar x - 2\bar x^{T} \Sigma^{-1} \bar \mu + \bar \mu^{T} \Sigma^{-1}\bar \mu).
+\end{align*}
+Differentiating $\ln P_{\bar X}(\bar x)$ with respect to $\mu$, we get,
+\begin{equation*}
+\frac{\partial}{\partial \mu}\ln P_{\bar X}(\bar x) = - \frac{1}{2} (-2 \bar \Sigma^{-1}\bar x + 2\Sigma^{-1}\bar\mu)=\bar \Sigma^{-1}\bar x - \Sigma^{-1}\bar\mu,
+\end{equation*}
+and,
+\begin{equation*}
+\frac{\partial^{2}}{\partial \mu^{2}} \ln P_{\bar X}(\bar x) = -\Sigma^{-1}.
+\end{equation*}
+Hence,
+\begin{equation*}
+-\mathbb{E}\left[\frac{\partial^{2}}{\partial \mu^{2}} \ln P_{\bar X}(\bar x)\right] = \Sigma^{-1}.
+\end{equation*}
 Therefore, 
-
-$\hspace{2cm}$ var($\bar X) \geq \frac{\sigma^{2}}{n}$\\
-
-b) $X_1,X_2....X_n\; \epsilon \;R^{d}$ where $X_i \sim N(\textbf{$\mu$},\textbf{$\Sigma$}),\; \textbf{$\Sigma$}\; \epsilon \;R^{d\times d} $ is the covariance matrix\\
-
-$\hspace{2cm}$$ P_{\bar X}(\bar x) = \frac{1}{(2\pi)^{\frac{n}{2}} {\mid \Sigma \mid ^{\frac{1}{2}}}} e^{-\frac{1}{2} (\bar x - \bar \mu)^{T} \Sigma^{-1} (\bar x - \bar \mu)} $\\
-
-where $\hspace{3cm}$$ \bar{\mu} = E[\bar X] $\\
-
-$\hspace{2.85cm}$ $ \Sigma = E[(\bar X - \bar \mu)^{T} (\bar X - \bar \mu)]$\\
-
-A covariance matrix is always non-negative definite(i.e., $\bar x^{T}\Sigma \bar x \geq 0 )$. We 
-
-assume that $\Sigma$ is positive definite (i.e., $\bar x^{T}\Sigma \bar x > 0$, except for x=0$)$. The 
-
-positive definite of $\Sigma$ implies that $\mid \Sigma \mid$$>$0 and that $\Sigma^{-1}$ exists.\\
-
-$\hspace{1cm}$ $\ln P_{\bar X}(\bar x) = -\frac{n}{2}\ln2\pi - \frac{1}{2}\ln \mid \Sigma \mid - \frac{1}{2}(\bar x- \bar{\mu})^{T}\Sigma^{-1}(\bar x- \bar \mu)$\\
-
-$\hspace{1cm}$ $ = - \frac{n}{2}\ln2\pi - \frac{1}{2}\ln \mid \Sigma \mid - \frac{1}{2} (\bar x^{T}\Sigma^{-1} \bar x - \bar x^{T} \Sigma^{-1} \bar \mu - \bar \mu^{T} \Sigma^{-1} \bar \mu + \bar \mu^{T} \Sigma^{-1}\bar \mu)$\\
-
-$\hspace{1cm}$ $ = - \frac{n}{2}\ln2\pi - \frac{1}{2}\ln \mid \Sigma \mid - \frac{1}{2} (\bar x^{T}\Sigma^{-1} \bar x - 2\bar x^{T} \Sigma^{-1} \bar \mu + \bar \mu^{T} \Sigma^{-1}\bar \mu)$\\
-
-Differentiating $\ln P_{\bar X}(\bar x)$ with respect to $\mu$\\
-
-$\hspace{1cm}\frac{\partial}{\partial \mu}\ln P_{\bar X}(\bar x) = - 0 - 0 - \frac{1}{2} (-2 \bar \Sigma^{-1}\bar x + 2\Sigma^{-1}\bar\mu)$ \\
-
-$\hspace{2.9cm} =  \bar \Sigma^{-1}\bar x + \Sigma^{-1}\bar\mu$ \\
-
-since, 
-
-$\hspace{1cm} $$\frac{\partial}{\partial\bar a} \bar b^{T}\bar a = \bar b$\\
-
-$\hspace{0.8cm} $ $\frac{\partial}{\partial\bar a} \bar a^{T} \bar b \bar a = 2\bar b \bar a  $\\
-
-Differentiating $\frac{\partial}{\partial \mu} \ln P_{\bar X}(\bar x)$ with respect to $\mu$\\
-
-$ \hspace{1cm}\frac{\partial^{2}}{\partial \mu^{2}} \ln P_{\bar X}(\bar x) = -\Sigma^{-1}$\\
-
-$\hspace{1cm}\Rightarrow -E[\frac{\partial^{2}}{\partial \mu^{2}} \ln P_{\bar X}(\bar x)] = \Sigma^{-1}$\\
-
-Therefore, 
-
-$\hspace{1.5cm}$ var$(\bar X) \geq \frac{1}{n\Sigma^{-1}}$\\
-
-$\hspace{2.8cm} \geq \frac{\Sigma}{n}$\\\\
-
-\begin{flushleft}
-9) Consider the noisy signal model
-\end{flushleft}
-
-$\hspace{2cm} $ Y = X + N $\hspace{1cm}$where $\;$ N$\sim CN(0,\sigma^{2})$\\
-
-$\hspace{2cm}$ X = A$\exp(j\phi)$
-
-where $\hspace{1cm}$ A : amplitude
-
-$\hspace{2cm}$ $\phi$ : random phase uniformly distributed in [0,2$\pi$]\\
-
-Consider the real system model i.e.,
-
-$\hspace{2cm}$ $Y_{1} = A\cos\phi + n_{1}$
-
-$\hspace{2cm}$ $Y_{2} = A\sin\phi + n_{2} \hspace{1cm} (n_{1},n_{2} \sim N(0,\sigma^{2}))$\\
-
-The parameter in this case can be taken as $\Theta = (\Theta_{1},\Theta_{2})$ with $\Theta_{1} \;\epsilon \;\{0,A\}$ 
-
-and $\Theta_{2}\; \epsilon\; [0,2\pi]$.\\
-
-The density y can be written as 
-
-$\hspace{2.5cm} P_{\Theta}(Y) = \frac{1}{2\pi \sigma^{2}} \exp(-\frac{q(y,\theta)}{2\sigma^{2}})$\\
-
-where $\hspace{1cm}q(y,\theta) = [(y_{1} - \theta_{1}\cos\theta_{2})^{2} + (y_{2} - \theta_{1}\sin\theta_{2})^{2}]$\\
-
-The maximum likelihood estimation is\\
-
-$\hspace{1cm} P(Y\mid \theta_{1}) = \frac{1}{2\pi} \int_{0}^{2\pi} P_{\Theta}(Y) \arrowvert_{\theta = A}\;d\theta_{2}$\\
-
-$\hspace{2.5cm} = \frac{1}{4\pi^{2} \sigma^{2}} \int_{0}^{2\pi} \exp\{-\frac{q(y,\theta)\arrowvert_{\theta_{1}=A}}{2\sigma^{2}}\} \;d\theta_{2}$\\
-
-$\hspace{2.5cm} = \frac{1}{4\pi^{2} \sigma^{2}} \int_{0}^{2\pi} \exp\{-\frac{(y_{1} - A\cos\theta_{2})^{2} + (y_{2} - A\sin\theta_{2})^{2}}{2\sigma^{2}}\} \;d\theta_{2}$\\
-
-$\hspace{2.5cm} = \frac{1}{4\pi^{2} \sigma^{2}} \int_{0}^{2\pi} \exp\{-\frac{1}{2\sigma^{2}}(y_{1}^{2} + y_{2}^{2} + A^{2})\} \exp\{\frac{A}{\sigma^{2}}(y_{1}\cos\theta_{2} + y_{2}\sin \theta_{2})\} \;d\theta_{2}$\\
-
-$\hspace{2.5cm} = \frac{1}{2\pi} \frac{\exp\{-\frac{1}{2\sigma^{2}}(y_{1}^{2} + y_{2}^{2} + A^{2})\}}{2\pi \sigma^{2}} \int_{0}^{2\pi} \exp\{\frac{A}{\sigma^{2}}(y_{1}\cos\theta_{2} + y_{2}\sin \theta_{2})\} \;d\theta_{2} $\\
-
-$\hspace{2.5cm} = \frac{1}{2\pi} \frac{\exp\{-\frac{1}{2\sigma^{2}}(y_{1}^{2} + y_{2}^{2} + A^{2})\}}{2\pi \sigma^{2}}  \int_{0}^{2\pi}\exp \{\frac{Ar}{\sigma^{2}}\cos(\theta_{2} - \phi)\} \;d\theta_{2} $\\
-
-$\hspace{2.5cm} = \frac{1}{2\pi} \frac{\exp\{-\frac{1}{2\sigma^{2}}(y_{1}^{2} + y_{2}^{2} + A^{2})\}}{2\pi \sigma^{2}} I_0(\frac{Ar}{\sigma^{2}})$\\
-
-where $\hspace{1cm} r = \sqrt{y_{1}^{2} + y_{2}^{2}}$\\
-
-$\hspace{2cm} \phi  = Tan^{-1}(\frac{y_{2}}{y_{1}})$\\
-
-$\hspace{2cm} y_{1} = r\cos \phi$
-
-$\hspace{2cm} y_{2} = r\sin\phi$\\
-
-Bessel function of zero'th order,\\
-
-$\hspace{2cm} I_{0}(x) = \frac{1}{2\pi} \int_{0}^{2\pi} \exp[x\cos \tau] \;d\tau $\\
-
-Using approximation $I_{0}(x) \simeq \frac{e^{x}}{\sqrt{2\pi x}}$\\
-
-$ \hspace{2cm}P(Y\mid \theta_{1}) = \frac{1}{2\pi} \frac{\exp\{-\frac{1}{2\sigma^{2}}(y_{1}^{2} + y_{2}^{2} + A^{2})\}}{2\pi \sigma^{2}}  \frac{e^{\frac{Ar}{\sigma^{2}}}}{\sqrt{2\pi(\frac{Ar}{\sigma^{2}})}}$\\
-
-Differentiate $P(Y\mid \theta_{1})$ with respect to A and solve for A by equating it to 
-
-zero.
-
-The maximum likelihood estimation of A is $\frac{r+\sqrt{r^{2} - 2\sigma^{2}}}{2}$
+\begin{equation*}
+Var(\bar X) \geq (n\Sigma^{-1})^{-1}=\frac{1}{n}\Sigma
+\end{equation*}
+\hypertarget{solution9}{\subsection*{Solution 9}}
+Consider the noisy signal model
+\begin{equation}
+Y = X + N~\mbox{where}~N\sim \mathcal{CN}(0,\sigma^{2}),~X = A\exp(j\phi)
+\end{equation}
+where, $A$ is the amplitude, and $\phi$ is the random phase uniformly distributed over  $[0,2\pi]$. Consider the real system model i.e.,
+\begin{equation*}
+Y_{1} = A\cos\phi + n_{1},~Y_{2} = A\sin\phi + n_{2},~~~(n_{1},n_{2} \sim N(0,\sigma^{2})).
+\end{equation*}
+The density of $Y$ can be written as,
+\begin{equation*}
+P_{\Theta}(Y) = \frac{1}{2\pi \sigma^{2}} \exp(-\frac{q(y,\phi)}{2\sigma^{2}})
+\end{equation*} 
+where $q(y,\phi) = [(y_{1} - A\cos\phi)^{2} + (y_{2} - A\sin\phi)^{2}]$. The marginal density of $Y$ is,
+\begin{align*}
+P(Y|A) &= \frac{1}{2\pi} \int_{0}^{2\pi} P_{\Theta}(Y) \;d\phi,\\
+&=\frac{1}{4\pi^{2} \sigma^{2}} \int_{0}^{2\pi} \exp\left[-\frac{q(y,\phi)}{2\sigma^{2}}\right] \;d\phi,\\
+&=\frac{1}{4\pi^{2} \sigma^{2}} \int_{0}^{2\pi} \exp\{-\frac{(y_{1} - A\cos\phi)^{2} + (y_{2} - A\sin\phi)^{2}}{2\sigma^{2}}\} \;d\phi,\\
+&= \frac{1}{2\pi} \frac{\exp\{-\frac{1}{2\sigma^{2}}(y_{1}^{2} + y_{2}^{2} + A^{2})\}}{2\pi \sigma^{2}} \int_{0}^{2\pi} \exp\{\frac{A}{\sigma^{2}}(y_{1}\cos\phi + y_{2}\sin \phi)\} \;d\phi,\\
+&= \frac{1}{2\pi} \frac{\exp\{-\frac{1}{2\sigma^{2}}(y_{1}^{2} + y_{2}^{2} + A^{2})\}}{2\pi \sigma^{2}}  \int_{0}^{2\pi}\exp \{\frac{Ar}{\sigma^{2}}\cos(\phi - \theta)\} \;d\phi,\\
+&= \frac{1}{2\pi} \frac{\exp\{-\frac{1}{2\sigma^{2}}(y_{1}^{2} + y_{2}^{2} + A^{2})\}}{2\pi \sigma^{2}} I_0(\frac{Ar}{\sigma^{2}}).
+\end{align*}
+where $r = \sqrt{y_{1}^{2} + y_{2}^{2}}$, $\theta  = \tan^{-1}(\frac{y_{2}}{y_{1}})$, $y_{1} = r\cos \phi$, $y_{2} = r\sin\phi$, and Bessel function of zero'th order,
+\begin{equation*}
+I_{0}(x) = \frac{1}{2\pi} \int_{0}^{2\pi} \exp[x\cos \tau] \;d\tau.
+\end{equation*}
+Using approximation $I_{0}(x) \simeq \frac{e^{x}}{\sqrt{2\pi x}}$, we get
+\begin{equation*}
+P(Y|A) \approx \frac{1}{2\pi} \frac{\exp\{-\frac{1}{2\sigma^{2}}(y_{1}^{2} + y_{2}^{2} + A^{2})\}}{2\pi \sigma^{2}}  \frac{e^{\frac{Ar}{\sigma^{2}}}}{\sqrt{2\pi(\frac{Ar}{\sigma^{2}})}}
+\end{equation*}
+Differentiating $P(Y|\theta_{1})$ with respect to $A$ and equating it to zero, we get the maximum likelihood estimate of $A$ as $\frac{r+\sqrt{r^{2} - 2\sigma^{2}}}{2}$.
 
 \end{document}
