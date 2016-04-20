@@ -1,0 +1,89 @@
+\documentclass[a4paper,english,10pt]{article}
+\input{header}
+\usepackage{etex,enumitem,hyperref,tikz,pgfplots}
+%opening
+\title{Homework 4 solutions}
+%\author{Deadline}
+
+\begin{document}
+\maketitle
+
+The solutions may have mistakes. Especially solutions for problem 10 and 11.
+
+\begin{enumerate}
+\item {Problem 6 solution}\\
+a. Given that $N_k$ are independent and
+ \begin{equation*}
+        N_k \sim \mathbb{N}(0,\sigma^2), Y_k=N_k+\mu s_k.
+ \end{equation*}
+Therefore 
+\begin{equation*}
+  Y_k \sim \mathbb{N}(\mu s_k, \sigma^2)
+\end{equation*}
+and 
+\begin{equation*}
+ f(Y_1,\cdots, Y_n|\mu)=\frac{1}{{(2\pi\sigma^2)}^{\frac{n}{2}}} \bigg{(} \exp{\frac{-\mu^2\sum_{i=1}^{n} s_{i}^2}{2\sigma^2}}\bigg{)}
+\bigg{(}\exp{\frac{-\sum_{i=1}^{n} y_{i}^2}{2\sigma^2}}\bigg{)}\bigg{(}\exp{\frac{\mu\sum_{i=1}^{n} s_{i}y_{i}}{\sigma^2}}\bigg{)}.
+\end{equation*}
+$T(Y)=\frac{\sum_{i=1}^{n} s_{i}y_{i}}{\sigma^2}$ is a complete sufficient statistic by
+thm: [SUFFICIENCY, MINIMAL SUFFICIENCY and COMPLETENESS for EXPONENTIAL FAMILIES] done in the class.
+\\
+
+b. The MVUE for $\mu$ is
+\begin{equation*}
+ \phi(T)=\frac{\sum_{i=1}^{n} s_{i}y_{i}}{\sum_{i=1}^{n} s_{i}^2} \\ 
+ \end{equation*}
+\begin{equation*}
+ \text{var}(\phi(T))=\frac{\mu^2\sigma^2}{\sum_{i=1}^{n}s_{i}^2}
+\end{equation*}
+\\
+
+c. Again the MVUE for $\mu$ is
+\begin{equation*}
+ \phi(Y_1,\cdots,Y_n)=\frac{\sum_{i=1}^{n} s_{i}y_{i}}{\sum_{i=1}^{n} s_{i}^2} \\ 
+ \end{equation*}
+ the MVUE for variance is
+ \begin{equation*}
+ \psi(Y_1,\cdots,Y_n)=\frac{\sum_{i=1}^{n}{\bigg{(}y_i-\frac{\sum_{i=1}^{n}s_{i}y_{i}}{\sum_{i=1}^{n}s_{i}^2} s_i\bigg{)}^2}}{n-1} \\ 
+ \end{equation*}
+
+ 
+\item{Problem 7 solution}\\ 
+
+We need to show that L1 norm minimizer is the median. Let
+\begin{align*}
+ f(a)= & \int_{\mathbb{R}}|\theta-a| \pi(\theta|x) d\theta \\
+  & a \int_{-\infty}^{a} \pi(\theta|x) d\theta- \int_{-\infty}^{a} \theta \pi(\theta|x) d\theta
++\int_{a}^{\infty} \theta \pi(\theta|x) d\theta - a \int_{a}^{\infty} \pi(\theta|x) d\theta
+\end{align*}
+Now solving for $f'(a)=0$ gives $a$ is median. It can be shown that  $f''(a)>0$ that is median
+is the L1 norm minimizer
+
+\item{Problem 8 solution}\\ 
+We need to show that for the loss function give mode is the minimizer. Let
+\begin{align*}
+f(a)= & \int_{\{ \theta_1, \theta_2 \cdots \}}c(a,\theta) \pi(\theta|x) d\theta \\
+      & \sum_{i=1}^{\infty}c(a,\theta_i) \pi(\theta_i|x). 
+\end{align*}
+
+From the given $\Delta$ exactly one of $c(a,\theta_i)$ is nonzero and is exactly 1. Hence
+$\argmax f(a) = \theta_i$ where $\pi(\theta_i|x)$ is maximum. That is $\theta_i$ is posterior mode. 
+
+\item{Problem 9 solution}\\ 
+Conditional density of $X$ given $Y$ is 
+$$\mathbb{N}(\mu_{X}+(\Sigma_{XY}-\mu_{X}\mu_{Y}^T)\Sigma_{Y}^{-1}(Y-\mu_{Y}), \Sigma_{X}-\Sigma_{XY}\Sigma_{Y}^{-1}\Sigma_{XY}^{T})$$
+
+The best MMSE estimate of $X$ given $Y$ is $\mathbb{E}[X|Y]=\mu_{X}+(\Sigma_{XY}-\mu_{X}\mu_{Y}^T)\Sigma_{Y}^{-1}(Y-\mu_{Y})$ is 
+linear in $Y$
+
+\item{Problem 10 solution}\\
+ 
+ YULE-WALKER/ WIENER-HOFF EQUATIONS become undetermined. Many linear predictors exist. The one
+ with minimum variance can be chosen.
+ 
+\item{Problem 10 solution}\\
+
+ORTHOGONALITY THM in the notes for vectors.
+
+\end{enumerate}
+\end{document}
