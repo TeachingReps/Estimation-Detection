@@ -1,0 +1,105 @@
+% -----------------------------*- LaTeX -*------------------------------
+%   SCRIBE.STY -- Make scribe notes
+%
+%  Aditya Gopalan ( aditya@ece.iisc.ernet.in ); Jan 2017
+
+%   Aditya Gopalan ( aditya@ece.iisc.ernet.in ); Sept 2014
+
+%   Modified from a version by Constantine Caramanis, Aug 2007
+%
+%   Constantine Caramanis;  August, 2007
+%
+%   Modified from a version by Jeff Erickson (jeffe@cs.uiuc.edu), July 29, 1998
+%
+%   Loosely based on the MIT/Berkeley scribe notes macros, but
+%   written from scratch.
+%
+% ----------------------------------------------------------------------
+%   USAGE:
+%
+%   \documentstyle[12pt]{report}		NOT article!
+%   \usepackage{scribe}
+%   ...
+%   \begin{document}
+%   \course{EECS 227} 				optional
+%   \coursetitle{Optimization}	optional
+%   \semester{Fall 2004}			optional
+%   \lecturer{Jeff Erickson}			optional
+%   \scribe{Joe. A Student}			required
+%   \lecturenumber{17}				required (must be a number)
+%   \lecturedate{October 12}			required (omit year)
+%   \maketitle
+% ----------------------------------------------------------------------
+%   The stuff before \maketitle can be in any order, but it has to go
+%   before \maketitle.
+%
+%   The lecture number appears in all page, section, theorem, figure,
+%   table, and equation numbers.  It must be a single positive
+%   integer; ranges like 3--5 are not (yet) properly supported.
+%
+%   Automatically loads the amsmath package, which is a Good Thing,
+%   especially if you're going to use a lot of math.  See ``The LaTeX
+%   Companion'' for details!
+%
+%   To get a proof, use \begin{proof}...\end{proof}.  You can attach
+%   an optional argument, just as with the standard latex theorem
+%   environment.  You can also define new proof-like environments with
+%   \newproof{foo}{bar}, just like \newtheorem.
+% ----------------------------------------------------------------------
+\RequirePackage{amsmath,amssymb}
+
+\def\course#1{\def\@course{#1}}
+\course{E1 244}
+
+\def\coursetitle#1{\def\@coursetitle{#1}}
+\coursetitle{Detection \& Estimation Theory}
+
+\def\semester#1{\def\@semester{#1}}
+\semester{Jan-May 2017}
+
+\def\lecturer#1{\def\@lecturer{#1}}
+\lecturer{Aditya Gopalan}
+
+\def\scribe#1{\def\@scribe{#1}}
+% \@scribe intentionally undefined
+
+\def\lecturenumber#1{\def\@lecturenumber{#1}}
+% \@lecturenumber intentionally undefined
+
+\def\lecturedate#1{\def\@lecturedate{#1}}
+% \@lecturedata intentionally undefined
+
+\def\xxx{\vphantom{()}}
+\def\maketitle
+{
+\def\@oddhead{\underline{\hbox to\textwidth{\textbf{%
+	\rlap{\@course\phantom{()}}\hfil
+	Lecture~\@lecturenumber~--- \@lecturedate
+	\hfil\llap{\@semester}}}}}
+\def\@oddfoot{\hfil\@lecturenumber-\thepage\hfil}
+\def\ps@myfirst{\ps@plain\def\@oddfoot{\hfil\@lecturenumber-\thepage\hfil}}
+\thispagestyle{myfirst}
+\noindent
+\framebox[\textwidth]{\vbox to 0.75in{
+\hbox to\textwidth{~\textbf{\rlap{\@course: \@coursetitle\xxx}
+	\hfil\llap{\@semester}}~}
+\vss
+\hbox to \textwidth{\Large\hfill Lecture \@lecturenumber~--- \@lecturedate\hfill}
+\vss
+\hbox to \textwidth{~\textsl{\rlap{Lecturer: \@lecturer\xxx}
+	\hfill\llap{Scribe: \@scribe}}~}
+}}
+\setcounter{chapter}{\@lecturenumber}
+\bigskip
+}
+
+
+
+% Formatting
+\oddsidemargin .00in
+\evensidemargin .00in
+\marginparwidth 0.07 true in
+\addtolength{\headsep}{0.25in}
+\textheight 8.5 true in
+\textwidth 6.5 true in
+\clubpenalty=10000
