@@ -14,6 +14,11 @@
 \lecturedate{January 3}		% required, omit year
 \maketitle
 
+% title of the lecture
+\begin{center}
+{\Large \bf Introduction to Hypothesis Testing --\\ Bayesian Hypothesis Testing}
+\end{center}
+
 % ----------------------------------------------------------------------
 
 \section{Administrative details}
@@ -67,7 +72,7 @@ We frame problems of detection in the language of {\em statistical hypothesis te
 \item $\Gamma$: Observation set
 \item $\mathcal{G}$: Class of subsets of $\Gamma$ that can be assigned probabilities. We will typically take this to be a $\sigma$-algebra, i.e., a class of subsets containing $\emptyset$ and $\Gamma$, and closed under complements and countable unions. Examples: (a) $\Gamma = \{1, 2, \ldots, n\} \equiv [n]$, $\mathcal{G} = 2^\Gamma$, the power set (all subsets) of $\Gamma$, (b) $\Gamma = \mathbb{R}$, $\mathcal{G} = \mathcal{B}(\mathbb{R})$, the Borel $\sigma$-algebra on $\mathbb{R}$.
 
-\item {\bf Notation.} $\prob{A}$: the probability assigned to $A \subseteq \Gamma$, $\indic{\mathbf{X}}$: the indicator function (0 if true, 1 if false) of $\mathbf{X}$
+\item {\bf Notation.} $\prob{A}$: the probability assigned to $A \subseteq \Gamma$, $\indic{\mathbf{X}}$: the indicator function (1 if true, 0 if false) of $\mathbf{X}$
 \end{itemize}
 
 \noindent {\em $M$-ary hypothesis testing:} Decide which of $M$ possible situations could describe the situation at hand, based on an observation $Y \in \Gamma$. \\
