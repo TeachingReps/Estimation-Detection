@@ -1,4 +1,116 @@
-\usepackage{graphicx}
+\usepackage{%
+	amsfonts,%
+	amsmath,%	
+	amssymb,%
+	amsthm,%
+	algorithm,%
+%	babel,%
+	bbm,%
+	bigints,
+	etex,%
+	%biblatex,%
+	caption,%
+	centernot,%
+	color,%
+	dsfont,%
+	enumerate,%
+	epsfig,%
+	epstopdf,%
+	geometry,%
+	graphicx,%
+	hyperref,%
+	latexsym,%
+	mathtools,%
+	multicol,%
+	pgf,%
+	pgfplots,%
+	pgfplotstable,%
+	pgfpages,%
+	proof,%
+	psfrag,%
+	subfigure,%	
+	tikz,%
+	ulem,%
+	url%
+}	
+\usepackage[noend]{algpseudocode}
+\usepackage[mathscr]{eucal}
+\usepgflibrary{shapes}
+\usetikzlibrary{%
+  	arrows,%
+	backgrounds,%
+	chains,%
+	decorations.pathmorphing,% /pgf/decoration/random steps | erste Graphik
+	decorations.text,%
+	matrix,%
+  	positioning,% wg. " of "
+  	fit,%
+	patterns,%
+  	petri,%
+	plotmarks,%
+  	scopes,%
+	shadows,%
+  	shapes.misc,% wg. rounded rectangle
+  	shapes.arrows,%
+	shapes.callouts,%
+  	shapes%
+}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{exmp}[thm]{Example}
+\newtheorem{assum}[thm]{Assumption}
+\newtheorem{axiom}[thm]{Axiom}
+
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{fact}{Fact}
+
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\indep}{\!\perp\!\!\!\perp}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
 \newcommand{\E}{\mathbb{E}}
-\newtheorem{rmk}{Remark}
-\newtheorem{exmp}{Example}[section]
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\B}{\mathscr{B}}
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\T}{\mathscr{T}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+%\newcommand{\ba}{\begin{align*}}
+%\newcommand{\ea}{\end{align*}}
+\newcommand{\expect}[1]{\mathbb{E}\left[{#1}\right]}
+\newcommand{\prob}[1]{\mathbb{P}\left[{#1}\right]}
+\newcommand{\probo}[1]{\mathbb{P}_0\left[{#1}\right]}
+\newcommand{\probi}[1]{\mathbb{P}_1\left[{#1}\right]}
+\newcommand{\given}{\; \big\vert \;} 
+\newcommand{\bydef}{:=}
+\newcommand{\indic}[1]{\mathbbm{1}\{#1\}}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\makeatletter
+\def\BState{\State\hskip-\ALG@thistlm}
+\makeatother
+
+\makeatletter
+\def\th@plain{%
+  \thm@notefont{}% same as heading font
+  \itshape % body font
+}
+\def\th@definition{%
+  \thm@notefont{}% same as heading font
+  \normalfont % body font
+}
+\makeatother
+\date{}
