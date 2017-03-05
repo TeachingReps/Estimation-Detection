@@ -1,0 +1,232 @@
+\documentclass[12pt]{report}
+\input{header4}
+\usepackage{scribe_e1244}
+\usepackage{times}
+\begin{document}
+\lecturer{Aditya Gopalan}	% optional, put lecturer's name here
+\scribe{Namrata Kar, Nanditha Unnikrishnan}		% required, put your name here
+\lecturenumber{16}			% required, must be a number
+\lecturedate{February 28}		% required, omit year
+\maketitle
+
+% title of the lecture
+\begin{center}
+{\Large \bf Sequential Detection}
+\end{center}
+
+% ----------------------------------------------------------------------
+
+
+\section{Recap}
+\subsection{The Optimal Bayes' Rule :}
+The optimal rule is:
+\begin{eqnarray}
+\label{l10}
+\phi_n(y_1,y_2,\cdots,y_n) =  
+\begin{cases}
+0 \ \ \ \ if \ \pi_1(y_1,y_2,\cdots,y_n)\in[\pi_L,\pi_u] \\
+1 \ \ \ \ if \ otherwise
+\end{cases}
+\end{eqnarray}
+
+\begin{eqnarray}
+\label{l10}
+\delta_n(y_1,y_2,\cdots,y_n) =  
+\begin{cases}
+0 \ \ \ \ if \ \pi_1(y_1,y_2,\cdots,y_n) < \pi_L \\
+1 \ \ \ \ if \ \pi_1(y_1,y_2,\cdots,y_n) > \pi_u \\
+0 \ or \ 1 \ \ if \ otherwise\ (doesn't \ matter!)
+\end{cases}
+\end{eqnarray}
+We can rewrite the optimal Bayes rule as:\newline
+
+\begin{eqnarray}
+%\label{l10}
+\phi_n(y_1,y_2,\cdots,y_n) =  
+\begin{cases}
+0 \ \ \ \ if \ L_n\in [\underline{\pi},\overline{\pi}] \\
+1 \ \ \ \ otherwise\\
+\end{cases}
+\end{eqnarray}
+
+\begin{eqnarray}
+%\label{l10}
+\delta_n(y_1,y_2,\cdots,y_n) =  
+\begin{cases}
+0 \ \ \ \ if \ L_n < \underline{\pi} \\
+1 \ \ \ \ if \ L_n > \overline{\pi} \\
+0 \ or \ 1 \ \ if \ otherwise\ (doesn't \ matter!)
+\end{cases}
+\end{eqnarray}
+
+where\newline
+\begin{eqnarray}
+\underline{\pi}=\frac{\pi_0\pi_L}{\pi_1(1-\pi_L)}\\
+\overline{\pi}=\frac{\pi_0\pi_u}{\pi_1(1-\pi_u)}
+\end{eqnarray}
+
+\section{Definition: SPRT(a,b)}
+
+A sequential Probability Ratio Test with parametes a$ \leq$ b is the rule:
+\newline
+\newline
+SPRT (a,b) : Sample until the first time L$_n$( $y_1,y_2,y_3,.....y_n )$ falls outside (a,b).
+With a = $\underline{\pi}$ and b = $\overline{\pi}$, SPRT (a,b) becomes Bayes optimal test. Choose H$_1$ if L$_n$($y_1,y_2,y_3,.....y_n)$ $>$ b and H$_0$ if L$_n$($y_1,y_2,y_3,.....y_n)$ $<$ a.\\
+\newline
+\textbf{Note:}
+\newline
+L$_0$ $(.)$ is defined to be equal to one. If either a$ > $1 or b$ < $1 , then the resulting SPRT takes no samples.
+\newline
+\\\textbf{Example:}
+\begin{align*}
+\\H_0 : Y_k = N_k \ \  \ \ \ \ \ k = 1,2,3\dots
+\\H_1 : Y_k = $ \theta$ + \textit{N}_k \ \ k = 1,2,3\dots
+\end{align*}
+where $\theta$ $\in$ \Re $^{+}$ and ${$\textit{N}_k$}\stackrel{iid}\sim $ \textit{N}$(0,\sigma^{2} )$
+\newline
+\begin{eqnarray}
+L$_n$($y_1,y_2,y_3,\cdots,y_n)$&=&\prod^{n}_{k=1} \frac{P_1(y_k)}{P_0(y_k)}\\
+&=&\prod^{n}_{k=1} \frac{\frac{1}{\sigma\sqrt{2\pi}}e^{\frac{-(y_k-\theta)^{2}}{2\sigma^{2}}}}{\frac{1}{\sigma\sqrt{2\pi}}e^{\frac{-(y_k)^{2}}{2\sigma^{2}}}}\\
+&=&exp \lbrace \ \  \sum^{n}_{k=1} \theta (y_k - \frac{\theta}{2} ) / \sigma^{2} \ \  \rbrace
+\end{eqnarray}
+
+
+SPRT(a,b) :  Sample until $\frac{\theta}{\sigma^{2}}$ $ \sum^{n}_{k=1} ( y_k -\frac{\theta}{2} )$ does not belong to ( log(a) , log(b) ).
+
+\section{Sample Optimality of the Bayes' SPRT ( SPRT( $\underline{\pi}$,$\overline{\pi}$) )}
+
+For a sequential rule ($\underline{\phi}$,$\underline{\delta}$),
+\newline
+\begin{eqnarray}
+P_{F}(\underline{\phi},\underline{\delta})&:=&\textit{P}_{0}[\delta_{N}(Y_1,Y_2,Y_3,...,Y_N)]\\
+P_{M}(\underline{\phi},\underline{\delta}) &:=& \textit{P}_{1}[1 - \delta_{N}(Y_1,Y_2,Y_3,..,Y_N)]\\
+N(\underline{\phi})&:=& min\lbrace n \geq 0 : \phi_{n}(Y_1,Y_2,Y_3,...,Y_n) = 1\rbrace
+\end{eqnarray}
+\section{Wald-Wolfowitz Theorem : [ $\sim$ 1943-1950]}
+Suppose ($\underline{\phi}^{*}$,$\underline{\delta}^{*}$) represents the Bayes' optimal SPRT($\underline{\pi}$,$\overline{\pi}$), and that ($\underline{\phi}$,$\underline{\delta}$) is any sequential rule, such that 
+\begin{eqnarray}
+P_{F}(\underline{\phi},\underline{\delta}) \leq P_{F}(\underline{\phi}^{*},\underline{\delta}^{*}),\\
+P_{M}(\underline{\phi},\underline{\delta}) \leq P_{M}(\underline{\phi}^{*},\underline{\delta}^{*})
+\end{eqnarray}
+Then,
+\begin{equation}
+\textit{E}_{j} [N(\underline{\phi})] \geq \textit{E}_{j} [N(\underline{\phi^{*}})] \ \ \forall \ j\in \lbrace 0 , 1\rbrace
+\end{equation}
+\newline
+[Proof: Coming up in Homework]
+\newline
+\newline
+\subsection{Wald's Approximation}
+\textbf{Question:} How can we set (a,b) in SPRT(a,b) to achieve desired performace ?\\
+\newline
+Say, P$_{F}$ \leq $\alpha$ , P$_{M}$ \leq $\gamma$ and suppose ($\underline{\phi}$,$\underline{\delta}$) is the SPRT(a,b).\\
+The false alarm probability of ($\underline{\phi}$,$\underline{\delta}$)
+\begin{eqnarray}
+\alpha &=& P_{F}(\underline{\phi},\underline{\delta})\\
+&=&\textit{P}_{0}[\Gamma_{1}]
+\end{eqnarray}
+where $\Gamma_{1}$ is the "rejection region" of ($\underline{\phi}$,$\underline{\delta}$).
+\begin{equation}
+\Gamma_{1} &:=&\lbrace (y_1,y_2,....) : L_{N}(y_1,y_2,...y_N) > b\rbrace
+\end{equation}
+\begin{eqnarray}
+\alpha &=&\textit{P}_{0}[\Gamma_{1}]\\
+&=&\textit{P}_{0} [ \cup_{n=0}^{\infty} \lbrace (y_1,y_2,....) : N = n, L_{n}(y_1,y_2,...y_n) > b\rbrace ]\\
+&=&\sum_{n=0}^{\infty}\textit{P}_{0}[Q_{n}]
+\end{eqnarray}
+where Q_{n} $=$ $\lbrace$ (y_1,y_2,....) : N = n, L_{n}(y_1,y_2,...y_n) > b $\rbrace$
+\newline
+\begin{eqnarray}
+\alpha &=&\sum_{n=0}^{\infty}\textit{P}_{0}[Q_{n}]\\
+&=& \sum_{n=0}^{\infty}\int_{Q_{n}} P_{0}(\underline{y}) d\underline{y}\\
+\end{eqnarray}
+As $\underline{y}$ $=$ $(y_1,y_2,....)$ $\in$ $Q_{n}$, P$_{0}$($\underline{y}$) is dependent only on the first n samples of $\underline{y}$.
+\begin{eqnarray}
+\alpha &=& \sum_{n=0}^{\infty}\int_{Q_{n}} \prod_{k=1}^{n} P_{0} (y_k) dy_k\\
+&\leq & \sum_{n=0}^{\infty} \frac{1}{b} \int_{Q_{n}} \prod_{k=1}^{n} P_{1} (y_k) dy_k
+\end{eqnarray}
+\newline
+Since $\underline{y}$ $\in$ Q$_{n}$, L$_{n}$($y_1,y_2,...y_n$) $>$ b , \\
+\begin{equation}
+\\\prod_{k=1}^{n} P_{1}(y_k) \geq b( \prod_{k=1}^{n} P_{0}(y_k) )
+\end{equation}
+\begin{eqnarray}
+\alpha &\leq & \sum_{n=0}^{\infty} \frac{1}{b} \int_{Q_{n}} \prod_{k=1}^{n} P_{1} (y_k) dy_k\\
+&=& \frac{1}{b} \textit{P}_{1}[ L_{N}(y_1,y_2,...y_N) > b]\\
+&=& \frac{1}{b} (1 - \gamma)
+\end{eqnarray}
+\newline
+Similarly, $\gamma$ $\leq$ a ( 1 - $\alpha$ ) (Following the same arguement as above for P$_M$).\\
+So we have,
+\begin{eqnarray}
+b &\leq & \frac{1-\gamma}{\alpha}\\
+a &\geq & \frac{\gamma}{1-\alpha}
+\end{eqnarray}
+\newline
+Hence any choice of (a,b) satisfying the above inequalities will guarantee P$_{F}$ $\leq$ $\alpha$ and P$_{M}$\leq $\gamma$.
+\newline
+\section{Wald's Lemma}
+Let Z$_1$, Z$_2$ ,.... be an i.i.d sequence of random variables, with \textit{E}[Z$_1$] $=$ 
+$\mu$.
+Consider K, a non-negative integer-valued random variable such that
+\begin{itemize}
+	\item \textit{E}[K] $<$ $\infty$ ,
+	\item $\forall$ k integers ,the event $\lbrace$ K = k$\rbrace$ is completely determined by Z$_1$, Z$_2$ ,....Z$_k$.
+\end{itemize}
+Then, 
+\begin{eqnarray}
+\textit{E}[\sum_{k=1}^{K} Z_k ] &=& \mu \textit{E}[K] \\
+N &=& min\lbrace n \geq 0 : \phi_{n} ( Y_1,Y_2,....Y_n ) = 1 \rbrace
+\end{eqnarray}
+\newline
+$\forall$ k , $\lbrace$ N $=$ k $\rbrace$ is completely determined by (Y$_1$, Y$_2$,....Y$_k$)
+\newline
+\subsection{Calculation of Expected number of samples in a SPRT}
+\textbf{Question:}
+What is the expected sample number of SPRT(a,b) under each hypothesis ?
+\newline
+Let us assume that \textit{E}$_{j}$ [N] $<$ $\infty$.
+\newline
+\begin{eqnarray}
+\textit{E}_{0}[ log L_{N} (Y_1, Y_2,...,Y_N) ] &=& \textit{E}_{0}[ \sum_{i=1}^{N} log \frac{P_{1}(Y_i)}{P_{0}(Y_i)}]\\
+&=& - \textit{E}_{0}[ \sum_{i=1}^{N} log \frac{P_{0}(Y_i)}{P_{1}(Y_i) }]\\
+&=& - \textit{E}_{0}[N] \  \textit{E}_{0}[log \frac{P_{0}(Y_1)}{P_{1}(Y_1) }]
+\end{eqnarray} 
+(The above equation can be obtained using Wald's Lemma.)
+\newline
+where,
+\begin{equation}
+{E}_{0}[log \frac{P_{0}(Y_1)}{P_{1}(Y_1) }] = D(P_{0} \Vert P_{1}) 
+\end{equation}
+\newline
+is the Kullback-Leibler Divergence between P$_0$ and P$_1$.
+\newline
+\newline
+Similarly, 
+\begin{equation}
+\textit{E}_{1}[ log L_{N} (Y_1, Y_2,...,Y_N) ] = \textit{E}_{1}[N] D(P_{1} \Vert P_{0})
+\end{equation}
+\newline
+\newline
+Alternatively, assume that $:$
+\begin{equation}
+L_{N} (Y_1, Y_2,...,Y_N) \approx b \  or \ L_{N} (Y_1, Y_2,...,Y_N) \approx a
+\end{equation}
+\newline
+(overshoot or undershoot $\approx$ 0).
+\begin{eqnarray}
+\textit{E}_{0}[ log L_{N} (Y_1, Y_2,...,Y_N) ] &\approx & ( log a ) ( 1 - P_{F} ) + ( log b ) ( P_{F} )\\
+\textit{E}_{1}[ log L_{N} (Y_1, Y_2,...,Y_N) ] &\approx & ( log a ) ( P_{M} ) + ( log b ) ( 1 - P_{M} )
+\end{eqnarray}
+\newline
+\newline
+Using equations (16.37) ,(16.39) ,(16.41) and (16.42) \\
+\begin{eqnarray}
+\textit{E}_{0}[ N ] &\approx & \frac{(1 - \alpha ) log \frac{(1 - \alpha )}{\gamma} + \alpha log \frac{\alpha}{( 1 - \gamma )} }{D(P_{0} \Vert P_{1})}\\
+\textit{E}_{1}[ N ] &\approx & \frac{(1 - \gamma ) log \frac{(1 - \gamma )}{\alpha} + \gamma log \frac{\gamma}{( 1 - \alpha )} }{D(P_{1} \Vert P_{0})}
+\end{eqnarray}
+\newline
+The closer the distributions P$_0$ and P$_1$ are, the harder it becomes to distiguish between them and hence we need more number of samples (which is evident from the above equations).
+\bibliography{Lecture_016_Scribe_Notes}
+\bibliographystyle{IEEEtran}
+\end{document}
