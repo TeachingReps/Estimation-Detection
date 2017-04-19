@@ -24,12 +24,12 @@
     \item $\Gamma$ : Observation Space.
     \item $\Lambda$ : Parameter Space.
     \item $\Lambda_j$ : Space of parameters corresponding to Hypothesis $H_j$.
-    \item $\mathbb{P}_{\theta}$ : Probability distribution on $\Gamma$, $\theta \in \Gamma_{0}$.
+    \item $\mathbb{P}_{\theta}$ : Probability distribution on $\Gamma$, $\theta \in \Lambda$.
     \item $\pi$ : Prior distribution on $\Lambda$.
-    \item $C(i,\theta)$ : Cost of answering '$i$' when the observation came from distribution $\mathbb{P}_{\theta}$, $\theta \in \Gamma_{0}$
+    \item $C(i,\theta)$ : Cost of answering '$i$' when the observation came from distribution $\mathbb{P}_{\theta}$, $\theta \in \Lambda$
     \item $\delta: \Gamma \to \{0, 1\}$ : (Deterministic) Decision Rule.
     \item $\delta: \Gamma \to [0, 1]$ : (Randomized) Decision Rule (On observing $y \in \Gamma$,  $1$ is output with probability $\delta(y)$) .
-    \item $R_{\theta}(\delta) \triangleq \mathbb{E}_{\theta}[C(\delta(Y),\theta)]$ : Conditional risk (Expected cost incurred when the observation came from distribution $\mathbb{P}_{\theta}$, $\theta \in \Gamma_{0}$)
+    \item $R_{\theta}(\delta) \triangleq \mathbb{E}_{\theta}[C(\delta(Y),\theta)]$ : Conditional risk (Expected cost incurred when the observation came from distribution $\mathbb{P}_{\theta}$, $\theta \in \Lambda$)
     \item $r(\delta) \triangleq \mathbb{E}[C(\delta(Y),\Theta)]$ : Bayes risk.
     
 \end{itemize}
