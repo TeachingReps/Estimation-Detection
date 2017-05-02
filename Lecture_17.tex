@@ -1,0 +1,215 @@
+
+%\documentclass[a4paper,english,12pt]{article}
+%\input{header}
+%\title{Lecture 17: Point Estimation}
+%\date{March 10, 2016}
+%\author{}
+%\begin{document}
+%\scribe{Sameer Malik, Sawant Omkar Vilas}
+%\maketitle
+%\maketitle
+\documentclass[12pt]{report}
+\input{header}
+\usepackage{scribe_e1244}
+\usepackage{times}
+\begin{document}
+\lecturer{Aditya Gopalan}		% optional, put lecturer's name here
+\scribe{Sameer Malik ,Sawant Omkar Vilas}					% required, put your name here
+\lecturenumber{17}						% required, must be a number
+\lecturedate{March 5}					% required, omit year
+ 
+ 
+\maketitle{
+\begin{center}
+\Large {\bf{POINT ESTIMATION}}
+\end{center} }
+\section{Introduction:}
+In previous lectures, we studied the problem of detection, which is nothing but deciding between two (or more) different hypothesis. In estimation, we estimate or guess the value of an unknown (point). This unknown need not to be a real number value, it can also be a vector or may take a range of interval. In this lecture, we will focus on \textit{point estimation}. Our purpose is to estimate a point, which will yield to the knowledge of entire population. Following is the definition of a \textit{point estimator}.
+example Consider tossing a coin $X_1,X_2,...,X_n$ n times. Bias of the coin =q$\in$(0,1)
+let $X_1,X_2,\dots,X_n$ be the result of coin tosses.
+%Estimate: $\sum Xi/n=q .... 1
+%q=1/2, n=9
+Examples of Estimates
+Economics(GDP,GDP growth,Population)
+Physics(What is mass of electron?)
+Communication Systems : (What is the transmitted Signal?)
+Point Estimation(Other kind of estimators are called interval estimation : set estimation,.....)
+Receive $X_1,X_2,.....X_n$: n samples usually i.i.d. sampled from pdf or pmf f$_\theta(x) in R^k$ : "parameter" of distribution, f$_\Theta(.)$;unknown.  
+\begin{defn}{ A $\textit{point estimator}$ is any function that maps  $W(X_1,X_2,...,X_n)$ to a space of $\Theta$. i.e. a function  W:$ R^n \rightarrow R^k$, W is called the estimate of $\theta$.
+\end{defn}
+\section {Methods of Constructing   Estimators: }
+In some cases our intuition lead us to a very good estimator. For example, estimating a parameter with it's sample analogue is usually reasonable. Like, the sample mean is a good estimator for the population mean, but this is not the case always. Sometimes our intuition lead us to a very bad estimator that seem to be correct. So we need a more methodical way of estimating parameters. Following are some methods of finding estimators.
+\subsection {Method of Moments}
+1. The method of moments (MOM) estimator [K.Pearson$\cong\cong1800s]$ is , perhaps, the oldest method of finding point estimators. It is quite simple to use and almost always yields some sort of estimate.
+\par Let $X_1,X_2,\dots,X_n$ be a sample from a population with pdf or pmf $f(x|\theta_1,\dots,\theta_k)$. Methods of moment estimators are found by equating the first $k$ sample moments to the corresponding $k$ population moments, and solving the resulting system of simultaneous equations. More precisely, define
+\begin{align}
+ %m_1 &= \frac{1}{n}\sum\limits_{i=1}^n{X^1_i}, \,\,\,\,\,\,\,%\mu'_1,\\
+%m_2 &= \frac{1}{n}\sum\limits_{i=1}^n{X^2_i}, \,\,\,\,\,\,\,%\mu'_2,\ \\
+%&\vdots \nonumber\\
+ m_j = \frac{1}{n}\sum\limits_{i=1}^n{X^j_i},\ for \ j = 1,2,...,k \,\,\,\,\,\,\,%%\mu'_j.\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\mathrm{for}\,\,        
+\end{align}  
+The population moment $\mu'_j$ will typically be a function of $\theta_1,....,\theta_k$, say $\mu'_j(\theta_1,\dots,\theta_k)$. The method of moments estimator $(\tilde\theta_1,\dots,\tilde\theta_k)$ of $\theta_1,\dots,\theta_k$ is obtained by solving the following system of equations for $(\theta_1,\dots,\theta_k)$ in terms of $m_1,\dots,m_k$:
+\begin{align}
+%m_1 &= \mu'_1(\theta_1,\dots,\theta_k),\\
+%m_2 &= \mu'_2(\theta_1,\dots,\theta_k),\\
+%\vdots\nonumber\\
+m_j = \mu'_j(\theta_1,\dots,\theta_k). \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\mathrm{for}\,\, j = 1,2,...,k
+\end{align} 
+Definitely, there will be some error in our estimate of the parameter but as we will increase the number of samples, the error will reduce.
+\begin{exmp}\textbf{(Normal method of moments)}
+\par Let samples $X_1,X_2,\dots,X_n$ are independent and Gaussian distributed with mean $\theta$ and variance $\sigma^2$. So our parameters for estimation are, $\theta_1=\theta$ and $\theta_2=\sigma^2$. We have $m_1 = \bar{X}, m_2 = \frac{1}{n}\sum_{i=1}^n{X^2_i}, \mu'_1=\theta, \mu'_2 = \theta^2 + \sigma^2 $, and hence we must solve 
+\begin{align}
+\bar{X}=\theta,~\frac{1}{n}\sum_{i=1}^n{X^2_i} = \theta^2 + \sigma^2.
+\end{align} 
+Solving for $\theta$ and $\sigma^2$ yields the method of moments estimators
+\begin{align}
+\tilde{\theta} = \bar{X},\,\,\,\,\,\tilde{\sigma^2}=\frac{1}{n}\sum_{i=1}^n{X^2_i} - \bar{X}^2=\frac{1}{n}\sum_{i=1}^n{(X_i - \bar{X})}^2.
+\end{align} 
+\end{exmp}
+\begin{exmp}\textbf{(Binomial method of moments)}
+\par Let samples $X_1,X_2,\dots,X_n$ are independent and binomial distributed with parameters$(k,p)$, that is,
+\begin{align}
+P(X_i=x|k,p) = {{k}\choose{x}}p^x(1-p)^{k-x},\,\,\,\,\,\,x=0,1,...,k.
+\end{align} 
+ 
+Here we want the point estimator for both unknown parameters $k$ and $p$.
+Equating the first two sample moments to their corresponding population moments yields the system of equations
+\begin{align}\label{eqn:xbarBin}
+\bar{X} &= kp,\\\label{eqn:x2barBin}
+\frac{1}{n}\sum_{i=1}^n{X_i}^2 &= kp(1-p) + k^2p^2.
+\end{align} 
+Now we can solve it  for $k$ and $p$. Substituting value of $kp$ from eqn. \eqref{eqn:xbarBin} in eqn. \eqref{eqn:x2barBin}, we get,
+\begin{equation}
+\frac{1}{n}\sum_{i=1}^n{X_i}^2 = \bar{X}(1-p) + \bar{X}^2,
+\end{equation}
+and the estimates of $p$ and $k$ as,
+\begin{align}
+\tilde{p}=1-\frac{\frac{1}{n}\sum_{i=1}^n{(X_i - \bar{X})}^2}{\bar{X}} ,     \,\,\,\,\,\tilde{k} = \frac{\bar{X}^2}{\bar{X}-\frac{1}{n}\sum_{i=1}^n{(X_i - \bar{X})}^2}.
+\end{align} 
+By observing $\tilde{p}$ and $\tilde{k}$, we can say that it is possible to get the negative estimates of $p$ and $k$ which, of course, must be positive numbers, Which implies that it is not necessary to coincide the range of estimator to the range of parameter it is estimating. However, we may reduce the probability of occurance of such event by taking large number of observables.   
+\end{exmp}
+\par Let samples $X_1,X_2,\dots,X_n$ are independent and bernoulli distributed with pmf $\theta \in (0,1)\subseteq R$
+\ If X$\sim bern(\theta)$ therefore E$_\theta(x)=\theta$
+Hence the method of moments estimator is simply 
+$\theta = \dfrac{1}{n} \Sigma x_i$
+\subsection{Maximum Likelihood Estimators}
+Let $X_1,X_2,\dots,X_n$ are an iid sample from a population with pdf or pmf $f(x|\theta_1,\dots,\theta_k)$, the likelihood function is defined by
+\begin{align}
+L(\mathrm{X}|\theta)=L(x_1,\dots,x_n|\theta_1,...,\theta_k)=\prod\limits_{i=1}^n f(x_i|\theta_1,\dots,\theta_k),\,\,\,\,\,\theta \in \Theta\subseteq\mathbb{R}^k
+\end{align} 
+\begin{defn}{Given observations $x_1,x_2,...,x_n$, a maximum likelihood estimate of $\theta$ is an element of $\underset{\theta \in \Theta}{\arg\max} ~L_{\theta}(x)$.}
+\par Likelihood of $x_1,x_2,...,x_n$ under $p(x_1,...,x_n|\theta)$ is,
+\begin{align}
+L_{\theta}(x) = \mathbb{P}(X_1=x_1,\dots,X_n=x_n|\theta)=\prod\limits_{i=1}^n f(x_i|\theta)
+\end{align} 
+\end{defn}
+\begin{rem}
+By it's construction, the range of the MLE (maximum likelihood estimate) coincides with the range of the parameter.
+\end{rem}
+\begin{rem}
+MLE is the solution to an optimizing problem, i.e. an optimizer. 
+\end{rem}
+\begin{exmp}\textbf{Normal likelihood}
+\par Let samples $X_1,X_2,\dots,X_n$ are independent and Gaussian distributed with mean $\theta$ and variance $\sigma^2$. We want to get an estimate of $\theta$ and $\sigma^2$. For that, we need to solve:
+\begin{align}
+\underset{(\theta,\sigma^2)}{\arg\max}
+\prod\limits_{i=1}^n f(x_i|\theta,\sigma^2)&= \arg\max\sum\limits_{i=1}^n \log f(x_i|\theta,\sigma^2),\\
+&=\arg\max \sum\limits_{i=1}^n\{(-1/2)\log(2\pi\sigma^2)-(1/2\sigma^2)(x_i-\theta)^2\},\nonumber\\
+&=\arg\max~\{-(n/2)\log(\sigma^2)-(1/2\sigma^2)\sum\limits_{i=1}^n(x_i-\theta)^2\},\nonumber\\
+&=\arg\max~g(\theta,\sigma^2).
+\end{align}
+At optimality: 
+\begin{align}
+\nabla{g}(\theta,\sigma^2)=0.
+\end{align} 
+To get the estimate of $\theta$, we need to compute the partial differentiation of ${g}(\theta,\sigma^2)$ w.r.t. $\theta$, and set it equal to $0$. 
+\begin{align}
+\frac{\partial g}{\partial \theta}=\frac{1}{\sigma^2}\sum\limits_{i=1}^n(x_i-\theta)
+\end{align}
+Equating it to zero, gives,
+\begin{align}
+\tilde{\theta}=\frac{1}{n}\sum\limits_{i=1}^n x_i,~\mbox{and}~
+\frac{\partial^2 g}{\partial \theta^2}=-\frac{n}{\sigma^2}.
+\end{align}
+Since,the second derivative is negative at $\theta$=$\tilde{\theta}$, so we can say that
+ $\tilde{\theta}$ is the maximum of $g(\theta)$ and hence MLE of $\theta$.
+\par Similarly, to get the estimate of $\sigma^2$ ,
+\begin{align}
+\frac{\partial g}{\partial \sigma^2}=0~\mbox{ gives }~\frac{-n}{2\sigma^2}+\frac{1}{2(\sigma^2)^2}\sum\limits_{i=1}^n(x_i-\tilde{\theta)}^2=0,
+\end{align}
+and we get the estimate,
+\begin{equation}
+\tilde{\sigma}^2=\frac{1}{n}\sum\limits_{i=1}^n(x_i-\tilde{\theta})^2.
+\end{equation}
+Let $\sigma^2=t$, $\tilde{\sigma}^2=\tilde{t}$,
+\begin{align}
+{\left(\frac{\partial^2 g}{\partial t^2}\right)}_{t=\tilde{t}}&=\, \frac{n}{2\tilde{t}^2}-\frac{1}{\tilde{t}^3}\sum\limits_{i=1}^n(x_i-\tilde{\theta)}^2\\
+&=-\frac{n^3}{2\left[\sum\limits_{i=1}^n(x_i-\tilde{\theta)}^2\right]^2}
+\end{align}
+Hence, $\tilde{\sigma}^2$ is the ML estimate of the $\sigma^2$.
+\end{exmp}
+\begin{exmp}\textbf{Bernoulli MLE}
+Let $X_1,X_2,\dots,X_n$ be iid Bernoulli($p$). Then the likelihood function is
+\begin{align}
+L(X|p)=\prod\limits_{i=1}^n p^{x_i}(1-p)^{1-x_i}=p^{y}(1-p)^{n-y},
+\end{align} 
+where ${y}=\sum_{i=1}^n x_i$. Sometimes, it is much easier to differentiate the log likelihood, 
+\begin{equation}
+\log L(\textbf{x}|p)={y}\log p + (n-{y}	)\log (1-p)
+\end{equation}
+Since log is a monotonic function, maximizing likelihood and its log value yield the same value for the maxima.
+\par If $0<y<n$, differentiating $\log L(\textbf{x}|p)$ and setting the result equal to $0$ give the solution, $\tilde{p}=y/n$. It is also straightforward to verify that $y/n$ is the global maximum in this case. If $y=0$ or $y=n$, then
+\begin{align}
+\log L(\textbf{x}|p) = 
+\begin{cases}
+n\log(1-p)\,\,\,\,\,\,\,\mbox{if}\,\,\, y=0\\
+n\log p\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\mbox{if}\,\,\,\, y=n.
+\end{cases}
+\end{align}
+In either case $\log L(\textbf{x}|p)$ is a monotone function of $p$, and it is again straightforward to verify that $\tilde{p}=y/n$  in each case. Thus, we have shown that $\sum_{i=1}^n {X_i}/n$  is the MLE of $p$.
+\end{exmp}
+\subsection{Bayes Estimators}
+In the Bayesian approach parameter $\theta$ is considered to be a quantity whose variation can be described by a probability distribution (called the prior distribution). This is a subjective distribution, based on the experimenter's belief, and is formulated before the data are seen (hence the name prior distribution). A sample is then taken from a population indexed by $\theta$ and the prior distribution is updated with this sample information. The updated prior is called the posterior distribution. This updating is done with the use of Bayes Rule, hence the name Bayesian statistics.
+\par Given $\{f(x|\theta):\theta \in \Theta\}$, underlying assumption is that $\theta \in \Theta$ is randomly chosen from a prior distribution $\pi$ over $\Theta$, and therefore $X_1,X_2,...,X_n$ are iid over distribution $f(\textbf{x}|\theta)$.
+\begin{note}
+ Choice of prior is subjective i.e. up to designer.
+\end{note}
+If $x_1,x_2,\dots,x_n$ are the observed samples, construct the posterior distribution for $\theta \in \Theta$ using Bayes rule.
+\begin{align}
+\pi(\theta|(x_1,x_2,\dots,x_n))=\frac{\pi(\theta)f(x_1,x_2,\dots,x_3|\theta)}{m(x_1,x_2,\dots,x_n)}
+\end{align} 
+where $m(\textbf{x})$ is the marginal distribution of $\textbf{X}$, that is,
+\begin{align}
+m(x_1,x_2,\dots,x_n)=\int_{\Theta}\pi(\theta')f(x_1,x_2,\dots,x_3|\theta')d\theta'
+\end{align} 
+One can write down possible estimators depending on the posterior distribution: (i) Mode, (ii) Mean and (iii) Median.
+\begin{exmp}\textbf{Bernoulli Bayes Estimators}
+\par Let $X_1,X_2,\dots,X_n$ be iid Bernoulli($\theta$), $\theta \in [0,1]$. Let prior has $\mathrm{Beta}(a,b)$ distribution then,
+\begin{align}
+\pi(\theta) = 
+\begin{cases}
+ \displaystyle{\frac{\theta^{a-1}(1-\theta)^{b-1}}{\beta(a,b)}},       \,\,\,\,\,\,\,\mbox{if}\,\,\,\theta \in [0,1] \\
+0,\hspace{85pt}\mbox{otherwise}
+\end{cases}
+\end{align} 
+where,
+\begin{align}
+\beta(a,b) = \displaystyle{\int\limits_0^1 x^{a-1}(1-x)^{b-1}dx}.
+\end{align}
+Let consider posterior distribution,
+\begin{align}
+\pi(\theta|(x_1,x_2,\dots,x_n))&=\displaystyle{\frac{\pi(\theta)f(x_1,x_2,\dots,x_n|\theta)}{f(x_1,x_2,\dots,x_n)}},\\
+&=\displaystyle{ \frac{1}{f(\textbf{x})} \frac{\theta^{a-1}(1-\theta)^{b-1}}{\beta(a,b)} \prod\limits_{i=1}^n{\theta^{x_i}(1-\theta)^{1-x_i}}},\nonumber\\
+&=\displaystyle{\frac{\theta^{\sum\limits_i {x_i}+a-1}(1-\theta)^{n-\sum\limits_i x_i +b-1}}{\beta(a,b)f(\textbf{x})}},\nonumber
+\end{align}
+which is a $\mathrm{Beta}\left(\sum\limits_i {x_i}+a,n-\sum\limits_i x_i +b\right)$ distribution.  
+Given the posterior distribution, the possible estimators are,
+\begin{enumerate}
+\item Mode\,\,\,=\,\,\,$\displaystyle{\frac{\sum\limits_i {x_i}+a-1}{a+b+n-2}}$
+\item Expectation\,\,\,=\,\,\,$\displaystyle{\frac{\sum\limits_i {x_i}+a}{a+b+n}}$
+%\item Median
+\end{enumerate}
+\end{exmp}
+\begin{defn}{Let $F$ denote the class of pdfs or pmfs $\{f(x|\theta):\theta \in \Theta\}$. A class $\prod$ of prior distributions on $\Theta$ is a \textit{conjugate} family for $F$, if the posterior distribution is in the class $\prod$ for all $f \in F$, for all priors in $\prod$.}
+\end{defn}
+\end{document}
